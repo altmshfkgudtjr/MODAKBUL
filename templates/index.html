@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>세종대학교 소프트웨어융합대학</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- 모바일 브라우저 상태바 컬러 -->
+	<meta name="theme-color" content="#ECECEC">
+	<!-- 모닥불 shortcut 아이콘 -->
+	<link rel="icon" type="image/png" href="../static/image/ModakbulLOGO.png">
+	<link rel="apple-touch-icon-precomposed" type="image/png" href="../static/image/ModakbulLOGO.png">
+	<!-- 아이콘 -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="../static/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<!--CSS-->
+	<link href="../static/css/style.min.css" rel="stylesheet">
+	<!--side menu-->
+	<link rel="stylesheet" type="text/css" href="../static/css/sidemenu/demo.css" />
+	<link rel="stylesheet" type="text/css" href="../static/css/sidemenu/component.css" />
+	<!--custom CSS-->
+	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+</head>
+
+
+<body>
+	<!--Side Menu-->
+	<div class="container">
+		<ul id="gn-menu" class="gn-menu-main">
+			<li class="gn-trigger">
+				<a class="gn-icon gn-icon-menu" style="padding-left : 20px"><span>Menu</span></a>
+				<nav class="gn-menu-wrapper">
+					<div class="gn-scroller">
+						<ul class="gn-menu">
+							<li><a><i class="far fa-sticky-note" style="padding: 0 22px"></i>공지사항</a></li>
+							<li><a><i class="far fa-sticky-note" style="padding: 0 22px"></i>학생회소개</a></li>
+							<ul><li><a><i class="far fa-sticky-note" style="padding: 0 22px"></i>학생회비내역</a>
+								<li id="M_studentMoney" class="M_textCenter display_none"><a>소프트웨어융합대학</a></li>
+								<li id="M_studentMoney" class="M_textCenter display_none"><a>컴퓨터공학과</a></li>
+								<li id="M_studentMoney" class="M_textCenter display_none"><a>소프트웨어학과</a></li>
+							</ul>
+							<li><a><i class="far fa-sticky-note" style="padding: 0 22px"></i>민원</a></li>
+							<li><a><i class="far fa-sticky-note" style="padding: 0 22px"></i>갤러리</a></li>
+							<li><a><i class="far fa-sticky-note" style="padding: 0 22px"></i>공모전</a></li>
+							<li><a><i class="far fa-sticky-note" style="padding: 0 22px"></i>세종소융봉사</a></li>
+							<li><a><i class="far fa-sticky-note" style="padding: 0 22px"></i>투표/설문조사</a></li>
+							<li><a><i class="far fa-sticky-note" style="padding: 0 22px"></i>통계자료</a></li>
+						</ul>
+					</div>
+				</nav>
+			</li>
+			<li><a><span>Burn Young</span></a></li>
+			<li><a><i class="fas fa-search"></i></a></li>
+			<li><a><i class="fas fa-user" style="padding: 0 10px;"></i></a></li>
+		</ul>
+	</div>
+</body>
+
+
+<!--fontawesome User account-->
+<script src="https://kit.fontawesome.com/69ff864019.js"></script>
+<!-- JQuery JS -->
+<script src="../static/vendor/jquery/jquery.min.js"></script>
+<!-- Identification JS -->
+<script src="../static/js/pnglib.js"></script>
+<script src="../static/js/identicon.js"></script>
+<script src="../static/js/identification.js"></script>
+<!-- AJAX JS -->
+<script src="../static/js/ajax.js"></script>
+<!-- Snackbar JS -->
+<script src="../static/js/snackbar.js"></script>
+<!--side menu-->
+<script src="../static/js/sidemenu/modernizr.custom.js"></script>
+<script src="../static/js/sidemenu/classie.js"></script>
+<script src="../static/js/sidemenu/gnmenu.js"></script>
+<script>
+	new gnMenu( document.getElementById( 'gn-menu' ) );
+</script>
+</html>
