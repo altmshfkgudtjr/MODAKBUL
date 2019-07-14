@@ -10,8 +10,9 @@ function user_login()
 	}
 
 	var send_data = {id: login_ID, pw: login_PW};
-	var a_jax = A_JAX('/login', "POST", null, send_data);	//"/login" 이라는 url에 아이디/비밀번호 data 전송
+	var a_jax = A_JAX(TEST_IP+"sign_in_up", "POST", null, send_data);	//"/login" 이라는 url에 아이디/비밀번호 data 전송
 	$.when(a_jax).done(function(){
+		console.log(a_jax);
 		var json = a_jax.responseJSON;
 		if (json['result'] == "your not Sejong"){			// result 값이 "your not Sejong" 이라면 실행
 			alert("로그인에 실패하였습니다.");

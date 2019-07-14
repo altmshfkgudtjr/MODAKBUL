@@ -2,6 +2,8 @@
 <html lang="ko">
 <head>
 	<title>세종대학교 소프트웨어융합대학</title>
+	<meta name="keywords" content="세종대학교,소프트웨어융합대학,소융대">
+	<meta name="author" content="Team IML">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- 모바일 브라우저 상태바 컬러 -->
@@ -19,15 +21,18 @@
 	<link rel="stylesheet" type="text/css" href="../static/css/sidemenu/component.css" />
 	<!--fire animation css-->
 	<link rel="stylesheet" type="text/css" href="../static/css/fire.css">
-	<!--custom CSS-->
+	<!--animation css-->
+	<link rel="stylesheet" type="text/css" href="../static/css/animation/animate.css">
+	<!--custom css-->
 	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
 </head>
 
 
 <body>
-	<!--Side Menu-->
+	<!--Side Menu : necessary-->
 	<div class="container">
 		<ul id="gn-menu" class="gn-menu-main M_boxshadow">
+			<!--nav bar 메인 로고-->
 			<a class="fir_all_contain" href="#">
 				<div class = "fire_container">
 					<div class = "fire_flame" id = "flame-2"></div>
@@ -43,6 +48,7 @@
 				</div>
 				<div class="fire_logo">Burn Young</div>
 			</a>
+			<!--사이드 메뉴-->
 			<li class="gn-trigger">
 				<a class="gn-icon gn-icon-menu" style="padding-left : 20px"><span>Menu</span></a>
 				<nav class="gn-menu-wrapper M_boxshadow_sidemenu">
@@ -90,9 +96,30 @@
 					</div>
 				</nav>
 			</li>
-			<li><a><i class="fas fa-search"></i></a></li>
-			<li><a><i class="fas fa-user" style="padding: 0 10px;"></i></a></li>
+			<!--검색버튼-->
+			<li onclick="M_search_bar_on()">
+				<a><i id="M_search_icon" class="fas fa-search"></i></a>
+				<div id="M_search_bar" class="M_search_bar M_boxshadow display_none">
+					<input id="M_search_input" type="text" name="search_about" autocomplete="off" onkeyup="search_enter()">
+				</div>
+			</li>
+			<!--유저버튼-->
+			<li id="M_nav_user2" class="gn-trigger" onclick="M_dropdown_user()">
+				<a><i class="fas fa-user" style="padding: 0 10px;"></i></a>
+				<div id="M_nav_user" class="M_nav_user M_boxshadow_user display_none">
+					<a>내 정보</a>
+					<a>설정</a>
+					<a>로그아웃</a>
+				</div>
+			</li>
 		</ul>
+	</div>
+
+
+	<div class="M_footer">
+		<img src="../static/image/foot.png" class="M_footer_img">
+		<p style="margin: 0 0 10px">010-7393-3434 | sejong1sc@gmail.com | 학생회관 409호</p>
+		<p>COPYRIGHT ⓒ 2019 Team IML</p>
 	</div>
 </body>
 
@@ -117,5 +144,6 @@
 	new gnMenu( document.getElementById( 'gn-menu' ) );
 </script>
 <!--custom JS-->
+<script src="../static/js/test_url.js"></script>
 <script src="../static/js/login.js"></script>
 </html>
