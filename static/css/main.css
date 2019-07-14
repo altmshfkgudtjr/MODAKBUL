@@ -54,10 +54,19 @@ body, html {
   to {bottom: 0; opacity: 0;}
 }
 /* 클래스 =================================================================*/
+.M_font_thin {font-weight: lighter}
+.M_font_normal {font-weight: normal}
+.M_font_bold {font-weight: bold}
+
 .M_textCenter {text-align: center}
 .M_textLeft {text-align: left}
-.M_textRgiht {text-align: right}
+.M_textRight {text-align: right}
 
-.display_none {
-	display: none;
-}
+.display_none {display: none}
+.display_block {display: block}
+
+.M_dropdwon_trf {transform: translate(0, 5px)}
+.M_dropdown_hypeon {padding: 0 22px 0 30px}
+
+.M_boxshadow {box-shadow: 0px 2px 49px -4px}
+.M_boxshadow_sidemenu {box-shadow: 0px 20px 30px -4px}
