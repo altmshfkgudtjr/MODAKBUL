@@ -14,13 +14,23 @@ function M_dropdown_volunteer() {
 	$("#M_studentVolunteer").animate({height: 'toggle'});
 }
 function M_dropdown_user() {
-	$("#M_nav_user_login").animate({height: 'toggle'}, 'fast');
+	if (localStorage.getItem('modakbul_token') != null){
+		$("#M_nav_user_login").animate({height: 'toggle'}, 'fast');
+	} else {
+		$("#M_nav_user_nologin").animate({height: 'toggle'}, 'fast');
+	}
 }
 // modal 이 외 클릭 시, modal 닫기
 $(document).mouseup(function (e) {
 	var container = $("#M_nav_user");
-	if (!container.is(e.target) && container.has(e.target).length === 0){
-		$("#M_nav_user_login").animate({height: 'hide'}, 'fast');
+	if (localStorage.getItem('modakbul_token') != null){
+		if (!container.is(e.target) && container.has(e.target).length === 0){
+			$("#M_nav_user_login").animate({height: 'hide'}, 'fast');
+		}
+	} else {
+		if (!container.is(e.target) && container.has(e.target).length === 0){
+			$("#M_nav_user_nologin").animate({height: 'hide'}, 'fast');
+		}
 	}
 });
 //search bar animation

@@ -1,6 +1,5 @@
 //로그인 버튼을 누를 시, 실행되는 함수
-function user_login()
-{
+function user_login(){
 	var login_ID = $('#user_id').val();	// user_id 란 ID 값의 value 값 가져옴
 	var login_PW = $('#user_pw').val();	// user_pw 란 ID 값의 value 값 가져옴
 	
@@ -30,4 +29,10 @@ function user_login()
 			alert("일시적인 오류가 발생하였습니다. 잠시 후 다시 시도해주세요.");
 		}
 	});
+}
+//로그아웃 버튼을 누를 시, 실행되는 함수
+function user_logout(){
+	localStorage.removeItem('modakbul_token');
+	snackbar("로그아웃 되었습니다.");
+	$("#M_nav_user_login").animate({height: 'hide'}, 'fast');
 }
