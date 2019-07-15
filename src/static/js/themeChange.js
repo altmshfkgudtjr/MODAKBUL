@@ -1,9 +1,9 @@
 function changeTheme() {
-	var now_thema = $('#M_theme').attr('class');
+	var now_theme = $('#M_theme').attr('class');
 	// now thema : white
-	if (now_thema.indexOf("moon") != -1 ){
-		$('#M_theme').removeClass("fa-moon");
-		$('#M_theme').addClass("fa-sun");
+	if (now_theme.indexOf("moon") != -1 ){
+		$('.M_theme').removeClass("fa-moon");
+		$('.M_theme').addClass("fa-sun");
 		$('body').addClass('M_dark_theme M_dark_theme_body');
 		$('#M_body').addClass('M_dark_theme M_dark_theme_body');
 		$('#gn-menu').addClass('M_dark_theme M_boxshadow_dark_shadow');
@@ -17,11 +17,13 @@ function changeTheme() {
 		$('.M_info_div').css({"background-color": "#494e52", "color": "#f5f6fa"});
 		$('.gn-menu-wrapper').css("background-color", "#202124");
 		$('meta[name="theme-color"]').attr('content', "#202124");
+		$('.input100').css("color", "#f5f6fa");
+		$('#M_nav_user_nologin a').css("color", "#e2e2e2");
 	}
 	// now thema : dark
 	else {
-		$('#M_theme').removeClass("fa-sun");
-		$('#M_theme').addClass("fa-moon");
+		$('.M_theme').removeClass("fa-sun");
+		$('.M_theme').addClass("fa-moon");
 		$('body').removeClass('M_dark_theme M_dark_theme_body');
 		$('#M_body').removeClass('M_dark_theme M_dark_theme_body');
 		$('#gn-menu').removeClass('M_dark_theme M_boxshadow_dark_shadow');
@@ -35,6 +37,8 @@ function changeTheme() {
 		$('.M_info_div').css({"background-color": "white", "color": "#3E5569"});
 		$('.gn-menu-wrapper').css("background-color", "white");
 		$('meta[name="theme-color"]').attr('content', "white");
+		$('.input100').css("color", "#555555");
+		$('#M_nav_user_nologin a').css("color", "#5f6f81");
 	}
 }
 //#323639

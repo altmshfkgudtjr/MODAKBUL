@@ -33,7 +33,7 @@
 	<div id="M_nav_container" class="container M_sidemenu">
 		<ul id="gn-menu" class="gn-menu-main M_boxshadow">
 			<!--nav bar 메인 로고-->
-			<a class="fir_all_contain" href="#">
+			<a class="fir_all_contain" href="/">
 				<div class = "fire_container">
 					<div class = "fire_flame" id = "flame-2"></div>
 					<div class = "fire_flame" id = "flame-1"></div>
@@ -111,12 +111,12 @@
 					<a>내 정보</a>
 					<a>설정</a>
 					<a onclick="user_logout()">로그아웃</a>
-					<a onclick="changeTheme()"><i id="M_theme" class="fas fa-moon"></i></a>
+					<a onclick="changeTheme()"><i id="M_theme" class="M_theme fas fa-moon"></i></a>
 				</div>
 				<!--비로그인시-->
 				<div id="M_nav_user_nologin" class="M_nav_user M_boxshadow_user display_none">
-					<a>로그인</a>
-					<a onclick="changeTheme()"><i id="M_theme" class="fas fa-moon"></i></a>
+					<a href="/sign-in">로그인</a>
+					<a onclick="changeTheme()"><i id="M_theme" class="M_theme fas fa-moon"></i></a>
 				</div>
 			</li>
 		</ul>
@@ -124,14 +124,13 @@
 	<!--Body-->
 	<div class="M_body">
 		<div class="M_info_div">
-			<p>글씨는 화이트! ^^</p>
+			<p>메인페이지 ^ㅁ^</p>
 		</div>
 	</div>
 	<!--Page footer-->
 	<div class="M_footer">
 		<img src="../static/image/foot.png" class="M_footer_img">
-		<p style="margin: 0 0 10px">010-7393-3434 | sejong1sc@gmail.com | 학생회관 409호</p>
-		<p>COPYRIGHT ⓒ 2019 Team IML</p>
+		<p class="M_footer_p">010-7393-3434 | sejong1sc@gmail.com | 학생회관 409호<br>COPYRIGHT ⓒ 2019 Team IML</p>
 	</div>
 </body>
 
@@ -159,7 +158,4 @@
 <script src="../static/js/test_url.js"></script>
 <script src="../static/js/login.js"></script>
 <script src="../static/js/themeChange.js"></script>
-<script>
-	localStorage.setItem('modakbul_token', '1234');
-</script>
 </html>

@@ -1,20 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-	<title>모닥불 INFO</title>
+	<title>세종대학교 소프트웨어융합대학</title>
+	<meta name="keywords" content="세종대학교,소프트웨어융합대학,소융대">
+	<meta name="author" content="Team IML">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- 모바일 브라우저 상태바 컬러 -->
-	<meta name="theme-color" content="#ECECEC">
+	<meta name="theme-color" content="white">
 	<!-- 모닥불 shortcut 아이콘 -->
 	<link rel="icon" type="image/png" href="../static/image/ModakbulLOGO.png">
 	<link rel="apple-touch-icon-precomposed" type="image/png" href="../static/image/ModakbulLOGO.png">
 	<!-- 아이콘 -->
-	<!-- fontawesome CDN-->
-	<!--
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-	-->
-	<link rel="stylesheet" type="text/css" href="../static/fonts/font-awesome-4.7.0/css/font-awesome.css">
 	<link rel="stylesheet" type="text/css" href="../static/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 	<!--CSS-->
 	<link href="../static/css/style.min.css" rel="stylesheet">
@@ -31,11 +29,11 @@
 
 
 <body class="M_white_theme">
-	<!--모닥불 사이드메뉴-->
+	<!--Side Menu : necessary-->
 	<div id="M_nav_container" class="container M_sidemenu">
 		<ul id="gn-menu" class="gn-menu-main M_boxshadow">
 			<!--nav bar 메인 로고-->
-			<a class="fir_all_contain" href="#">
+			<a class="fir_all_contain" href="/">
 				<div class = "fire_container">
 					<div class = "fire_flame" id = "flame-2"></div>
 					<div class = "fire_flame" id = "flame-1"></div>
@@ -112,133 +110,40 @@
 				<div id="M_nav_user_login" class="M_nav_user M_boxshadow_user display_none">
 					<a>내 정보</a>
 					<a>설정</a>
-					<a>로그아웃</a>
+					<a onclick="user_logout()">로그아웃</a>
 					<a onclick="changeTheme()"><i id="M_theme" class="fas fa-moon"></i></a>
 				</div>
 				<!--비로그인시-->
 				<div id="M_nav_user_nologin" class="M_nav_user M_boxshadow_user display_none">
-					<a>로그인</a>
+					<a href="/sign-in">로그인</a>
+					<a onclick="changeTheme()"><i id="M_theme" class="fas fa-moon"></i></a>
 				</div>
 			</li>
 		</ul>
 	</div>
-	<!--정보-->
-	<div id="M_body" class="M_body">
-		<!--글꼴-->
-		<div>
-			<h1 style="border-bottom: 3px solid #BDBDBD; padding-bottom: 10px;">글꼴</h1>
-			<h4 style="font-family: 'Do Hyeon', sans-serif;">구글폰트</h4>
-			<div class="M_info_div" style="font-family: 'Do Hyeon', sans-serif;">
-				<p class="M_font_bold" style="font-family: 'Do Hyeon', sans-serif;">@import url('https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean');</p>
-				<p class="M_font_bold" style="color: green; font-family: 'Do Hyeon', sans-serif;">font-family: 'Do Hyeon', sans-serif;</p>
-			</div>
-			<h4 style="font-family: 'NanumBarunGothic', 'sans-serif';">나눔바른고딕</h4>
-			<div class="M_info_div" style="font-family: 'NanumBarunGothic', 'sans-serif';">
-				<p class="M_font_bold" style="font-family: 'NanumBarunGothic', 'sans-serif';">@font-face { 
-					<br>font-family: 'NanumBarunGothic';
-					<br>src: url('../fonts/NanumBarunGothic/NanumBarunGothic.eot') format('embedded-opentype'),
-					<br>url('../fonts/NanumBarunGothic/NanumBarunGothic.woff') format('woff');}</p>
-				<p class="M_font_bold" style="color: green; font-family: 'NanumBarunGothic', 'sans-serif';">font-family: 'NanumBarunGothic', 'sans-serif';</p>
-			</div>
-			<h4 style="font-family: 'NanumGothic', 'sans-serif';">나눔고딕</h4>
-			<div class="M_info_div" style="font-family: 'NanumGothic', 'sans-serif';">
-				<p class="M_font_bold" style="font-family: 'NanumGothic', 'sans-serif';">@font-face { font-family: 'NanumGothic';
-					<br>src: url('../fonts/NanumBarunGothic/NanumGothic.eot') format('embedded-opentype'),
-					<br>url('../fonts/NanumBarunGothic/NanumGothic.woff') format('woff');}</p>
-				<p class="M_font_bold" style="color: green; font-family: 'NanumGothic', 'sans-serif';">font-family: 'NanumGothic', 'sans-serif';</p>
-			</div>
-		</div>
-		<!--색상표-->
-		<div>
-			<h1 style="border-bottom: 3px solid #BDBDBD; padding-bottom: 10px;">색상</h1>
-			<div style="width: 200px; height: 60px; background-color: #c30e2e; color: white; border: 5px solid #aaaaaa; display: inline-block; margin-right: 30px;">#c30e2e</div>
-			<div style="width: 200px; height: 60px; background-color: #5f6f81; color: white; border: 5px solid #aaaaaa; display: inline-block; margin-right: 30px;">#5f6f81</div>
-			<div style="width: 200px; height: 60px; background-color: #323639; color: white; border: 5px solid #aaaaaa; display: inline-block; margin-right: 30px;">#323639</div>
-			<div style="width: 200px; height: 60px; background-color: #202124; color: white; border: 5px solid #aaaaaa; display: inline-block; margin-right: 30px;">#202124</div>
-			<div style="width: 200px; height: 60px; background-color: #e2e2e2; color: black; border: 5px solid #aaaaaa; display: inline-block; margin-right: 30px;">#e2e2e2</div>
-			<div style="width: 200px; height: 60px; background-color: #f5f6fa; color: black; border: 5px solid #aaaaaa; display: inline-block; margin-right: 30px;">#f5f6fa</div>
-		</div>
-		<!--박스쉐도우-->
-		<div>
-			<h1 style="border-bottom: 3px solid #BDBDBD; padding-bottom: 10px;">박스쉐도우</h1>
-			<div class="M_info_div">
-				<p class="M_font_bold">box-shadow: 0px 2px 49px -4px</p>
-				<p class="M_font_bold" style="color: green;">.M_boxshadow</p>
-			</div>
-		</div>
-		<!--아이콘-->
-		<div>
-			<h1 style="border-bottom: 3px solid #BDBDBD; padding-bottom: 10px;">아이콘</h1>
-			<div class="M_info_div">
-				<xmp class="M_font_bold" style="white-space: pre-wrap; font-size: 14px; font-family: 'NanumGothic', 'sans-serif';"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-				</xmp>
-				<xmp class="M_font_bold" style="color: green; white-space: pre-wrap; font-size: 14px; font-family: 'NanumGothic', 'sans-serif';"><i class="fab fa-accessible-icon"></i>
-				</xmp>
-			</div>
-		</div>
-		<!--애니메이션-->
-		<div>
-			<h1 style="border-bottom: 3px solid #BDBDBD; padding-bottom: 10px;">애니메이션</h1>
-			<h4>Animate.css</h4>
-			<div class="M_info_div">
-				<xmp class="M_font_bold" style="white-space: pre-wrap; font-size: 14px; font-family: 'NanumGothic', 'sans-serif';"><link rel="stylesheet" type="text/css" href="../static/css/animation/animate.css">
-				</xmp>
-				<p class="M_font_bold" style="color: green;">.animated .원하는애니메이션Class</p>
-				<iframe style="width: 100%; height: 500px;" src="https://daneden.github.io/animate.css/"></iframe>
-			</div>
-		</div>
-		<!--로고-->
-		<div>
-			<h1 style="border-bottom: 3px solid #BDBDBD; padding-bottom: 10px;">로고</h1>
-			<div class="M_info_div">
-				<img src="../static/image/ModakbulLOGO.png" style="width: 100px; height: 100px;">
-			</div>
-		</div>
-		<!--css 기능-->
-		<div>
-			<h1 style="border-bottom: 3px solid #BDBDBD; padding-bottom: 10px;">CSS</h1>
-			<h4>클래스 생성 규정</h4>
-			<div class="M_info_div">
-				<p class="M_font_bold">Custom CSS 인 경우, 중복을 피하기 위해서 "M_" 을 붙여준다.</p>
-				<p class="M_font_bold" style="color: green;">
-					.M_textCenter {text-align: center}<br>
-					.M_textLeft {text-align: left}<br>
-					.M_textRight {text-align: right}<br>
-				</p>
-			</div>
-		</div>
-		<!--스낵바 기능-->
-		<div>
-			<h1 style="border-bottom: 3px solid #BDBDBD; padding-bottom: 10px;">SNCAKBAR</h1>
-			<h4>스낵바 사용방법</h4>
-			<div class="M_info_div">
-				<xmp class="M_font_bold" style="white-space: pre-wrap; font-size: 14px; font-family: 'NanumGothic', 'sans-serif';"><script src="../static/js/snackbar.js"></script>
-				</xmp>
-				<p class="M_font_bold" style="color: green;">
-					snackbar("원하는 문자열");
-				</p>
-			</div>
-		</div>
-		<!--IMG 저장 규정-->
-		<div>
-			<h1 style="border-bottom: 3px solid #BDBDBD; padding-bottom: 10px;">IMAGE</h1>
-			<h4>IMGAE 저장 규정</h4>
-			<div class="M_info_div">
-				<p class="M_font_bold">홈페이지 구성 이미지</p>
-				<p class="M_font_bold" style="color: green;">../static/image/이미지명.확장자명</p>
-				<p class="M_font_bold">저장 이미지</p>
-				<p class="M_font_bold" style="color: green;">../static/image_save/이미지명.확장자명</p>
-			</div>
-		</div>
+	<!--Body-->
+	<div class="M_body">
+		<div class="M_info_div M_login_box">
+			<form class="validate-form">
+				<div class="wrap-input100 validate-input">
+					<input id="user_id" class="input100" type="text" name="user_id" autocomplete="off" required autofocus>
+					<span class="focus-input100" data-placeholder="학번 / 사번"></span>
+				</div>
+				<div style="width: 100%; height: 20px;"></div>
+				<div class="wrap-input100 validate-input">
+					<input id="user_pw" class="input100" type="password" name="user_pw" required onkeyup="login_enter()">
+					<span class="focus-input100" data-placeholder="비밀번호"></span>
+				</div>
+				<div class="M_login_submit" onclick="user_login()">로그인</div>
+			</form>
+    	</div>
 	</div>
-	<!--하단 정보-->
+	<!--Page footer-->
 	<div class="M_footer">
 		<img src="../static/image/foot.png" class="M_footer_img">
 		<p class="M_footer_p">010-7393-3434 | sejong1sc@gmail.com | 학생회관 409호<br>COPYRIGHT ⓒ 2019 Team IML</p>
 	</div>
 </body>
-
-
 
 <!--fontawesome User account-->
 <script src="https://kit.fontawesome.com/69ff864019.js"></script>

@@ -7,7 +7,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- 모바일 브라우저 상태바 컬러 -->
-	<meta name="theme-color" content="#ECECEC">
+	<meta name="theme-color" content="white">
 	<!-- 모닥불 shortcut 아이콘 -->
 	<link rel="icon" type="image/png" href="../static/image/ModakbulLOGO.png">
 	<link rel="apple-touch-icon-precomposed" type="image/png" href="../static/image/ModakbulLOGO.png">
@@ -110,12 +110,13 @@
 				<div id="M_nav_user_login" class="M_nav_user M_boxshadow_user display_none">
 					<a>내 정보</a>
 					<a>설정</a>
-					<a>로그아웃</a>
+					<a onclick="user_logout()">로그아웃</a>
 					<a onclick="changeTheme()"><i id="M_theme" class="fas fa-moon"></i></a>
 				</div>
 				<!--비로그인시-->
 				<div id="M_nav_user_nologin" class="M_nav_user M_boxshadow_user display_none">
-					<a>로그인</a>
+					<a href="./login.html">로그인</a>
+					<a onclick="changeTheme()"><i id="M_theme" class="fas fa-moon"></i></a>
 				</div>
 			</li>
 		</ul>
@@ -123,22 +124,7 @@
 	<!--Body-->
 	<div class="M_body">
 		<div class="M_info_div">
-			<p class="M_font_bold">1. This is a flame</p>
-		</div>
-		<div class="M_info_div">
-			<p class="M_font_bold">2. This is a flame</p>
-		</div>
-		<div class="M_info_div">
-			<p class="M_font_bold">3. This is a flame</p>
-		</div>
-		<div class="M_info_div">
-			<p class="M_font_bold">4. This is a flame</p>
-		</div>
-		<div class="M_info_div">
-			<p class="M_font_bold">5. This is a flame</p>
-		</div>
-		<div class="M_info_div">
-			<p class="M_font_bold">6. This is a flame</p>
+			<p>글씨는 화이트! ^^</p>
 		</div>
 	</div>
 	<!--Page footer-->

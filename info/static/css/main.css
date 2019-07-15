@@ -171,11 +171,21 @@ body, html {
   height: auto;
   width: 300px;
 }
+.M_footer_p {
+  position: absolute;
+  bottom: 0px;
+  text-align: center;
+  width: 100%;
+  line-height: 20px;
+}
 @media (max-width: 1000px) {
   .M_footer_img {
-    position: relative;
-    height: auto;
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translate(-50%, 0);
     width: 250px;
+    height: auto;
   }
 }
 
