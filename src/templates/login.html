@@ -28,7 +28,7 @@
 </head>
 
 
-<body class="M_white_theme">
+<body class="M_white_theme" onload="setTheme()">
 	<!--Side Menu : necessary-->
 	<div id="M_nav_container" class="container M_sidemenu">
 		<ul id="gn-menu" class="gn-menu-main M_boxshadow">
@@ -109,14 +109,13 @@
 				<!--로그인시-->
 				<div id="M_nav_user_login" class="M_nav_user M_boxshadow_user display_none">
 					<a>내 정보</a>
-					<a>설정</a>
 					<a onclick="user_logout()">로그아웃</a>
-					<a onclick="changeTheme()"><i id="M_theme" class="fas fa-moon"></i></a>
+					<a onclick="changeTheme()"><i id="M_theme" class="M_theme fas fa-moon"></i></a>
 				</div>
 				<!--비로그인시-->
 				<div id="M_nav_user_nologin" class="M_nav_user M_boxshadow_user display_none">
 					<a href="/sign-in">로그인</a>
-					<a onclick="changeTheme()"><i id="M_theme" class="fas fa-moon"></i></a>
+					<a onclick="changeTheme()"><i id="M_theme" class="M_theme fas fa-moon"></i></a>
 				</div>
 			</li>
 		</ul>
@@ -145,8 +144,6 @@
 	</div>
 </body>
 
-<!--fontawesome User account-->
-<script src="https://kit.fontawesome.com/69ff864019.js"></script>
 <!-- JQuery JS -->
 <script src="../static/vendor/jquery/jquery.min.js"></script>
 <!-- Identification JS -->

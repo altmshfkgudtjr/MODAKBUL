@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 	<title>모닥불 INFO</title>
+	<meta name="keywords" content="세종대학교,소프트웨어융합대학,소융대">
+	<meta name="author" content="Team IML">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- 모바일 브라우저 상태바 컬러 -->
-	<meta name="theme-color" content="#ECECEC">
+	<meta name="theme-color" content="white">
 	<!-- 모닥불 shortcut 아이콘 -->
 	<link rel="icon" type="image/png" href="../static/image/ModakbulLOGO.png">
 	<link rel="apple-touch-icon-precomposed" type="image/png" href="../static/image/ModakbulLOGO.png">
 	<!-- 아이콘 -->
-	<!-- fontawesome CDN-->
-	<!--
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-	-->
-	<link rel="stylesheet" type="text/css" href="../static/fonts/font-awesome-4.7.0/css/font-awesome.css">
+
 	<link rel="stylesheet" type="text/css" href="../static/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 	<!--CSS-->
 	<link href="../static/css/style.min.css" rel="stylesheet">
@@ -111,13 +110,13 @@
 				<!--로그인시-->
 				<div id="M_nav_user_login" class="M_nav_user M_boxshadow_user display_none">
 					<a>내 정보</a>
-					<a>설정</a>
 					<a>로그아웃</a>
-					<a onclick="changeTheme()"><i id="M_theme" class="fas fa-moon"></i></a>
+					<a onclick="changeTheme()"><i id="M_theme" class="M_theme fas fa-moon"></i></a>
 				</div>
 				<!--비로그인시-->
 				<div id="M_nav_user_nologin" class="M_nav_user M_boxshadow_user display_none">
 					<a>로그인</a>
+					<a onclick="changeTheme()"><i id="M_theme" class="M_theme fas fa-moon"></i></a>
 				</div>
 			</li>
 		</ul>
@@ -151,12 +150,12 @@
 		<!--색상표-->
 		<div>
 			<h1 style="border-bottom: 3px solid #BDBDBD; padding-bottom: 10px;">색상</h1>
-			<div style="width: 200px; height: 60px; background-color: #c30e2e; color: white; border: 5px solid #aaaaaa; display: inline-block; margin-right: 30px;">#c30e2e</div>
-			<div style="width: 200px; height: 60px; background-color: #5f6f81; color: white; border: 5px solid #aaaaaa; display: inline-block; margin-right: 30px;">#5f6f81</div>
-			<div style="width: 200px; height: 60px; background-color: #323639; color: white; border: 5px solid #aaaaaa; display: inline-block; margin-right: 30px;">#323639</div>
-			<div style="width: 200px; height: 60px; background-color: #202124; color: white; border: 5px solid #aaaaaa; display: inline-block; margin-right: 30px;">#202124</div>
-			<div style="width: 200px; height: 60px; background-color: #e2e2e2; color: black; border: 5px solid #aaaaaa; display: inline-block; margin-right: 30px;">#e2e2e2</div>
-			<div style="width: 200px; height: 60px; background-color: #f5f6fa; color: black; border: 5px solid #aaaaaa; display: inline-block; margin-right: 30px;">#f5f6fa</div>
+			<div style="width: 200px; height: 60px; background-color: #c30e2e; color: white; border: 5px solid #aaaaaa; display: inline-block; margin-right: 30px; margin-bottom: 20px;">#c30e2e</div>
+			<div style="width: 200px; height: 60px; background-color: #5f6f81; color: white; border: 5px solid #aaaaaa; display: inline-block; margin-right: 30px; margin-bottom: 20px;">#5f6f81</div>
+			<div style="width: 200px; height: 60px; background-color: #323639; color: white; border: 5px solid #aaaaaa; display: inline-block; margin-right: 30px; margin-bottom: 20px;">#323639</div>
+			<div style="width: 200px; height: 60px; background-color: #202124; color: white; border: 5px solid #aaaaaa; display: inline-block; margin-right: 30px; margin-bottom: 20px;">#202124</div>
+			<div style="width: 200px; height: 60px; background-color: #e2e2e2; color: black; border: 5px solid #aaaaaa; display: inline-block; margin-right: 30px; margin-bottom: 20px;">#e2e2e2</div>
+			<div style="width: 200px; height: 60px; background-color: #f5f6fa; color: black; border: 5px solid #aaaaaa; display: inline-block; margin-right: 30px; margin-bottom: 20px;">#f5f6fa</div>
 		</div>
 		<!--박스쉐도우-->
 		<div>
@@ -240,8 +239,6 @@
 
 
 
-<!--fontawesome User account-->
-<script src="https://kit.fontawesome.com/69ff864019.js"></script>
 <!-- JQuery JS -->
 <script src="../static/vendor/jquery/jquery.min.js"></script>
 <!-- Identification JS -->

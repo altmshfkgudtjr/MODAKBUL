@@ -190,31 +190,31 @@ input:-ms-input-placeholder { color: #adadad;}
 .M_boxshadow_user {box-shadow: 0px 10px 30px -10px}
 
 .M_dropdown_icon {
-  position: absolute; right: 10px; margin-right: 30px; line-height: 60px; padding-top: 20px;
+  position: absolute; right: 10px; margin-right: 30px; line-height: 60px;
 }
 @media screen and (max-width: 760px) {
   .M_dropdown_icon {
-    position: absolute; left: 320px !important; line-height: 60px; padding-top: 20px;
+    position: absolute; left: 320px !important; line-height: 60px;
   }
 }
 @media screen and (max-width: 420px) {
   .M_dropdown_icon {
-    position: absolute; left: 380px !important; line-height: 60px; padding-top: 20px;
+    position: absolute; left: 380px !important; line-height: 60px;
   }
 }
 @media screen and (max-width: 400px) {
   .M_dropdown_icon {
-    position: absolute; left: 350px !important; line-height: 60px; padding-top: 20px;
+    position: absolute; left: 350px !important; line-height: 60px;
   }
 }
 @media screen and (max-width: 360px) {
   .M_dropdown_icon {
-    position: absolute; left: 330px !important; line-height: 60px; padding-top: 20px;
+    position: absolute; left: 330px !important; line-height: 60px;
   }
 }
 @media screen and (max-width: 320px) {
   .M_dropdown_icon {
-    position: absolute; left: 300px !important; line-height: 60px; padding-top: 20px;
+    position: absolute; left: 300px !important; line-height: 60px;
   }
 }
 
@@ -292,6 +292,36 @@ input:-ms-input-placeholder { color: #adadad;}
     height: auto;
   }
 }
+@media (max-width: 450px) {
+  .M_footer {
+    position: static;
+    width: 100%;
+    height: auto;
+    bottom: 0;
+    z-index: 0;
+    background-color: rgba(0,0,0,0);
+    text-align: center;
+    line-height: 10px;
+    font-size: 10px;
+    margin: 180px 0 10px;
+    font-family: 'NanumGothic', 'sans-serif';
+  }
+  .M_footer_img {
+    position: static;
+    bottom: 60px;
+    left: 50%;
+    transform: translate(0, 0);
+    width: 250px;
+    height: auto;
+  }
+  .M_footer_p {
+  position: static;
+  bottom: 0px;
+  text-align: center;
+  width: 100%;
+  line-height: 20px;
+}
+}
 
 .M_body {
   position: relative;
@@ -334,6 +364,18 @@ input:-ms-input-placeholder { color: #adadad;}
   height: 270px;
   background-color: white;
   box-shadow: 0px 10px 30px -20px rgb(0,0,0);
+}
+@media screen and (max-width: 760px) {
+  .M_login_box {
+    position: relative;
+    top: 50px;
+    margin: auto;
+    padding: 20px;
+    width: 98%;
+    height: 270px;
+    background-color: white;
+    box-shadow: 0px 10px 30px -20px rgb(0,0,0);
+  }
 }
 .M_login_submit {
   position: relative;
