@@ -22,9 +22,14 @@
 
 body, html {
 	font-family: 'NanumGothic', sans-serif;
+  height: 85%;
 	z-index: -100;
 }
-
+@media screen and (max-width: 760px) {
+  body {
+    max-height: 600px;
+  }
+}
 /* 스낵 바 ===============================================================*/
 #snackbar {
   visibility: hidden; /* Hidden by default. Visible on click */
@@ -185,7 +190,7 @@ input:-ms-input-placeholder { color: #adadad;}
 .M_dropdwon_trf {transform: translate(0, 5px)}
 .M_dropdown_hypeon {padding: 0 22px 0 30px}
 
-.M_boxshadow {box-shadow: 0px 2px 49px -4px}
+.M_boxshadow {box-shadow: 0px 4px 30px -4px}
 .M_boxshadow_sidemenu {box-shadow: 0px 20px 30px -4px}
 .M_boxshadow_user {box-shadow: 0px 10px 30px -10px}
 
@@ -228,6 +233,10 @@ input:-ms-input-placeholder { color: #adadad;}
 }
 .M_nav_user > a {height: 50px; line-height: 50px;}
 
+.M_nav_user_button{
+  color: white;
+}
+
 .M_search_bar {
   position: absolute;
   width: 96%;
@@ -264,7 +273,7 @@ input:-ms-input-placeholder { color: #adadad;}
   text-align: center;
   line-height: 10px;
   font-size: 10px;
-  margin: 80px 0 10px;
+  margin: 100px 0 10px;
   font-family: 'NanumGothic', 'sans-serif';
 }
 .M_footer_img {
@@ -303,7 +312,7 @@ input:-ms-input-placeholder { color: #adadad;}
     text-align: center;
     line-height: 10px;
     font-size: 10px;
-    margin: 180px 0 10px;
+    margin: 45px 0 10px;
     font-family: 'NanumGothic', 'sans-serif';
   }
   .M_footer_img {
@@ -334,6 +343,7 @@ input:-ms-input-placeholder { color: #adadad;}
 }
 .M_info_div {
   background-color: white;
+  color: #3E5569;
   padding: 10px;
   padding-bottom: 10px;
   margin-bottom: 20px;
@@ -350,7 +360,7 @@ input:-ms-input-placeholder { color: #adadad;}
 .M_dark_theme_body {
   background-color: #323639;
 }
-.M_boxshadow_dark_shadow {box-shadow: 0px 10px 30px -15px rgb(0,0,0);}
+.M_boxshadow_dark_shadow {box-shadow: 0px 10px 30px -10px rgb(0,0,0);}
 .M_boxshadow_dark_sidemenu {box-shadow: 0px 20px 30px -4px rgb(0,0,0)}
 .M_boxshadow_dark_user {box-shadow: 0px 10px 30px -10px rgb(0,0,0)}
 
@@ -394,4 +404,16 @@ input:-ms-input-placeholder { color: #adadad;}
 }
 .M_login_submit:hover {
   border: 2px solid #c30e2e;
+}
+
+.M_user_box {
+  position: relative;
+  margin: auto;
+  margin-top: 100px;
+  padding: 20px;
+  width: 80%;
+  height: 80%;
+  max-height: 480px;
+  background-color: white;
+  border: 0.5px solid #dddddd;
 }

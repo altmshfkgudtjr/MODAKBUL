@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
 	<title>세종대학교 소프트웨어융합대학</title>
 	<meta name="keywords" content="세종대학교,소프트웨어융합대학,소융대">
@@ -13,6 +13,7 @@
 	<link rel="apple-touch-icon-precomposed" type="image/png" href="../static/image/ModakbulLOGO.png">
 	<!-- 아이콘 -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
 	<link rel="stylesheet" type="text/css" href="../static/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 	<!--CSS-->
 	<link href="../static/css/style.min.css" rel="stylesheet">
@@ -26,9 +27,7 @@
 	<!--custom css-->
 	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
 </head>
-
-
-<body class="M_white_theme" onload="setTheme()">
+<body class="M_white_theme" onload="setTheme(); user_info(); user_get_write();">
 	<!--Side Menu : necessary-->
 	<div id="M_nav_container" class="container M_sidemenu">
 		<ul id="gn-menu" class="gn-menu-main M_boxshadow">
@@ -108,7 +107,7 @@
 				<a><i class="fas fa-user" style="padding: 0 10px;"></i></a>
 				<!--로그인시-->
 				<div id="M_nav_user_login" class="M_nav_user M_boxshadow_user display_none">
-					<a class="M_nav_user_button" onclick="need_login_snackbar()">내 정보</a>
+					<a class="M_nav_user_button" href="/user">내 정보</a>
 					<a class="M_nav_user_button" onclick="user_logout()">로그아웃</a>
 					<a class="M_nav_user_button" onclick="changeTheme()"><i id="M_theme" class="M_theme fas fa-moon"></i></a>
 				</div>
@@ -121,22 +120,33 @@
 		</ul>
 	</div>
 	<!--Body-->
-	<div class="M_body">
-		<div class="M_info_div M_login_box">
-			<form class="validate-form">
-				<div class="wrap-input100 validate-input">
-					<input id="user_id" class="input100" type="text" name="user_id" autocomplete="off" required autofocus>
-					<span class="focus-input100" data-placeholder="학번 / 사번"></span>
+	<!--User information box-->
+	<div class="M_user_box">
+		<div class="M_user_img_container">
+			<img src="" id="M_user_img" class="M_user_img" onerror="this.src='../static/image/user.png'">
+		</div>
+			<div class="M_user_nickname">
+				<div>
+					<div style="margin-right: 10px; display: inline-block;">Brother_rock999</div>
+					<i class="fas fa-hammer M_user_nickname_fix" onclick="fix_user_nickname()"></i>
 				</div>
-				<div style="width: 100%; height: 20px;"></div>
-				<div class="wrap-input100 validate-input">
-					<input id="user_pw" class="input100" type="password" name="user_pw" required onkeyup="login_enter()">
-					<span class="focus-input100" data-placeholder="비밀번호"></span>
+				<div class="M_user_introduce">일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</div>
+				<div class="M_float_left">
+					<div class="M_user_title">작성글</div>
+					<div id="M_user_writecnt" class="M_font_bold M_user_writecnt">5</div>
 				</div>
-				<div class="M_login_submit" onclick="user_login()">로그인</div>
-			</form>
-    	</div>
+			</div>
 	</div>
+	<!--User Choice box-->
+	<div class="M_user_choice_box">
+		<div id="M_user_choice_write" class="M_user_choice_write" onclick="user_get_write()"><i class="fas fa-table"></i></div>
+		<div id="M_user_choice_like" class="M_user_choice_like" onclick="user_get_like()"><i class="far fa-heart"></i></div>
+	</div>
+	<div>
+		<div class="M_info_div M_user_post">
+			
+		</div>
+	</div>	
 	<!--Page footer-->
 	<div class="M_footer">
 		<img src="../static/image/foot.png" class="M_footer_img">

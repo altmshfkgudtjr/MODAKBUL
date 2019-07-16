@@ -17,7 +17,7 @@ function user_login(){
 			snackbar("올바르지 않은 회원 정보입니다.");
 		}
 		else if (json['result'] == "wrong info"){	// result 값이 "password incorrect" 이라면 실행
-			snackbar("비밀번호를 다시 입력해주세요!");
+			snackbar("비밀번호를 다시 입력해주세요.");
 		}
 		else if (json['result'] == "success"){				// result 값이 "success" 이라면 실행
 			// 로그인 성공 token 생성
@@ -33,8 +33,8 @@ function user_login(){
 //로그아웃 버튼을 누를 시, 실행되는 함수
 function user_logout(){
 	localStorage.removeItem('modakbul_token');
-	snackbar("로그아웃 되었습니다.");
 	$("#M_nav_user_login").animate({height: 'hide'}, 'fast');
+	snackbar("로그아웃 되었습니다.");
 }
 
 //엔터 로그인
@@ -42,6 +42,10 @@ function login_enter(){
     if (window.event.keyCode == 13) {
         user_login();
     }
+}
+
+function need_login_snackbar(){
+	snackbar("로그인을 해주세요!");
 }
 
 //로그인 창 애니메이션 함수
