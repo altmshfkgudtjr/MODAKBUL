@@ -29,7 +29,7 @@
 </head>
 
 
-<body class="M_white_theme" onload="setTheme()">
+<body class="M_white_theme" onload="setTheme();">
 	<!--Side Menu : necessary-->
 	<div id="M_nav_container" class="container M_sidemenu">
 		<ul id="gn-menu" class="gn-menu-main M_boxshadow">
@@ -46,6 +46,9 @@
 					</div>
 					<div class = "fire_wood" id = "wood-1"></div>
 					<div class = "fire_wood" id = "wood-2"></div>
+				</div>
+				<div class="fire_container display_none">
+					<img src="../static/image/ModakbulLOGO.png" style="height: 40px; width: auto; transform: translate(0, -8px); border-radius: 50%;">
 				</div>
 				<div id="M_fire_logo" class="fire_logo">Burn Young</div>
 			</a>
@@ -109,13 +112,25 @@
 				<a><i class="fas fa-user" style="padding: 0 10px;"></i></a>
 				<!--로그인시-->
 				<div id="M_nav_user_login" class="M_nav_user M_boxshadow_user display_none">
-					<a class="M_nav_user_button" href="/user">내 정보</a>
+					<div>
+						<div class="M_user_img_container">
+							<div id="M_user_img" class="M_user_img"></div>
+						</div>
+						<div class="M_user_info_container">
+							<h4>김형석</h4>
+							<p class="M_user_introduce">컴퓨터공학과</p>
+							<p class="M_user_introduce">10611075</p>	
+						</div>
+					</div>
+					<div class="M_nav_border"></div>
 					<a class="M_nav_user_button" onclick="user_logout()">로그아웃</a>
+					<div class="M_nav_border"></div>
 					<a class="M_nav_user_button" onclick="changeTheme()"><i id="M_theme" class="M_theme fas fa-moon"></i></a>
 				</div>
 				<!--비로그인시-->
-				<div id="M_nav_user_nologin" class="M_nav_user M_boxshadow_user display_none">
+				<div id="M_nav_user_nologin" class="M_nav_user M_boxshadow_user M_nav_user_nologin display_none">
 					<a class="M_nav_user_button" href="/sign-in">로그인</a>
+					<div class="M_nav_border"></div>
 					<a class="M_nav_user_button" onclick="changeTheme()"><i id="M_theme" class="M_theme fas fa-moon"></i></a>
 				</div>
 			</li>

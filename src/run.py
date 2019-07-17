@@ -9,9 +9,9 @@ def index():
 @app.route('/sign-in')
 def login():
 	return render_template('login.html')
-@app.route('/user')
-def user():
-	return render_template('user.html')
+@app.route('/board')
+def board():
+	return render_template('board.html')
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', port=80, debug = True)

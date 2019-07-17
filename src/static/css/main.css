@@ -14,6 +14,8 @@
 }
 
 
+
+
 * {
 	margin: 0px; 
 	padding: 0px; 
@@ -24,6 +26,10 @@ body, html {
 	font-family: 'NanumGothic', sans-serif;
   height: 85%;
 	z-index: -100;
+}
+/*스크롤바 숨기기*/
+body::-webkit-scrollbar { 
+  display: none; 
 }
 @media screen and (max-width: 760px) {
   body {
@@ -232,12 +238,22 @@ input:-ms-input-placeholder { color: #adadad;}
   position: absolute;
   top: 65px;
   right: 5px;
-  width: 100px;
-  height: auto;
+  width: 200px;
+  height: 290px;
   background-color: white;
+}
+.M_nav_user_nologin {
+  height: 100px;
 }
 .M_nav_user > a {height: 50px; line-height: 50px;}
 
+.M_nav_border{
+  position: relative;
+  margin: auto;
+  width: 98%;
+  height: 1px;
+  background-color: #e2e2e2;
+}
 .M_nav_user_button{
   color: white;
 }
@@ -272,10 +288,10 @@ input:-ms-input-placeholder { color: #adadad;}
 }
 
 .M_footer {
-  position: static;
+  position: absolute;
   width: 100%;
-  height: auto;
-  bottom: 0;
+  height: 90px;
+  bottom: 0px;
   z-index: 0;
   background-color: rgba(0,0,0,0);
   text-align: center;
@@ -286,14 +302,14 @@ input:-ms-input-placeholder { color: #adadad;}
 }
 .M_footer_img {
   z-index: 0;
-  position: absolute;
+  position: static;
   left: 10px;
   bottom: 5px;
   height: auto;
   width: 300px;
 }
 .M_footer_p {
-  position: absolute;
+  position: sta;
   bottom: 0px;
   text-align: center;
   width: 100%;
@@ -301,38 +317,38 @@ input:-ms-input-placeholder { color: #adadad;}
 }
 @media (max-width: 1000px) {
   .M_footer_img {
-    position: absolute;
+    position: static;
     bottom: 60px;
     left: 50%;
-    transform: translate(-50%, 0);
+    transform: translate(0, 0);
     width: 250px;
     height: auto;
   }
 }
 @media (max-width: 450px) {
   .M_footer {
-    position: static;
+    position: absolute;
     width: 100%;
     height: auto;
-    bottom: 0;
+    bottom: 0px;
     z-index: 0;
     background-color: rgba(0,0,0,0);
     text-align: center;
     line-height: 10px;
     font-size: 10px;
-    margin: 45px 0 10px;
+    margin: 100px 0 10px;
     font-family: 'NanumGothic', 'sans-serif';
   }
   .M_footer_img {
     z-index: 0;
-    position: absolute;
+    position: static;
     left: 50%;
     bottom: 60px;
     height: auto;
     width: 250px;
   }
   .M_footer_p {
-    position: absolute;
+    position: static;
     bottom: 0px;
     text-align: center;
     width: 100%;
@@ -429,18 +445,27 @@ input:-ms-input-placeholder { color: #adadad;}
 }
 .M_user_img_container {
   position: relative;
-  float: left;
-  width: 30%;
-  height: 100%;
-  margin-right: 30px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  width: 50px;
+  height: 50px;
 }
 .M_user_img {
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0);
-  width: 150px;
-  height: 100%;
-  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #A9A9F5;
+}
+.M_user_info_container {
+  position: relative;
+  margin: auto;
+  margin-bottom: 5px;
+  width: 100px;
+  height: 100px;
 }
 .M_user_nickname {
   position: relative;
@@ -459,8 +484,9 @@ input:-ms-input-placeholder { color: #adadad;}
   text-shadow: 0px 0px 2px #999999;
 }
 .M_user_introduce {
-  font-size: 15px;
-  margin-top: 10px;
+  font-size: 13px;
+  height: 20px;
+  margin: 0;
 }
 .M_user_title{
   display: inline-block;
@@ -491,18 +517,27 @@ input:-ms-input-placeholder { color: #adadad;}
   }
   .M_user_img_container {
     position: relative;
-    float: left;
-    width: 30%;
-    height: 100%;
-    margin-right: 5px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    width: 50px;
+    height: 50px;
   }
   .M_user_img {
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
-    width: 90px;
-    height: 100%;
-    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #A9A9F5;
+  }
+  .M_user_info_container {
+    position: relative;
+    margin: auto;
+    margin-bottom: 10px;
+    width: 100px;
+    height: 100px;
   }
   .M_user_nickname {
     position: relative;
@@ -530,8 +565,8 @@ input:-ms-input-placeholder { color: #adadad;}
   }
   .M_user_introduce {
     font-size: 15px;
-    margin-top: 10px;
-    height: 45px;
+    margin-top: 0px;
+    height: 20px;
   }
   .M_user_title{
     display: inline-block;
@@ -639,4 +674,18 @@ input:-ms-input-placeholder { color: #adadad;}
   width: 90%;
   max-width: 1000px;
   height: 140px;
+}
+
+/*Board*/
+.M_board_tag_container {
+  position: relative;
+  margin: auto;
+  margin-top: 50px;
+  width: 70%;
+  max-width: 800px;
+  height: 20px;
+}
+.M_board_tag_title {
+  display: inline-block;
+  margin-right: 10px;
 }

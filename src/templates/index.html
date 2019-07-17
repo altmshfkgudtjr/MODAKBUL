@@ -29,7 +29,7 @@
 </head>
 
 
-<body class="M_white_theme" onload="setTheme()">
+<body class="M_white_theme" onload="setTheme();">
 	<!--Side Menu : necessary-->
 	<div id="M_nav_container" class="container M_sidemenu">
 		<ul id="gn-menu" class="gn-menu-main M_boxshadow">
@@ -47,6 +47,9 @@
 					<div class = "fire_wood" id = "wood-1"></div>
 					<div class = "fire_wood" id = "wood-2"></div>
 				</div>
+				<div class="fire_container display_none">
+					<img src="../static/image/ModakbulLOGO.png" style="height: 40px; width: auto; transform: translate(0, -8px); border-radius: 50%;">
+				</div>
 				<div id="M_fire_logo" class="fire_logo">Burn Young</div>
 			</a>
 			<!--사이드 메뉴-->
@@ -55,44 +58,44 @@
 				<nav id="gn-menu-wrapper" class="gn-menu-wrapper M_boxshadow_sidemenu">
 					<div id="gn-scroller" class="gn-scroller">
 						<ul id="gn-menu2" class="gn-menu">
-							<li><a><i class="fas fa-bullhorn" style="padding: 0 22px"></i>공지사항</a></li>
-							<li><a><i class="far fa-bell" style="padding: 0 22px"></i>학생회소개</a></li>
-							<li><a onclick="M_dropdown_money()"><i id="M_studentMoneyButton" class="fas fa-file-invoice-dollar" style="padding: 0 23px"></i>학생회비내역<i id="M_dropdown_icon_money" class="fas fa-sort-down M_dropdown_icon"></i></a></li>
+							<li><a href="/board" class="M_nav_user_button"><i class="fas fa-bullhorn" style="padding: 0 22px"></i>공지사항</a></li>
+							<li><a class="M_nav_user_button"><i class="far fa-bell" style="padding: 0 22px"></i>학생회소개</a></li>
+							<li><a onclick="M_dropdown_money()" class="M_nav_user_button"><i id="M_studentMoneyButton" class="fas fa-file-invoice-dollar" style="padding: 0 23px"></i>학생회비내역<i id="M_dropdown_icon_money" class="fas fa-sort-down M_dropdown_icon"></i></a></li>
 							<div id="M_studentMoney" class="display_none">
 								<div>
-									<a><i class="fas fa-minus M_dropdown_hypeon"></i>소프트웨어융합대학</a>
-									<a><i class="fas fa-minus M_dropdown_hypeon"></i>컴퓨터공학과</a>
-									<a><i class="fas fa-minus M_dropdown_hypeon"></i>소프트웨어학과</a>
-									<a><i class="fas fa-minus M_dropdown_hypeon"></i>정보보호학과</a>
-									<a><i class="fas fa-minus M_dropdown_hypeon"></i>데이터사이언스학과</a>
-									<a><i class="fas fa-minus M_dropdown_hypeon"></i>지능기전공학부</a>
-									<a><i class="fas fa-minus M_dropdown_hypeon"></i>디자인이노베이션</a>
-									<a><i class="fas fa-minus M_dropdown_hypeon"></i>만화애니메이션택</a>
+									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>소프트웨어융합대학</a>
+									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>컴퓨터공학과</a>
+									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>소프트웨어학과</a>
+									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>정보보호학과</a>
+									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>데이터사이언스학과</a>
+									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>지능기전공학부</a>
+									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>디자인이노베이션</a>
+									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>만화애니메이션택</a>
 								</div>
 							</div>
-							<li><a><i class="fas fa-feather-alt" style="padding: 0 22px"></i>민원</a></li>
-							<li><a><i class="far fa-images" style="padding: 0 22px"></i>갤러리</a></li>
-							<li><a onclick="M_dropdown_competition()"><i id="M_studentCompetitionButton" class="fab fa-dribbble" style="padding: 0 22px"></i>공모전<i id="M_dropdown_icon_competition" class="fas fa-sort-down M_dropdown_icon"></i></a></li>
+							<li><a class="M_nav_user_button"><i class="fas fa-feather-alt" style="padding: 0 22px"></i>민원</a></li>
+							<li><a class="M_nav_user_button"><i class="far fa-images" style="padding: 0 22px"></i>갤러리</a></li>
+							<li><a onclick="M_dropdown_competition()" class="M_nav_user_button"><i id="M_studentCompetitionButton" class="fab fa-dribbble" style="padding: 0 22px"></i>공모전<i id="M_dropdown_icon_competition" class="fas fa-sort-down M_dropdown_icon"></i></a></li>
 							<div id="M_studentCompetition" class="display_none">
 								<div>
-									<a><i class="fas fa-minus M_dropdown_hypeon"></i>소융대 공모전</a>
-									<a><i class="fas fa-minus M_dropdown_hypeon"></i>외부 공모전</a>
-									<a><i class="fas fa-minus M_dropdown_hypeon"></i>공모전 구인</a>
+									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>소융대 공모전</a>
+									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>외부 공모전</a>
+									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>공모전 구인</a>
 								</div>
 							</div>
-							<li><a onclick="M_dropdown_volunteer()"><i id="M_studentVolunteerButton" class="far fa-sticky-note" style="padding: 0 22px"></i>세종소융봉사<i id="M_dropdown_icon_volunteer" class="fas fa-sort-down M_dropdown_icon"></i></a></li>
+							<li><a onclick="M_dropdown_volunteer()" class="M_nav_user_button"><i id="M_studentVolunteerButton" class="far fa-sticky-note" style="padding: 0 22px"></i>세종소융봉사<i id="M_dropdown_icon_volunteer" class="fas fa-sort-down M_dropdown_icon"></i></a></li>
 							<div id="M_studentVolunteer" class="display_none">
 								<div>
-									<a><i class="fas fa-minus M_dropdown_hypeon"></i>세종소융봉사공지</a>
-									<a><i class="fas fa-minus M_dropdown_hypeon"></i>멘토링 1조</a>
-									<a><i class="fas fa-minus M_dropdown_hypeon"></i>멘토링 2조</a>
-									<a><i class="fas fa-minus M_dropdown_hypeon"></i>멘토링 3조</a>
-									<a><i class="fas fa-minus M_dropdown_hypeon"></i>멘토링 4조</a>
-									<a><i class="fas fa-minus M_dropdown_hypeon"></i>멘토링 5조</a>
+									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>세종소융봉사공지</a>
+									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>멘토링 1조</a>
+									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>멘토링 2조</a>
+									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>멘토링 3조</a>
+									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>멘토링 4조</a>
+									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>멘토링 5조</a>
 								</div>
 							</div>
-							<li><a><i class="far fa-check-square" style="padding: 0 22px"></i>투표/설문조사</a></li>
-							<li><a><i class="far fa-chart-bar" style="padding: 0 22px"></i>통계자료</a></li>
+							<li><a class="M_nav_user_button"><i class="far fa-check-square" style="padding: 0 22px"></i>투표/설문조사</a></li>
+							<li><a class="M_nav_user_button"><i class="far fa-chart-bar" style="padding: 0 22px"></i>통계자료</a></li>
 						</ul>
 					</div>
 				</nav>
@@ -109,13 +112,25 @@
 				<a><i class="fas fa-user" style="padding: 0 10px;"></i></a>
 				<!--로그인시-->
 				<div id="M_nav_user_login" class="M_nav_user M_boxshadow_user display_none">
-					<a class="M_nav_user_button" href="/user">내 정보</a>
+					<div>
+						<div class="M_user_img_container">
+							<div id="M_user_img" class="M_user_img"></div>
+						</div>
+						<div class="M_user_info_container">
+							<h4>김형석</h4>
+							<p class="M_user_introduce">컴퓨터공학과</p>
+							<p class="M_user_introduce">10611075</p>	
+						</div>
+					</div>
+					<div class="M_nav_border"></div>
 					<a class="M_nav_user_button" onclick="user_logout()">로그아웃</a>
+					<div class="M_nav_border"></div>
 					<a class="M_nav_user_button" onclick="changeTheme()"><i id="M_theme" class="M_theme fas fa-moon"></i></a>
 				</div>
 				<!--비로그인시-->
-				<div id="M_nav_user_nologin" class="M_nav_user M_boxshadow_user display_none">
+				<div id="M_nav_user_nologin" class="M_nav_user M_boxshadow_user M_nav_user_nologin display_none">
 					<a class="M_nav_user_button" href="/sign-in">로그인</a>
+					<div class="M_nav_border"></div>
 					<a class="M_nav_user_button" onclick="changeTheme()"><i id="M_theme" class="M_theme fas fa-moon"></i></a>
 				</div>
 			</li>
@@ -159,7 +174,6 @@
 <script src="../static/js/test_url.js"></script>
 <script src="../static/js/login.js"></script>
 <script src="../static/js/themeChange.js"></script>
-<script src="../static/js/user.js"></script>
 <script>
 	localStorage.setItem('modakbul_token', '1234');
 </script>
