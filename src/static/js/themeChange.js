@@ -17,6 +17,7 @@ function darkSetTheme() {
 	$('.input100').css("color", "#f5f6fa");
 	$('#M_nav_user_nologin a').css("color", "#e2e2e2");
 	$('.M_nav_user_button').css("color", "#e2e2e2");
+	$('.M_boxshadow').addClass('M_boxshadow_dark_shadow');
 }
 function whiteSetTheme() {
 	$('.M_theme').removeClass("fa-sun");
@@ -37,6 +38,7 @@ function whiteSetTheme() {
 	$('.input100').css("color", "#555555");
 	$('#M_nav_user_nologin a').css("color", "#5f6f81");
 	$('.M_nav_user_button').css("color", "#5f6f81");
+	$('.M_boxshadow').removeClass('M_boxshadow_dark_shadow');
 }
 function changeTheme() {
 	// now_theme check
