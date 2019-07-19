@@ -34,7 +34,12 @@ _gaq.push(['_trackPageview']);
 })();
 
 function user_color_select_ok() {
-  $('#M_user_color_selector_container').addClass("display_none");
+  $('#M_user_color_selector_container_modal').addClass('display_none');
+  $('#M_user_color_selector_container').addClass("fadeOutUp");
+  setTimeout(function(){
+    $('#M_user_color_selector_container').addClass("display_none");
+  }, 400);
+  snackbar("라벨 색 변경 완료!");
   var send_data = new FormData();
   send_data.append('new_color', user_color_output.toString());
   var token = localStorage.getItem('modakbul_token');
@@ -47,19 +52,23 @@ function user_color_select_ok() {
       if (json['result'] == "success"){
         var color = $('#M_user_img');
         color.css("background-color", user_color_output);
-        snackbar("라벨 색 변경 완료!");
       }
       else if (json['result'] == 'bad request'){
-        snackbar("일시적인 오류로 정보를 가져오지 못하였습니다.");
+        snackbar("일시적인 오류로 변경을 실패하였습니다.");
       }
       else{
-        snackbar("일시적인 오류로 정보를 가져오지 못하였습니다.");
+        snackbar("일시적인 오류로 변경을 실패하였습니다.");
       }
     });
   }
 }
 function user_color_select_cancel() {
-  $('#M_user_color_selector_container').addClass("display_none");
+  $('#M_user_color_selector_container_modal').addClass('display_none');
+  $('#M_user_color_selector_container').removeClass('fadeInDown');
+  $('#M_user_color_selector_container').addClass("fadeOutUp");
+  setTimeout(function(){
+    $('#M_user_color_selector_container').addClass("display_none");
+  }, 400);
 }
 
 function user_color_select_label() {
@@ -70,6 +79,9 @@ function user_color_select_label() {
 
 function user_color_select_page_open() {
   user_color_select_label();
+  $('#M_user_color_selector_container_modal').removeClass('display_none');
+  $('#M_user_color_selector_container').removeClass("fadeOutUp");
+  $('#M_user_color_selector_container').addClass("fadeInDown");
   $('#M_user_color_selector_container').removeClass('display_none');
   $('#user_color_selector_info_content_name').empty();
   $('#user_color_selector_info_content_name').append($('#M_user_content_name').text());
