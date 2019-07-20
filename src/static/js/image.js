@@ -32,33 +32,6 @@ function image_get_posts_after(){
 		});
 	});
 }
-//디버그용 삭제해도됨
-function image_get_posts_test() {
-	var target = document.getElementById("M_image_container");
-	for (var i =0; i <30; i++){
-		var item = document.createElement('li');
-		item.classList.add('grid__item', 'shown');
-		var item_a = document.createElement('a');
-		item_a.classList.add('grid__link', 'M_image_content');
-		var item_img_first = document.createElement('img');
-		item_img_first.classList.add('grid__img', 'layer');
-		item_img_first.setAttribute('src', '../static/image/canvas.png');
-		item_a.append(item_img_first);
-		for (var j = 0; j < 2; j++){
-			let item_img = document.createElement('img');
-			item_img.classList.add('grid__img', 'layer');
-			item_img.setAttribute('src', '../static/image/'+'ModakbulLOGO.png');
-			item_a.append(item_img);
-		}
-		item_span = document.createElement('span');
-		item_span.classList.add('grid__title');
-		item_span.append("모닥불 테스트 파일");
-		item_a.append(item_span);
-		item.append(item_a);
-		target.append(item);
-	}
-	image_get_posts_after();
-}
 
 //포스트 li 태그 생성해주는 함수
 function image_get_posts(json) {
