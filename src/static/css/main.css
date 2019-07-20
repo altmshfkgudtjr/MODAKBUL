@@ -1041,4 +1041,105 @@ input:-ms-input-placeholder { color: #adadad;}
         height: 2200px !important;
     }
 }
-/*===
+
+
+
+/*image board CSS================================================================*/
+.M_image_contents_container {
+    position: relative;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 70%;
+    height: auto;
+    max-width: 800px;
+    padding-left: 5%;
+}
+@media screen and (min-width: 450px) {
+    .M_image_contents_container {
+        position: relative;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 800px;
+        height: auto;
+    }
+}
+.M_image_content {
+    cursor: pointer;
+}
+.M_image_content_title {
+    position: fixed;
+    top: 100px;
+    left: 50px;
+    font-size: 40px;
+}
+@media screen and (max-width: 450px){
+    .M_image_content_title {
+        position: fixed;
+        top: 70px;
+        left: 20px;
+        font-size: 40px;
+    }
+}
+.pseudo-scroller {
+    height: 3300px !important;
+}
+@media screen and (min-width: 1284px){
+    .pseudo-scroller {
+        height: 2200px !important;
+    }
+}
+/*==========
+
+
+
+/*image board CSS================================================================*/
+.M_image_contents_container {
+  position: relative;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 70%;
+  height: auto;
+  max-width: 800px;
+  padding-left: 5%;
+}
+@media screen and (min-width: 450px) {
+  .M_image_contents_container {
+    position: relative;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+  }
+}
+.M_image_content {
+  cursor: pointer;
+}
+.M_image_content_title {
+  position: fixed;
+  top: 100px;
+  left: 50px;
+  font-size: 40px;
+}
+@media screen and (max-width: 450px){
+  .M_image_content_title {
+    position: fixed;
+    top: 70px;
+    left: 20px;
+    font-size: 40px;
+  }
+}
+.pseudo-scroller {
+  height: 3300px !important;
+}
+@media screen and (min-width: 1284px){
+  .pseudo-scroller {
+    height: 2200px !important;
+  }
+}
+/*===============================================================================*/
