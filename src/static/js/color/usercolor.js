@@ -40,17 +40,21 @@ function user_color_select_ok() {
   setTimeout(function(){
     $('#M_user_color_selector_container').addClass("display_none");
   }, 400);
-  snackbar("라벨 색 변경 완료!");
   var send_data = new FormData();
   send_data.append('new_color', user_color_output.toString());
   var token = localStorage.getItem('modakbul_token');
   if (token == null){
     snackbar("올바르지 않은 접근입니다.");
   } else {
-    var a_jax = A_JAX(TEST_IP+"/user-color", "POST", token, send_data);
+    try {
+      var a_jax = A_JAX(TEST_IP+"user-color", "POST", token, send_data);
+    } catch(e) {
+      snackbar("일시적인 오류로 변경을 실패하였습니다.");
+    }
     $.when(a_jax).done(function(){
       var json = a_jax.responseJSON;
       if (json['result'] == "success"){
+        snackbar("라벨 색 변경 완료!");
         var color = $('#M_user_img');
         color.css("background-color", user_color_output);
       }

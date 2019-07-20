@@ -48,6 +48,8 @@ function need_login_snackbar(){
 }
 
 function get_user_info() {
+	//소융대 학과 모음집
+	var majors = ['데이터사이언스학과', '디자인이노베이션', '디지털콘텐츠학과', '만화애니메이션텍', '소프트웨어학과', '정보보호학과', '지능기전공학부', '창의소프트학부', '컴퓨터공학과'];
 	var token = localStorage.getItem('modakbul_token');
 	if (token == null){
 		return;
@@ -63,8 +65,16 @@ function get_user_info() {
 			name.empty();
 			major.empty();
 			number.empty();
+			if (json['user_tages'].length > 1){
+				for (var i=0; i< json['user_tages'].length; i++){
+					if (majors.includes(json['user_tages'][i])){
+						major.append(json['user_tages'][i]);
+					}
+				}
+			}else{
+				major.append(json['user_tages'][0]);
+			}
 			name.append(json['user_name']);
-			major.append(json['user_major']);	
 			number.append(json['user_id']);
 			color.css("background-color", json['user_color']);
 		}
