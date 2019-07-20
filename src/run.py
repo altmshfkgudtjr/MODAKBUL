@@ -1,5 +1,4 @@
 from flask import Flask, render_template, redirect, request, jsonify
-import MySQLdb
 import os
 app = Flask(__name__)
 
@@ -12,6 +11,9 @@ def login():
 @app.route('/board')
 def board():
 	return render_template('board.html')
+@app.route('/gallery')
+def image():
+	return render_template('image.html')
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', port=80, debug = True)

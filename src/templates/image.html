@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 	<title>세종대학교 소프트웨어융합대학</title>
 	<meta name="keywords" content="세종대학교,소프트웨어융합대학,소융대">
@@ -13,6 +13,7 @@
 	<link rel="apple-touch-icon-precomposed" type="image/png" href="../static/image/ModakbulLOGO.png">
 	<!-- 아이콘 -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
 	<link rel="stylesheet" type="text/css" href="../static/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 	<!--CSS-->
 	<link href="../static/css/style.min.css" rel="stylesheet">
@@ -23,15 +24,18 @@
 	<link rel="stylesheet" type="text/css" href="../static/css/fire.css">
 	<!--animation css-->
 	<link rel="stylesheet" type="text/css" href="../static/css/animation/animate.css">
-	<!--color-->
+	<!--color css-->
 	<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+	<!--gallery css-->
+	<link rel="stylesheet" type="text/css" href="../static/vendor/IsometricGrids/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="../static/vendor/IsometricGrids/css/demo.css" />
+	<link rel="stylesheet" type="text/css" href="../static/vendor/IsometricGrids/css/component.css" />
 	<!--custom css-->
 	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
 </head>
 
 
-
-<body class="M_white_theme" onload="setTheme(); get_user_info();">
+<body class="demo-1 M_white_theme" onload="setTheme(); get_user_info(); image_get_posts_test();">
 	<!--Side Menu : necessary-->
 	<div id="M_nav_container" class="container M_sidemenu">
 		<ul id="gn-menu" class="gn-menu-main M_boxshadow">
@@ -161,135 +165,18 @@
 		</div>
 	</div>
 	<!--Body-->
+	<div class="M_image_content_title">#갤러리</div>
 	<div class="M_body">
-		<div class="M_board_tag_container">
-			<h5 class="M_board_tag_title">#세종소융봉사</h5>
-			<h5 class="M_board_tag_title">#멘토링 1조</h5>
+		<div class="M_image_contents_container">
+			<main>
+				<div class="isolayer isolayer--scroll1 isolayer--shadow abcdefg">
+					<ul id="M_image_container" class="grid grid--effect-flip">
+					</ul>
+				</div>
+			</main>
 		</div>
-		<div class="M_board_contents_container">
-			<div class="M_info_div M_board_content M_boxshadow M_board_content wow flipInX">
-                <div class="M_user_profile_color"></div>
-                <div class="M_user_name">정재경</div>
-                <div class="M_time_info">| 2019년 7월 21일 20:48:12</div>
-                <i class="fas fa-paperclip M_board_content_icon"></i>
-                <i class="fas fa-image M_board_content_icon"></i>
-                <div class="M_board_content_info">40</div>
-                <i class="fas fa-comment M_board_content_icon"></i>
-                <div class="M_board_content_info">15</div>
-                <i class="fas fa-heart M_board_content_icon"></i>
-                <div class="M_board_content_info">20</div>
-                <i class="fas fa-eye M_board_content_icon"></i>
-                <div class="M_board_content_title">제목입니다</div>
-			</div>
-            <div class="M_info_div M_board_content M_boxshadow M_board_content wow flipInX">
-                <div class="M_user_profile_color"></div>
-                <div class="M_user_name">정재경</div>
-                <div class="M_time_info">| 2019년 7월 21일 20:48:12</div>
-                <i class="fas fa-paperclip M_board_content_icon"></i>
-                <i class="fas fa-image M_board_content_icon"></i>
-                <div class="M_board_content_info">40</div>
-                <i class="fas fa-comment M_board_content_icon"></i>
-                <div class="M_board_content_info">15</div>
-                <i class="fas fa-heart M_board_content_icon"></i>
-                <div class="M_board_content_info">20</div>
-                <i class="fas fa-eye M_board_content_icon"></i>
-                <div class="M_board_content_title">제목입니다</div>
-            </div>
-            <div class="M_info_div M_board_content M_boxshadow M_board_content wow flipInX">
-                <div class="M_user_profile_color"></div>
-                <div class="M_user_name">정재경</div>
-                <div class="M_time_info">| 2019년 7월 21일 20:48:12</div>
-                <i class="fas fa-paperclip M_board_content_icon"></i>
-                <i class="fas fa-image M_board_content_icon"></i>
-                <div class="M_board_content_info">40</div>
-                <i class="fas fa-comment M_board_content_icon"></i>
-                <div class="M_board_content_info">15</div>
-                <i class="fas fa-heart M_board_content_icon"></i>
-                <div class="M_board_content_info">20</div>
-                <i class="fas fa-eye M_board_content_icon"></i>
-                <div class="M_board_content_title">제목입니다</div>
-            </div>
-            <div class="M_info_div M_board_content M_boxshadow M_board_content wow flipInX">
-                <div class="M_user_profile_color"></div>
-                <div class="M_user_name">정재경</div>
-                <div class="M_time_info">| 2019년 7월 21일 20:48:12</div>
-                <i class="fas fa-paperclip M_board_content_icon"></i>
-                <i class="fas fa-image M_board_content_icon"></i>
-                <div class="M_board_content_info">40</div>
-                <i class="fas fa-comment M_board_content_icon"></i>
-                <div class="M_board_content_info">15</div>
-                <i class="fas fa-heart M_board_content_icon"></i>
-                <div class="M_board_content_info">20</div>
-                <i class="fas fa-eye M_board_content_icon"></i>
-                <div class="M_board_content_title">제목입니다</div>
-            </div>
-            <div class="M_info_div M_board_content M_boxshadow M_board_content wow flipInX">
-                <div class="M_user_profile_color"></div>
-                <div class="M_user_name">정재경</div>
-                <div class="M_time_info">| 2019년 7월 21일 20:48:12</div>
-                <i class="fas fa-paperclip M_board_content_icon"></i>
-                <i class="fas fa-image M_board_content_icon"></i>
-                <div class="M_board_content_info">40</div>
-                <i class="fas fa-comment M_board_content_icon"></i>
-                <div class="M_board_content_info">15</div>
-                <i class="fas fa-heart M_board_content_icon"></i>
-                <div class="M_board_content_info">20</div>
-                <i class="fas fa-eye M_board_content_icon"></i>
-                <div class="M_board_content_title">제목입니다</div>
-            </div>
-            <div class="M_info_div M_board_content M_boxshadow M_board_content wow flipInX">
-                <div class="M_user_profile_color"></div>
-                <div class="M_user_name">정재경</div>
-                <div class="M_time_info">| 2019년 7월 21일 20:48:12</div>
-                <i class="fas fa-paperclip M_board_content_icon"></i>
-                <i class="fas fa-image M_board_content_icon"></i>
-                <div class="M_board_content_info">40</div>
-                <i class="fas fa-comment M_board_content_icon"></i>
-                <div class="M_board_content_info">15</div>
-                <i class="fas fa-heart M_board_content_icon"></i>
-                <div class="M_board_content_info">20</div>
-                <i class="fas fa-eye M_board_content_icon"></i>
-                <div class="M_board_content_title">제목입니다</div>
-            </div>
-            <div class="M_info_div M_board_content M_boxshadow M_board_content wow flipInX">
-                <div class="M_user_profile_color"></div>
-                <div class="M_user_name">정재경</div>
-                <div class="M_time_info">| 2019년 7월 21일 20:48:12</div>
-                <i class="fas fa-paperclip M_board_content_icon"></i>
-                <i class="fas fa-image M_board_content_icon"></i>
-                <div class="M_board_content_info">40</div>
-                <i class="fas fa-comment M_board_content_icon"></i>
-                <div class="M_board_content_info">15</div>
-                <i class="fas fa-heart M_board_content_icon"></i>
-                <div class="M_board_content_info">20</div>
-                <i class="fas fa-eye M_board_content_icon"></i>
-                <div class="M_board_content_title">제목입니다</div>
-            </div>
-            <div class="M_info_div M_board_content M_boxshadow M_board_content wow flipInX">
-                <div class="M_user_profile_color"></div>
-                <div class="M_user_name">정재경</div>
-                <div class="M_time_info">| 2019년 7월 21일 20:48:12</div>
-                <i class="fas fa-paperclip M_board_content_icon"></i>
-                <i class="fas fa-image M_board_content_icon"></i>
-                <div class="M_board_content_info">40</div>
-                <i class="fas fa-comment M_board_content_icon"></i>
-                <div class="M_board_content_info">15</div>
-                <i class="fas fa-heart M_board_content_icon"></i>
-                <div class="M_board_content_info">20</div>
-                <i class="fas fa-eye M_board_content_icon"></i>
-                <div class="M_board_content_title">제목입니다</div>
-            </div>
-
-		</div>
-	</div>
-	<!--Page footer-->
-	<div class="M_footer">
-		<img src="../static/image/foot.png" class="M_footer_img">
-		<p class="M_footer_p">010-7393-3434 | sejong1sc@gmail.com | 학생회관 409호<br>COPYRIGHT ⓒ 2019 Team IML</p>
 	</div>
 </body>
-
-
 
 <!-- JQuery JS -->
 <script src="../static/vendor/jquery/jquery.min.js"></script>
@@ -304,10 +191,9 @@
 <script src="../static/js/sidemenu/classie.js"></script>
 <script src="../static/js/sidemenu/gnmenu.js"></script>
 <script src="../static/js/sidemenu/dropdown.js"></script>
-<script>new gnMenu( document.getElementById( 'gn-menu' ) );</script>
-<!--scroll animation-->
-<script src="../static/js/scroll/wow.min.js"></script>
-<script>new WOW().init();</script>
+<script>
+	new gnMenu( document.getElementById( 'gn-menu' ) );
+</script>
 <!--animation-->
 <script src="../static/js/scroll/wow.min.js"></script>
 <script>new WOW().init();</script>
@@ -316,9 +202,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
 <script src="../static/js/color/jquery.colorpicker.js" type="text/javascript" charset="utf-8"></script>
 <script src="../static/js/color/usercolor.js"></script>
+<!--gallery JS-->
+<script src="../static/vendor/IsometricGrids/js/modernizr.custom.js"></script>
+<script src="../static/vendor/IsometricGrids/js/modernizrNext.js"></script>
+<script src="../static/vendor/IsometricGrids/js/imagesloaded.pkgd.min.js"></script>
+<script src="../static/vendor/IsometricGrids/js/masonry.pkgd.min.js"></script>
+<script src="../static/vendor/IsometricGrids/js/dynamics.min.js"></script>
+<script src="../static/vendor/IsometricGrids/js/animOnScroll.js"></script>
+<script src="../static/vendor/IsometricGrids/js/main.js"></script>
+<script src="../static/js/image.js"></script>
 <!--custom JS-->
 <script src="../static/js/test_url.js"></script>
 <script src="../static/js/login.js"></script>
 <script src="../static/js/themeChange.js"></script>
-<script src="../static/js/infinitescroll.js"></script>
 </html>

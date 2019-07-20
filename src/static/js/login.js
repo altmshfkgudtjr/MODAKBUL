@@ -64,10 +64,7 @@ function get_user_info() {
 			major.empty();
 			number.empty();
 			name.append(json['user_name']);
-			for (var i = 0; i < json['user_tag'].length; i++){
-				major.append(json['user_tag'][i]['tag_id'], "<br>");
-				if (i == 1) break;
-			}
+			major.append(json['user_major']);	
 			number.append(json['user_id']);
 			color.css("background-color", json['user_color']);
 		}

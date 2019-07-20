@@ -34,6 +34,7 @@ _gaq.push(['_trackPageview']);
 })();
 
 function user_color_select_ok() {
+  $('html, body').removeAttr("style");
   $('#M_user_color_selector_container_modal').addClass('display_none');
   $('#M_user_color_selector_container').addClass("fadeOutUp");
   setTimeout(function(){
@@ -46,7 +47,7 @@ function user_color_select_ok() {
   if (token == null){
     snackbar("올바르지 않은 접근입니다.");
   } else {
-    var a_jax = A_JAX(TEST_IP+"user-color", "POST", token, send_data);
+    var a_jax = A_JAX(TEST_IP+"/user-color", "POST", token, send_data);
     $.when(a_jax).done(function(){
       var json = a_jax.responseJSON;
       if (json['result'] == "success"){
@@ -63,6 +64,7 @@ function user_color_select_ok() {
   }
 }
 function user_color_select_cancel() {
+  $('html, body').removeAttr("style");
   $('#M_user_color_selector_container_modal').addClass('display_none');
   $('#M_user_color_selector_container').removeClass('fadeInDown');
   $('#M_user_color_selector_container').addClass("fadeOutUp");
@@ -79,6 +81,9 @@ function user_color_select_label() {
 
 function user_color_select_page_open() {
   user_color_select_label();
+  $('#M_user_color_selector_container_modal').css("top", (($(window).height()-$('div#M_user_color_selector_container_modal').outerHeight())/2+$(window).scrollTop()));
+  $('#M_user_color_selector_container').css("top", (($(window).height()-$('div#M_user_color_selector_container').outerHeight())/2+$(window).scrollTop()));
+  $('html, body').css({'overflow': 'hidden'});
   $('#M_user_color_selector_container_modal').removeClass('display_none');
   $('#M_user_color_selector_container').removeClass("fadeOutUp");
   $('#M_user_color_selector_container').addClass("fadeInDown");
