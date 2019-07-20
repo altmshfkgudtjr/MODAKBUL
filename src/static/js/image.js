@@ -32,9 +32,10 @@ function image_get_posts_after(){
 		});
 	});
 }
-
+var now_gallery_scroll_function = 0;
 //포스트 li 태그 생성해주는 함수
 function image_get_posts(json) {
+	now_gallery_scroll_function = 0;
 	var target = document.getElementById("M_image_container");
 	for (var i =0; i < 포스트개수; i++){
 		var item = document.createElement('li');
@@ -62,8 +63,10 @@ function image_get_posts(json) {
 		item.append(item_a);
 		target.append(item);
 	}
+	image_get_posts_after();
 }
 function image_get_posts_test() {
+	now_gallery_scroll_function = 0;
 	var target = document.getElementById("M_image_container");
 	for (var i =0; i <30; i++){
 		var item = document.createElement('li');
@@ -119,6 +122,7 @@ function image_send() {
 
 	var M_files = document.getElementById('files-upload').files;
 	var M_list = [];
+	var tag_list = [];
 	for (var i = 0; i < M_files.length; i++){
 		M_list.push(M_files[i]);
 	}
@@ -126,12 +130,11 @@ function image_send() {
 	send_data.append('title', '16011075');
 	send_data.append('content', '메롱');
 	send_data.append('anony', '0');
-	//send_data.append('files', M_list);
-	for (var i = 0; i<  M_files.length; i++){
-		send_data.append('files', M_list[i]);
+	send_data.append('tages', '소융대_갤러리');
+	for (var value of send_data.values()) {
+		console.log(value);
 	}
-
-	var a_jax = A_JAX(TEST_IP+'post_upload', "POST", 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NjM1NjM1MjIsIm5iZiI6MTU2MzU2MzUyMiwianRpIjoiMjFiNTdjZGYtMzFiMS00YjE2LTk1ZmItYjgwYWEwNWJkZWU0IiwiaWRlbnRpdHkiOiIxNjAxMTA3NSIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.C9J6R9VplEDvw5bmEFnPw2nKc7uEMq1siGJH7T391bw', send_data);
+	var a_jax = A_JAX(TEST_IP+'post_upload', "POST", 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NjM2MTg5MDUsIm5iZiI6MTU2MzYxODkwNSwianRpIjoiMTc2NWZmYmEtMTBiOS00OGZlLTkzYTMtNWVjYzUyZWUwYmNmIiwiaWRlbnRpdHkiOiIxNjAxMTA3NSIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.PgNcNefJjh1ZYVWtTZ297KhUOkvWunBQLsWyHZKjHc8', send_data);
 	$.when(a_jax).done(function(){
       var json = a_jax.responseJSON;
       if (json['result'] == "success"){
@@ -146,9 +149,13 @@ function image_send() {
     });
 }
 
+
 //스크롤할시 생성
 $(window).scroll(function(event){
-	if ($(window).scrollTop() + 400>= ($(document).height() - $(window).height())){
-		image_get_posts_test();
+	if (now_gallery_scroll_function == 0){
+		if ($(window).scrollTop() + 400 >= ($(document).height() - $(window).height())){
+			now_gallery_scroll_function = 1;
+			image_get_posts_test();
+		}
 	}
 });
