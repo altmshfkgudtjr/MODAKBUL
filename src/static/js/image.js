@@ -32,56 +32,18 @@ function image_get_posts_after(){
 		});
 	});
 }
-var now_gallery_scroll_function = 0;
-//포스트 li 태그 생성해주는 함수
-function image_get_posts(json) {
-	now_gallery_scroll_function = 0;
-	var target = document.getElementById("M_image_container");
-	for (var i =0; i < 포스트개수; i++){
-		var item = document.createElement('li');
-		item.classList.add('grid__item');
-		var item_a = document.createElement('a');
-		item_a.classList.add('grid__link');
-		var item_img_first = document.createElement('img');
-		item_img_first.classList.add('grid__img', 'layer');
-		item_img_first.setAttribute('src', '../static/image/canvas.png');
-		item_a.append(item_img_first);
-		var item_img_second = document.createElement('img');
-		item_img_second.classList.add('grid__img', 'layer');
-		item_img_second.setAttribute('src', '../static/image/wireframe.png');
-		item_a.append(item_img_second);
-		for (var j = 0; j < 사진개수; j++){
-			let item_img = document.createElement('img');
-			item_img.classList.add('grid__img', 'layer');
-			item_img.setAttribute('src', '../static/image/'+파일이름);
-			item_a.append(item_img);
-		}
-		item_span = document.createElement('span');
-		item_span.classList.add('grid__title');
-		item_span.append(타이틀);
-		item_a.append(item_span);
-		item.append(item_a);
-		target.append(item);
-	}
-	image_get_posts_after();
-}
+//디버그용 삭제해도됨
 function image_get_posts_test() {
-	now_gallery_scroll_function = 0;
 	var target = document.getElementById("M_image_container");
 	for (var i =0; i <30; i++){
 		var item = document.createElement('li');
-		item.classList.add('grid__item', 'animated');
-		item.style.animationDuration = '1s';
+		item.classList.add('grid__item', 'shown');
 		var item_a = document.createElement('a');
 		item_a.classList.add('grid__link', 'M_image_content');
 		var item_img_first = document.createElement('img');
 		item_img_first.classList.add('grid__img', 'layer');
 		item_img_first.setAttribute('src', '../static/image/canvas.png');
 		item_a.append(item_img_first);
-		var item_img_second = document.createElement('img');
-		item_img_second.classList.add('grid__img', 'layer');
-		item_img_second.setAttribute('src', '../static/image/wireframe.png');
-		item_a.append(item_img_second);
 		for (var j = 0; j < 2; j++){
 			let item_img = document.createElement('img');
 			item_img.classList.add('grid__img', 'layer');
@@ -98,11 +60,37 @@ function image_get_posts_test() {
 	image_get_posts_after();
 }
 
+//포스트 li 태그 생성해주는 함수
+function image_get_posts(json) {
+	var target = document.getElementById("M_image_container");
+	for (var i =0; i < json['posts'].length; i++){
+		var item = document.createElement('li');
+		item.setAttribute('title', json['posts'][i]['post_id']);
+		item.classList.add('grid__item', 'shown');
+		var item_a = document.createElement('a');
+		item_a.classList.add('grid__link');
+		var item_img_first = document.createElement('img');
+		item_img_first.classList.add('grid__img', 'layer');
+		item_img_first.setAttribute('src', '../static/image/canvas.png');
+		item_a.append(item_img_first);
+		for (var j = 0; j < json['posts'][i]['files'].length; j++){
+			let item_img = document.createElement('img');
+			item_img.classList.add('grid__img', 'layer');
+			item_img.setAttribute('src', '../static/files/'+json['posts'][i]['files'][j]);
+			item_a.append(item_img);
+		}
+		item_span = document.createElement('span');
+		item_span.classList.add('grid__title');
+		item_span.append(json['posts'][i]['post_title']);
+		item_a.append(item_span);
+		item.append(item_a);
+		target.append(item);
+	}
+	image_get_posts_after();
+}
+
 function image_init() {
-	var send_data = new FormData();
-	send_data.append('cnt_start', '1');
-	send_data.append('cnt_end', '30');
-	var a_jax = A_JAX(TEST_IP+"image", "POST", null, send_data);
+	var a_jax = A_JAX(TEST_IP+"image/"+1, "GET", null, null);
 	$.when(a_jax).done(function(){
       var json = a_jax.responseJSON;
       if (json['result'] == "success"){
@@ -122,7 +110,6 @@ function image_send() {
 
 	var M_files = document.getElementById('files-upload').files;
 	var M_list = [];
-	var tag_list = [];
 	for (var i = 0; i < M_files.length; i++){
 		M_list.push(M_files[i]);
 	}
@@ -130,15 +117,14 @@ function image_send() {
 	send_data.append('title', '16011075');
 	send_data.append('content', '메롱');
 	send_data.append('anony', '0');
-	send_data.append('tages', '소융대_갤러리');
-	for (var value of send_data.values()) {
-		console.log(value);
+	send_data.append('tages', '갤러리');
+	for (var i = 0; i< M_files.length; i++){
+		send_data.append('files', M_list[i]);
 	}
 	var a_jax = A_JAX(TEST_IP+'post_upload', "POST", 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NjM2MTg5MDUsIm5iZiI6MTU2MzYxODkwNSwianRpIjoiMTc2NWZmYmEtMTBiOS00OGZlLTkzYTMtNWVjYzUyZWUwYmNmIiwiaWRlbnRpdHkiOiIxNjAxMTA3NSIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.PgNcNefJjh1ZYVWtTZ297KhUOkvWunBQLsWyHZKjHc8', send_data);
 	$.when(a_jax).done(function(){
       var json = a_jax.responseJSON;
       if (json['result'] == "success"){
-      	console.log(json);
       }
       else if (json['result'] == 'bad request'){
        	alert("실패");
@@ -148,9 +134,7 @@ function image_send() {
       }
     });
 }
-
-
-//스크롤할시 생성
+/*스크롤할시 생성
 $(window).scroll(function(event){
 	if (now_gallery_scroll_function == 0){
 		if ($(window).scrollTop() + 400 >= ($(document).height() - $(window).height())){
@@ -158,4 +142,4 @@ $(window).scroll(function(event){
 			image_get_posts_test();
 		}
 	}
-});
+});*/
