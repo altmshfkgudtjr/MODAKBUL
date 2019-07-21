@@ -33,31 +33,41 @@ $(document).mouseup(function (e) {
 		}
 	}
 });
+var search_bar_value = 0;
 //search bar animation
 //검색 아이콘을 클릭했을 때,
 function M_search_bar_on() {
-	var search_bar = $("#M_search_bar");
-	search_bar.removeClass("display_none");
-	search_bar.removeClass("flipOutX");
-	search_bar.addClass("flipInX animated");
-	$("#M_search_input").focus();
+	if (search_bar_value == 0){
+		search_bar_value = 1;
+		var search_bar = $("#M_search_bar");
+		search_bar.removeClass("display_none");
+		search_bar.removeClass("fadeOutUp");
+		search_bar.addClass("fadeInDown animated");
+		$("#M_search_input").focus();
+	}
 }
 //검색 창 닫을 때
 $(document).mouseup(function (e) {
-	var container = $("#M_search_bar");
-	var search_bar = $("#M_search_bar");
-	if (!container.is(e.target) && container.has(e.target).length === 0){
-		search_bar.removeClass("flipInX");
-		search_bar.addClass("flipOutX");
-		$("#M_search_input").val("")
+	if (search_bar_value == 1){
+		search_bar_value = 0;
+		var container = $("#M_search_bar");
+		var search_bar = $("#M_search_bar");
+		if (!container.is(e.target) && container.has(e.target).length === 0){
+			search_bar.removeClass("fadeInDown");
+			search_bar.addClass("fadeOutUp");
+			setTimeout(function(){search_bar.addClass("display_none")}, 400);
+			$("#M_search_input").val("")
+		}
 	}
 });
 //엔터 검색 함수
 function search_enter(){
+	search_bar_value = 0;
     if (window.event.keyCode == 13) {
     	var search_bar = $("#M_search_bar");
-    	search_bar.removeClass("flipInX");
-		search_bar.addClass("flipOutX");
+    	search_bar.removeClass("fadeInDown");
+		search_bar.addClass("fadeOutUp");
+		setTimeout(function(){search_bar.addClass("display_none")}, 400);
 		$("#M_search_input").val("")
     }
 }

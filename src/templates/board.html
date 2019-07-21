@@ -105,7 +105,7 @@
 			<!--검색버튼-->
 			<li onclick="M_search_bar_on()">
 				<a><i id="M_search_icon" class="fas fa-search"></i></a>
-				<div id="M_search_bar" class="M_search_bar M_boxshadow display_none">
+				<div id="M_search_bar" class="M_search_bar wow display_none" data-wow-duration = "0.4s">
 					<input id="M_search_input" type="text" name="search_about" autocomplete="off" onkeyup="search_enter()">
 				</div>
 			</li>
@@ -332,9 +332,6 @@
 <script src="../static/js/sidemenu/gnmenu.js"></script>
 <script src="../static/js/sidemenu/dropdown.js"></script>
 <script>new gnMenu( document.getElementById( 'gn-menu' ) );</script>
-<!--scroll animation-->
-<script src="../static/js/scroll/wow.min.js"></script>
-<script>new WOW().init();</script>
 <!--animation-->
 <script src="../static/js/scroll/wow.min.js"></script>
 <script>new WOW().init();</script>

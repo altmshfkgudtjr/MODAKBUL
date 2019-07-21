@@ -258,15 +258,20 @@ input:-ms-input-placeholder { color: #adadad;}
   color: white;
 }
 .M_nav_user_button:hover {
-  color: white !important;
+  color: white;
+}
+@media screen and (max-width: 450px){
+  .M_nav_user_button:hover {
+    color: #5f6f81;
+  }
 }
 
 .M_search_bar {
   position: absolute;
-  width: 96%;
-  height: 56px;
-  top:10px;
-  left: 2%;
+  width: 90%;
+  height: 60px;
+  top: 0;
+  left: 5%;
   background-color: white;
   z-index: 100;
 }
@@ -281,6 +286,31 @@ input:-ms-input-placeholder { color: #adadad;}
   border: 0;
   border-bottom: 2px solid #dee1e6;
   font-family: 'NanumGothic', 'sans-serif';
+  background-color: rgba(0,0,0,0);
+}
+@media screen and (max-width: 800px){
+  .M_search_bar {
+    width: 86%;
+    left: 7%;
+  }
+}
+@media screen and (max-width: 450px){
+  .M_search_bar {
+    width: 74%;
+    left: 13%;
+  }
+}
+@media screen and (min-width: 1390px){
+  .M_search_bar {
+    width: 94%;
+    left: 3%;
+  }
+}
+@media screen and (min-width: 2100px){
+  .M_search_bar {
+    width: 96%;
+    left: 2%;
+  }
 }
 .M_sidemenu {
   position: relative;
