@@ -65,14 +65,14 @@ function get_user_info() {
 			name.empty();
 			major.empty();
 			number.empty();
-			if (json['user_tages'].length > 1){
-				for (var i=0; i< json['user_tages'].length; i++){
-					if (majors.includes(json['user_tages'][i])){
-						major.append(json['user_tages'][i]);
+			if (json['user_tags'].length > 1){
+				for (var i=0; i< json['user_tags'].length; i++){
+					if (majors.includes(json['user_tags'][i])){
+						major.append(json['user_tags'][i]);
 					}
 				}
 			}else{
-				major.append(json['user_tages'][0]);
+				major.append(json['user_tags'][0]);
 			}
 			name.append(json['user_name']);
 			number.append(json['user_id']);

@@ -740,7 +740,9 @@ input:-ms-input-placeholder { color: #adadad;}
   margin: auto;
   margin-top: 50px;
   margin-bottom: 20px;
-  width: 70%;
+  width: 80%;
+  padding-left: 2%;
+  padding-right: 2%;
   max-width: 800px;
   height: 20px;
 }
@@ -752,7 +754,9 @@ input:-ms-input-placeholder { color: #adadad;}
   position: relative;
   margin: auto;
   margin-top: 10px;
-  width: 70%;
+  width: 80%;
+  padding-left: 2%;
+  padding-right: 2%;
   max-width: 800px;
   height: auto;
   overflow: auto;
@@ -802,7 +806,8 @@ input:-ms-input-placeholder { color: #adadad;}
   height: 90%;
   max-height: 700px;
   min-height: 620px;
-  top: 5%;
+  top: 0;
+  margin-top: 80px;
   margin-left: auto;
   margin-right: auto;
   left: 0;
@@ -815,9 +820,10 @@ input:-ms-input-placeholder { color: #adadad;}
     width: 95%;
     max-width: 500px;
     height: 80%;
-    max-height: 700px;
+    max-height: 570px;
     min-height: 560px;
-    top: 10%;
+    top: 0;
+    margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
     left: 0;
@@ -831,9 +837,27 @@ input:-ms-input-placeholder { color: #adadad;}
     width: 95%;
     max-width: 500px;
     height: 80%;
-    max-height: 580px;
-    min-height: 620px;
-    top: 10%;
+    max-height: 570px;
+    min-height: 560px;
+    top: 0;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    z-index: 200;
+  }
+}
+@media screen and (min-width: 750px) {
+  .M_user_color_selector_container {
+    position: absolute;
+    width: 95%;
+    max-width: 500px;
+    height: 80%;
+    max-height: 660px;
+    min-height: 560px;
+    top: 0;
+    margin-top: 100px;
     margin-left: auto;
     margin-right: auto;
     left: 0;
@@ -849,7 +873,8 @@ input:-ms-input-placeholder { color: #adadad;}
     height: 80%;
     max-height: 660px;
     min-height: 560px;
-    top: 20%;
+    top: 0;
+    margin-top: 200px;
     margin-left: auto;
     margin-right: auto;
     left: 0;
@@ -1132,13 +1157,16 @@ input:-ms-input-placeholder { color: #adadad;}
 }
 .M_user_post_modal_container {
   width: 70%;
-  height: 100%;
+  height: auto;
   position: relative;
   margin: auto;
   margin-top: 80px;
   z-index: 70;
-  overflow: auto;
-  border-radius: 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.M_user_post_modal_container::-webkit-scrollbar { 
+  display: none; 
 }
 @media screen and (max-width: 850px){
   .M_user_post_modal_background{
@@ -1147,13 +1175,209 @@ input:-ms-input-placeholder { color: #adadad;}
   }
   .M_user_post_modal_container {
     width: 100%;
-    height: 100%;
+    height: auto;
     position: relative;
     margin: auto;
     margin-top: 80px;
     z-index: 70;
     overflow: auto;
-    border-radius: 8px;
   }
 }
 /*=================================================================================*/
+.M_post_top_container{
+  display: inline-block;
+  float: left;
+  height: 60px;
+  width: 80%;
+  padding-top: 10px;
+}
+@media screen and (max-width: 450px){
+  .M_post_top_container {
+    height: 80px;
+  }
+}
+.M_post_profile_color {
+  display: inline-block;
+  float: left;
+  width: 8px;
+  height: 30px;
+  line-height: 30px;
+  background-color: mediumpurple;
+  border-radius: 20px;
+  margin-left: 10px;
+}
+.M_post_author {
+  display: inline-block;
+  float: left;
+  margin-left: 10px;
+  margin-bottom: 2px;
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: normal;
+}
+.M_post_time {
+  display: inline-block;
+  float: left;
+  font-size: 20px;
+  line-height: 30px;
+  margin-left: 10px;
+  opacity: 0.6;
+}
+@media screen and (max-width: 350px){
+  .M_post_time {
+    font-size: 15px;
+  }
+}
+.M_post_top_heart {
+  display: inline-block;
+  float: right;
+  height: 40px;
+  width: 40px;
+  padding-top: 5px;
+  padding-right: 8px;
+  font-size: 30px;
+  font-weight: lighter;
+  line-height: 40px;
+  color: #e2e2e2e2;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.M_post_top_heart:hover {
+  color: red;
+  text-shadow: 0px 0px 10px red;
+}
+.M_post_top_title {
+  position: relative;
+  display: inline-block;
+  max-width: 99%;
+  height: auto;
+  padding-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  line-height: 30px;
+  font-size: 30px;
+  font-weight: bold;
+}
+@media screen and (max-width: 450px){
+  .M_post_top_title {
+    padding-top: 10px;
+  }
+}
+.M_post_body {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: auto;
+  min-height: 250px;
+  padding: 20px 10px 20px 10px;
+  font-size: 18px;
+}
+@media screen and (max-width: 450px){
+  .M_post_body {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+.M_post_body_icon_container {
+  position: relative;
+  display: inline-block;
+  width: 80%;
+  max-width: 180px;
+  height: 30px;
+  padding: 10px 10px 0 10px;
+}
+.M_post_body_icons {
+  position: relative;
+  display: inline-block;;
+  float: left;
+  margin-right: 6px;
+  font-size: 18px;
+}
+.M_post_body_icons_data{
+  position: relative;
+  display: inline-block;;
+  float: left;
+  margin-right: 6px;
+  font-size: 18px;
+  line-height: 18px;
+}
+.M_post_body_share{
+  position: relative;
+  display: inline-block;
+  float: right;
+  padding-right: 10px;
+  width: auto;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.M_post_body_share:hover {
+  color: #202124;
+  text-shadow: 0px 0px 1px #202124;
+}
+@media screen and (max-width: 450px){
+  .M_post_body_share {
+    padding-top: 5px;
+  }
+}
+.M_post_body_scroll_container {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 100%;
+  height: 120px;
+  padding: 0 10px 0 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+.M_post_body_content {
+  position: relative;
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.M_post_body_image_content {
+  height: 100%;
+}
+.M_post_body_scroll_container::-webkit-scrollbar { 
+  display: none; 
+}
+.M_post_body_content_attachment {
+  width: 120px;
+  height: 120px;
+  margin-right: 10px;
+  cursor: pointer;
+  border: 2px solid #e2e2e2;
+}
+.M_post_body_content_attachment_icon {
+  position: relative;
+  display: block;
+  margin-top: 20px;
+  font-size: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+.M_post_body_attach_title {
+  position: relative;
+  display: block;
+  margin-top: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 12px;
+  text-align: center;
+}
+.M_post_body_line {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 100%;
+  height: 2px;
+  background-color: #e2e2e2;
+  border-radius: 10px;
+}

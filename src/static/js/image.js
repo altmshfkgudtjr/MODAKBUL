@@ -80,7 +80,6 @@ function image_init() {
 
 
 function image_send() {
-
 	var M_files = document.getElementById('files-upload').files;
 	var M_list = [];
 	for (var i = 0; i < M_files.length; i++){
