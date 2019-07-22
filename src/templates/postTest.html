@@ -160,10 +160,6 @@
 			<div class="M_user_color_select_choice" onclick="user_color_select_cancel()">취소</div>
 		</div>
 	</div>
-	<!--Test div 삭제할것-->
-	<div style="position: fixed; top: 80px; left: 50px; width: 100px; height: 50px; background-color: black; cursor: pointer; color: white; z-index: 140;" onclick="postmodal_open()">Open Post Modal</div>
-
-
 	<div class="M_body">
 	<!--Body-->
 		<div class="M_board_tag_container">
@@ -171,7 +167,7 @@
 			<h5 class="M_board_tag_title">#멘토링 1조</h5>
 		</div>
 		<div class="M_board_contents_container">
-			<div class="M_info_div M_board_content M_boxshadow M_board_content wow flipInX">
+			<div class="M_info_div M_board_content M_boxshadow M_board_content wow flipInX" onclick="postmodal_open()">
                 <div class="M_user_profile_color"></div>
                 <div class="M_user_name">정재경</div>
                 <div class="M_time_info">| 2019년 7월 21일 20:48:12</div>
@@ -185,7 +181,7 @@
                 <i class="fas fa-eye M_board_content_icon"></i>
                 <div class="M_board_content_title">제목입니다</div>
 			</div>
-            <div class="M_info_div M_board_content M_boxshadow M_board_content wow flipInX">
+			<div class="M_info_div M_board_content M_boxshadow M_board_content wow flipInX" onclick="postmodal_open()">
                 <div class="M_user_profile_color"></div>
                 <div class="M_user_name">정재경</div>
                 <div class="M_time_info">| 2019년 7월 21일 20:48:12</div>
@@ -198,8 +194,8 @@
                 <div class="M_board_content_info">20</div>
                 <i class="fas fa-eye M_board_content_icon"></i>
                 <div class="M_board_content_title">제목입니다</div>
-            </div>
-            <div class="M_info_div M_board_content M_boxshadow M_board_content wow flipInX">
+			</div>
+			<div class="M_info_div M_board_content M_boxshadow M_board_content wow flipInX" onclick="postmodal_open()">
                 <div class="M_user_profile_color"></div>
                 <div class="M_user_name">정재경</div>
                 <div class="M_time_info">| 2019년 7월 21일 20:48:12</div>
@@ -212,8 +208,8 @@
                 <div class="M_board_content_info">20</div>
                 <i class="fas fa-eye M_board_content_icon"></i>
                 <div class="M_board_content_title">제목입니다</div>
-            </div>
-            <div class="M_info_div M_board_content M_boxshadow M_board_content wow flipInX">
+			</div>
+			<div class="M_info_div M_board_content M_boxshadow M_board_content wow flipInX" onclick="postmodal_open()">
                 <div class="M_user_profile_color"></div>
                 <div class="M_user_name">정재경</div>
                 <div class="M_time_info">| 2019년 7월 21일 20:48:12</div>
@@ -226,8 +222,8 @@
                 <div class="M_board_content_info">20</div>
                 <i class="fas fa-eye M_board_content_icon"></i>
                 <div class="M_board_content_title">제목입니다</div>
-            </div>
-            <div class="M_info_div M_board_content M_boxshadow M_board_content wow flipInX">
+			</div>
+			<div class="M_info_div M_board_content M_boxshadow M_board_content wow flipInX" onclick="postmodal_open()">
                 <div class="M_user_profile_color"></div>
                 <div class="M_user_name">정재경</div>
                 <div class="M_time_info">| 2019년 7월 21일 20:48:12</div>
@@ -240,8 +236,8 @@
                 <div class="M_board_content_info">20</div>
                 <i class="fas fa-eye M_board_content_icon"></i>
                 <div class="M_board_content_title">제목입니다</div>
-            </div>
-            <div class="M_info_div M_board_content M_boxshadow M_board_content wow flipInX">
+			</div>
+			<div class="M_info_div M_board_content M_boxshadow M_board_content wow flipInX" onclick="postmodal_open()">
                 <div class="M_user_profile_color"></div>
                 <div class="M_user_name">정재경</div>
                 <div class="M_time_info">| 2019년 7월 21일 20:48:12</div>
@@ -254,13 +250,13 @@
                 <div class="M_board_content_info">20</div>
                 <i class="fas fa-eye M_board_content_icon"></i>
                 <div class="M_board_content_title">제목입니다</div>
-            </div>
+			</div>
 		</div>
 	</div>
 	<!--Post modal-->
-	<div id="M_user_post_modal_background" class="M_user_post_modal_background animated wow display_none" data-wow-duration = "0.4s">
-		<div id="M_user_post_modal_container" class="M_info_div M_user_post_modal_container display_none animated wow M_boxshadow" data-wow-duration = "0.4s">
-		<!--post 관련 코드 작성-->
+	<div id="M_user_post_modal_background" class="M_user_post_modal_background animated wow" data-wow-duration = "0.4s">
+		<div id="M_user_post_modal_container" class="M_info_div M_user_post_modal_container animated wow M_boxshadow" data-wow-duration = "0.4s">
+			
 		</div>
 	</div>
 	<!--Page footer-->
