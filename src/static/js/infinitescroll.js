@@ -1,9 +1,6 @@
 $(window).scroll(function() {
-    console.log($(window).scrollTop());
-    console.log($(document).height() - $(window).height());
     //여기 수정
     if ($(window).scrollTop() + 150 >= $(document).height() - $(window).height()) {
-        console.log("실행");
         let div_class = 'M_info_div M_board_content M_boxshadow wow flipInX';
         if (localStorage.getItem('modakbul_theme') === 'dark') {
             div_class +=  ' M_boxshadow_dark_shadow" style="' +
