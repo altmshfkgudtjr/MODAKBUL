@@ -15,6 +15,9 @@ def board():
 @app.route('/gallery')
 def image():
 	return render_template('image.html')
+@app.route('/test')
+def image():
+	return render_template('postTest.html')
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', port=80, debug = True)

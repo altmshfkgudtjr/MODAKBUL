@@ -24,7 +24,6 @@
 
 body, html {
 	font-family: 'NanumGothic', sans-serif;
-  height:85%;
 	z-index: -100;
 }
 /*스크롤바 숨기기*/
@@ -33,7 +32,6 @@ body::-webkit-scrollbar {
 }
 @media screen and (max-width: 760px) {
   body {
-    max-height: 600px;
   }
 }
 /* 스낵 바 ===============================================================*/
@@ -1082,4 +1080,41 @@ input:-ms-input-placeholder { color: #adadad;}
     height: 6500px !important;
   }
 }
-/*===============================================================================*/
+/*post modal=======================================================================*/
+.M_user_post_modal_background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding: 20px;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 50;
+}
+.M_user_post_modal_container {
+  width: 70%;
+  height: 100%;
+  position: relative;
+  margin: auto;
+  margin-top: 80px;
+  z-index: 70;
+  overflow: auto;
+  border-radius: 8px;
+}
+@media screen and (max-width: 850px){
+  .M_user_post_modal_background{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .M_user_post_modal_container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    margin: auto;
+    margin-top: 80px;
+    z-index: 70;
+    overflow: auto;
+    border-radius: 8px;
+  }
+}
+/*=================================================================================*/
