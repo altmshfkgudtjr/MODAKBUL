@@ -16,7 +16,7 @@ def board():
 def image():
 	return render_template('image.html')
 @app.route('/test')
-def image():
+def test():
 	return render_template('postTest.html')
 
 if __name__ == '__main__':
