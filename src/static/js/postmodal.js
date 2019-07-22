@@ -73,7 +73,6 @@ slider.addEventListener('mousemove', (e) => {
   const x = e.pageX - slider.offsetLeft;
   const walk = (x - startX) * 3; //scroll-fast
   slider.scrollLeft = scrollLeft - walk;
-  console.log(walk);
 });
 //마우스 드래그로 스크롤할 수 있는 함수  = 첨부파일 container
 const slider2 = document.querySelector('#M_post_body_attachment_container');
@@ -100,5 +99,4 @@ slider2.addEventListener('mousemove', (e) => {
   const x = e.pageX - slider2.offsetLeft;
   const walk2 = (x - startX2) * 3; //scroll-fast
   slider2.scrollLeft = scrollLeft2 - walk2;
-  console.log(walk2);
 });
