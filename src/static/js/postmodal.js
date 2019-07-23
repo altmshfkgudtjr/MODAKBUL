@@ -5,7 +5,7 @@ function postmodal_open(){
 	now_postmodal_top = $(window).scrollTop();
 	history.pushState(null, null, "#post");
 	is_postmodal_open = 1;
-	$('#M_user_post_modal_background').css("height", $(window).height());
+	$('#M_user_post_modal_background').css("height", $(window).height() + 100);
 	//$('#M_user_post_modal_background').css("top", (($(window).height()-$('div#M_user_post_modal_background').outerHeight())/2+$(window).scrollTop()));
 	$('#M_user_post_modal_background').css('position', "fixed");
 	$('#M_user_post_modal_background').removeClass('display_none');
@@ -23,7 +23,7 @@ function postmodal_open(){
 function postmodal_close(){
 	is_postmodal_open = 0;
 	//history.go(-1);
-	history.replaceState(null, null, "");
+	history.replaceState(null, null, "#list");
 	$('#M_user_post_modal_background').addClass('fadeOut');
 	$('#M_user_post_modal_background').removeClass('fadeIn');
 	$('#M_user_post_modal_container').addClass("fadeOutDown");
@@ -100,3 +100,18 @@ slider2.addEventListener('mousemove', (e) => {
   const walk2 = (x - startX2) * 3; //scroll-fast
   slider2.scrollLeft = scrollLeft2 - walk2;
 });
+
+
+// 모바일
+var filter = "win16|win32|win64|mac|macintel";
+if ( navigator.platform ) { 
+	if ( filter.indexOf( navigator.platform.toLowerCase() ) < 0 ) { 
+		$('#M_post_user_comment_input').focus(function() {
+			$('#M_post_user_comment_container').css("position", "fixed");
+		});
+		$('#M_post_user_comment_input').blur(function() {
+			$('#M_post_user_comment_container').css("position", "relative");
+		});
+	}
+}
+

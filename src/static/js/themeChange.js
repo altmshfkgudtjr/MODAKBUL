@@ -70,3 +70,19 @@ function setTheme() {
 		darkSetTheme();
 	}
 }
+
+
+//hover 시 background-color 수정
+$('.M_board_content').hover(function(){
+    if (localStorage.getItem('modakbul_theme') === 'dark') {
+        $(this).css("background-color", "#41464a");
+    } else {
+        $(this).css("background-color", "#f8f8f8");
+    }
+}, function(){
+    if (localStorage.getItem('modakbul_theme') === 'dark') {
+        $(this).css("background-color", "#494e52");
+    } else {
+        $(this).css("background-color", "white");
+    }
+});
