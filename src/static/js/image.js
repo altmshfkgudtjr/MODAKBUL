@@ -86,14 +86,14 @@ function image_send() {
 		M_list.push(M_files[i]);
 	}
 	var send_data = new FormData();
-	send_data.append('title', '16011075');
-	send_data.append('content', '메롱');
+	send_data.append('title', '테스트제목');
+	send_data.append('content', '반갑습니다.');
 	send_data.append('anony', '0');
-	send_data.append('tages', '갤러리');
+	send_data.append('tags', '갤러리');
 	for (var i = 0; i< M_files.length; i++){
 		send_data.append('files', M_list[i]);
 	}
-	var a_jax = A_JAX(TEST_IP+'post_upload', "POST", 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NjM2MTg5MDUsIm5iZiI6MTU2MzYxODkwNSwianRpIjoiMTc2NWZmYmEtMTBiOS00OGZlLTkzYTMtNWVjYzUyZWUwYmNmIiwiaWRlbnRpdHkiOiIxNjAxMTA3NSIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.PgNcNefJjh1ZYVWtTZ297KhUOkvWunBQLsWyHZKjHc8', send_data);
+	var a_jax = A_JAX(TEST_IP+'post_upload', "POST", 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NjM4MTE3NjcsIm5iZiI6MTU2MzgxMTc2NywianRpIjoiNDE5YWU4OTktYmY2Ni00MDI0LTliZTMtMTVkMzVhZjMxNDFhIiwiaWRlbnRpdHkiOiIxNjAxMTA3NSIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.gzaFomVsusmzZ9osBNfsqA7smi41qcuwi7BB2-P8dFg', send_data);
 	$.when(a_jax).done(function(){
       var json = a_jax.responseJSON;
       if (json['result'] == "success"){

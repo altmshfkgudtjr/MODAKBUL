@@ -257,55 +257,38 @@
 	<div id="M_user_post_modal_background" class="M_user_post_modal_background animated wow display_none" data-wow-duration = "0.4s">
 		<div id="M_user_post_modal_container" class="M_info_div M_user_post_modal_container animated wow M_boxshadow display_none" data-wow-duration = "0.4s">
 			<div class="M_post_top_container">
-				<div class="M_post_profile_color"></div>
-            	<div class="M_post_author">정재경</div>
-            	<div class="M_post_time">| 2019년 7월 21일 20:48:12</div>
+				<div id="M_post_profile_color" class="M_post_profile_color"></div>
+            	<div id="M_post_author" class="M_post_author"></div>
+            	<div id="M_post_time" class="M_post_time"></div>
 			</div>
-			<div class="M_post_top_heart"><i class="fas fa-heart"></i></div>
-			<div class="M_post_top_title">모닥불 테스트 제목입니다.</div>
-			<div class="M_post_body">모닥불 테스트 포스트 본문입니다.모닥불 테스트 포스트 본문입니다.</div>
+			<div id="M_post_top_heart" class="M_post_top_heart" onclick="post_like_button()"><i class="fas fa-heart"></i></div>
+			<div id="M_post_top_title" class="M_post_top_title"></div>
+			<div id="M_post_body" class="M_post_body"></div>
 			<div id="M_post_body_image_container" class="M_post_body_scroll_container">
-				<div class="M_post_body_content">
-					<img src="../static/files/9bd16c66bce930a6d419c8baf3a884ea.png" class="M_post_body_image_content">
-				</div>
-				<div class="M_post_body_content">
-					<img src="../static/files/9bd16c66bce930a6d419c8baf3a884ea.png" class="M_post_body_image_content">
-				</div>
 			</div>
 			<div id="M_post_body_attachment_container" class="M_post_body_scroll_container">
-				<div class="M_post_body_content M_post_body_content_attachment">
-					<i class="fas fa-paperclip M_post_body_content_attachment_icon"></i>
-					<span class="M_post_body_attach_title">모닥불.zip</span>
-				</div>
-				<div class="M_post_body_content M_post_body_content_attachment">
-					<i class="fas fa-paperclip M_post_body_content_attachment_icon"></i>
-					<span class="M_post_body_attach_title">가입양식.hwp</span>
-				</div>
 			</div>
 			<div class="M_post_body_icon_container">
 				<i class="fas fa-eye M_post_body_icons"></i>
-				<span class="M_post_body_icons_data">23</span>
+				<span id="M_post_body_icons_view" class="M_post_body_icons_data"></span>
 				<i class="fas fa-heart M_post_body_icons"></i>
-				<span class="M_post_body_icons_data">18</span>
+				<span id="M_post_body_icons_like" class="M_post_body_icons_data"></span>
 				<i class="fas fa-comment M_post_body_icons"></i>
-				<span class="M_post_body_icons_data">18</span>
+				<span id="M_post_body_icons_comment" class="M_post_body_icons_data"></span>
 			</div>
 			<div class="M_post_body_share">
 				<i class="fas fa-share-square"></i>
 			</div>
 			<div class="M_post_body_line"></div>
-			<div class="M_post_comment_container">
-				<div class="M_comment_top_container">
-					<div class="M_comment_profile_color"></div>
-            		<div class="M_comment_author">김형석</div>
-            		<div class="M_comment_time">| 2019년 7월 21일 20:48:12</div>
-            		<i class="fas fa-comment M_comment_double"></i>
-				</div>
-            	<div class="M_comment_body">하 인생</div>
+			<div id="comment_target">
 			</div>
-			
+			<div class="M_comment_bottom_empty"></div>
 			<div id="M_post_user_comment_container" class="M_post_user_comment_container">
-				<input id="M_post_user_comment_input" type="text" class="M_post_user_comment_input" placeholder="댓글을 입력해주세요.">
+				<input id="M_post_user_comment_input" type="text" class="M_post_user_comment_input" placeholder="댓글을 입력해주세요." onkeyup="comment_enter()" autocomplete="off">
+				<div id="M_post_user_comment_anony_container" class="M_post_user_comment_anony_container">
+					익명
+					<input id="M_post_user_comment_anony" class="M_post_user_comment_anony" type="checkbox">
+				</div>
 			</div>
 		</div>
 	</div>

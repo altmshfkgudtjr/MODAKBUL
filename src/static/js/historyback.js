@@ -8,5 +8,5 @@ $(window).bind("hashchange", function(){
   else {
   	history.go(-1);
   }
-  postmodal_hashchange();
+  //postmodal_hashchange();
 });

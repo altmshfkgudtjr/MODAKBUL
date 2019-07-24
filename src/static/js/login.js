@@ -1,3 +1,5 @@
+//user이 좋아요한 포스트 id
+var user_like_posts_id = [];
 //로그인 버튼을 누를 시, 실행되는 함수
 function user_login(){
 	var login_ID = $('#user_id').val();	// user_id 란 ID 값의 value 값 가져옴
@@ -77,6 +79,9 @@ function get_user_info() {
 			name.append(json['user_name']);
 			number.append(json['user_id']);
 			color.css("background-color", json['user_color']);
+			for (let i=0; i< json['user_like_posts'].length; i++){
+				user_like_posts_id.push(json['user_like_posts'][i]);
+			}
 		}
 		else{
 			snackbar("일시적인 오류로 정보를 가져오지 못하였습니다.");
