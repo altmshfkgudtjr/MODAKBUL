@@ -1279,10 +1279,6 @@ input:-ms-input-placeholder { color: #adadad;}
   cursor: pointer;
   transition: 0.2s;
 }
-.M_post_top_heart:hover {
-  color: red;
-  text-shadow: 0px 0px 10px red;
-}
 .M_post_top_title {
   position: relative;
   display: inline-block;
@@ -1538,17 +1534,19 @@ input:-ms-input-placeholder { color: #adadad;}
   display: inline-block;
   background-color: #e2e2e2;
   font-size: 15px;
-  line-height: 15px;
+  line-height: 17px;
   padding-top: 11px;
   padding-bottom: 10px;
   text-align: center;
+  cursor: default;
 }
 .M_post_user_comment_anony {
   position: relative;
   float: left;
   display: inline-block;
-  top: 2px;
-  transform: scale(1.5);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 @media screen and (max-width: 500px){
   .M_post_user_comment_input {

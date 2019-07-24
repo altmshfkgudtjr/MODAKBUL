@@ -121,21 +121,21 @@ if ( navigator.platform ) {
 			$('#M_post_user_comment_container').css("position", "relative");
 			$('#M_post_user_comment_container').css("padding", "10px");
 			if (comment_double_check == 1){
-				let comment_id = $('#M_post_user_comment_input').attr('title');
-				$('#M_post_user_comment_input').removeAttr("title");
+				let comment_id = $('#M_post_user_comment_input').attr('alt');
+				$('#M_post_user_comment_input').removeAttr("alt");
 				comment_double_check = 0;
-				$('div[title=comment_'+comment_id+']').removeAttr('style');
-				$('div[title=comment_'+comment_id+']').removeClass("comment_check");
+				$('div[alt=comment_'+comment_id+']').removeAttr('style');
+				$('div[alt=comment_'+comment_id+']').removeClass("comment_check");
 			}
 		});
 	} else {
 		$('#M_post_user_comment_input').blur(function(){
 			if (comment_double_check == 1){
-				let comment_id = $('#M_post_user_comment_input').attr('title');
-				$('#M_post_user_comment_input').removeAttr("title");
+				let comment_id = $('#M_post_user_comment_input').attr('alt');
+				$('#M_post_user_comment_input').removeAttr("alt");
 				comment_double_check = 0;
-				$('div[title=comment_'+comment_id+']').removeAttr('style');
-				$('div[title=comment_'+comment_id+']').removeClass("comment_check");
+				$('div[alt=comment_'+comment_id+']').removeAttr('style');
+				$('div[alt=comment_'+comment_id+']').removeClass("comment_check");
 			}
 		});
 	}
@@ -144,20 +144,39 @@ if ( navigator.platform ) {
 function comment_enter() {
 	if (window.event.keyCode == 13) {
 		let is_double_comment = 0;
+		let is_anony = 0;
+		if ($('input:checkbox[id="M_post_user_comment_anony"]').is(":checked") == true){
+			is_anony = 1;
+		}
 		let token = localStorage.getItem('modakbul_token');
-		if ($('#M_post_user_comment_input').attr('title') != null){
-			is_double_comment = $('#M_post_user_comment_input').attr('title');
+		if ($('#M_post_user_comment_input').attr('alt') != null){
+			is_double_comment = $('#M_post_user_comment_input').attr('alt');
 		}
 		let send_data = new FormData();
-		send_data.append('post_id', $('#M_user_post_modal_container').attr('title').split('_')[1]*1);
+		send_data.append('post_id', $('#M_user_post_modal_container').attr('alt').split('_')[1]*1);
 		send_data.append('comment', $("#M_post_user_comment_input").val());
-		send_data.append('anony', '0');
+		send_data.append('anony', is_anony);
 		send_data.append('comment_id', is_double_comment*1);
 		a_jax = A_JAX(TEST_IP+"comment_upload", "POST", token, send_data);
 		$.when(a_jax).done(function(){
 			var json = a_jax.responseJSON;
 			if (json['result'] == "success"){
 				snackbar("댓글 입력 완료!");
+				var a_jax_user = A_JAX(TEST_IP+"get-userinfo", "GET", token, null);
+				$.when(a_jax_user).done(function(){
+					json = a_jax_user.responseJSON;
+					if (json['result'] == "success"){
+						user_comments_id = [];
+						for (let i = 0; i< json['user_comments'].length; i++){
+							user_comments_id.push(json['user_comments'][i]);
+						}
+						empty_post_info();
+						get_post_info();
+					}
+					else {
+						snackbar("일시적인 오류로 정보를 가져오지 못하였습니다.");
+					}
+				});
 			}
 			else if (json['result'] == "bad request"){
 				snackbar("다시 로그인해주세요.");
@@ -176,14 +195,14 @@ function get_post_info() {
 	if (token != null){	
 		var a_jax = A_JAX(TEST_IP+"post/561", "GET", token, null);
 	} else {
-		var a_jax = A_JAX(TEST_IP+"test", "GET", null, null);
+		var a_jax = A_JAX(TEST_IP+"post/561", "GET", null, null);
 	}
 	$.when(a_jax).done(function(){
 		var json = a_jax.responseJSON;
 		if (json['result'] == "success"){
 			//조회수 증가 A_JAX
 			let a_jax2 = A_JAX(TEST_IP+"view_up/"+json['post']['post_id'], "GET", null, null);
-			$('#M_user_post_modal_container').attr('title', "post_"+json['post']['post_id']);
+			$('#M_user_post_modal_container').attr('alt', "post_"+json['post']['post_id']);
 			$('#M_post_profile_color').css("background-color", json['post']['author_color']);
 			$('#M_post_author').append(json['post']['author_name']);
 			$('#M_post_time').append("| "+json['post']['post_date']); 	// 날짜 수정
@@ -239,7 +258,7 @@ function get_post_info() {
 			var comment_target = $('#comment_target');
 			for (let i = 0; i < json['comment'].length; i++){
 				let container = document.createElement('div');
-				container.setAttribute('title', 'comment_'+json['comment'][i]['comment_id']);
+				container.setAttribute('alt', 'comment_'+json['comment'][i]['comment_id']);
 				container.classList.add('M_post_comment_container');
 				let top_container = document.createElement('div');
 				top_container.classList.add('M_comment_top_container');
@@ -256,6 +275,12 @@ function get_post_info() {
 				let comment_double_icon = document.createElement('i');
 				comment_double_icon.classList.add("fas", "fa-comment", 'M_comment_double');
 				comment_double_icon.setAttribute('onclick', "double_comment_button_check("+json['comment'][i]['comment_id']+")");
+				if (user_comments_id.includes(json['comment'][i]['comment_id'])){
+					let comment_trash_icon = document.createElement('i');
+					comment_trash_icon.classList.add("fas", "fa-trash-alt", 'M_comment_double');
+					comment_trash_icon.setAttribute('onclick', "comment_trash_button("+json['comment'][i]['comment_id']+")");
+					top_container.append(comment_trash_icon);
+				}	
 				top_container.append(comment_double_icon);
 				container.append(top_container);
 				let comment_body = document.createElement('div');
@@ -267,7 +292,7 @@ function get_post_info() {
 				comment_target.append(container);
 				for (let j = 0; j < json['comment'][i]['double_comment'].length; j++){
 					let d_container = document.createElement('div');
-					d_container.setAttribute('title', 'comment_'+json['comment'][i]['double_comment'][j]['comment_id']);
+					d_container.setAttribute('alt', 'comment_'+json['comment'][i]['double_comment'][j]['comment_id']);
 					d_container.classList.add('M_post_double_comment_container');
 					let d_top_container = document.createElement('div');
 					d_top_container.classList.add('M_comment_top_container');
@@ -280,6 +305,12 @@ function get_post_info() {
 					let d_comment_time = document.createElement('div');
 					d_comment_time.classList.add('M_comment_time');
 					d_comment_time.append("| "+json['comment'][i]['double_comment'][j]['comment_date']);
+					if (user_comments_id.includes(json['comment'][i]['double_comment'][j]['comment_id'])){
+						let d_comment_trash_icon = document.createElement('i');
+						d_comment_trash_icon.classList.add("fas", "fa-trash-alt", 'M_comment_double');
+						d_comment_trash_icon.setAttribute('onclick', "comment_trash_button("+json['comment'][i]['double_comment'][j]['comment_id']+")");
+						d_top_container.append(d_comment_trash_icon);
+					}
 					d_top_container.append(d_comment_color, d_comment_author, d_comment_time);
 					d_container.append(d_top_container);
 					let d_comment_body = document.createElement('div');
@@ -321,29 +352,33 @@ function empty_post_info(){
 var comment_double_check = 0;
 function double_comment_button_check(comment_id) {
 	comment_double_check = 1;
-	$('div[title=comment_'+comment_id+']').addClass("comment_check");
+	$('div[alt=comment_'+comment_id+']').addClass("comment_check");
 	if (localStorage.getItem('modakbul_theme') === 'dark') {
-        $('div[title=comment_'+comment_id+']').css("background-color", "#41464a");
+        $('div[alt=comment_'+comment_id+']').css("background-color", "#41464a");
     } else {
-        $('div[title=comment_'+comment_id+']').css("background-color", "#f8f8f8");
+        $('div[alt=comment_'+comment_id+']').css("background-color", "#f8f8f8");
     }
-    $('#M_post_user_comment_input').attr('title', comment_id);
+    $('#M_post_user_comment_input').attr('alt', comment_id);
 	$('#M_post_user_comment_input').focus();
 }
 
 
 function post_like_button() {
 	if (is_post_like == 0) {
+		if (localStorage.getItem('modakbul_token') == null){
+			snackbar("로그인을 해주세요!");
+			return;
+		}
 		is_post_like = 1;
 		let token = localStorage.getItem('modakbul_token');
-		let post_id = $('#M_user_post_modal_container').attr('title').split('_')[1]*1;
+		let post_id = $('#M_user_post_modal_container').attr('alt').split('_')[1]*1;
 		a_jax = A_JAX(TEST_IP+'post_like_up/'+post_id, "GET", token, null);
 		$('#M_post_top_heart').css({"color":"red", "text-shadow": "0px 0px 10px red"});
 		user_like_posts_id.push(post_id);
 	} else {
 		is_post_like = 0;
 		let token = localStorage.getItem('modakbul_token');
-		let post_id = $('#M_user_post_modal_container').attr('title').split('_')[1]*1;;
+		let post_id = $('#M_user_post_modal_container').attr('alt').split('_')[1]*1;;
 		a_jax = A_JAX(TEST_IP+'post_like_down/'+post_id, "GET", token, null);
 		$('#M_post_top_heart').removeAttr('style');
 		let post_id_index = user_like_posts_id.indexOf(post_id); 
@@ -352,6 +387,33 @@ function post_like_button() {
 		}
 	}
 }
+
+
+function comment_trash_button(comment_id) {
+	if (localStorage.getItem('modakbul_token') == null){
+		snackbar('잘못된 접근입니다.');
+		return;
+	} else {
+		if (user_comments_id.includes(comment_id)){
+			let token = localStorage.getItem('modakbul_token');
+			a_jax = A_JAX(TEST_IP+"comment_delete/"+comment_id, "GET", token, null);
+			$.when(a_jax).done(function(){
+				json = a_jax.responseJSON;
+				if (json['result'] == 'success'){
+					snackbar("댓글을 삭제하였습니다.");
+					let = comment_cnt = $('#M_post_body_icons_comment').text();
+					$('#M_post_body_icons_comment').empty();
+					$('#M_post_body_icons_comment').append(comment_cnt*1 - 1);
+					$('div[alt=comment_'+comment_id+']').remove();
+				}
+			});
+		} else {
+			snackbar('잘못된 접근입니다.');
+			return;
+		}
+	}
+}
+
 
 /*
 //디버그 확인용 코드
