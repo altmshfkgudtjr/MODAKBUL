@@ -17,14 +17,14 @@
 
 
 * {
-	margin: 0px; 
-	padding: 0px; 
-	box-sizing: border-box;
+  margin: 0px; 
+  padding: 0px; 
+  box-sizing: border-box;
 }
 
 body, html {
-	font-family: 'NanumGothic', sans-serif;
-	z-index: -100;
+  font-family: 'NanumGothic', sans-serif;
+  z-index: -100;
 }
 /*스크롤바 숨기기*/
 body::-webkit-scrollbar { 
@@ -81,7 +81,6 @@ body::-webkit-scrollbar {
 input {
   outline: none;
   border: none;
-  -webkit-appearance: none;
   -webkit-border-radius: 0;
 }
 input:focus::-webkit-input-placeholder { color:transparent; }
@@ -1168,7 +1167,6 @@ input:-ms-input-placeholder { color: #adadad;}
   z-index: 50;
 }
 .M_user_post_modal_container {
-  -webkit-overflow-scrolling: touch;
   width: 72%;
   height: auto;
   position: relative;
@@ -1177,6 +1175,7 @@ input:-ms-input-placeholder { color: #adadad;}
   z-index: 70;
   overflow-y: auto;
   overflow-x: hidden;
+  padding-bottom: 0;
 }
 .M_user_post_modal_container::-webkit-scrollbar { 
   display: none; 
@@ -1509,23 +1508,31 @@ input:-ms-input-placeholder { color: #adadad;}
   display: inline-block;
   float: left;
   width: 100%;
-  height: 100px;
+  height: 150px;
+}
+@media screen and (min-height: 750px){
+  .M_comment_bottom_empty{
+    height: 200px;
+  }
 }
 .M_post_user_comment_container {
-  position: fixed;
+  position: relative;
   float: left;
   display: inline-block;
   background-color: white;
-  width: 70%;
+  width: 100%;
   height: 60px;
   left: 50%;
   transform: translate(-50%, 0);
   bottom: 0;
   padding: 10px;
+  padding-left: 0;
+  padding-right: 0;
   z-index: 80;
 }
 .M_post_user_comment_input {
   position: relative;
+  border: initial;
   float: left;
   display: inline-block;
   background-color: #e2e2e2;
@@ -1557,37 +1564,38 @@ input:-ms-input-placeholder { color: #adadad;}
   height: 20px;
   cursor: pointer;
 }
-@media screen and (max-width: 1100px){
+@media screen and (min-width: 760px){
   .M_post_user_comment_container {
-    width: 74%;
+    position: fixed;
+    width: 98%;
   }
 }
-@media screen and (max-width: 800px){
+@media screen and (min-width: 851px){
   .M_post_user_comment_container {
-    width: 100%;
-    left: 0;
-    transform: translate(0, 0);
+    position: fixed;
+    width: 70%;
   }
 }
 @media screen and (max-width: 500px){
   .M_post_user_comment_container {
-    position: fixed;
-    -webkit-overflow-scrolling: touch;
-    -webkit-transform: translateZ(0);
+    position: relative;
     float: left;
     display: inline-block;
     background-color: white;
-    width: 100%;
+    width: 99%;
     height: 60px;
-    left: 0;
-    transform: translate(0, 0);
+    left: 50%;
+    transform: translate(-50%, 0);
     bottom: 0;
-    padding: 10px;
+    padding: 0;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 10px;
     z-index: 80;
   }
   .M_post_user_comment_input {
     width: 80%;
-    padding: 0px;
+    padding: 10px;
   }
   .M_post_user_comment_anony_container {
     width: 19%;

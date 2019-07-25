@@ -179,6 +179,7 @@
 			<div id="M_post_top_heart" class="M_post_top_heart" onclick="post_like_button()"><i class="fas fa-heart"></i></div>
 			<div id="M_post_top_title" class="M_post_top_title"></div>
 			<div id="M_post_body" class="M_post_body"></div>
+			<div class="M_post_body_line"></div>
 			<div id="M_post_body_image_container" class="M_post_body_scroll_container">
 			</div>
 			<div id="M_post_body_attachment_container" class="M_post_body_scroll_container">
@@ -192,7 +193,7 @@
 				<span id="M_post_body_icons_comment" class="M_post_body_icons_data"></span>
 			</div>
 			<div class="M_post_body_share">
-				<i class="fas fa-share-square"></i>
+				<i id="M_post_url_copy" class="fas fa-share-square" onclick="clipboardCopy(this)"></i>
 			</div>
 			<div class="M_post_body_line"></div>
 			<div id="comment_target">
