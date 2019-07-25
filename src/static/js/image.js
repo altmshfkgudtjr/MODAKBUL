@@ -94,7 +94,7 @@ function image_send() {
 	for (var i = 0; i< M_files.length; i++){
 		send_data.append('files', M_list[i]);
 	}
-	var a_jax = A_JAX(TEST_IP+'post_upload', "POST", 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NjM2MTg5MDUsIm5iZiI6MTU2MzYxODkwNSwianRpIjoiMTc2NWZmYmEtMTBiOS00OGZlLTkzYTMtNWVjYzUyZWUwYmNmIiwiaWRlbnRpdHkiOiIxNjAxMTA3NSIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.PgNcNefJjh1ZYVWtTZ297KhUOkvWunBQLsWyHZKjHc8', send_data);
+	var a_jax = A_JAX(`TEST_IP`+'post_upload', "POST", 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NjM2MTg5MDUsIm5iZiI6MTU2MzYxODkwNSwianRpIjoiMTc2NWZmYmEtMTBiOS00OGZlLTkzYTMtNWVjYzUyZWUwYmNmIiwiaWRlbnRpdHkiOiIxNjAxMTA3NSIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.PgNcNefJjh1ZYVWtTZ297KhUOkvWunBQLsWyHZKjHc8', send_data);
 	$.when(a_jax).done(function(){
       var json = a_jax.responseJSON;
       if (json['result'] == "success"){
