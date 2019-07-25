@@ -1168,6 +1168,7 @@ input:-ms-input-placeholder { color: #adadad;}
   z-index: 50;
 }
 .M_user_post_modal_container {
+  -webkit-overflow-scrolling: touch;
   width: 72%;
   height: auto;
   position: relative;
@@ -1571,6 +1572,8 @@ input:-ms-input-placeholder { color: #adadad;}
 @media screen and (max-width: 500px){
   .M_post_user_comment_container {
     position: fixed;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translateZ(0);
     float: left;
     display: inline-block;
     background-color: white;
