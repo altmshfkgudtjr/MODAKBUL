@@ -63,7 +63,7 @@ function image_get_posts(json) {
 }
 
 function image_init() {
-	var a_jax = A_JAX(TEST_IP+"image/"+1, "GET", null, null);
+	var a_jax = A_JAX(TEST_IP+"get_image/"+1, "GET", null, null);
 	$.when(a_jax).done(function(){
       var json = a_jax.responseJSON;
       if (json['result'] == "success"){
@@ -86,10 +86,10 @@ function image_send() {
 		M_list.push(M_files[i]);
 	}
 	var send_data = new FormData();
-	send_data.append('title', '테스트제목');
-	send_data.append('content', '반갑습니다.');
-	send_data.append('anony', '0');
-	send_data.append('tags', '갤러리');
+	send_data.append('title', '모닥불 테스트 포스트 제목입니다.');
+	send_data.append('content', '반갑습니다! 세종대학교 소프트웨어융합대학 모닥불입니다!');
+	send_data.append('anony', '1');
+	send_data.append('tags', '공지');
 	for (var i = 0; i< M_files.length; i++){
 		send_data.append('files', M_list[i]);
 	}
