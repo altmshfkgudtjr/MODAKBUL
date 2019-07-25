@@ -34,7 +34,7 @@ _gaq.push(['_trackPageview']);
 })();
 
 function user_color_select_ok() {
-  $('html, body').removeAttr("style");
+  $('html, body').removeClass('M_modal_open_fixed');
   $('#M_user_color_selector_container_modal').addClass('display_none');
   $('#M_user_color_selector_container').addClass("fadeOutUp");
   setTimeout(function(){
@@ -68,7 +68,7 @@ function user_color_select_ok() {
   }
 }
 function user_color_select_cancel() {
-  $('html, body').removeAttr("style");
+  $('html, body').removeClass('M_modal_open_fixed');
   $('#M_user_color_selector_container_modal').addClass('display_none');
   $('#M_user_color_selector_container').removeClass('fadeInDown');
   $('#M_user_color_selector_container').addClass("fadeOutUp");
@@ -85,9 +85,9 @@ function user_color_select_label() {
 
 function user_color_select_page_open() {
   user_color_select_label();
-  $('#M_user_color_selector_container_modal').css("top", (($(window).height()-$('div#M_user_color_selector_container_modal').outerHeight())/2+$(window).scrollTop()));
-  $('#M_user_color_selector_container').css("top", (($(window).height()-$('div#M_user_color_selector_container').outerHeight())/2+$(window).scrollTop()));
-  $('html, body').css({'overflow': 'hidden'});
+  //$('#M_user_color_selector_container_modal').css("top", (($(window).height()-$('div#M_user_color_selector_container_modal').outerHeight())/2+$(window).scrollTop()));
+  //$('#M_user_color_selector_container').css("top", (($(window).height()-$('div#M_user_color_selector_container').outerHeight())/2+$(window).scrollTop()));
+  $('html, body').addClass('M_modal_open_fixed');
   $('#M_user_color_selector_container_modal').removeClass('display_none');
   $('#M_user_color_selector_container').removeClass("fadeOutUp");
   $('#M_user_color_selector_container').addClass("fadeInDown");

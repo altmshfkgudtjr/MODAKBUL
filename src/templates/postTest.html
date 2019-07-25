@@ -254,9 +254,42 @@
 		</div>
 	</div>
 	<!--Post modal-->
-	<div id="M_user_post_modal_background" class="M_user_post_modal_background animated wow" data-wow-duration = "0.4s">
-		<div id="M_user_post_modal_container" class="M_info_div M_user_post_modal_container animated wow M_boxshadow" data-wow-duration = "0.4s">
-			
+	<div id="M_user_post_modal_background" class="M_user_post_modal_background animated wow display_none" data-wow-duration = "0.4s">
+		<div id="M_user_post_modal_container" class="M_info_div M_user_post_modal_container animated wow M_boxshadow display_none" data-wow-duration = "0.4s">
+			<div class="M_post_top_container">
+				<div id="M_post_profile_color" class="M_post_profile_color"></div>
+            	<div id="M_post_author" class="M_post_author"></div>
+            	<div id="M_post_time" class="M_post_time"></div>
+			</div>
+			<div id="M_post_top_heart" class="M_post_top_heart" onclick="post_like_button()"><i class="fas fa-heart"></i></div>
+			<div id="M_post_top_title" class="M_post_top_title"></div>
+			<div id="M_post_body" class="M_post_body"></div>
+			<div id="M_post_body_image_container" class="M_post_body_scroll_container">
+			</div>
+			<div id="M_post_body_attachment_container" class="M_post_body_scroll_container">
+			</div>
+			<div class="M_post_body_icon_container">
+				<i class="fas fa-eye M_post_body_icons"></i>
+				<span id="M_post_body_icons_view" class="M_post_body_icons_data"></span>
+				<i class="fas fa-heart M_post_body_icons"></i>
+				<span id="M_post_body_icons_like" class="M_post_body_icons_data"></span>
+				<i class="fas fa-comment M_post_body_icons"></i>
+				<span id="M_post_body_icons_comment" class="M_post_body_icons_data"></span>
+			</div>
+			<div class="M_post_body_share">
+				<i class="fas fa-share-square"></i>
+			</div>
+			<div class="M_post_body_line"></div>
+			<div id="comment_target">
+			</div>
+			<div class="M_comment_bottom_empty"></div>
+			<div id="M_post_user_comment_container" class="M_post_user_comment_container">
+				<input id="M_post_user_comment_input" type="text" class="M_post_user_comment_input" placeholder="댓글을 입력해주세요." onkeyup="comment_enter()" autocomplete="off">
+				<div id="M_post_user_comment_anony_container" class="M_post_user_comment_anony_container">
+					익명
+					<input id="M_post_user_comment_anony" class="M_post_user_comment_anony" type="checkbox">
+				</div>
+			</div>
 		</div>
 	</div>
 	<!--Page footer-->

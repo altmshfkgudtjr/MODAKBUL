@@ -20,6 +20,9 @@ function darkSetTheme() {
 	$('.M_boxshadow').addClass('M_boxshadow_dark_shadow');
 	$('#M_search_bar').addClass('M_dark_theme');
 	$('#M_search_input').css("color", "#e2e2e2");
+	$('#M_post_user_comment_container').css("background-color", "#494e52");
+	$('#M_post_user_comment_input').css({"background-color": "#41464a","color": "white"});
+	$('#M_post_user_comment_anony_container').css({"background-color": "#41464a","color": "white"});
 }
 function whiteSetTheme() {
 	$('.M_theme').removeClass("fa-sun");
@@ -43,6 +46,9 @@ function whiteSetTheme() {
 	$('.M_boxshadow').removeClass('M_boxshadow_dark_shadow');
 	$('#M_search_bar').removeClass('M_dark_theme');
 	$('#M_search_input').css("color", "#5f6f81");
+	$('#M_post_user_comment_container').css("background-color", "white");
+	$('#M_post_user_comment_input').css({"background-color": "#e2e2e2","color": "#3e5569"});
+	$('#M_post_user_comment_anony_container').css({"background-color": "#e2e2e2","color": "#3e5569"});
 }
 function changeTheme() {
 	// now_theme check
@@ -70,3 +76,19 @@ function setTheme() {
 		darkSetTheme();
 	}
 }
+
+
+//hover 시 background-color 수정
+$('.M_board_content').hover(function(){
+    if (localStorage.getItem('modakbul_theme') === 'dark') {
+        $(this).css("background-color", "#41464a");
+    } else {
+        $(this).css("background-color", "#f8f8f8");
+    }
+}, function(){
+    if (localStorage.getItem('modakbul_theme') === 'dark') {
+        $(this).css("background-color", "#494e52");
+    } else {
+        $(this).css("background-color", "white");
+    }
+});
