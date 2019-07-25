@@ -11,6 +11,7 @@ function A_JAX(url, type, token, data){
             success: function(res){
             },
             error: function(res){
+                snackbar("일시적인 오류로 정보를 가져오지 못하였습니다.");
             }
         });
     }
@@ -26,6 +27,7 @@ function A_JAX(url, type, token, data){
             dataType : "json",
             success: function(res){},
             error: function(res){
+                snackbar("일시적인 오류로 정보를 가져오지 못하였습니다.");
             }
         });
     }
