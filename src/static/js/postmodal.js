@@ -1,12 +1,13 @@
 //라벨, 이름, 시간, 제목, 본문, 조회수, 공감수, 댓글, 첨부파일, 사진, 태그
 var is_postmodal_open = 0;
 var now_postmodal_top = 0;
+var is_image_modal_open = 0;
 var is_post_like = 0;
 var img_set = ['png', 'jpg', 'jpeg', 'gif', 'bmp'];
 var file_path = "../static/files/";
-function postmodal_open(){
+function postmodal_open(get_post_id){
 	is_post_like = 0;
-	get_post_info();
+	get_post_info(get_post_id);
 	now_postmodal_top = $(window).scrollTop();
 	history.pushState(null, null, "#post");
 	is_postmodal_open = 1;
@@ -25,9 +26,14 @@ function postmodal_open(){
 	$('#M_user_post_modal_container').css('height', $(window).height() - 70);
 }
 
-function postmodal_close(){
+function postmodal_close(is_secret = null){
 	is_postmodal_open = 0;
-	//history.go(-1);
+	image_modal_close();
+	if (is_secret != 1){
+		//조회수 증가 A_JAX
+		let post_get_id = $('#M_user_post_modal_container').attr('alt').split('_')[1]*1;
+		let a_jax2 = A_JAX(TEST_IP+"view_up/"+post_get_id, "GET", null, null);
+	}
 	history.replaceState(null, null, "#list");
 	$('#M_user_post_modal_background').addClass('fadeOut');
 	$('#M_user_post_modal_background').removeClass('fadeIn');
@@ -46,7 +52,7 @@ function postmodal_close(){
 
 // modal 이 외 클릭 시, modal 닫기
 $(document).mouseup(function (e) {
-	if (is_postmodal_open == 1){
+	if (is_postmodal_open == 1 && is_image_modal_open == 0){
 		var container = $("#M_user_post_modal_container");
 		if (!container.is(e.target) && container.has(e.target).length === 0){
 			postmodal_close();
@@ -161,7 +167,6 @@ function comment_enter() {
 		$.when(a_jax).done(function(){
 			var json = a_jax.responseJSON;
 			if (json['result'] == "success"){
-				snackbar("댓글 입력 완료!");
 				var a_jax_user = A_JAX(TEST_IP+"get-userinfo", "GET", token, null);
 				$.when(a_jax_user).done(function(){
 					json = a_jax_user.responseJSON;
@@ -171,7 +176,8 @@ function comment_enter() {
 							user_comments_id.push(json['user_comments'][i]);
 						}
 						empty_post_info();
-						get_post_info();
+						let get_post_id =$('#M_user_post_modal_container').attr('alt').split('_')[1]*1;
+						get_post_info(get_post_id);
 					}
 					else {
 						snackbar("일시적인 오류로 정보를 가져오지 못하였습니다.");
@@ -189,19 +195,44 @@ function comment_enter() {
     }
 }
 
+$(document).keydown(function(event){
+	if (event.keyCode == 27){
+		if (is_image_modal_open == 1){
+			image_modal_close();
+		}
+		else {
+			if (is_postmodal_open == 1){
+				if ($("#M_post_user_comment_input").is(":focus")){
+					$("#M_post_user_comment_input").val("");
+    				$("#M_post_user_comment_input").blur();
+				} else {
+					postmodal_close();
+				}
+			}
+			if (search_bar_value == 1){
+				search_bar_value = 0;
+				var container = $("#M_search_bar");
+				var search_bar = $("#M_search_bar");
+				search_bar.removeClass("fadeInDown");
+				search_bar.addClass("fadeOutUp");
+				setTimeout(function(){search_bar.addClass("display_none")}, 400);
+				$("#M_search_input").val("")
+			}
+		}
+	}
+});
+
 //포스트 정보 가져오는 함수
-function get_post_info() {
+function get_post_info(get_post_id) {
 	let token = localStorage.getItem('modakbul_token');
-	if (token != null){	
-		var a_jax = A_JAX(TEST_IP+"post/561", "GET", token, null);
+	if (token != null){
+		var a_jax = A_JAX(TEST_IP+"get_post/"+get_post_id, "GET", token, null);
 	} else {
-		var a_jax = A_JAX(TEST_IP+"post/561", "GET", null, null);
+		var a_jax = A_JAX(TEST_IP+"get_post/"+get_post_id, "GET", null, null);
 	}
 	$.when(a_jax).done(function(){
 		var json = a_jax.responseJSON;
 		if (json['result'] == "success"){
-			//조회수 증가 A_JAX
-			let a_jax2 = A_JAX(TEST_IP+"view_up/"+json['post']['post_id'], "GET", null, null);
 			$('#M_user_post_modal_container').attr('alt', "post_"+json['post']['post_id']);
 			$('#M_post_profile_color').css("background-color", json['post']['author_color']);
 			$('#M_post_author').append(json['post']['author_name']);
@@ -228,6 +259,7 @@ function get_post_info() {
 					let img_tag = document.createElement('img');
 					img_tag.classList.add('M_post_body_image_content');
 					img_tag.setAttribute('src', file_path+img_files[i]);
+					img_tag.setAttribute('onclick', "image_modal_open(this);");
 					img_content.append(img_tag);
 					image_container.append(img_content);
 				}
@@ -244,7 +276,9 @@ function get_post_info() {
 					attachment_icon.classList.add('fas', 'fa-paperclip', 'M_post_body_content_attachment_icon');
 					let attachment_title = document.createElement('span');
 					attachment_title.classList.add('M_post_body_attach_title');
-					attachment_title.append(attachment_files[i]);
+					let attachment_title_date = attachment_files[i].split('_')[0];
+					let attachment_title_info = attachment_files[i].slice(attachment_title_date.length + 1);
+					attachment_title.append(attachment_title_info);
 					attachment_content.append(attachment_icon, attachment_title);
 					attachment_container.append(attachment_content);
 				}
@@ -327,6 +361,10 @@ function get_post_info() {
 				$('#M_post_top_heart').css({"color":"red", "text-shadow": "0px 0px 10px red"});
 			}
 		}
+		else if (json['result'] == 'do not access'){
+			snackbar("비밀글입니다.");
+			postmodal_close(1);
+		}
 		else {
 			snackbar("일시적인 오류로 정보를 가져오지 못하였습니다.");
 		}
@@ -370,6 +408,9 @@ function post_like_button() {
 			return;
 		}
 		is_post_like = 1;
+		let now_like_cnt = $('#M_post_body_icons_like').text();
+		$('#M_post_body_icons_like').empty();
+		$('#M_post_body_icons_like').append(now_like_cnt*1 + 1);
 		let token = localStorage.getItem('modakbul_token');
 		let post_id = $('#M_user_post_modal_container').attr('alt').split('_')[1]*1;
 		a_jax = A_JAX(TEST_IP+'post_like_up/'+post_id, "GET", token, null);
@@ -377,6 +418,9 @@ function post_like_button() {
 		user_like_posts_id.push(post_id);
 	} else {
 		is_post_like = 0;
+		let now_like_cnt = $('#M_post_body_icons_like').text();
+		$('#M_post_body_icons_like').empty();
+		$('#M_post_body_icons_like').append(now_like_cnt*1 - 1);
 		let token = localStorage.getItem('modakbul_token');
 		let post_id = $('#M_user_post_modal_container').attr('alt').split('_')[1]*1;;
 		a_jax = A_JAX(TEST_IP+'post_like_down/'+post_id, "GET", token, null);
@@ -401,10 +445,9 @@ function comment_trash_button(comment_id) {
 				json = a_jax.responseJSON;
 				if (json['result'] == 'success'){
 					snackbar("댓글을 삭제하였습니다.");
-					let = comment_cnt = $('#M_post_body_icons_comment').text();
-					$('#M_post_body_icons_comment').empty();
-					$('#M_post_body_icons_comment').append(comment_cnt*1 - 1);
-					$('div[alt=comment_'+comment_id+']').remove();
+					empty_post_info();
+					let get_post_id =$('#M_user_post_modal_container').attr('alt').split('_')[1]*1;
+					get_post_info(get_post_id);
 				}
 			});
 		} else {
@@ -413,6 +456,31 @@ function comment_trash_button(comment_id) {
 		}
 	}
 }
+
+function image_modal_open(tag){
+	is_image_modal_open = 1;
+	let now_src = tag.getAttribute('src');
+	$('#M_image_modal_container').attr('src', now_src);
+	$('#M_image_modal_background').css('position', "fixed");
+	$('#M_image_modal_background').removeClass('display_none');
+	$('#M_image_modal_background').removeClass('fadeOut');
+	$('#M_image_modal_background').addClass('fadeIn');
+	$('html, body').css({'overflow': 'hidden'});
+	$('html, body').addClass('M_modal_open_fixed');
+}
+
+function image_modal_close(){
+	is_image_modal_open = 0;
+	$('#M_image_modal_background').addClass('fadeOut');
+	$('#M_image_modal_background').removeClass('fadeIn');
+	setTimeout(function(){
+  		$('#M_image_modal_background').addClass('display_none');
+  	}, 400);
+	$('html, body').removeAttr("style");
+	$('html, body').removeClass('M_modal_open_fixed');
+	$('html').scrollTop(now_postmodal_top);
+}
+
 
 
 /*
