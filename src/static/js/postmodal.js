@@ -29,6 +29,7 @@ function postmodal_open(get_post_id){
 function postmodal_close(is_secret = null){
 	is_postmodal_open = 0;
 	image_modal_close();
+	$("#M_post_user_comment_input").blur();
 	if (is_secret != 1){
 		//조회수 증가 A_JAX
 		let post_get_id = $('#M_user_post_modal_container').attr('alt').split('_')[1]*1;
@@ -114,38 +115,6 @@ slider2.addEventListener('mousemove', (e) => {
   slider2.scrollLeft = scrollLeft2 - walk2;
 });
 
-
-// 모바일
-var filter = "win16|win32|win64|mac|macintel";
-if ( navigator.platform ) { //mobile
-	if ( filter.indexOf( navigator.platform.toLowerCase() ) < 0 ) { 
-		$('#M_post_user_comment_input').focus(function() {
-			$('#M_post_user_comment_container').css("position", "fixed");
-			$('#M_post_user_comment_container').css("padding", "10px 10px 0px 10px");
-		});
-		$('#M_post_user_comment_input').blur(function() {
-			$('#M_post_user_comment_container').css("position", "relative");
-			$('#M_post_user_comment_container').css("padding", "0px");
-			if (comment_double_check == 1){
-				let comment_id = $('#M_post_user_comment_input').attr('alt');
-				$('#M_post_user_comment_input').removeAttr("alt");
-				comment_double_check = 0;
-				$('div[alt=comment_'+comment_id+']').removeAttr('style');
-				$('div[alt=comment_'+comment_id+']').removeClass("comment_check");
-			}
-		});
-	} else {	//pc
-		$('#M_post_user_comment_input').blur(function(){
-			if (comment_double_check == 1){
-				let comment_id = $('#M_post_user_comment_input').attr('alt');
-				$('#M_post_user_comment_input').removeAttr("alt");
-				comment_double_check = 0;
-				$('div[alt=comment_'+comment_id+']').removeAttr('style');
-				$('div[alt=comment_'+comment_id+']').removeClass("comment_check");
-			}
-		});
-	}
-}
 
 function comment_enter() {
 	if (window.event.keyCode == 13) {
@@ -394,6 +363,43 @@ function empty_post_info(){
 }
 
 
+// 모바일
+var filter = "win16|win32|win64|mac|macintel";
+if ( navigator.platform ) { //mobile
+	if ( filter.indexOf( navigator.platform.toLowerCase() ) < 0 ) {
+		$('#M_post_user_comment_input').focus(function() {
+			let mobile_seletor = navigator.platform.toLowerCase();
+			if (mobile_seletor.indexOf("iphone")>-1||mobile_seletor.indexOf("ipad")>-1||mobile_seletor.indexOf("ipod")>-1){
+				$('#M_user_post_modal_container').animate({scrollTop : $('#M_user_post_modal_container').height() + $('#M_user_post_modal_container').height()/100*38}, 400);
+			} else {
+				$('#M_post_user_comment_container').css("position", "fixed");
+				$('#M_post_user_comment_container').css("padding", "10px 10px 0px 10px");
+			}
+		});
+		$('#M_post_user_comment_input').blur(function() {
+			$('#M_post_user_comment_container').css("position", "relative");
+			$('#M_post_user_comment_container').css("padding", "0px");
+			if (comment_double_check == 1){
+				let comment_id = $('#M_post_user_comment_input').attr('alt');
+				$('#M_post_user_comment_input').removeAttr("alt");
+				comment_double_check = 0;
+				$('div[alt=comment_'+comment_id+']').removeAttr('style');
+				$('div[alt=comment_'+comment_id+']').removeClass("comment_check");
+			}
+		});
+	} else {	//pc
+		$('#M_post_user_comment_input').blur(function(){
+			if (comment_double_check == 1){
+				let comment_id = $('#M_post_user_comment_input').attr('alt');
+				$('#M_post_user_comment_input').removeAttr("alt");
+				comment_double_check = 0;
+				$('div[alt=comment_'+comment_id+']').removeAttr('style');
+				$('div[alt=comment_'+comment_id+']').removeClass("comment_check");
+			}
+		});
+	}
+}
+
 var comment_double_check = 0;
 function double_comment_button_check(comment_id) {
 	comment_double_check = 1;
@@ -405,6 +411,15 @@ function double_comment_button_check(comment_id) {
     }
     $('#M_post_user_comment_input').attr('alt', comment_id);
 	$('#M_post_user_comment_input').focus();
+	//$('#M_user_post_modal_container').scrollTop($('#M_post_user_comment_input').offset().top);
+	/*
+	let mobile_seletor = navigator.platform.toLowerCase();
+	if (mobile_seletor.indexOf("iphone")>-1||mobile_seletor.indexOf("ipad")>-1||mobile_seletor.indexOf("ipod")>-1){
+		$('#M_user_post_modal_container').animate({scrollTop : $('#M_user_post_modal_container').height() + $('#M_user_post_modal_container').height()/10*4}, 400);
+	} else {
+		$('#M_post_user_comment_container').css("position", "fixed");
+		$('#M_post_user_comment_container').css("padding", "10px 10px 0px 10px");
+	}*/
 }
 
 

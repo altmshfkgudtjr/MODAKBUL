@@ -1564,6 +1564,14 @@ input:-ms-input-placeholder { color: #adadad;}
   height: 20px;
   cursor: pointer;
 }
+.mobile_keypad_empty {
+  height: 0;
+  width: 100%;
+  position: relative;
+  display: inline-block;
+  float: left;
+}
+/*
 @media screen and (min-width: 760px){
   .M_post_user_comment_container {
     position: fixed;
@@ -1575,8 +1583,9 @@ input:-ms-input-placeholder { color: #adadad;}
     position: fixed;
     width: 70%;
   }
-}
+}*/
 @media screen and (max-width: 500px){
+  /*
   .M_post_user_comment_container {
     position: relative;
     float: left;
@@ -1592,7 +1601,7 @@ input:-ms-input-placeholder { color: #adadad;}
     padding-right: 0px;
     padding-top: 10px;
     z-index: 80;
-  }
+  }*/
   .M_post_user_comment_input {
     width: 80%;
     padding: 10px;

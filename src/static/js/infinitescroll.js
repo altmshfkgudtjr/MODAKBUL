@@ -70,7 +70,7 @@ $(window).ready(function() {
 
 let page = 2;
 $(window).scroll(function() {
-    if ($(window).scrollTop() + 1 >= $(document).height() - $(window).height()) {
+    if ($(window).scrollTop() + 100 >= $(document).height() - $(window).height()) {
         if (flag === false)
         {
             flag = true;
@@ -130,9 +130,12 @@ $(window).scroll(function() {
                                     '</div>');
                         }
                         page++;
+                        flag = false;
+                    }
+                    else {
+                        flag = true;
                     }
                 }
-                flag = false;
             });
         }
     }
