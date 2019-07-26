@@ -29,6 +29,7 @@ function postmodal_open(get_post_id){
 function postmodal_close(is_secret = null){
 	is_postmodal_open = 0;
 	image_modal_close();
+	$("#M_post_user_comment_input").blur();
 	if (is_secret != 1){
 		//조회수 증가 A_JAX
 		let post_get_id = $('#M_user_post_modal_container').attr('alt').split('_')[1]*1;
@@ -115,38 +116,6 @@ slider2.addEventListener('mousemove', (e) => {
 });
 
 
-// 모바일
-var filter = "win16|win32|win64|mac|macintel";
-if ( navigator.platform ) { 
-	if ( filter.indexOf( navigator.platform.toLowerCase() ) < 0 ) { 
-		$('#M_post_user_comment_input').focus(function() {
-			$('#M_post_user_comment_container').css("position", "fixed");
-			$('#M_post_user_comment_container').css("padding", "10px 20px 0px 20px");
-		});
-		$('#M_post_user_comment_input').blur(function() {
-			$('#M_post_user_comment_container').css("position", "relative");
-			$('#M_post_user_comment_container').css("padding", "10px");
-			if (comment_double_check == 1){
-				let comment_id = $('#M_post_user_comment_input').attr('alt');
-				$('#M_post_user_comment_input').removeAttr("alt");
-				comment_double_check = 0;
-				$('div[alt=comment_'+comment_id+']').removeAttr('style');
-				$('div[alt=comment_'+comment_id+']').removeClass("comment_check");
-			}
-		});
-	} else {
-		$('#M_post_user_comment_input').blur(function(){
-			if (comment_double_check == 1){
-				let comment_id = $('#M_post_user_comment_input').attr('alt');
-				$('#M_post_user_comment_input').removeAttr("alt");
-				comment_double_check = 0;
-				$('div[alt=comment_'+comment_id+']').removeAttr('style');
-				$('div[alt=comment_'+comment_id+']').removeClass("comment_check");
-			}
-		});
-	}
-}
-
 function comment_enter() {
 	if (window.event.keyCode == 13) {
 		let is_double_comment = 0;
@@ -155,6 +124,10 @@ function comment_enter() {
 			is_anony = 1;
 		}
 		let token = localStorage.getItem('modakbul_token');
+		if (token == null){
+			snackbar("로그인을 해주세요.");
+			return;
+		}
 		if ($('#M_post_user_comment_input').attr('alt') != null){
 			is_double_comment = $('#M_post_user_comment_input').attr('alt');
 		}
@@ -171,6 +144,7 @@ function comment_enter() {
 				$.when(a_jax_user).done(function(){
 					json = a_jax_user.responseJSON;
 					if (json['result'] == "success"){
+						$("#M_post_user_comment_input").blur();
 						user_comments_id = [];
 						for (let i = 0; i< json['user_comments'].length; i++){
 							user_comments_id.push(json['user_comments'][i]);
@@ -272,6 +246,7 @@ function get_post_info(get_post_id) {
 				for (let i = 0; i < attachment_files.length; i++){
 					let attachment_content = document.createElement('div');
 					attachment_content.classList.add("M_post_body_content", "M_post_body_content_attachment");
+					attachment_content.setAttribute('onclick', "attachment_donwload('"+attachment_files[i]+"')");
 					let attachment_icon = document.createElement('i');
 					attachment_icon.classList.add('fas', 'fa-paperclip', 'M_post_body_content_attachment_icon');
 					let attachment_title = document.createElement('span');
@@ -285,6 +260,7 @@ function get_post_info(get_post_id) {
 			} else {
 				attachment_container.css('display', "none");
 			}
+			$('#M_post_url_copy').attr('alt', json['post']['post_id']);
 			$('#M_post_body_icons_view').append(json['post']['post_view']);
 			$('#M_post_body_icons_like').append(json['post']['like_cnt']);
 			$('#M_post_body_icons_comment').append(json['post']['comment_cnt']);
@@ -387,6 +363,43 @@ function empty_post_info(){
 }
 
 
+// 모바일
+var filter = "win16|win32|win64|mac|macintel";
+if ( navigator.platform ) { //mobile
+	if ( filter.indexOf( navigator.platform.toLowerCase() ) < 0 ) {
+		$('#M_post_user_comment_input').focus(function() {
+			let mobile_seletor = navigator.platform.toLowerCase();
+			if (mobile_seletor.indexOf("iphone")>-1||mobile_seletor.indexOf("ipad")>-1||mobile_seletor.indexOf("ipod")>-1){
+				$('#M_user_post_modal_container').animate({scrollTop : $('#M_user_post_modal_container').height() + $('#M_user_post_modal_container').height()/100*38}, 400);
+			} else {
+				$('#M_post_user_comment_container').css("position", "fixed");
+				$('#M_post_user_comment_container').css("padding", "10px 10px 0px 10px");
+			}
+		});
+		$('#M_post_user_comment_input').blur(function() {
+			$('#M_post_user_comment_container').css("position", "relative");
+			$('#M_post_user_comment_container').css("padding", "0px");
+			if (comment_double_check == 1){
+				let comment_id = $('#M_post_user_comment_input').attr('alt');
+				$('#M_post_user_comment_input').removeAttr("alt");
+				comment_double_check = 0;
+				$('div[alt=comment_'+comment_id+']').removeAttr('style');
+				$('div[alt=comment_'+comment_id+']').removeClass("comment_check");
+			}
+		});
+	} else {	//pc
+		$('#M_post_user_comment_input').blur(function(){
+			if (comment_double_check == 1){
+				let comment_id = $('#M_post_user_comment_input').attr('alt');
+				$('#M_post_user_comment_input').removeAttr("alt");
+				comment_double_check = 0;
+				$('div[alt=comment_'+comment_id+']').removeAttr('style');
+				$('div[alt=comment_'+comment_id+']').removeClass("comment_check");
+			}
+		});
+	}
+}
+
 var comment_double_check = 0;
 function double_comment_button_check(comment_id) {
 	comment_double_check = 1;
@@ -394,10 +407,19 @@ function double_comment_button_check(comment_id) {
 	if (localStorage.getItem('modakbul_theme') === 'dark') {
         $('div[alt=comment_'+comment_id+']').css("background-color", "#41464a");
     } else {
-        $('div[alt=comment_'+comment_id+']').css("background-color", "#f8f8f8");
+        $('div[alt=comment_'+comment_id+']').css("background-color", "#f5f6fa");
     }
     $('#M_post_user_comment_input').attr('alt', comment_id);
 	$('#M_post_user_comment_input').focus();
+	//$('#M_user_post_modal_container').scrollTop($('#M_post_user_comment_input').offset().top);
+	/*
+	let mobile_seletor = navigator.platform.toLowerCase();
+	if (mobile_seletor.indexOf("iphone")>-1||mobile_seletor.indexOf("ipad")>-1||mobile_seletor.indexOf("ipod")>-1){
+		$('#M_user_post_modal_container').animate({scrollTop : $('#M_user_post_modal_container').height() + $('#M_user_post_modal_container').height()/10*4}, 400);
+	} else {
+		$('#M_post_user_comment_container').css("position", "fixed");
+		$('#M_post_user_comment_container').css("padding", "10px 10px 0px 10px");
+	}*/
 }
 
 
@@ -479,6 +501,35 @@ function image_modal_close(){
 	$('html, body').removeAttr("style");
 	$('html, body').removeClass('M_modal_open_fixed');
 	$('html').scrollTop(now_postmodal_top);
+}
+
+//file download function
+function attachment_donwload(file){
+	let date = file.split('_')[0];
+	let title = file.slice(date.length + 1);
+	var element = document.createElement('a');
+	element.setAttribute('href', '../static/files/'+file);
+	element.setAttribute('download', title);
+	element.style.display = 'none';
+	document.body.appendChild(element);
+	element.click();
+	document.body.removeChild(element);
+}
+
+
+//클립보드 복사 함수
+function clipboardCopy(tag) {
+	let post_id = tag.getAttribute('alt');
+	var clipboard_textarea = document.createElement('textarea');
+	clipboard_textarea.setAttribute('id', 'clipboard_copy');
+	clipboard_textarea.value = TEST_IP+"v/"+post_id;
+	clipboard_textarea.style.zIndex = "-3000";
+	document.body.appendChild(clipboard_textarea);
+	clipboard_textarea.select();
+	document.execCommand("copy");
+	document.getElementById('clipboard_copy').blur();
+	snackbar("URL 복사완료!");
+	$('textarea').remove('#clipboard_copy');
 }
 
 

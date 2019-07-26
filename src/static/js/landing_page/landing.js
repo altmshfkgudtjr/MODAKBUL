@@ -466,22 +466,15 @@ function animateTitles_white() {
 
 function changeLanding()
 {
-  if (localStorage.getItem('modakbul_theme') == 'dark')
-  {
-    createLandscape_dark({
-      palleteImage:'static/image/landing_dark.png'
-    });
-    animateTitles_dark();
+  if (localStorage.getItem('modakbul_theme') == 'dark'){
+    localStorage.setItem('modakbul_theme', 'white');
+  } else {
+    localStorage.setItem('modakbul_theme', 'dark');
   }
-  else
-  {
-    createLandscape_white({
-      palleteImage:'static/image/landing_white.png'
-    });
-    animateTitles_white();
-  }
+  location.reload();
 }
 
+// 처음실행
 if (localStorage.getItem('modakbul_theme') == 'dark')
 {
   createLandscape_dark({
