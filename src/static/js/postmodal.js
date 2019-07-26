@@ -55,12 +55,12 @@ function postmodal_close(is_secret = null){
 $(document).mouseup(function (e) {
 	if (is_postmodal_open == 1 && is_image_modal_open == 0){
 		var container = $("#M_user_post_modal_container");
-		if (!container.is(e.target) && container.has(e.target).length === 0){
+		var control_button = $('#ss_menu');
+		if (!container.is(e.target) && container.has(e.target).length === 0 && !control_button.is(e.target) && control_button.has(e.target).length === 0 && !$('#M_post_user_comment_container').is(e.target) && $('#M_post_user_comment_container').has(e.target).length === 0){
 			postmodal_close();
 		}
 	}
 });
-
 //마우스 드래그로 스크롤할 수 있는 함수  = 이미지 container
 const slider = document.querySelector('#M_post_body_image_container');
 
@@ -361,24 +361,21 @@ function empty_post_info(){
 	is_post_like = 0;
 	$('#M_post_top_heart').removeAttr('style');
 }
-
-
 // 모바일
 var filter = "win16|win32|win64|mac|macintel";
 if ( navigator.platform ) { //mobile
 	if ( filter.indexOf( navigator.platform.toLowerCase() ) < 0 ) {
 		$('#M_post_user_comment_input').focus(function() {
 			let mobile_seletor = navigator.platform.toLowerCase();
+			//IOS
 			if (mobile_seletor.indexOf("iphone")>-1||mobile_seletor.indexOf("ipad")>-1||mobile_seletor.indexOf("ipod")>-1){
-				$('#M_user_post_modal_container').animate({scrollTop : $('#M_user_post_modal_container').height() + $('#M_user_post_modal_container').height()/100*38}, 400);
-			} else {
+				$('#M_user_post_modal_container').animate({scrollTop : $('#M_user_post_modal_container').height() + $('#M_user_post_modal_container').height()/100*68}, 400);
+			} else {	//ANDROID
 				$('#M_post_user_comment_container').css("position", "fixed");
 				$('#M_post_user_comment_container').css("padding", "10px 10px 0px 10px");
 			}
 		});
 		$('#M_post_user_comment_input').blur(function() {
-			$('#M_post_user_comment_container').css("position", "relative");
-			$('#M_post_user_comment_container').css("padding", "0px");
 			if (comment_double_check == 1){
 				let comment_id = $('#M_post_user_comment_input').attr('alt');
 				$('#M_post_user_comment_input').removeAttr("alt");
@@ -516,7 +513,6 @@ function attachment_donwload(file){
 	document.body.removeChild(element);
 }
 
-
 //클립보드 복사 함수
 function clipboardCopy(tag) {
 	let post_id = tag.getAttribute('alt');
@@ -531,6 +527,8 @@ function clipboardCopy(tag) {
 	snackbar("URL 복사완료!");
 	$('textarea').remove('#clipboard_copy');
 }
+
+
 
 
 

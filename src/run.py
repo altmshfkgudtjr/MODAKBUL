@@ -15,9 +15,6 @@ def board():
 @app.route('/gallery')
 def image():
 	return render_template('image.html')
-@app.route('/test')
-def test():
-	return render_template('postTest.html')
 @app.route('/intro')
 def intro():
 	return render_template('intro.html')

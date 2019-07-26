@@ -1168,6 +1168,7 @@ input:-ms-input-placeholder { color: #adadad;}
 }
 .M_user_post_modal_container {
   width: 72%;
+  max-width: 800px;
   height: auto;
   position: relative;
   margin: auto;
@@ -1562,6 +1563,7 @@ input:-ms-input-placeholder { color: #adadad;}
   display: inline-block;
   width: 20px;
   height: 20px;
+  margin-left: 10px;
   cursor: pointer;
 }
 .mobile_keypad_empty {
@@ -1571,37 +1573,7 @@ input:-ms-input-placeholder { color: #adadad;}
   display: inline-block;
   float: left;
 }
-/*
-@media screen and (min-width: 760px){
-  .M_post_user_comment_container {
-    position: fixed;
-    width: 98%;
-  }
-}
-@media screen and (min-width: 851px){
-  .M_post_user_comment_container {
-    position: fixed;
-    width: 70%;
-  }
-}*/
 @media screen and (max-width: 500px){
-  /*
-  .M_post_user_comment_container {
-    position: relative;
-    float: left;
-    display: inline-block;
-    background-color: white;
-    width: 99%;
-    height: 60px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    bottom: 0;
-    padding: 0;
-    padding-left: 0px;
-    padding-right: 0px;
-    padding-top: 10px;
-    z-index: 80;
-  }*/
   .M_post_user_comment_input {
     width: 80%;
     padding: 10px;
@@ -1610,7 +1582,6 @@ input:-ms-input-placeholder { color: #adadad;}
     width: 19%;
   }
 }
-
 .M_post_comment_line {
   position: relative;
   display: inline-block;
@@ -1629,7 +1600,7 @@ input:-ms-input-placeholder { color: #adadad;}
   left: 0;
   background-color: rgba(0,0,0,0.5);
   padding: 20px;
-  z-index: 300;
+  z-index: 500;
   cursor: pointer;
 }
 .M_image_modal_container {
@@ -1638,9 +1609,30 @@ input:-ms-input-placeholder { color: #adadad;}
   height: auto;
   max-width: 95%;
   max-height: 95%;
-  z-index: 350;
+  z-index: 550;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   cursor: pointer;
+}
+
+
+.M_post_user_comment_container_fixed {
+  position: fixed;
+  background-color: white;
+  width: 72%;
+  max-width: 800px;
+  height: 60px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  bottom: 0;
+  padding: 10px;
+  z-index: 80;
+}
+@media screen and (max-width: 850px){
+  .M_post_user_comment_container_fixed {
+    width: 99%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
