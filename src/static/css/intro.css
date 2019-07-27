@@ -5,25 +5,10 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 	box-sizing: border-box;
 }
 
-html {
-	background: #141414;
-}
-
-body {
-	font-family: 'Montserrat', sans-serif;
-	min-height: 100vh;
-	color: #ededed;
-	color: var(--color-text);
-	background-color: #fff;
-	background-color: var(--color-bg);
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
 /* Color schemes */
 .demo-1 {
 	--color-text: #ededed;
-	--color-bg: #000;
+	--color-bg: #0e0e0f;
 	--color-link: #fff;
 	--color-link-hover: #5d5050;
 	--color-info: #5d5050;
@@ -32,6 +17,15 @@ body {
 	--color-title: #fff;
 	--color-subtitle: #ededed;
 	--color-deco: #161616;
+
+	font-family: 'Montserrat', sans-serif;
+	min-height: 100vh;
+	color: #ededed;
+	color: var(--color-text);
+	background-color: #fff;
+	background-color: var(--color-bg);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 /* Fade effect */
@@ -313,6 +307,8 @@ main {
 	justify-content: center;
 	flex-wrap: wrap;
 	position: relative;
+	margin-bottom: 5%;
+	text-shadow: 0 0 7px black;
 }
 
 .menu__item:hover,
@@ -333,15 +329,15 @@ main {
 }
 
 .menu__item:nth-child(2)::before {
-	background: linear-gradient(45deg, #9d316e, #de2d3e);
+	background: linear-gradient(45deg, #fc00ff, #00dbde);
 }
 
 .menu__item:nth-child(3)::before {
-	background: linear-gradient(45deg, #3a3d98, #6f22b9);
+	background: linear-gradient(45deg, #3c1053, #ad5389);
 }
 
 .menu__item:nth-child(4)::before {
-	background: linear-gradient(45deg, #f19872, #e86c9a);
+	background: linear-gradient(45deg, #DD5E89, #F7BB97);
 }
 
 .menu__item:nth-child(5)::before {
