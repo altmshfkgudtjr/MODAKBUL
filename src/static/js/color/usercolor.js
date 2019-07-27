@@ -1,4 +1,5 @@
 var user_color_output;
+var color_selector_scrollTop;
 function rgb2hex(rgb) {
      if (  rgb.search("rgb") == -1 ) {
           return rgb;
@@ -35,6 +36,7 @@ _gaq.push(['_trackPageview']);
 
 function user_color_select_ok() {
   $('html, body').removeClass('M_modal_open_fixed');
+  $('html').animate( { scrollTop : color_selector_scrollTop }, 400 );
   $('#M_user_color_selector_container_modal').addClass('display_none');
   $('#M_user_color_selector_container').addClass("fadeOutUp");
   setTimeout(function(){
@@ -69,6 +71,7 @@ function user_color_select_ok() {
 }
 function user_color_select_cancel() {
   $('html, body').removeClass('M_modal_open_fixed');
+  $('html').animate( { scrollTop : color_selector_scrollTop }, 400 );
   $('#M_user_color_selector_container_modal').addClass('display_none');
   $('#M_user_color_selector_container').removeClass('fadeInDown');
   $('#M_user_color_selector_container').addClass("fadeOutUp");
@@ -84,14 +87,16 @@ function user_color_select_label() {
 }
 
 function user_color_select_page_open() {
+  color_selector_scrollTop = $(window).scrollTop();
   user_color_select_label();
-  //$('#M_user_color_selector_container_modal').css("top", (($(window).height()-$('div#M_user_color_selector_container_modal').outerHeight())/2+$(window).scrollTop()));
-  //$('#M_user_color_selector_container').css("top", (($(window).height()-$('div#M_user_color_selector_container').outerHeight())/2+$(window).scrollTop()));
-  $('html, body').addClass('M_modal_open_fixed');
-  $('#M_user_color_selector_container_modal').removeClass('display_none');
-  $('#M_user_color_selector_container').removeClass("fadeOutUp");
-  $('#M_user_color_selector_container').addClass("fadeInDown");
-  $('#M_user_color_selector_container').removeClass('display_none');
-  $('#user_color_selector_info_content_name').empty();
-  $('#user_color_selector_info_content_name').append($('#M_user_content_name').text());
+  $('html').animate( { scrollTop : 0 }, 400 );
+  setTimeout(function() {
+    $('html, body').addClass('M_modal_open_fixed');
+    $('#M_user_color_selector_container_modal').removeClass('display_none');
+    $('#M_user_color_selector_container').removeClass("fadeOutUp");
+    $('#M_user_color_selector_container').addClass("fadeInDown");
+    $('#M_user_color_selector_container').removeClass('display_none');
+    $('#user_color_selector_info_content_name').empty();
+    $('#user_color_selector_info_content_name').append($('#M_user_content_name').text());  
+  }, 400);
 }

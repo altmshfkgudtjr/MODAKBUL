@@ -30,6 +30,10 @@ $(window).ready(function() {
                     let is_image_icon = data.img_cnt;
                     let is_attachment_icon = data.file_cnt;
                     let is_lock_icon = data.private;
+                    let user_name = data.author_name;
+                    if (user_name == null){
+                        user_name = "익명";
+                    }
                     if (is_image_icon == 0){
                         is_image_icon = "M_board_content_image_none";
                     } else {
@@ -49,7 +53,7 @@ $(window).ready(function() {
                         .append(
                             '<div class="' + div_class + '" onclick="postmodal_open('+ post_id +')">' +
                             '<div class="M_user_profile_color" style="background-color:'+user_color+'"></div>' +
-                            '<div class="M_user_name">' + data.author_name + '</div>' +
+                            '<div class="M_user_name">' + user_name + '</div>' +
                             '<div class="M_time_info">| ' + submission_time + '</div>' +
                             '<i class="fas fa-lock M_board_content_icon M_board_content_lock '+is_lock_icon+'"></i>' +
                             '<i class="fas fa-paperclip M_board_content_icon M_board_content_paperclip '+is_attachment_icon+'"></i>' +
@@ -96,6 +100,10 @@ $(window).scroll(function() {
                             let is_image_icon = data.img_cnt;
                             let is_attachment_icon = data.file_cnt;
                             let is_lock_icon = data.private;
+                            let user_name = data.author_name;
+                            if (user_name == null){
+                                user_name = "익명";
+                            }
                             if (is_image_icon == 0){
                                 is_image_icon = "M_board_content_image_none";
                             } else {
@@ -115,7 +123,7 @@ $(window).scroll(function() {
                                 .append(
                                     '<div class="' + div_class + '" onclick="postmodal_open('+ post_id +')">' +
                                     '<div class="M_user_profile_color" style="background-color:'+user_color+'"></div>' +
-                                    '<div class="M_user_name">' + data.author_name + '</div>' +
+                                    '<div class="M_user_name">' + user_name + '</div>' +
                                     '<div class="M_time_info">| ' + submission_time + '</div>' +
                                     '<i class="fas fa-lock M_board_content_icon M_board_content_lock '+is_lock_icon+'"></i>' +
                                     '<i class="fas fa-paperclip M_board_content_icon M_board_content_paperclip '+is_attachment_icon+'"></i>' +
