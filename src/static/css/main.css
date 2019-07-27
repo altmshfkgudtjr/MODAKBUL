@@ -195,6 +195,8 @@ input:-ms-input-placeholder { color: #adadad;}
 
 .display_none {display: none}
 .display_block {display: block}
+.display_none_important {display: none !important;}
+.display_block_important {display: block !important;}
 
 .M_dropdwon_trf {transform: translate(0, 5px)}
 .M_dropdown_hypeon {padding: 0 22px 0 30px}
@@ -1001,10 +1003,12 @@ input:-ms-input-placeholder { color: #adadad;}
 }
 .M_user_color_select_choice:active {
   background-color: #c30e2e;
+  color: white;
 }
 @media screen and (min-width: 450px) {
   .M_user_color_select_choice:hover {
     background-color: #c30e2e;
+    color: white;
   } 
 }
 
@@ -1565,6 +1569,8 @@ input:-ms-input-placeholder { color: #adadad;}
   height: 20px;
   margin-left: 10px;
   cursor: pointer;
+  top: -5px;
+  left: 4px;
 }
 .mobile_keypad_empty {
   height: 0;
@@ -1629,10 +1635,183 @@ input:-ms-input-placeholder { color: #adadad;}
   padding: 10px;
   z-index: 80;
 }
+@media screen and (min-width: 1100px){
+  .M_post_user_comment_container_fixed{
+    width: 68%;
+  }
+}
 @media screen and (max-width: 850px){
   .M_post_user_comment_container_fixed {
     width: 99%;
     padding-left: 10px;
     padding-right: 10px;
   }
+}
+/*post modal fixed ========================================================================*/
+.M_user_post_modal_background_fixed {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 300;
+}
+.M_user_post_modal_container_fixed {
+  position: absolute;
+  width: 72%;
+  max-width: 800px;
+  height: 90%;
+  max-height: 1000px;
+  min-height: 600px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 350;
+  overflow-y: auto;
+}
+.M_user_post_modal_container_fixed::-webkit-scrollbar { 
+  display: none; 
+}
+@media screen and (max-width: 800px) {
+  .M_user_post_modal_container_fixed {
+    height: 800px;
+  }
+}
+@media screen and (max-width: 450px){
+  .M_user_post_modal_container_fixed {
+    width: 99%;
+    height: 620px;
+  }
+}
+.M_post_fixed_info {
+  text-align: center;
+}
+@media screen and (max-width: 450px){
+  .M_post_fixed_info {
+    font-size: 30px;
+  }
+}
+.M_post_fixed_title {
+  text-align: left;
+  margin-left: 10px;
+}
+@media screen and (max-width: 450px){
+  .M_post_fixed_title {
+    margin-left: 0;  
+  }
+}
+.M_post_fixed_title_input {
+  border: 1px solid #a2a2a2;
+  border-radius: 4px;
+  background-color: rgba(0,0,0,0);
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-family: 'NanumGothic', sans-serif;
+}
+.M_filebox {
+  color: #5f6f81;
+}
+
+.M_filebox label {
+  display: inline-block;
+  padding: .5em .75em;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: rgba(0,0,0,0);
+  cursor: pointer;
+  border: 1px solid #e2e2e2;
+  border-radius: .25em;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+
+.M_filebox label:active {
+  background-color: #e2e2e288;
+}
+
+.M_filebox input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+.M_file_route {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 100%;
+  min-height: 40px;
+  height: auto;
+  max-height: 80px;
+  font-size: 18px;
+  color: #5f6f81;
+  background-color: rgba(0,0,0,0);
+  border-radius: 4px;
+  border: 1px solid #e2e2e2;
+  margin-top: 10px;
+  padding: 5px;
+  padding-left: 10px;
+}
+.M_user_post_modal_container_fixed_choice_container{
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 100%;
+  height: 60px;
+  margin: 10px 0;
+  padding: 0;
+}
+.M_user_post_modal_container_fixed_choice {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 50%;
+  height: 60px;
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 20px;
+  line-height: 50px;
+  cursor: pointer;
+}
+.M_user_post_modal_container_fixed_choice:hover {
+  background-color: #c30e2e;
+  color: white;
+}
+.M_post_user_post_anony_container {
+  height: 40px;
+  width: 10%;
+  min-width: 60px;
+  position: relative;
+  float: right;
+  display: inline-block;
+  background-color: rgba(0,0,0,0);
+  font-size: 15px;
+  line-height: 17px;
+  padding-top: 11px;
+  padding-bottom: 10px;
+  text-align: center;
+  cursor: default;
+}
+.M_post_user_post_anony {
+  position: relative;
+  float: left;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  top: -5px;
 }

@@ -27,6 +27,11 @@
 	<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 	<!--post_menu_button-->
 	<link rel="stylesheet" type="text/css" href="../static/css/post_menu_button.css">
+	<!--textarea editor-->
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">
+	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css">
 	<!--custom css-->
 	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
 </head>
@@ -74,7 +79,7 @@
 									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>데이터사이언스학과</a>
 									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>지능기전공학부</a>
 									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>디자인이노베이션</a>
-									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>만화애니메이션택</a>
+									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>만화애니메이션텍</a>
 								</div>
 							</div>
 							<li><a class="M_nav_user_button"><i class="fas fa-feather-alt" style="padding: 0 22px"></i>민원</a></li>
@@ -204,7 +209,7 @@
 		</div>
 		<div id="M_post_user_comment_container" class="M_post_user_comment_container_fixed">
 			<div id="M_post_user_comment_anony_container" class="M_post_user_comment_anony_container">
-				<input class="M_post_user_comment_anony" class="M_post_user_comment_anony" type="checkbox">
+				<input id="M_post_user_comment_anony" class="M_post_user_comment_anony" class="M_post_user_comment_anony" type="checkbox">
 				익명
 			</div>
 			<input type="text" id="M_post_user_comment_input" class="M_post_user_comment_input" placeholder="댓글을 입력해주세요." onkeyup="comment_enter()" autocomplete="off">
@@ -213,9 +218,9 @@
 	<!--menu control button-->
 	<div id="M_menu_button_container">
 		<div id='ss_menu'>
-		  <div> <i class="fas fa-plus"></i> </div>
-		  <div class="display_none"> <i class="fas fa-trash-alt"></i> </div>
-		  <div class="display_none"> <i class="fas fa-pen-nib"></i> </div>
+		  <div id="M_menu_button_write" onclick="post_write()"> <i class="fas fa-plus"></i> </div>
+		  <div id="M_menu_button_trash" class="display_none_important" onclick="post_delete()"> <i class="fas fa-trash-alt"></i> </div>
+		  <div id="M_menu_button_modify" class="display_none_important" onclick="post_modify()"> <i class="fas fa-pen-nib"></i> </div>
 		  <div></div>
 		  <div class='menu'>
 		    <div class='share' id='ss_toggle' data-rot='180'>
@@ -232,6 +237,30 @@
 	<div class="M_footer">
 		<img src="../static/image/foot.png" class="M_footer_img">
 		<p class="M_footer_p">010-7393-3434 | sejong1sc@gmail.com | 학생회관 409호<br>COPYRIGHT ⓒ 2019 Team IML</p>
+	</div>
+	<!--post control modal-->
+	<div id="M_user_post_modal_background_fixed" class="M_user_post_modal_background_fixed display_none wow animated" data-wow-duration = "0.4s"></div>
+		<div id="M_user_post_modal_container_fixed" class="M_info_div M_boxshadow M_user_post_modal_container_fixed animated display_none wow" data-wow-duration = "0.4s">
+			<h1 class="M_post_fixed_info">포스트 작성</h1>
+			<h4 class="M_post_fixed_title">제목</h4>
+			<input type="text" id="M_post_fixed_title_input" class="M_post_fixed_title_input" placeholder="제목을 입력해주세요." autocomplete="off" maxlength="100" required="">
+			<h4 class="M_post_fixed_title">내용</h4>
+			<!--<textarea type="textfield" id="M_post_fixed_body_input" class="M_post_fixed_body_input" placeholder="내용을 입력해주세요." maxlength="10000"></textarea>-->
+			<div id="summernote"></div>
+			<div class="M_filebox">
+				<label for="files_upload" class="M_filebox">업로드</label>
+				<div id="M_post_user_post_anony_container" class="M_post_user_post_anony_container">
+					<input id="M_post_user_post_anony" class="M_post_user_post_anony" type="checkbox">
+					익명
+				</div>
+				<input type="file" id="files_upload" multiple="multiple" class="M_post_fixed_attachment" max-10 maxlength="10" data-maxsize="51200" onchange="javascript:document.getElementById('M_file_route').value=this.value">
+				<div id="M_file_route" class="M_file_route">
+			</div>
+		</div>
+		<div class="M_user_post_modal_container_fixed_choice_container">
+			<div class="M_user_post_modal_container_fixed_choice" onclick="post_write_accept()" style="border-right: 1px solid #e2e2e2">적용</div>
+			<div class="M_user_post_modal_container_fixed_choice" onclick="post_write_cancel()">취소</div>
+		</div>
 	</div>
 </body>
 
@@ -261,6 +290,14 @@
 <script src="../static/js/color/usercolor.js"></script>
 <!--post_menu_button JS-->
 <script src="../static/js/post_menu_button.js"></script>
+<!--post editor JS-->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js"></script>
+<!--multifile JS-->
+<script src="../static/js/multifile/jquery.MultiFile.min.js"></script>
 <!--custom JS-->
 <script src="../static/js/test_url.js"></script>
 <script src="../static/js/login.js"></script>
@@ -268,4 +305,42 @@
 <script src="../static/js/infinitescroll.js"></script>
 <script src="../static/js/postmodal.js"></script>
 <script src="../static/js/historyback.js"></script>
+<script>
+	M_summernote_change();
+	$(document).ready(function() {
+	  $('#summernote').summernote({
+	  	fontNames: ['NanumGothic', 'sans-serif', 'serif'],
+        placeholder: '내용을 입력해주세요.',
+        tabsize: 2,
+        minHeight: 300,
+        maxHeight: 300,
+        height: 300,
+        toolbar: [
+  		// [groupName, [list of button]]
+  		['style', ['bold', 'italic', 'underline', 'clear']],
+  		['fontsize', ['fontsize']],
+  		['color', ['color']],
+  		['undo', ['undo']]
+  		],
+  		callbacks: {
+  			onInit: function() {
+  				M_summernote_init();
+  			}
+  		}
+      });
+      $("input[type=file]").change(function () {
+            let fileInput = document.getElementById("files_upload");
+            let files = fileInput.files;
+            let file;
+            let string = "";
+            for (let i = 0; i < files.length; i++) {
+                file = files[i];
+                string += file.name;
+                string += " / ";
+            }
+            $('#M_file_route').empty();
+            $('#M_file_route').append(string);
+        });
+	});
+</script>
 </html>

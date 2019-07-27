@@ -66,6 +66,7 @@ function changeTheme() {
 	else {
 		darkSetTheme();
 	}
+	M_summernote_change();
 }
 function setTheme() {
 	if (localStorage.getItem('modakbul_theme') == null){
@@ -92,3 +93,25 @@ $('.M_board_content').hover(function(){
         $(this).css("background-color", "white");
     }
 });
+
+
+function M_summernote_change() {
+	let theme = localStorage.getItem('modakbul_theme');
+	if (theme == 'dark') {
+		$('.note-editable').css('background-color', "#494E52");
+		$('.note-editable').css('color', "#e2e2e2");
+		$('.note-toolbar').css('background-color', '#494E52');
+		$('.note-resizebar').remove();
+		$('.note-status-output').remove();
+		$('.M_file_route').css('color', "#e2e2e2");
+		$('.M_filebox').css('color', "#e2e2e2");
+	} else {
+		$('.note-editable').css('background-color', "white");
+		$('.note-editable').css('color', '#5f6f81');
+		$('.note-toolbar').css('background-color', 'white');
+		$('.note-resizebar').remove();
+		$('.note-status-output').remove();
+		$('.M_file_route').css('color', "#5f6f81");
+		$('.M_filebox').css('color', "#5f6f81");
+	}
+}
