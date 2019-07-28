@@ -1,18 +1,22 @@
 //라벨, 이름, 시간, 제목, 본문, 조회수, 공감수, 댓글, 첨부파일, 사진, 태그
 var is_postmodal_open = 0;
+var is_postmodal_fixed_open = 0;
 var now_postmodal_top = 0;
 var is_image_modal_open = 0;
 var is_post_like = 0;
 var img_set = ['png', 'jpg', 'jpeg', 'gif', 'bmp'];
 var file_path = "../static/files/";
+var is_post_modify = 0;
+var is_post_property = 0;
 function postmodal_open(get_post_id){
 	is_post_like = 0;
 	get_post_info(get_post_id);
+	$('#M_menu_button_modify').removeClass('display_none_important');
+	$('#M_menu_button_trash').removeClass('display_none_important');
 	now_postmodal_top = $(window).scrollTop();
 	history.pushState(null, null, "#post");
 	is_postmodal_open = 1;
 	$('#M_user_post_modal_background').css("height", $(window).height() + 100);
-	//$('#M_user_post_modal_background').css("top", (($(window).height()-$('div#M_user_post_modal_background').outerHeight())/2+$(window).scrollTop()));
 	$('#M_user_post_modal_background').css('position', "fixed");
 	$('#M_user_post_modal_background').removeClass('display_none');
 	$('#M_user_post_modal_background').removeClass('fadeOut');
@@ -28,7 +32,9 @@ function postmodal_open(get_post_id){
 
 function postmodal_close(is_secret = null){
 	is_postmodal_open = 0;
-	image_modal_close();
+	image_modal_close();	
+	$('#M_menu_button_modify').addClass('display_none_important');
+	$('#M_menu_button_trash').addClass('display_none_important');
 	$("#M_post_user_comment_input").blur();
 	if (is_secret != 1){
 		//조회수 증가 A_JAX
@@ -61,6 +67,7 @@ $(document).mouseup(function (e) {
 		}
 	}
 });
+
 //마우스 드래그로 스크롤할 수 있는 함수  = 이미지 container
 const slider = document.querySelector('#M_post_body_image_container');
 
@@ -207,6 +214,7 @@ function get_post_info(get_post_id) {
 	$.when(a_jax).done(function(){
 		var json = a_jax.responseJSON;
 		if (json['result'] == "success"){
+			is_post_property = json['property']*1;
 			$('#M_user_post_modal_container').attr('alt', "post_"+json['post']['post_id']);
 			$('#M_post_profile_color').css("background-color", json['post']['author_color']);
 			$('#M_post_author').append(json['post']['author_name']);
@@ -225,7 +233,7 @@ function get_post_info(get_post_id) {
 				}
 			}
 			let image_container = $('#M_post_body_image_container');
-			if (img_files.length != 0){
+			if (img_files.length != 0) {
 				image_container.css('display', "inline-block");
 				for (let i = 0; i < img_files.length; i++){
 					let img_content = document.createElement('div');
@@ -408,15 +416,6 @@ function double_comment_button_check(comment_id) {
     }
     $('#M_post_user_comment_input').attr('alt', comment_id);
 	$('#M_post_user_comment_input').focus();
-	//$('#M_user_post_modal_container').scrollTop($('#M_post_user_comment_input').offset().top);
-	/*
-	let mobile_seletor = navigator.platform.toLowerCase();
-	if (mobile_seletor.indexOf("iphone")>-1||mobile_seletor.indexOf("ipad")>-1||mobile_seletor.indexOf("ipod")>-1){
-		$('#M_user_post_modal_container').animate({scrollTop : $('#M_user_post_modal_container').height() + $('#M_user_post_modal_container').height()/10*4}, 400);
-	} else {
-		$('#M_post_user_comment_container').css("position", "fixed");
-		$('#M_post_user_comment_container').css("padding", "10px 10px 0px 10px");
-	}*/
 }
 
 
@@ -495,8 +494,6 @@ function image_modal_close(){
 	setTimeout(function(){
   		$('#M_image_modal_background').addClass('display_none');
   	}, 400);
-	$('html, body').removeAttr("style");
-	$('html, body').removeClass('M_modal_open_fixed');
 	$('html').scrollTop(now_postmodal_top);
 }
 
@@ -528,9 +525,219 @@ function clipboardCopy(tag) {
 	$('textarea').remove('#clipboard_copy');
 }
 
+//포스트 작성 함수
+function post_write() {
+	now_postmodal_top = $(window).scrollTop();
+	postmodal_close(1);
+	is_postmodal_fixed_open = 1;
+	$('#M_user_post_modal_background_fixed').css("height", $(window).height() + 100);
+	$('#M_user_post_modal_background_fixed').css('position', "fixed");
+	$('#M_user_post_modal_background_fixed').removeClass('display_none');
+	$('#M_user_post_modal_background_fixed').removeClass('fadeOut');
+	$('#M_user_post_modal_background_fixed').addClass('fadeIn');
+	$('html, body').css({'overflow': 'hidden'});
+	$('html, body').addClass('M_modal_open_fixed');
+	$('#M_user_post_modal_container_fixed').removeClass('fadeOutDown');
+	$('#M_user_post_modal_container_fixed').addClass('fadeInUp');
+	$('#M_user_post_modal_container_fixed').removeClass('display_none');
+}
 
+//포스트 수정 함수
+function post_modify() {
+	is_post_modify = 1;
+	let token = localStorage.getItem('modakbul_token');
+	if (token == null){
+		snackbar("로그인을 해주세요.");
+		post_write_cancel();
+		return;
+	}
+	if (is_post_property == 0){
+		snackbar("권한이 없습니다.");
+		return;
+	}
+	now_postmodal_top = $(window).scrollTop();
+	let post_id = $('#M_user_post_modal_container').attr('alt').split('_')[1]*1;
+	let title = $('#M_post_top_title').text();
+	let content = $('#M_post_body').html();
+	postmodal_close(1);
+	is_post_property = 0;
+	is_postmodal_fixed_open = 1;
+	$('#M_user_post_modal_container_fixed').attr('alt', "post_"+post_id);
+	$('#M_user_post_modal_background_fixed').css("height", $(window).height() + 100);
+	$('#M_user_post_modal_background_fixed').css('position', "fixed");
+	$('#M_user_post_modal_background_fixed').removeClass('display_none');
+	$('#M_user_post_modal_background_fixed').removeClass('fadeOut');
+	$('#M_user_post_modal_background_fixed').addClass('fadeIn');
+	$('html, body').css({'overflow': 'hidden'});
+	$('html, body').addClass('M_modal_open_fixed');
+	$('#M_user_post_modal_container_fixed').removeClass('fadeOutDown');
+	$('#M_user_post_modal_container_fixed').addClass('fadeInUp');
+	$('#M_user_post_modal_container_fixed').removeClass('display_none');
+	$('#M_post_fixed_title_input').val(title);
+	$('.note-editable').empty();
+	$('.note-editable').append(content);
+}
 
+//포스트 삭제 함수
+function post_delete() {
+	let post_id = $('#M_user_post_modal_container').attr('alt').split('_')[1]*1;
+	let token = localStorage.getItem('modakbul_token');
+	if (token != null){
+		let a_jax = A_JAX(TEST_IP+'post_delete/'+post_id, "GET", token, null);
+		$.when(a_jax).done(function(){
+			let json = a_jax.responseJSON;
+			if (json['result'] == "success"){
+				snackbar("포스트 삭제를 성공하였습니다.");
+				postmodal_close(1);
+				location.reload();
+			} else if (json['result'] == "do not access") {
+				snackbar("권한이 없습니다.");
+			} else {
+				snackbar("포스트 삭제를 실패하였습니다.");
+			}
+		});
+	} else {
+		snackbar("권한이 없습니다.");
+	}
+}
 
+//textarea init 함수
+function M_summernote_init() {
+	let theme = localStorage.getItem('modakbul_theme');
+	if (theme == 'dark') {
+		$('.note-editable').css('background-color', "#494E52");
+		$('.note-editable').css('color', "white");
+		$('.note-toolbar').css('background-color', '#494E52');
+		$('.note-resizebar').remove();
+		$('.note-status-output').remove();
+	} else {
+		$('.note-editable').css('background-color', "white");
+		$('.note-editable').css('color', '#5f6f81');
+		$('.note-toolbar').css('background-color', 'white');
+		$('.note-resizebar').remove();
+		$('.note-status-output').remove();
+	}
+}
+
+$(function(){
+	$('#files-upload').MultiFile({
+		max: 10, //업로드 최대 파일 갯수 (지정하지 않으면 무한대)
+		maxsize: 51200,  //전체 파일 최대 업로드 크기
+		STRING: { //Multi-lingual support : 메시지 수정 가능
+		    toomuch: "업로드할 수 있는 최대크기를 초과하였습니다.", 
+		    toomany: "업로드할 수 있는 최대 갯수는 $max개 입니다."
+		},
+		list:"#files-upload" //파일목록을 출력할 요소 지정가능
+	});
+});
+
+function post_write_accept() {
+	if ($('#M_post_fixed_title_input').val() == ""){
+		snackbar("제목을 입력해주세요.");
+	}
+	let token = localStorage.getItem('modakbul_token');
+	let is_anony = 0;
+	let content = $('.note-editable').html();
+	let send_data = new FormData();
+	var M_files = document.getElementById('files_upload').files;
+	var M_list = [];
+	if (is_post_modify == 0) {
+		for (var i = 0; i < M_files.length; i++){
+			M_list.push(M_files[i]);
+		}
+		if ($('input:checkbox[id="M_post_user_post_anony"]').is(":checked") == true){
+			is_anony = 1;
+		}
+		send_data.append("title", $('#M_post_fixed_title_input').val());
+		send_data.append("content", content);
+		if (content.length >= 50000){
+			snackbar("작성 범위를 초과하였습니다.")
+		}
+		send_data.append("anony", is_anony);
+		send_data.append("tags", "공지");
+		for (var i = 0; i< M_files.length; i++){
+			send_data.append('files', M_list[i]);
+		}
+		let a_jax = A_JAX(TEST_IP+"post_upload", "POST", token, send_data);
+		$.when(a_jax).done(function(){
+			let json = a_jax.responseJSON;
+			if (json['result'] == "success"){
+				snackbar("게실글을 성공적으로 업로드하였습니다.");
+				post_write_cancel();
+				location.reload();
+    	  	}
+    	  	else if (json['result'] == 'bad request'){
+    	  	 	snackbar("게시글 업로드를 실패하였습니다.");
+    	  	}
+    	  	else if (json['result'] == 'fail_save_file'){
+    	  		snackbar("게시글 업로드를 실패하였습니다.");
+    	  	}
+    	  	else if (json['result'] == "wrong_file"){
+    	  		snackbar("잘못된 파일 확장자명입니다.");
+    	  	}
+    	  	else {
+    	  		snackbar("게시글 업로드를 실패하였습니다.");
+    	  	}
+		});
+	} else {
+		for (var i = 0; i < M_files.length; i++){
+			M_list.push(M_files[i]);
+		}
+		if ($('input:checkbox[id="M_post_user_post_anony"]').is(":checked") == true){
+			is_anony = 1;
+		}
+		send_data.append("post_id", $('#M_user_post_modal_container_fixed').attr('alt').split('_')[1]*1);
+		send_data.append("title", $('#M_post_fixed_title_input').val());
+		send_data.append("content", content);
+		if (content.length >= 50000){
+			snackbar("작성 범위를 초과하였습니다.")
+		}
+		send_data.append("anony", is_anony);
+		for (var i = 0; i< M_files.length; i++){
+			send_data.append('files', M_list[i]);
+		}
+		let a_jax = A_JAX(TEST_IP+"post_update", "POST", token, send_data);
+		$.when(a_jax).done(function(){
+			let json = a_jax.responseJSON;
+			if (json['result'] == "success"){
+				snackbar("게실글을 성공적으로 업로드하였습니다.");
+				post_write_cancel();
+				location.reload();
+    	  	}
+    	  	else if (json['result'] == 'bad request'){
+    	  	 	snackbar("게시글 업로드를 실패하였습니다.");
+    	  	}
+    	  	else if (json['result'] == 'fail_save_file'){
+    	  		snackbar("게시글 업로드를 실패하였습니다.");
+    	  	}
+    	  	else if (json['result'] == "wrong_file"){
+    	  		snackbar("잘못된 파일 확장자명입니다.");
+    	  	}
+    	  	else {
+    	  		snackbar("게시글 업로드를 실패하였습니다.");
+    	  	}
+		});
+	}
+}
+
+function post_write_cancel() {
+	is_postmodal_fixed_open = 0;
+	$('#M_post_fixed_title_input').val("");
+	$('#M_file_route').empty();
+	$('.note-editable').empty();
+	history.replaceState(null, null, "#list");
+	$('#M_user_post_modal_background_fixed').addClass('fadeOut');
+	$('#M_user_post_modal_background_fixed').removeClass('fadeIn');
+	$('#M_user_post_modal_container_fixed').addClass("fadeOutDown");
+	$('#M_user_post_modal_container_fixed').removeClass('fadeInUp');
+	setTimeout(function(){
+  		$('#M_user_post_modal_container_fixed').addClass("display_none");
+  		$('#M_user_post_modal_background_fixed').addClass('display_none');
+  	}, 400);
+	$('html, body').removeAttr("style");
+	$('html, body').removeClass('M_modal_open_fixed');
+	$('html').scrollTop(now_postmodal_top);
+}
 
 /*
 //디버그 확인용 코드

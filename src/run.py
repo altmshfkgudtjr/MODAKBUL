@@ -18,6 +18,9 @@ def image():
 @app.route('/intro')
 def intro():
 	return render_template('intro.html')
+@app.route('/vote')
+def vote():
+	return render_template('vote.html')
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', port=80, debug = True)

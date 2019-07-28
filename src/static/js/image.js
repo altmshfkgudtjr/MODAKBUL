@@ -77,35 +77,6 @@ function image_init() {
       }
     });
 }
-
-
-function image_send() {
-	var M_files = document.getElementById('files-upload').files;
-	var M_list = [];
-	for (var i = 0; i < M_files.length; i++){
-		M_list.push(M_files[i]);
-	}
-	var send_data = new FormData();
-	send_data.append('title', '모닥불 테스트 포스트 제목입니다.');
-	send_data.append('content', '반갑습니다! 세종대학교 소프트웨어융합대학 모닥불입니다!');
-	send_data.append('anony', '1');
-	send_data.append('tags', '공지');
-	for (var i = 0; i< M_files.length; i++){
-		send_data.append('files', M_list[i]);
-	}
-	var a_jax = A_JAX(TEST_IP+'post_upload', "POST", 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NjM4MTE3NjcsIm5iZiI6MTU2MzgxMTc2NywianRpIjoiNDE5YWU4OTktYmY2Ni00MDI0LTliZTMtMTVkMzVhZjMxNDFhIiwiaWRlbnRpdHkiOiIxNjAxMTA3NSIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.gzaFomVsusmzZ9osBNfsqA7smi41qcuwi7BB2-P8dFg', send_data);
-	$.when(a_jax).done(function(){
-      var json = a_jax.responseJSON;
-      if (json['result'] == "success"){
-      }
-      else if (json['result'] == 'bad request'){
-       	alert("실패");
-      }
-      else{
-        alert("실패");
-      }
-    });
-}
 /*스크롤할시 생성
 $(window).scroll(function(event){
 	if (now_gallery_scroll_function == 0){
