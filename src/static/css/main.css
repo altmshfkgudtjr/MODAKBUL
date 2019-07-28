@@ -91,6 +91,9 @@ input::-webkit-input-placeholder { color: #adadad;}
 input:-moz-placeholder { color: #adadad;}
 input::-moz-placeholder { color: #adadad;}
 input:-ms-input-placeholder { color: #adadad;}
+a:hover {
+  text-decoration: none;
+}
 
 .wrap-login100 {
   width: 390px;
@@ -746,6 +749,8 @@ input:-ms-input-placeholder { color: #adadad;}
   height: 20px;
 }
 .M_board_tag_title {
+  font-size: 16px;
+  font-weight: 700;
   display: inline-block;
   margin-right: 10px;
 }
@@ -1814,4 +1819,97 @@ input:-ms-input-placeholder { color: #adadad;}
   margin-left: 10px;
   cursor: pointer;
   top: -5px;
+}
+
+/* 설문조사 CSS =================================================================*/
+.M_vote_date_title {
+  display: inline-block;
+  margin-top: 1%;
+  margin-left: 2%;
+  float: left;
+  font-weight: bold;
+}
+.M_vote_content_info {
+  float: right;
+  opacity: 0.7;
+  margin-right: 1%;
+  margin-top: 0.7%;
+} 
+.M_vote_content_icon {
+  float: right;
+  opacity: 0.7;
+  margin-right: 1%;
+  margin-top: 1.2%;
+}
+.M_vote_fixed_body_input {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  display: inline-block;
+  float: left;
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+  background-color: rgba(0,0,0,0);
+  color: #5f6f81;
+}
+.M_vote_body_icon_container {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 30px;
+  padding-left: 10px;
+  float: left;
+}
+.M_vote_content_icon_footer {
+  float: left;
+  line-height: 30px;
+  font-size: 25px;
+}
+.M_vote_body_icons_data {
+  float: left;
+  line-height: 30px;
+  font-size: 25px;
+  margin-left: 10px;
+}
+.M_vote_picture_container {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  display: inline-block;
+  float: left;
+  background-color: rgba(0,0,0,0);
+  text-align: center;
+  margin-top: 20px;
+}
+.M_vote_pciture {
+  position: relative;
+  margin: auto;
+  width: auto;
+  height: auto;
+  max-height: 300px;
+  cursor: pointer;
+}
+.M_vote_body {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: auto;
+  min-height: 100px;
+  padding: 20px 10px 20px 10px;
+  font-size: 18px;
+  margin-bottom: 100px;
+}
+.M_vote_top_container {
+  display: inline-block;
+  float: left;
+  height: 80px;
+  width: 100%;
+  padding-top: 10px;
+}
+.M_vote_date_container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 40px;
+  padding-bottom: 10px;
 }

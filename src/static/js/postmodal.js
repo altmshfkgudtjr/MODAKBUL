@@ -218,7 +218,6 @@ function get_post_info(get_post_id) {
 			$('#M_user_post_modal_container').attr('alt', "post_"+json['post']['post_id']);
 			$('#M_post_profile_color').css("background-color", json['post']['author_color']);
 			$('#M_post_author').append(json['post']['author_name']);
-			$('#M_post_author').attr('alt', json['post']['author_id']);
 			$('#M_post_time').append("| "+json['post']['post_date']); 	// 날짜 수정
 			$('#M_post_top_title').append(json['post']['post_title']);
 			$('#M_post_body').append(json['post']['post_content']);

@@ -1,18 +1,3 @@
-function M_dropdown_money() {
-	$("#M_dropdown_icon_money").toggleClass("fa-sort-down");
-	$("#M_dropdown_icon_money").toggleClass("fa-sort-up M_dropdwon_trf");
-	$("#M_studentMoney").animate({height: 'toggle'});
-}
-function M_dropdown_competition() {
-	$("#M_dropdown_icon_competition").toggleClass("fa-sort-down");
-	$("#M_dropdown_icon_competition").toggleClass("fa-sort-up M_dropdwon_trf");
-	$("#M_studentCompetition").animate({height: 'toggle'});
-}
-function M_dropdown_volunteer() {
-	$("#M_dropdown_icon_volunteer").toggleClass("fa-sort-down");
-	$("#M_dropdown_icon_volunteer").toggleClass("fa-sort-up M_dropdwon_trf");
-	$("#M_studentVolunteer").animate({height: 'toggle'});
-}
 function M_dropdown_user() {
 	if (localStorage.getItem('modakbul_token') != null){
 		$("#M_nav_user_login").animate({height: 'toggle'}, 'fast');
@@ -20,6 +5,13 @@ function M_dropdown_user() {
 		$("#M_nav_user_nologin").animate({height: 'toggle'}, 'fast');
 	}
 }
+function M_dropdown_global(tag){
+	tag.children('i.M_dropdown_icon').toggleClass("fa-sort-down");
+	tag.children('i.M_dropdown_icon').toggleClass("fa-sort-up M_dropdwon_trf");
+	tag.parent().next().animate({height: 'toggle'});
+}
+
+
 // modal 이 외 클릭 시, modal 닫기
 $(document).mouseup(function (e) {
 	var container = $("#M_nav_user");
