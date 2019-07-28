@@ -9,7 +9,7 @@ def index():
 @app.route('/sign-in')
 def login():
 	return render_template('login.html')
-@app.route('/board')
+@app.route('/board/')
 def board():
 	return render_template('board.html')
 @app.route('/gallery')

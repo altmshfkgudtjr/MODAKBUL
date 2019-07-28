@@ -23,6 +23,8 @@ function darkSetTheme() {
 	$('#M_post_user_comment_container').css("background-color", "#494e52");
 	$('#M_post_user_comment_input').css({"background-color": "#41464a","color": "white"});
 	$('#M_post_user_comment_anony_container').css({"background-color": "#41464a","color": "white"});
+	$('.demo-1').css("background-color", "#0e0e0f");
+	$('.menu__item').css({"color": "#fff", "opacity": "1"});
 }
 function whiteSetTheme() {
 	$('.M_theme').removeClass("fa-sun");
@@ -49,6 +51,8 @@ function whiteSetTheme() {
 	$('#M_post_user_comment_container').css("background-color", "white");
 	$('#M_post_user_comment_input').css({"background-color": "#e2e2e2","color": "#3e5569"});
 	$('#M_post_user_comment_anony_container').css({"background-color": "#e2e2e2","color": "#3e5569"});
+	$('.demo-1').css("background-color", "#ffffff");
+	$('.menu__item').css({"color": "#000", "opacity": "0.7"});
 }
 function changeTheme() {
 	// now_theme check

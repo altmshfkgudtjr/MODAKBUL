@@ -8,8 +8,12 @@ function format_time(raw_data) {
     return year+'년 '+month+'월 '+date+'일 '+time;
 }
 let flag = true;
+
+let searchParams = new URLSearchParams(window.location.search);
+let request_board = searchParams.get('type');
+
 $(window).ready(function() {
-    let a_jax = A_JAX(TEST_IP+'get_posts/공지/1', 'GET', null, null);
+    let a_jax = A_JAX(TEST_IP+'get_posts/' + request_board + '/1', 'GET', null, null);
         $.when(a_jax).done(function () {
             if (a_jax.responseJSON['result'] == 'success'){
                 flag = false;
@@ -78,7 +82,7 @@ $(window).scroll(function() {
         if (flag === false)
         {
             flag = true;
-            let a_jax = A_JAX(TEST_IP+'get_posts/공지/'+page, 'GET', null, null);
+            let a_jax = A_JAX(TEST_IP+'get_posts/' + request_board + '/'+page, 'GET', null, null);
             $.when(a_jax).done(function () {
                 if (a_jax.responseJSON['result'] == 'success'){
                     let div_class = 'M_info_div M_board_content M_boxshadow wow flipInX';
