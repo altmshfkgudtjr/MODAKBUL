@@ -618,7 +618,7 @@ function M_summernote_init() {
 		$('.note-status-output').remove();
 	}
 }
-
+/*
 $(function(){
 	$('#files-upload').MultiFile({
 		max: 10, //업로드 최대 파일 갯수 (지정하지 않으면 무한대)
@@ -630,7 +630,7 @@ $(function(){
 		list:"#files-upload" //파일목록을 출력할 요소 지정가능
 	});
 });
-
+*/
 function post_write_accept() {
 	if ($('#M_post_fixed_title_input').val() == ""){
 		snackbar("제목을 입력해주세요.");
