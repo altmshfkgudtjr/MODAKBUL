@@ -137,10 +137,10 @@
     </div>
     <div class="content">
         <nav class="menu">
-            <a href="#" class="menu__item">총 인사말</a>
-            <a href="#" class="menu__item">회장단 소개</a>
-            <a href="#" class="menu__item">국장 소개</a>
-            <a href="#" class="menu__item">연락처</a>
+            <a href="#" onclick="set_display(1)" class="menu__item">총 인사말</a>
+            <a href="#" onclick="set_display(2)" class="menu__item">회장단 소개</a>
+            <a href="#" onclick="set_display(3)" class="menu__item">국장 소개</a>
+            <a href="#" onclick="set_display(4)" class="menu__item">연락처</a>
         </nav>
         <svg class="scene" width="1440" height="800" preserveAspectRatio="xMinYMid slice" viewBox="0 0 1440 800" xmlns:pathdata="http://www.codrops.com/">
             <defs>
@@ -227,15 +227,28 @@
     </div>
     <div class="content content--reveal" style="position: fixed;">
         <div class="content__wrapper" style="overflow-y: scroll">
-            <div class="content__inner">
+            <div class="content__inner intro_main">
                 <h2 class="content__title">총 인사말</h2>
                 <h3 class="content__subtitle">안녕하세요 번영입니다.</h3>
             </div>
-            <div class="content__inner">
+            <div class="content__inner principle_bio">
                 <h2 class="content__title">회장단 소개</h2>
-                <h3 class="content__subtitle">디지털컨텐츠학과 14 이호식 <br> x <br> 컴퓨터공학과 17 임수현</h3>
+                <h3 class="content__subtitle">
+                    <div class="info_wrapper">
+                        <div class="info_img_wrapper">
+                            <img src="http://placehold.it/120x160" class="info_img">
+                        </div>
+                        <div class="info_text_wrapper">
+                            <div>
+                                <h2 class="info_text info_department"> 단과대학장 </h2>
+                                <h4 class="info_text info_dept_head"> 디지털컨텐츠학과 14 이호식 </h4>
+                                <div class="info_text info_bio"> 아령하세여~허잇! 메롱메롱 임수현 메롱 부단대장님 메롱입니다 메롱~ 아~ 배고프다 ~~ 우리 기획국은 말이에요~ 무언가를 기획하는데 너무 힘들어요~ 짜증나면 님들이 와서 기획한번 해보세요 ㅋㅋ 이게 쉬운 것 같아요? ㅋㅋㅋ~ 어이가 없네요 ㅋㅋ 아령하세여~허잇! 메롱메롱 임수현 메롱 부단대장님 메롱입니다 메롱~ 아~ 배고프다 ~~ 우리 기획국은 말이에요~ 무언가를 기획하는데 너무 힘들어요~ 짜증나면 님들이 와서 기획한번 해보세요 ㅋㅋ 이게 쉬운 것 같아요? ㅋㅋㅋ~ 어이가 없네요 ㅋㅋ 아령하세여~허잇! 메롱메롱 임수현 메롱 부단대장님 메롱입니다 메롱~ 아~ 배고프다 ~~ 우리 기획국은 말이에요~ 무언가를 기획하는데 너무 힘들어요~ 짜증나면 님들이 와서 기획한번 해보세요 ㅋㅋ 이게 쉬운 것 같아요? ㅋㅋㅋ~ 어이가 없네요 ㅋㅋ </div>
+                            </div>
+                        </div>
+                    </div>
+                </h3>
             </div>
-            <div class="content__inner">
+            <div class="content__inner director_bio">
                 <h2 class="content__title">국장 소개</h2>
                 <h3 class="content__subtitle">
                     <div class="info_wrapper">
@@ -324,18 +337,19 @@
                     </div>
                 </h3>
             </div>
-            <div class="content__inner">
+            <div class="content__inner contacts">
                 <h2 class="content__title">연락처</h2>
                 <h3 class="content__subtitle">학생회관 409호</h3>
             </div>
         </div>
-        <button class="content__close"><svg class="icon icon--arrowback"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrowback"></use></svg></button>
+        <button onclick="set_display(0)" class="content__close"><svg class="icon icon--arrowback"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrowback"></use></svg></button>
     </div>
 </main>
 <script src="../static/js/intro/charming.min.js"></script>
 <script src="../static/js/intro/anime.min.js"></script>
 <script src="../static/js/intro/demo.js"></script>
 <script src="../static/js/intro/main.js"></script>
+<script src="../static/js/intro.js"></script>
 </body>
 <!-- JQuery JS -->
 <script src="../static/vendor/jquery/jquery.min.js"></script>
