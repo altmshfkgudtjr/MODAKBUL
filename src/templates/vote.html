@@ -246,39 +246,39 @@
 					<input id="M_post_user_post_anony" class="M_post_user_post_anony" type="checkbox">
 					익명
 				</div>
-				<input type="file" id="files_upload" multiple="multiple" class="M_post_fixed_attachment" max-10 maxlength="10" data-maxsize="51200" onchange="javascript:document.getElementById('M_file_route').value=this.value">
+				<input type="file" id="files_upload" multiple="multiple" class="M_post_fixed_attachment" max-1 maxlength="1" data-maxsize="51200" onchange="javascript:document.getElementById('M_file_route').value=this.value">
 				<div id="M_file_route" class="M_file_route"></div>
 			</div>
 			<div class="M_vote_write_line"></div>
 			<div id="M_vote_question_cotainer_target" class="M_vote_question_cotainer_target">
 				<!--여기부터 폼-->
-				<div class="M_vote_question_container">
+				<div class="M_vote_question_container" box_type="checkbox">
 					<input type="text" class="M_vote_write_title" placeholder="질문을 입력해주세요." maxlength="100">
 					<div class="M_vote_write_trash" onclick="vote_write_question_delete($(this))"><i class="fas fa-trash-alt" style="position: relative; float: right;"></i></div>
 					<span class="M_vote_write_answer_number">1</span>
 					<input type="text" class="M_vote_write_answer_input" placeholder="선택지를 입력해주세요." maxlength="100">
 					<div class="M_vote_write_answer_add_container">
-						<i class="fas fa-plus M_vote_write_answer_plus"></i>
+						<i class="far fa-check-square M_vote_write_answer_plus"></i>
 						<div class="M_vote_write_answer_input" onclick="vote_write_question_select_add($(this))" alt="1">선택지를 추가하기</div>
 					</div>
 				</div>
 				<!--여기까지-->
-				<div class="M_vote_question_container">
-					<input type="text" class="M_vote_write_title" placeholder="질문을 입력해주세요." maxlength="100">
-					<div class="M_vote_write_trash"><i class="fas fa-trash-alt" style="position: relative; float: right;"></i></div>
-					<input type="text" class="M_vote_write_answer_input_answer" value="단답형 양식입니다." maxlength="100" readonly>
-				</div>
-				<!--여기도-->
 				<div class="M_vote_container_add">
-					<div class="M_vote_container_add_choice M_vote_container_add_checkbox" title="체크박스">
+					<div class="M_vote_container_add_choice M_vote_container_add_checkbox" title="체크박스" onclick="vote_write_question_add_checkbox($(this))">
 						<i class="far fa-check-square M_vote_container_add_checkbox_icon"></i>
 					</div>
-					<div class="M_vote_container_add_choice M_vote_container_add_radio" title="라디오버튼">
+					<div class="M_vote_container_add_choice M_vote_container_add_radio" title="라디오버튼" onclick="vote_write_question_add_radio($(this))">
 						<i class="far fa-dot-circle M_vote_container_add_radio_icon"></i>
 					</div>
-					<div class="M_vote_container_add_choice M_vote_container_add_answer" title="단답형">
+					<div class="M_vote_container_add_choice M_vote_container_add_answer" title="단답형" onclick="vote_write_question_add_answer($(this))">
 						<i class="fas fa-keyboard M_vote_container_add_answer_icon"></i>
 					</div>
+				</div>
+				<div class="range-slider">
+					<div class="range-slider__bar">마감기한</div>
+					<input id="post_admin_modal_date_select" type="range" class="custom-range" orient="vertical"
+						min="0" max="30" value="0" />
+					<div class="range-slider__thumb"></div>
 				</div>
 			</div>
 			<div class="M_user_post_modal_container_fixed_choice_container">
@@ -320,6 +320,7 @@
 <!--vote-->
 <script src="../static/js/vote/modernizr.custom.js"></script>
 <script src="../static/js/vote/svgcheckbx.js"></script>
+<script src="../static/js/slider_bar_dynamic.js"></script>
 <!--custom JS-->
 <script src="../static/js/test_url.js"></script>
 <script src="../static/js/login.js"></script>
@@ -327,19 +328,4 @@
 <script src="../static/js/vote_list.js"></script>
 <script src="../static/js/vote.js"></script>
 <script src="../static/js/historyback.js"></script>
-<script>
-	$("input[type=file]").change(function () {
-        let fileInput = document.getElementById("files_upload");
-        let files = fileInput.files;
-        let file;
-        let string = "";
-        for (let i = 0; i < files.length; i++) {
-            file = files[i];
-            string += file.name;
-            string += " / ";
-        }
-        $('#M_file_route').empty();
-        $('#M_file_route').append(string);
-    });
-</script>
 </html>

@@ -501,7 +501,7 @@ function vote_send() {
 				}
 				if (is_check == question_answer_list.length){
 					snackbar("질문에 모두 답해주세요.");
-					$('#M_user_post_modal_container').animate({scrollTop : $('section').scrollTop()}, 400);
+					$('#M_user_post_modal_container').animate({scrollTop : 300}, 400);
 					return;
 				}
 			}
@@ -509,7 +509,7 @@ function vote_send() {
 		} else {
 			if ($(question_list[i]).find('input').val() == ""){
 				snackbar("질문에 모두 답해주세요.");
-				$('#M_user_post_modal_container').animate({scrollTop : $('section').scrollTop()}, 400);
+				$('#M_user_post_modal_container').animate({scrollTop : 300}, 400);
 				return;
 			}
 			question_dict["ans"] = $(question_list[i]).find('input').val();
@@ -546,11 +546,81 @@ function vote_write_question_delete(tag) {
 
 function vote_write_question_select_add(tag) {
 	let now_num = tag.attr('alt')*1;
-	
+	now_num += 1;
+	tag.attr('alt', now_num);
+	let answer_number = document.createElement('span');
+	answer_number.classList.add("M_vote_write_answer_number");
+	answer_number.append(now_num);
+	let answer_input = document.createElement('input');
+	answer_input.setAttribute('type', 'text');
+	answer_input.setAttribute('placeholder', '선택지를 입력해주세요.');
+	answer_input.setAttribute('maxlength', '100');
+	answer_input.classList.add("M_vote_write_answer_input");
+	tag.parent().before($(answer_number));
+	tag.parent().before($(answer_input));
 }
 
+function vote_write_question_add_checkbox(tag) {
+	let output = '<div class="M_vote_question_container" box_type="checkbox">\
+					<input type="text" class="M_vote_write_title" placeholder="질문을 입력해주세요." maxlength="100">\
+					<div class="M_vote_write_trash" onclick="vote_write_question_delete($(this))"><i class="fas fa-trash-alt" style="position: relative; float: right;"></i></div>\
+					<span class="M_vote_write_answer_number">1</span>\
+					<input type="text" class="M_vote_write_answer_input" placeholder="선택지를 입력해주세요." maxlength="100">\
+					<div class="M_vote_write_answer_add_container">\
+						<i class="far fa-check-square M_vote_write_answer_plus"></i>\
+						<div class="M_vote_write_answer_input" onclick="vote_write_question_select_add($(this))" alt="1">선택지를 추가하기</div>\
+					</div>\
+				</div>';
+	tag.parent('div').before(output);
+}
 
+function vote_write_question_add_radio(tag) {
+	let output = '<div class="M_vote_question_container" box_type="radio">\
+					<input type="text" class="M_vote_write_title" placeholder="질문을 입력해주세요." maxlength="100">\
+					<div class="M_vote_write_trash" onclick="vote_write_question_delete($(this))"><i class="fas fa-trash-alt" style="position: relative; float: right;"></i></div>\
+					<span class="M_vote_write_answer_number">1</span>\
+					<input type="text" class="M_vote_write_answer_input" placeholder="선택지를 입력해주세요." maxlength="100">\
+					<div class="M_vote_write_answer_add_container">\
+						<i class="far fa-dot-circle M_vote_write_answer_plus"></i>\
+						<div class="M_vote_write_answer_input" onclick="vote_write_question_select_add($(this))" alt="1">선택지를 추가하기</div>\
+					</div>\
+				</div>';
+	tag.parent('div').before(output);
+}
 
+function vote_write_question_add_answer(tag) {
+	let output = '<div class="M_vote_question_container" box_type="answer">\
+					<input type="text" class="M_vote_write_title" placeholder="질문을 입력해주세요." maxlength="100">\
+					<div class="M_vote_write_trash" onclick="vote_write_question_delete($(this))"><i class="fas fa-trash-alt" style="position: relative; float: right;"></i></div>\
+					<input type="text" class="M_vote_write_answer_input_answer" value="단답형 양식입니다." maxlength="100" readonly>\
+				</div>';
+	tag.parent('div').before(output);
+}
+
+/*업로드 파일 관리*/
+$("input[type=file]").change(function () {
+    let fileInput = document.getElementById("files_upload");
+    let files = fileInput.files;
+    let file;
+    let string = "";
+    if (files.length > 1){
+    	alert("사진 개수는 하나만 올려주세요!");
+    	$('#files_upload').val('');
+    	return;
+    }
+   	if (jQuery.inArray(files[0]['name'].split(".")[(files[0]['name'].split(".").length-1)], img_set) == -1){
+   		alert("사진 파일만 올려주세요!");
+   		$('#files_upload').val('');
+   		return;
+   	}
+    for (let i = 0; i < files.length; i++) {
+        file = files[i];
+        string += file.name;
+        string += " / ";
+    }
+    $('#M_file_route').empty();
+    $('#M_file_route').append(string);
+});
 
 /*
 //디버그 확인용 코드
