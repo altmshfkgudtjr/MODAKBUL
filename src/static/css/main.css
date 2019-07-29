@@ -1825,13 +1825,6 @@ a:focus {
 }
 
 /* 설문조사 CSS =================================================================*/
-.M_vote_date_title {
-  display: inline-block;
-  margin-top: 1%;
-  margin-left: 2%;
-  float: left;
-  font-weight: normal;
-}
 .M_vote_content_info {
   float: right;
   opacity: 0.7;
@@ -1928,11 +1921,11 @@ a:focus {
 .M_vote_date_title {
   display: inline-block;
   float: left;
-  margin-top: 0;
+  margin-top: 1%;
   margin-left: 10px;
   margin-bottom: 2px;
   font-size: 16px;
-  line-height: 30px;
+  line-height: 20px;
   font-weight: bold;
 }
 .M_vote_que_target {
@@ -1987,3 +1980,12 @@ a:focus {
   font-size: 24px;
   font-weight: bold;
 }
+.M_vote_time {
+    display: inline-block;
+    float: left;
+    font-size: 15px;
+    line-height: 20px;
+    margin-top: 1%;
+    margin-left: 10px;
+    opacity: 0.6;
+  } 

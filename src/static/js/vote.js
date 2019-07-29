@@ -6,7 +6,6 @@ var is_image_modal_open = 0;
 var img_set = ['png', 'jpg', 'jpeg', 'gif', 'bmp'];
 var file_path = "../static/files/";
 var is_post_modify = 0;
-var is_post_property = 0;
 function postmodal_open(get_post_id){
 	let token = localStorage.getItem('modakbul_token');
 	if (token == null){
@@ -122,6 +121,7 @@ function get_post_info(get_post_id) {
 			let que_length = json['vote']['que_list'].length;
 			for (let i = 0; i < que_length; i++){
 				let section = document.createElement('section');
+				section.setAttribute("alt", "que_"+json['vote']['que_list'][i]['que_id']);
 				let form_tag = document.createElement('form');
 				form_tag.setAttribute('autocomplete', 'off');
 				let question_title = json['vote']['que_list'][i]['que'];
@@ -278,7 +278,6 @@ function image_modal_close(){
 function post_write() {
 	now_postmodal_top = $(window).scrollTop();
 	postmodal_close(1);
-	is_postmodal_fixed_open = 1;
 	$('#M_user_post_modal_background_fixed').css("height", $(window).height() + 100);
 	$('#M_user_post_modal_background_fixed').css('position', "fixed");
 	$('#M_user_post_modal_background_fixed').removeClass('display_none');
@@ -471,8 +470,56 @@ function post_write_cancel() {
 }
 
 //설문조사 accept
-function vote_send(tag) {
-	console.log("hi");
+function vote_send() {
+	let token = localStorage.getItem('modakbul_token');
+	let vote_id = $('#M_user_post_modal_container').attr('alt').split('_')[1]*1;
+	send_data = new FormData();
+	send_data.append("vote_id", vote_id);
+	let question_list = $('#M_vote_que_target').find('section').toArray();
+	let question_len = question_list.length;
+	let ans_list = [];
+	for (let i = 0; i < question_len; i++){
+		let question_dict = {};
+		let question_type;
+		if ($(question_list[i].getElementsByTagName("form")).hasClass("ac-checkbox") === true){
+			question_type = 0;
+		} else if ($(question_list[i].getElementsByTagName("form")).hasClass("ac-radio") === true){
+			question_type = 1;
+		} else {
+			question_type = 2;
+		}
+		question_dict["que_id"] = $(question_list[i]).attr('alt').split('_')[1]*1;
+		question_dict["que_type"]  = question_type;
+		if (question_type == 0 || question_type == 1) {	
+			let question_answer_list = $(question_list[i]).find("li");
+			let question_answer_check_list = [];
+			for (let j = 0; j < question_answer_list.length; j++){
+				if ($(question_answer_list[j]).find("path").length != 0){
+					question_answer_check_list.push($(question_answer_list[j]).find("label").attr('alt'));
+				}
+			}
+			question_dict["ans"] = question_answer_check_list;
+		} else {
+			question_dict["ans"] = $(question_list[i]).find('input').val();
+		}
+		ans_list.push(question_dict);
+	}
+	send_data.append("ans_list", ans_list);
+
+	console.log(send_data);
+
+	let a_jax = A_JAX(TEST_IP+"vote_answer", "POST", token, send_data);
+	$.when(a_jax).done(function(){
+		let json = a_jax.responseJSON;
+		if (json['result'] == 'success'){
+			snackbar("설문조사 완료!");
+		} else if (json['result'] == "bad request") {
+			snackbar("로그인을 다시 해주세요.");
+			return;
+		 } else {
+		 	snackbar("일시적인 오류로 정보를 보내지 못하였습니다.");
+		 }
+	});
 }
 
 /*
@@ -480,4 +527,21 @@ function vote_send(tag) {
 for (var value of send_data.values()) {
    	console.log(value); 
 }
+*/
+/*
+answer_json = {
+		"vote_id": 1,
+		"ans_list": [
+			{"que_id": 1,
+			"que_type": 0,
+			"ans": [1, 2]},
+
+			{"que_id": 2,
+			"que_type": 1,
+			"ans": [1]},
+
+			{"que_id": 3,
+			"que_type": 2,
+			"ans": "단답형"}]
+		}
 */

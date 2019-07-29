@@ -22,6 +22,9 @@ function user_login(){
 		else if (json['result'] == "wrong info"){	// result 값이 "password incorrect" 이라면 실행
 			snackbar("비밀번호를 다시 입력해주세요.");
 		}
+		else if (json['result'] == "blacklist"){			// 블랙리스트일 경우
+			snackbar("블랙리스트 입니다.");
+		}
 		else if (json['result'] == "success"){				// result 값이 "success" 이라면 실행
 			// 로그인 성공 token 생성
 			localStorage.setItem('modakbul_token', json['access_token']);
@@ -87,6 +90,10 @@ function get_user_info() {
 			for (let i = 0; i< json['user_comments'].length; i++){
 				user_comments_id.push(json['user_comments'][i]);
 			}
+		}
+		else if (json['result'] == 'blacklist'){
+			snackbar("블랙리스트 입니다.");
+			localStorage.removeItem('modakbul_token');
 		}
 		else{
 			snackbar("일시적인 오류로 정보를 가져오지 못하였습니다.");
