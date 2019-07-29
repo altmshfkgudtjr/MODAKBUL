@@ -33,6 +33,10 @@
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">
 	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css">
+	<!--vote-->
+	<link rel="stylesheet" type="text/css" href="../static/css/vote/vote_normalize.css" />
+	<link rel="stylesheet" type="text/css" href="../static/css/vote/vote_demo.css" />
+	<link rel="stylesheet" type="text/css" href="../static/css/vote/vote_component.css" />
 	<!--custom css-->
 	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
 </head>
@@ -182,25 +186,32 @@
 				<div id="M_post_profile_color" class="M_post_profile_color"></div>
             	<div id="M_post_author" class="M_post_author"></div>
             	<div class="M_vote_date_container">
-            		<div id="M_post_start_date" class="M_post_time"></div>
+            		<div class="M_vote_date_title">기간 : </div>
+            		<div id="M_post_start_date" class="M_vote_time" style="margin-left: 5px"></div>
             		<span class="M_post_time"> ~ </span>
-            		<div id="M_post_end_date" class="M_post_time"></div>
+            		<div id="M_post_end_date" class="M_vote_time"></div>
             	</div>
 			</div>
-			<div id="M_post_top_title" class="M_post_top_title"></div>
+			<div id="M_post_top_title" class="M_vote_top_title"></div>
 			<div id="M_vote_picture_container" class="M_vote_picture_container">
 				<img id="M_vote_picture" src="#" class="M_vote_pciture" onclick="image_modal_open(this)">
 			</div>
 			<div id="M_post_body" class="M_vote_body"></div>
+			<div class="M_post_body_line"></div>
+			<div id="M_vote_que_target" class="M_vote_que_target">
+				
+			</div>
 			<div class="M_post_body_line" style="margin-bottom: 10px;"></div>
 			<div class="M_vote_body_icon_container">
 				<i class="fas fa-male M_vote_content_icon_footer"></i>
 				<span id="M_post_body_icons_data" class="M_vote_body_icons_data"></span>
-				
 			</div>
 			<div class="M_post_body_share">
-				<i id="M_post_url_copy" class="fas fa-share-square" onclick="clipboardCopy(this)"></i>
+				전송
+				<i class="far fa-paper-plane" class="fas fa-share-square" onclick="vote_send()"></i>
 			</div>
+			<div class="M_vote_empty_box"></div>
+		</div>
 	</div>
 	<!--menu control button-->
 	<div id="M_menu_button_container">
@@ -284,6 +295,9 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js"></script>
 <!--multifile JS-->
 <script src="../static/js/multifile/jquery.MultiFile.min.js"></script>
+<!--vote-->
+<script src="../static/js/vote/modernizr.custom.js"></script>
+<script src="../static/js/vote/svgcheckbx.js"></script>
 <!--custom JS-->
 <script src="../static/js/test_url.js"></script>
 <script src="../static/js/login.js"></script>

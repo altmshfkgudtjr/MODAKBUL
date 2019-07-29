@@ -6,7 +6,6 @@ var is_image_modal_open = 0;
 var img_set = ['png', 'jpg', 'jpeg', 'gif', 'bmp'];
 var file_path = "../static/files/";
 var is_post_modify = 0;
-var is_post_property = 0;
 function postmodal_open(get_post_id){
 	let token = localStorage.getItem('modakbul_token');
 	if (token == null){
@@ -104,7 +103,6 @@ function get_post_info(get_post_id) {
 	var a_jax = A_JAX(TEST_IP+"get_vote/"+get_post_id, "GET", token, null);
 	$.when(a_jax).done(function(){
 		var json = a_jax.responseJSON;
-		console.log(json);
 		if (json['result'] == "success"){
 			$('#M_user_post_modal_container').attr('alt', "vote_"+get_post_id);
 			$('#M_post_profile_color').css("background-color", "#d8d8d8");
@@ -116,10 +114,88 @@ function get_post_info(get_post_id) {
 			$('#M_post_body_icons_data').append(json['vote']['join_cnt']);
 			$('#M_post_body').append(json['vote']['vote_content']);
 			if (json['file'].length == 0){
-				$('#M_vote_picture_container').addClass('display_none');
+				$('#M_vote_picture_container').addClass('display_none_important');
 			} else {
 				$('#M_vote_picture').attr('src', "../static/files/"+json['file'][0]['vote_file_path']);
 			}
+			let que_length = json['vote']['que_list'].length;
+			for (let i = 0; i < que_length; i++){
+				let section = document.createElement('section');
+				section.setAttribute("alt", "que_"+json['vote']['que_list'][i]['que_id']);
+				let form_tag = document.createElement('form');
+				form_tag.setAttribute('autocomplete', 'off');
+				let question_title = json['vote']['que_list'][i]['que'];
+				let question_title_tag = document.createElement('h2');
+				question_title_tag.append(question_title);
+				form_tag.append(question_title_tag);
+				let question_id = json['vote']['que_list'][i]['que_id'];
+				let question_type = json['vote']['que_list'][i]['que_type'];
+				let question_type_name;
+				if (question_type == 0){
+					question_type_name = "checkbox";
+					form_tag.classList.add("ac-custom", "ac-checkbox", "ac-checkmark");
+				} else if (question_type == 1){
+					question_type_name = "radio";
+					form_tag.classList.add("ac-custom", "ac-radio", "ac-circle");
+				} else {
+					question_type_name = "answer";
+					form_tag.classList.add("ac-custom");
+				}
+				if (question_type == 0) {
+					let answer_ul = document.createElement('ul');
+					for (let j = 0 ; j < json['vote']['que_list'][i]['select'].length; j ++){
+						let answer_li = document.createElement('li');
+						let answer_input = document.createElement('input');
+						answer_input.setAttribute('type', question_type_name);
+						answer_input.setAttribute('id', 'cb'+(i*1+1)+'_'+(j*1+1));
+						let select_content = json['vote']['que_list'][i]['select'][j]['select_content'];
+						let select_id = json['vote']['que_list'][i]['select'][j]['select_id'];
+						let answer_label = document.createElement('label');
+						answer_label.setAttribute('for', 'cb'+(i*1+1)+'_'+(j*1+1));
+						answer_label.setAttribute('alt', select_id);
+						answer_label.append(select_content);
+						answer_li.append(answer_input, answer_label);
+						answer_ul.append(answer_li);
+					}
+					form_tag.append(answer_ul);
+					section.append(form_tag);
+				} else if(question_type == 1) {
+					let answer_ul = document.createElement('ul');
+					for (let j = 0 ; j < json['vote']['que_list'][i]['select'].length; j ++){
+						let answer_li = document.createElement('li');
+						let answer_input = document.createElement('input');
+						answer_input.setAttribute('type', question_type_name);
+						answer_input.setAttribute('id', 'r'+(i*1+1)+'_'+(j*1+1));
+						answer_input.setAttribute('name', 'r');
+						let select_content = json['vote']['que_list'][i]['select'][j]['select_content'];
+						let select_id = json['vote']['que_list'][i]['select'][j]['select_id'];
+						let answer_label = document.createElement('label');
+						answer_label.setAttribute('for', 'r'+(i*1+1)+'_'+(j*1+1));
+						answer_label.setAttribute('alt', select_id);
+						answer_label.append(select_content);
+						answer_li.append(answer_input, answer_label);
+						answer_ul.append(answer_li);
+					}
+					form_tag.append(answer_ul);
+					section.append(form_tag);
+				} else {
+					let answer_input = document.createElement('input');
+					answer_input.classList.add('M_vote_answer_type_answer');
+					answer_input.setAttribute('type', 'text');
+					answer_input.setAttribute('autocomplete', 'off');
+					answer_input.setAttribute('maxlength', '100');
+					answer_input.setAttribute('placeholder', "답변을 입력해주세요.");
+					form_tag.append(answer_input);
+					section.append(form_tag);
+				}
+				let question_bottom_line = document.createElement('div');
+				question_bottom_line.classList.add("M_vote_body_line");
+				$('#M_vote_que_target').append(section);
+				if ( i != que_length - 1){
+					$('#M_vote_que_target').append(question_bottom_line);
+				}
+			}
+			vote_init_finally();
 		}
 		else {
 			snackbar("일시적인 오류로 정보를 가져오지 못하였습니다.");
@@ -128,12 +204,15 @@ function get_post_info(get_post_id) {
 }
 
 function empty_post_info(){
+	$('#M_vote_que_target').empty();
 	$('#M_post_author').empty();
 	$('#M_post_start_date').empty();
 	$('#M_post_end_date').empty();
 	$('#M_post_top_title').empty();
+	$('#M_vote_picture_container').removeClass('display_none_important');
 	$('#M_post_body').empty();
 	$('#M_post_body_icons_data').empty();
+	$('#M_vote_picture').attr('src', '#');
 }
 
 
@@ -195,27 +274,10 @@ function image_modal_close(){
 	$('html').scrollTop(now_postmodal_top);
 }
 
-
-//클립보드 복사 함수
-function clipboardCopy(tag) {
-	let post_id = tag.getAttribute('alt');
-	var clipboard_textarea = document.createElement('textarea');
-	clipboard_textarea.setAttribute('id', 'clipboard_copy');
-	clipboard_textarea.value = TEST_IP+"v/"+post_id;
-	clipboard_textarea.style.zIndex = "-3000";
-	document.body.appendChild(clipboard_textarea);
-	clipboard_textarea.select();
-	document.execCommand("copy");
-	document.getElementById('clipboard_copy').blur();
-	snackbar("URL 복사완료!");
-	$('textarea').remove('#clipboard_copy');
-}
-
 //포스트 작성 함수
 function post_write() {
 	now_postmodal_top = $(window).scrollTop();
 	postmodal_close(1);
-	is_postmodal_fixed_open = 1;
 	$('#M_user_post_modal_background_fixed').css("height", $(window).height() + 100);
 	$('#M_user_post_modal_background_fixed').css('position', "fixed");
 	$('#M_user_post_modal_background_fixed').removeClass('display_none');
@@ -407,9 +469,79 @@ function post_write_cancel() {
 	$('html').scrollTop(now_postmodal_top);
 }
 
+//설문조사 accept
+function vote_send() {
+	let token = localStorage.getItem('modakbul_token');
+	let vote_id = $('#M_user_post_modal_container').attr('alt').split('_')[1]*1;
+	send_data = new FormData();
+	send_data.append("vote_id", vote_id);
+	let question_list = $('#M_vote_que_target').find('section').toArray();
+	let question_len = question_list.length;
+	let ans_list = [];
+	for (let i = 0; i < question_len; i++){
+		let question_dict = {};
+		let question_type;
+		if ($(question_list[i].getElementsByTagName("form")).hasClass("ac-checkbox") === true){
+			question_type = 0;
+		} else if ($(question_list[i].getElementsByTagName("form")).hasClass("ac-radio") === true){
+			question_type = 1;
+		} else {
+			question_type = 2;
+		}
+		question_dict["que_id"] = $(question_list[i]).attr('alt').split('_')[1]*1;
+		question_dict["que_type"]  = question_type;
+		if (question_type == 0 || question_type == 1) {	
+			let question_answer_list = $(question_list[i]).find("li");
+			let question_answer_check_list = [];
+			for (let j = 0; j < question_answer_list.length; j++){
+				if ($(question_answer_list[j]).find("path").length != 0){
+					question_answer_check_list.push($(question_answer_list[j]).find("label").attr('alt'));
+				}
+			}
+			question_dict["ans"] = question_answer_check_list;
+		} else {
+			question_dict["ans"] = $(question_list[i]).find('input').val();
+		}
+		ans_list.push(question_dict);
+	}
+	send_data.append("ans_list", ans_list);
+
+	console.log(send_data);
+
+	let a_jax = A_JAX(TEST_IP+"vote_answer", "POST", token, send_data);
+	$.when(a_jax).done(function(){
+		let json = a_jax.responseJSON;
+		if (json['result'] == 'success'){
+			snackbar("설문조사 완료!");
+		} else if (json['result'] == "bad request") {
+			snackbar("로그인을 다시 해주세요.");
+			return;
+		 } else {
+		 	snackbar("일시적인 오류로 정보를 보내지 못하였습니다.");
+		 }
+	});
+}
+
 /*
 //디버그 확인용 코드
 for (var value of send_data.values()) {
    	console.log(value); 
 }
+*/
+/*
+answer_json = {
+		"vote_id": 1,
+		"ans_list": [
+			{"que_id": 1,
+			"que_type": 0,
+			"ans": [1, 2]},
+
+			{"que_id": 2,
+			"que_type": 1,
+			"ans": [1]},
+
+			{"que_id": 3,
+			"que_type": 2,
+			"ans": "단답형"}]
+		}
 */

@@ -94,6 +94,9 @@ input:-ms-input-placeholder { color: #adadad;}
 a:hover {
   text-decoration: none;
 }
+a:focus {
+  text-decoration: none;
+}
 
 .wrap-login100 {
   width: 390px;
@@ -1609,9 +1612,9 @@ a:hover {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.7);
   padding: 20px;
-  z-index: 500;
+  z-index: 160;
   cursor: pointer;
 }
 .M_image_modal_container {
@@ -1620,7 +1623,7 @@ a:hover {
   height: auto;
   max-width: 95%;
   max-height: 95%;
-  z-index: 550;
+  z-index: 210;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -1822,13 +1825,6 @@ a:hover {
 }
 
 /* 설문조사 CSS =================================================================*/
-.M_vote_date_title {
-  display: inline-block;
-  margin-top: 1%;
-  margin-left: 2%;
-  float: left;
-  font-weight: bold;
-}
 .M_vote_content_info {
   float: right;
   opacity: 0.7;
@@ -1855,7 +1851,7 @@ a:hover {
 .M_vote_body_icon_container {
   position: relative;
   display: inline-block;
-  width: 50px;
+  width: 100px;
   height: 30px;
   padding-left: 10px;
   float: left;
@@ -1879,12 +1875,20 @@ a:hover {
   float: left;
   background-color: rgba(0,0,0,0);
   text-align: center;
-  margin-top: 20px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+@media screen and (max-width: 450px){
+  .M_vote_picture_container {
+    height: auto;
+    max-height: 300px;
+  }
 }
 .M_vote_pciture {
   position: relative;
   margin: auto;
   width: auto;
+  max-width: 100%; 
   height: auto;
   max-height: 300px;
   cursor: pointer;
@@ -1902,7 +1906,8 @@ a:hover {
 .M_vote_top_container {
   display: inline-block;
   float: left;
-  height: 80px;
+  height: auto;
+  min-height: 70px;
   width: 100%;
   padding-top: 10px;
 }
@@ -1910,6 +1915,77 @@ a:hover {
   position: relative;
   display: inline-block;
   width: 100%;
-  height: 40px;
-  padding-bottom: 10px;
+  height: auto;
+  margin-top: 5px;
 }
+.M_vote_date_title {
+  display: inline-block;
+  float: left;
+  margin-top: 1%;
+  margin-left: 10px;
+  margin-bottom: 2px;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: bold;
+}
+.M_vote_que_target {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 100%;
+  height: auto;
+}
+.M_vote_answer_type_answer {
+  width: 100%;
+  height: 50px;
+  background-color: rgba(0,0,0,.1);
+  font-size: 18px;
+  line-height: 30px;
+  padding: 10px 20px;
+  position: relative;
+  margin: auto;
+  font-weight: bold;
+}
+.M_vote_empty_box {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 100%;
+  height: 20px;
+}
+.M_vote_body_line {
+  position: relative;
+  margin: auto;
+  width: 90%;
+  height: 1px;
+  background-color: #e2e2e2;
+  border-radius: 10px;
+}
+@media screen and (max-width: 450px){
+  .M_vote_body_line {
+    width: 95%;
+  }
+}
+.M_vote_top_title{
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 99%;
+  height: auto;
+  padding-top: 0px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 0px;
+  line-height: 30px;
+  font-size: 24px;
+  font-weight: bold;
+}
+.M_vote_time {
+    display: inline-block;
+    float: left;
+    font-size: 15px;
+    line-height: 20px;
+    margin-top: 1%;
+    margin-left: 10px;
+    opacity: 0.6;
+  } 
