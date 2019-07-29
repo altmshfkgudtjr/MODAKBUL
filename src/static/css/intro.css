@@ -79,6 +79,10 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 	}
 }
 
+.display_none {
+	display: none;
+}
+
 a {
 	text-decoration: none;
 	color: var(--color-link);
