@@ -34,7 +34,7 @@ $(window).ready(function () {
                     '<i class="fas fa-feather-alt" style="padding: 0 22px"></i>민원</a></li>';
             }
             else if (board.board_name === '갤러리') {
-                result_html += '<li><a href="/gallery" class="M_nav_user_button">' +
+                result_html += '<li><a href="/gallery?type=갤러리" class="M_nav_user_button">' +
                     '<i class="far fa-images" style="padding: 0 22px"></i>갤러리</a></li>';
             }
             else if (board.board_name === '대외활동') {
