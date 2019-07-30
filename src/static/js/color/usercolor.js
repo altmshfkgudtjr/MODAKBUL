@@ -49,7 +49,7 @@ function user_color_select_ok() {
     snackbar("올바르지 않은 접근입니다.");
   } else {
     try {
-      var a_jax = A_JAX(TEST_IP+"user-color", "POST", token, send_data);
+      var a_jax = A_JAX_FILE(TEST_IP+"user_color", "POST", token, send_data);
     } catch(e) {
       snackbar("일시적인 오류로 변경을 실패하였습니다.");
     }
