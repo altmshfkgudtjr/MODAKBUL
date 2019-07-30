@@ -663,7 +663,6 @@ function post_write_accept() {
 		let searchParams = new URLSearchParams(window.location.search);
 		let request_board = searchParams.get('type');
 		send_data.append("anony", is_anony);
-		console.log(request_board);
 		send_data.append("tags", request_board);
 		for (var i = 0; i< M_files.length; i++){
 			send_data.append('files', M_list[i]);
