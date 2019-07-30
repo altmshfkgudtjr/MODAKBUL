@@ -13,7 +13,7 @@ function user_login(){
 	}
 
 	var send_data = {id: login_ID, pw: login_PW};
-	var a_jax = A_JAX(TEST_IP+"sign-in-up", "POST", null, send_data);	//"/login" 이라는 url에 아이디/비밀번호 data 전송
+	var a_jax = A_JAX(TEST_IP+"sign_in_up", "POST", null, send_data);	//"/login" 이라는 url에 아이디/비밀번호 data 전송
 	$.when(a_jax).done(function(){
 		var json = a_jax.responseJSON;
 		if (json['result'] == "you are not sejong"){			// result 값이 "your not Sejong" 이라면 실행
@@ -65,7 +65,7 @@ function get_user_info() {
 	var name = $('#M_user_content_name');
 	var major = $('#M_user_content_major');
 	var number = $('#M_user_content_number');
-	var a_jax = A_JAX(TEST_IP+"get-userinfo", "GET", token, null);
+	var a_jax = A_JAX(TEST_IP+"get_userinfo", "GET", token, null);
 	$.when(a_jax).done(function(){
 		var json = a_jax.responseJSON;
 		if (json['result'] == "success"){
