@@ -67,46 +67,6 @@
 				<a id="M_gn-icon" class="gn-icon gn-icon-menu" style="padding-left : 20px"><span>Menu</span></a>
 				<nav id="gn-menu-wrapper" class="gn-menu-wrapper M_boxshadow_sidemenu">
 					<div id="gn-scroller" class="gn-scroller">
-						<ul id="gn-menu2" class="gn-menu">
-							<li><a href="/board" class="M_nav_user_button"><i class="fas fa-bullhorn" style="padding: 0 22px"></i>공지사항</a></li>
-							<li><a href="/intro" class="M_nav_user_button"><i class="far fa-bell" style="padding: 0 22px"></i>학생회소개</a></li>
-							<li><a onclick="M_dropdown_global($(this))" class="M_nav_user_button"><i id="M_studentMoneyButton" class="fas fa-file-invoice-dollar" style="padding: 0 23px"></i>학생회비내역<i id="M_dropdown_icon_money" class="fas fa-sort-down M_dropdown_icon"></i></a></li>
-							<div id="M_studentMoney" class="display_none">
-								<div>
-									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>소프트웨어융합대학</a>
-									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>컴퓨터공학과</a>
-									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>소프트웨어학과</a>
-									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>정보보호학과</a>
-									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>데이터사이언스학과</a>
-									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>지능기전공학부</a>
-									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>디자인이노베이션</a>
-									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>만화애니메이션텍</a>
-								</div>
-							</div>
-							<li><a class="M_nav_user_button"><i class="fas fa-feather-alt" style="padding: 0 22px"></i>민원</a></li>
-							<li><a href="/gallery" class="M_nav_user_button"><i class="far fa-images" style="padding: 0 22px"></i>갤러리</a></li>
-							<li><a onclick="M_dropdown_global($(this))" class="M_nav_user_button"><i id="M_studentCompetitionButton" class="fab fa-dribbble" style="padding: 0 22px"></i>공모전<i id="M_dropdown_icon_competition" class="fas fa-sort-down M_dropdown_icon"></i></a></li>
-							<div id="M_studentCompetition" class="display_none">
-								<div>
-									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>소융대 공모전</a>
-									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>외부 공모전</a>
-									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>공모전 구인</a>
-								</div>
-							</div>
-							<li><a onclick="M_dropdown_global($(this))" class="M_nav_user_button"><i id="M_studentVolunteerButton" class="far fa-sticky-note" style="padding: 0 22px"></i>세종소융봉사<i id="M_dropdown_icon_volunteer" class="fas fa-sort-down M_dropdown_icon"></i></a></li>
-							<div id="M_studentVolunteer" class="display_none">
-								<div>
-									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>세종소융봉사공지</a>
-									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>멘토링 1조</a>
-									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>멘토링 2조</a>
-									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>멘토링 3조</a>
-									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>멘토링 4조</a>
-									<a class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>멘토링 5조</a>
-								</div>
-							</div>
-							<li><a class="M_nav_user_button"><i class="far fa-check-square" style="padding: 0 22px"></i>투표/설문조사</a></li>
-							<li><a class="M_nav_user_button"><i class="far fa-chart-bar" style="padding: 0 22px"></i>통계자료</a></li>
-						</ul>
 					</div>
 				</nav>
 			</li>
@@ -202,9 +162,9 @@
 				<i class="fas fa-male M_vote_content_icon_footer"></i>
 				<span id="M_post_body_icons_data" class="M_vote_body_icons_data"></span>
 			</div>
-			<div class="M_post_body_share">
+			<div class="M_post_body_share" onclick="vote_send()">
 				전송
-				<i class="far fa-paper-plane" class="fas fa-share-square" onclick="vote_send()"></i>
+				<i class="far fa-paper-plane" class="fas fa-share-square"></i>
 			</div>
 			<div class="M_vote_empty_box"></div>
 		</div>
@@ -328,4 +288,5 @@
 <script src="../static/js/vote_list.js"></script>
 <script src="../static/js/vote.js"></script>
 <script src="../static/js/historyback.js"></script>
+<script src="../static/js/nav_bar.js"></script>
 </html>
