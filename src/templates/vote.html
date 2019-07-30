@@ -29,10 +29,6 @@
 	<link rel="stylesheet" type="text/css" href="../static/css/post_menu_button.css">
 	<!--bootstrap-->
 	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-	<!--textarea editor-->
-	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">
-	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css">
 	<!--vote-->
 	<link rel="stylesheet" type="text/css" href="../static/css/vote/vote_normalize.css" />
 	<link rel="stylesheet" type="text/css" href="../static/css/vote/vote_demo.css" />
@@ -239,24 +235,56 @@
 	<!--post control modal-->
 	<div id="M_user_post_modal_background_fixed" class="M_user_post_modal_background_fixed display_none wow animated" data-wow-duration = "0.4s"></div>
 		<div id="M_user_post_modal_container_fixed" class="M_info_div M_boxshadow M_user_post_modal_container_fixed animated display_none wow" data-wow-duration = "0.4s">
-			<h1 class="M_post_fixed_info">포스트 작성</h1>
+			<h1 class="M_post_fixed_info">설문조사 작성</h1>
 			<h4 class="M_post_fixed_title">제목</h4>
 			<input type="text" id="M_post_fixed_title_input" class="M_post_fixed_title_input" placeholder="제목을 입력해주세요." autocomplete="off" maxlength="100" required="">
 			<h4 class="M_post_fixed_title">내용</h4>
-			<textarea type="textfield" id="M_vote_fixed_body_input" class="M_post_fixed_body_input" placeholder="내용을 입력해주세요." maxlength="10000"></textarea>
+			<textarea type="textfield" id="M_vote_fixed_body_input" class="M_vote_fixed_body_input" placeholder="내용을 입력해주세요." maxlength="10000"></textarea>
 			<div class="M_filebox">
-				<label for="files_upload" class="M_filebox">업로드</label>
+				<label for="files_upload" class="M_filebox">업로드</label> 사진파일을 1개만 등록해주세요!
 				<div id="M_post_user_post_anony_container" class="M_post_user_post_anony_container">
 					<input id="M_post_user_post_anony" class="M_post_user_post_anony" type="checkbox">
 					익명
 				</div>
-				<input type="file" id="files_upload" multiple="multiple" class="M_post_fixed_attachment" max-10 maxlength="10" data-maxsize="51200" onchange="javascript:document.getElementById('M_file_route').value=this.value">
-				<div id="M_file_route" class="M_file_route">
+				<input type="file" id="files_upload" multiple="multiple" class="M_post_fixed_attachment" max-1 maxlength="1" data-maxsize="51200" onchange="javascript:document.getElementById('M_file_route').value=this.value">
+				<div id="M_file_route" class="M_file_route"></div>
 			</div>
-		</div>
-		<div class="M_user_post_modal_container_fixed_choice_container">
-			<div class="M_user_post_modal_container_fixed_choice" onclick="post_write_accept()" style="border-right: 1px solid #e2e2e2">적용</div>
-			<div class="M_user_post_modal_container_fixed_choice" onclick="post_write_cancel()">취소</div>
+			<div class="M_vote_write_line"></div>
+			<div id="M_vote_question_cotainer_target" class="M_vote_question_cotainer_target">
+				<!--여기부터 폼-->
+				<div class="M_vote_question_container" box_type="checkbox">
+					<input type="text" class="M_vote_write_title" placeholder="질문을 입력해주세요." maxlength="100">
+					<div class="M_vote_write_trash" onclick="vote_write_question_delete($(this))"><i class="fas fa-trash-alt" style="position: relative; float: right;"></i></div>
+					<span class="M_vote_write_answer_number">1</span>
+					<input type="text" class="M_vote_write_answer_input" placeholder="선택지를 입력해주세요." maxlength="100">
+					<div class="M_vote_write_answer_add_container">
+						<i class="far fa-check-square M_vote_write_answer_plus"></i>
+						<div class="M_vote_write_answer_input" onclick="vote_write_question_select_add($(this))" alt="1">선택지를 추가하기</div>
+					</div>
+				</div>
+				<!--여기까지-->
+				<div class="M_vote_container_add">
+					<div class="M_vote_container_add_choice M_vote_container_add_checkbox" title="체크박스" onclick="vote_write_question_add_checkbox($(this))">
+						<i class="far fa-check-square M_vote_container_add_checkbox_icon"></i>
+					</div>
+					<div class="M_vote_container_add_choice M_vote_container_add_radio" title="라디오버튼" onclick="vote_write_question_add_radio($(this))">
+						<i class="far fa-dot-circle M_vote_container_add_radio_icon"></i>
+					</div>
+					<div class="M_vote_container_add_choice M_vote_container_add_answer" title="단답형" onclick="vote_write_question_add_answer($(this))">
+						<i class="fas fa-keyboard M_vote_container_add_answer_icon"></i>
+					</div>
+				</div>
+				<div class="range-slider">
+					<div class="range-slider__bar">마감기한</div>
+					<input id="post_admin_modal_date_select" type="range" class="custom-range" orient="vertical"
+						min="0" max="30" value="0" />
+					<div class="range-slider__thumb"></div>
+				</div>
+			</div>
+			<div class="M_user_post_modal_container_fixed_choice_container">
+				<div class="M_user_post_modal_container_fixed_choice" onclick="post_write_accept()" style="border-right: 1px solid #e2e2e2">적용</div>
+				<div class="M_user_post_modal_container_fixed_choice" onclick="post_write_cancel()">취소</div>
+			</div>
 		</div>
 	</div>
 </body>
@@ -287,17 +315,12 @@
 <script src="../static/js/color/usercolor.js"></script>
 <!--post_menu_button JS-->
 <script src="../static/js/post_menu_button.js"></script>
-<!--post editor JS-->
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js"></script>
 <!--multifile JS-->
 <script src="../static/js/multifile/jquery.MultiFile.min.js"></script>
 <!--vote-->
 <script src="../static/js/vote/modernizr.custom.js"></script>
 <script src="../static/js/vote/svgcheckbx.js"></script>
+<script src="../static/js/slider_bar_dynamic.js"></script>
 <!--custom JS-->
 <script src="../static/js/test_url.js"></script>
 <script src="../static/js/login.js"></script>

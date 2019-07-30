@@ -348,7 +348,7 @@ function post_delete() {
 		snackbar("권한이 없습니다.");
 	}
 }
-
+/*
 $(function(){
 	$('#files-upload').MultiFile({
 		max: 1, //업로드 최대 파일 갯수 (지정하지 않으면 무한대)
@@ -360,7 +360,7 @@ $(function(){
 		list:"#files-upload" //파일목록을 출력할 요소 지정가능
 	});
 });
-
+*/
 function post_write_accept() {
 	if ($('#M_post_fixed_title_input').val() == ""){
 		snackbar("제목을 입력해주세요.");
@@ -473,8 +473,7 @@ function post_write_cancel() {
 function vote_send() {
 	let token = localStorage.getItem('modakbul_token');
 	let vote_id = $('#M_user_post_modal_container').attr('alt').split('_')[1]*1;
-	send_data = new FormData();
-	send_data.append("vote_id", vote_id);
+	send_data = {};
 	let question_list = $('#M_vote_que_target').find('section').toArray();
 	let question_len = question_list.length;
 	let ans_list = [];
@@ -493,55 +492,140 @@ function vote_send() {
 		if (question_type == 0 || question_type == 1) {	
 			let question_answer_list = $(question_list[i]).find("li");
 			let question_answer_check_list = [];
+			let is_check = 0;
 			for (let j = 0; j < question_answer_list.length; j++){
 				if ($(question_answer_list[j]).find("path").length != 0){
 					question_answer_check_list.push($(question_answer_list[j]).find("label").attr('alt'));
+				} else {
+					is_check += 1;
+				}
+				if (is_check == question_answer_list.length){
+					snackbar("질문에 모두 답해주세요.");
+					$('#M_user_post_modal_container').animate({scrollTop : 300}, 400);
+					return;
 				}
 			}
 			question_dict["ans"] = question_answer_check_list;
 		} else {
+			if ($(question_list[i]).find('input').val() == ""){
+				snackbar("질문에 모두 답해주세요.");
+				$('#M_user_post_modal_container').animate({scrollTop : 300}, 400);
+				return;
+			}
 			question_dict["ans"] = $(question_list[i]).find('input').val();
 		}
 		ans_list.push(question_dict);
 	}
-	send_data.append("ans_list", ans_list);
+	send_data["vote_id"] = vote_id;
+	send_data["ans_list"] = ans_list;
 
-	console.log(send_data);
+	let output = new FormData();
+	output.append('answer', JSON.stringify(send_data));
 
-	let a_jax = A_JAX(TEST_IP+"vote_answer", "POST", token, send_data);
+	let a_jax = A_JAX(TEST_IP+"vote_answer", "POST", token, output);
 	$.when(a_jax).done(function(){
 		let json = a_jax.responseJSON;
 		if (json['result'] == 'success'){
 			snackbar("설문조사 완료!");
+			postmodal_close();
+			setTimeout(function() {location.reload()}, 400);
 		} else if (json['result'] == "bad request") {
 			snackbar("로그인을 다시 해주세요.");
 			return;
-		 } else {
+		} else if (json['result'] == "already_vote"){
+			snackbar("이미 투표한 설문조사입니다.");
+		} else {
 		 	snackbar("일시적인 오류로 정보를 보내지 못하였습니다.");
 		 }
 	});
 }
+
+function vote_write_question_delete(tag) {
+	tag.parent('div').remove();
+}
+
+function vote_write_question_select_add(tag) {
+	let now_num = tag.attr('alt')*1;
+	now_num += 1;
+	tag.attr('alt', now_num);
+	let answer_number = document.createElement('span');
+	answer_number.classList.add("M_vote_write_answer_number");
+	answer_number.append(now_num);
+	let answer_input = document.createElement('input');
+	answer_input.setAttribute('type', 'text');
+	answer_input.setAttribute('placeholder', '선택지를 입력해주세요.');
+	answer_input.setAttribute('maxlength', '100');
+	answer_input.classList.add("M_vote_write_answer_input");
+	tag.parent().before($(answer_number));
+	tag.parent().before($(answer_input));
+}
+
+function vote_write_question_add_checkbox(tag) {
+	let output = '<div class="M_vote_question_container" box_type="checkbox">\
+					<input type="text" class="M_vote_write_title" placeholder="질문을 입력해주세요." maxlength="100">\
+					<div class="M_vote_write_trash" onclick="vote_write_question_delete($(this))"><i class="fas fa-trash-alt" style="position: relative; float: right;"></i></div>\
+					<span class="M_vote_write_answer_number">1</span>\
+					<input type="text" class="M_vote_write_answer_input" placeholder="선택지를 입력해주세요." maxlength="100">\
+					<div class="M_vote_write_answer_add_container">\
+						<i class="far fa-check-square M_vote_write_answer_plus"></i>\
+						<div class="M_vote_write_answer_input" onclick="vote_write_question_select_add($(this))" alt="1">선택지를 추가하기</div>\
+					</div>\
+				</div>';
+	tag.parent('div').before(output);
+}
+
+function vote_write_question_add_radio(tag) {
+	let output = '<div class="M_vote_question_container" box_type="radio">\
+					<input type="text" class="M_vote_write_title" placeholder="질문을 입력해주세요." maxlength="100">\
+					<div class="M_vote_write_trash" onclick="vote_write_question_delete($(this))"><i class="fas fa-trash-alt" style="position: relative; float: right;"></i></div>\
+					<span class="M_vote_write_answer_number">1</span>\
+					<input type="text" class="M_vote_write_answer_input" placeholder="선택지를 입력해주세요." maxlength="100">\
+					<div class="M_vote_write_answer_add_container">\
+						<i class="far fa-dot-circle M_vote_write_answer_plus"></i>\
+						<div class="M_vote_write_answer_input" onclick="vote_write_question_select_add($(this))" alt="1">선택지를 추가하기</div>\
+					</div>\
+				</div>';
+	tag.parent('div').before(output);
+}
+
+function vote_write_question_add_answer(tag) {
+	let output = '<div class="M_vote_question_container" box_type="answer">\
+					<input type="text" class="M_vote_write_title" placeholder="질문을 입력해주세요." maxlength="100">\
+					<div class="M_vote_write_trash" onclick="vote_write_question_delete($(this))"><i class="fas fa-trash-alt" style="position: relative; float: right;"></i></div>\
+					<input type="text" class="M_vote_write_answer_input_answer" value="단답형 양식입니다." maxlength="100" readonly>\
+				</div>';
+	tag.parent('div').before(output);
+}
+
+/*업로드 파일 관리*/
+$("input[type=file]").change(function () {
+    let fileInput = document.getElementById("files_upload");
+    let files = fileInput.files;
+    let file;
+    let string = "";
+    if (files.length > 1){
+    	alert("사진 개수는 하나만 올려주세요!");
+    	$('#files_upload').val('');
+    	return;
+    }
+   	if (jQuery.inArray(files[0]['name'].split(".")[(files[0]['name'].split(".").length-1)], img_set) == -1){
+   		alert("사진 파일만 올려주세요!");
+   		$('#files_upload').val('');
+   		return;
+   	}
+    for (let i = 0; i < files.length; i++) {
+        file = files[i];
+        string += file.name;
+        string += " / ";
+    }
+    $('#M_file_route').empty();
+    $('#M_file_route').append(string);
+});
 
 /*
 //디버그 확인용 코드
 for (var value of send_data.values()) {
    	console.log(value); 
 }
-*/
-/*
-answer_json = {
-		"vote_id": 1,
-		"ans_list": [
-			{"que_id": 1,
-			"que_type": 0,
-			"ans": [1, 2]},
-
-			{"que_id": 2,
-			"que_type": 1,
-			"ans": [1]},
-
-			{"que_id": 3,
-			"que_type": 2,
-			"ans": "단답형"}]
-		}
+(JSON.stringify(value))
 */
