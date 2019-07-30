@@ -354,11 +354,17 @@ a:focus {
   height: 1px;
   background-color: #e2e2e2;
 }
+@media screen and (min-width: 450px){
+  .M_nav_user_button:hover {
+    background-color: #c30e2e !important;
+    color: white !important;  
+  }
+}
 .M_nav_user_button{
   color: white;
 }
 .M_nav_user_button:hover {
-  color: #5f6f81;
+  color: white;
 }
 @media screen and (min-width: 450px){
   .M_nav_user_button:hover {
@@ -2047,6 +2053,11 @@ a:focus {
   position: relative;
   margin: auto;
   font-weight: bold;
+  border-bottom: 1.5px solid rgba(0,0,0,.1);
+  transition: 0.3s;
+}
+.M_vote_answer_type_answer:focus {
+  border-bottom: 1.5px solid #c30e2e;
 }
 .M_vote_empty_box {
   position: relative;

@@ -165,7 +165,7 @@ function get_post_info(get_post_id) {
 						let answer_input = document.createElement('input');
 						answer_input.setAttribute('type', question_type_name);
 						answer_input.setAttribute('id', 'r'+(i*1+1)+'_'+(j*1+1));
-						answer_input.setAttribute('name', 'r');
+						answer_input.setAttribute('name', 'r'+i);
 						let select_content = json['vote']['que_list'][i]['select'][j]['select_content'];
 						let select_id = json['vote']['que_list'][i]['select'][j]['select_id'];
 						let answer_label = document.createElement('label');
@@ -364,9 +364,9 @@ function post_write_accept() {
 	let question_containers = $('#M_vote_question_cotainer_target').find('div.M_vote_question_container');
 	for (let i = 0; i < question_containers.length; i++){
 		let que_list_element = {};
-		let question_container_type = question_containers[i].attr('box_type');
-		let question_container_inputs = question_containers[i].find('input');
-		let question_container_input_title = question_container_inputs[0].val();
+		let question_container_type = $(question_containers[i]).attr('box_type');
+		let question_container_inputs = $(question_containers[i]).find('input');
+		let question_container_input_title = $(question_container_inputs[0]).val();
 		if (question_container_input_title == ""){
 			snackbar("질문을 모두 입력해주세요.");
 			$('#M_user_post_modal_container_fixed').animate({scrollTop : 500}, 400);
@@ -387,28 +387,30 @@ function post_write_accept() {
 			return;
 		}
 
-		let que_container_select = [];
-		for (let j = 1; j < question_container_inputs.length; j++){
-			let number = question_container_inputs[j].prev().text()*1;
-			let question_container_input_select = question_container_inputs[j].val();
-			if (question_container_input_select == ""){
-				snackbar("선택지를 모두 입력해주세요.");
-				$('#M_user_post_modal_container_fixed').animate({scrollTop : 500}, 400);
-				question_container_inputs[j]focus();
-				return;
-			} else {
-				que_container_select.push(question_container_input_select);
+		if (question_container_type == 'checkbox' || question_container_type == "radio"){
+			let que_container_select = [];
+			for (let j = 1; j < question_container_inputs.length; j++){
+				let number = $(question_container_inputs[j]).prev().text()*1;
+				let question_container_input_select = $(question_container_inputs[j]).val();
+				if (question_container_input_select == ""){
+					snackbar("선택지를 모두 입력해주세요.");
+					$('#M_user_post_modal_container_fixed').animate({scrollTop : 500}, 400);
+					question_container_inputs[j].focus();
+					return;
+				} else {
+					que_container_select.push(question_container_input_select);
+				}
 			}
-		}
-		que_list_element['select'] = que_container_select;
+			que_list_element['select'] = que_container_select;
+		} 
 		que_list.push(que_list_element);
 	}
 	vote['que_list'] = que_list;
 
-	send_data.append('vote', vote);
+	send_data.append('vote', JSON.stringify(vote));
 	send_data.append('file', M_file);
 
-	let a_jax = A_JAX(TEST_IP+"post_upload", "POST", token, send_data);
+	let a_jax = A_JAX_FILE(TEST_IP+"vote_upload", "POST", token, send_data);
 	$.when(a_jax).done(function(){
 		let json = a_jax.responseJSON;
 		if (json['result'] == "success"){
@@ -519,7 +521,7 @@ function vote_send() {
 	let output = new FormData();
 	output.append('answer', JSON.stringify(send_data));
 
-	let a_jax = A_JAX(TEST_IP+"vote_answer", "POST", token, output);
+	let a_jax = A_JAX_FILE(TEST_IP+"vote_answer", "POST", token, output);
 	$.when(a_jax).done(function(){
 		let json = a_jax.responseJSON;
 		if (json['result'] == 'success'){
@@ -531,6 +533,8 @@ function vote_send() {
 			return;
 		} else if (json['result'] == "already_vote"){
 			snackbar("이미 투표한 설문조사입니다.");
+		} else if (json['result'] == "admin can not vote"){
+			snackbar("관리자는 투표에 참여할 수 없습니다.");
 		} else {
 		 	snackbar("일시적인 오류로 정보를 보내지 못하였습니다.");
 		 }

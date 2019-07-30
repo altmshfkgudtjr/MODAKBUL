@@ -40,7 +40,7 @@
 	display: inline-block;
 	position: relative;
 	font-size: 20px;
-	padding: 0 0 0 80px;
+	padding: 0 0 0 50px;
 	vertical-align: top;
 	color: rgba(170,170,170,0.5);
 	cursor: pointer;
@@ -51,11 +51,11 @@
 .ac-custom input[type="checkbox"],
 .ac-custom input[type="radio"],
 .ac-custom label::before {
-	width: 50px;
-	height: 50px;
-	top: 60%;
+	width: 30px;
+	height: 30px;
+	top: 0;
 	left: 0;
-	margin-top: -25px;
+	margin-top: 0px;
 	position: absolute;
 	cursor: pointer;
 }
@@ -94,10 +94,10 @@
 
 .ac-custom svg {
 	position: absolute;
-	width: 40px;
-	height: 40px;
-	top: 50%;
-	margin-top: -20px;
+	width: 20px;
+	height: 20px;
+	top: 26px;
+	margin-top: 0px;
 	left: 5px;
 	pointer-events: none;
 }
@@ -116,9 +116,9 @@
 .ac-circle input[type="checkbox"],
 .ac-circle input[type="radio"],
 .ac-circle label::before {
-	width: 30px;
-	height: 30px;
-	margin-top: -15px;
+	width: 20px;
+	height: 20px;
+	margin-top: 5px;
 	left: 10px;
 	position: absolute;
 }
@@ -129,10 +129,10 @@
 }
 
 .ac-circle svg {
-	width: 70px;
-	height: 70px;
-	margin-top: -35px;
-	left: -10px;
+	width: 45px;
+	height: 45px;
+	margin-top: -15px;
+	left: -3px;
 }
 
 .ac-circle svg path {

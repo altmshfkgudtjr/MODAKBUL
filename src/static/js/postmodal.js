@@ -143,11 +143,11 @@ function comment_enter() {
 		send_data.append('comment', $("#M_post_user_comment_input").val());
 		send_data.append('anony', is_anony);
 		send_data.append('comment_id', is_double_comment*1);
-		a_jax = A_JAX(TEST_IP+"comment_upload", "POST", token, send_data);
+		a_jax = A_JAX_FILE(TEST_IP+"comment_upload", "POST", token, send_data);
 		$.when(a_jax).done(function(){
 			var json = a_jax.responseJSON;
 			if (json['result'] == "success"){
-				var a_jax_user = A_JAX(TEST_IP+"get-userinfo", "GET", token, null);
+				var a_jax_user = A_JAX(TEST_IP+"get_userinfo", "GET", token, null);
 				$.when(a_jax_user).done(function(){
 					json = a_jax_user.responseJSON;
 					if (json['result'] == "success"){
@@ -663,11 +663,12 @@ function post_write_accept() {
 		let searchParams = new URLSearchParams(window.location.search);
 		let request_board = searchParams.get('type');
 		send_data.append("anony", is_anony);
+		console.log(request_board);
 		send_data.append("tags", request_board);
 		for (var i = 0; i< M_files.length; i++){
 			send_data.append('files', M_list[i]);
 		}
-		let a_jax = A_JAX(TEST_IP+"post_upload", "POST", token, send_data);
+		let a_jax = A_JAX_FILE(TEST_IP+"post_upload", "POST", token, send_data);
 		$.when(a_jax).done(function(){
 			let json = a_jax.responseJSON;
 			if (json['result'] == "success"){
