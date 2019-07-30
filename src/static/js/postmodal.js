@@ -527,6 +527,11 @@ function clipboardCopy(tag) {
 
 //포스트 작성 함수
 function post_write() {
+	token = localStorage.getItem('modakbul_token');
+	if (token == null){
+		snackbar("로그인을 해주세요.");
+		return;
+	}
 	now_postmodal_top = $(window).scrollTop();
 	postmodal_close(1);
 	is_postmodal_fixed_open = 1;
@@ -634,6 +639,7 @@ $(function(){
 function post_write_accept() {
 	if ($('#M_post_fixed_title_input').val() == ""){
 		snackbar("제목을 입력해주세요.");
+		return;
 	}
 	let token = localStorage.getItem('modakbul_token');
 	let is_anony = 0;
@@ -651,10 +657,13 @@ function post_write_accept() {
 		send_data.append("title", $('#M_post_fixed_title_input').val());
 		send_data.append("content", content);
 		if (content.length >= 50000){
-			snackbar("작성 범위를 초과하였습니다.")
+			snackbar("작성 범위를 초과하였습니다.");
+			return;
 		}
+		let searchParams = new URLSearchParams(window.location.search);
+		let request_board = searchParams.get('type');
 		send_data.append("anony", is_anony);
-		send_data.append("tags", "공지");
+		send_data.append("tags", request_board);
 		for (var i = 0; i< M_files.length; i++){
 			send_data.append('files', M_list[i]);
 		}
@@ -691,6 +700,7 @@ function post_write_accept() {
 		send_data.append("content", content);
 		if (content.length >= 50000){
 			snackbar("작성 범위를 초과하였습니다.")
+			return;
 		}
 		send_data.append("anony", is_anony);
 		for (var i = 0; i< M_files.length; i++){

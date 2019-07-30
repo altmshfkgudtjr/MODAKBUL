@@ -23,7 +23,12 @@ $(window).ready(function() {
                tags += '<h5 class="M_board_tag_title"> # ' + ajax_board.responseJSON.board.board_name + '</h5>';
            }*/
            tags = '<h5 class="M_board_tag_title"> # ' + ajax_board.responseJSON.board.board_name + '</h5>';
+
            $('.M_board_tag_container').append(tags);
+           /*
+           if (ajax_board.board.board_access === 1) {
+
+           }*/
        }
     });
 

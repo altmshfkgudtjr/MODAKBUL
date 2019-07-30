@@ -21,6 +21,9 @@ def intro():
 @app.route('/vote')
 def vote():
 	return render_template('vote.html')
+@app.route('/settings')
+def settings():
+	return render_template('settings.html')
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', port=80, debug = True)
