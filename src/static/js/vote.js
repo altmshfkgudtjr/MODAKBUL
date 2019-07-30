@@ -5,7 +5,6 @@ var now_postmodal_top = 0;
 var is_image_modal_open = 0;
 var img_set = ['png', 'jpg', 'jpeg', 'gif', 'bmp'];
 var file_path = "../static/files/";
-var is_post_modify = 0;
 function postmodal_open(get_post_id){
 	let token = localStorage.getItem('modakbul_token');
 	if (token == null){
@@ -292,38 +291,8 @@ function post_write() {
 
 //포스트 수정 함수
 function post_modify() {
-	is_post_modify = 1;
-	let token = localStorage.getItem('modakbul_token');
-	if (token == null){
-		snackbar("로그인을 해주세요.");
-		post_write_cancel();
-		return;
-	}
-	if (is_post_property == 0){
-		snackbar("권한이 없습니다.");
-		return;
-	}
-	now_postmodal_top = $(window).scrollTop();
-	let post_id = $('#M_user_post_modal_container').attr('alt').split('_')[1]*1;
-	let title = $('#M_post_top_title').text();
-	let content = $('#M_post_body').html();
-	postmodal_close(1);
-	is_post_property = 0;
-	is_postmodal_fixed_open = 1;
-	$('#M_user_post_modal_container_fixed').attr('alt', "post_"+post_id);
-	$('#M_user_post_modal_background_fixed').css("height", $(window).height() + 100);
-	$('#M_user_post_modal_background_fixed').css('position', "fixed");
-	$('#M_user_post_modal_background_fixed').removeClass('display_none');
-	$('#M_user_post_modal_background_fixed').removeClass('fadeOut');
-	$('#M_user_post_modal_background_fixed').addClass('fadeIn');
-	$('html, body').css({'overflow': 'hidden'});
-	$('html, body').addClass('M_modal_open_fixed');
-	$('#M_user_post_modal_container_fixed').removeClass('fadeOutDown');
-	$('#M_user_post_modal_container_fixed').addClass('fadeInUp');
-	$('#M_user_post_modal_container_fixed').removeClass('display_none');
-	$('#M_post_fixed_title_input').val(title);
-	$('.note-editable').empty();
-	$('.note-editable').append(content);
+	snackbar("설문조사는 수정할 수 없습니다.");
+	return;
 }
 
 //포스트 삭제 함수
@@ -364,97 +333,125 @@ $(function(){
 function post_write_accept() {
 	if ($('#M_post_fixed_title_input').val() == ""){
 		snackbar("제목을 입력해주세요.");
+		$('#M_user_post_modal_container_fixed').animate({scrollTop : 0}, 400);
+		$('#M_post_fixed_title_input').focus();
+		return;
+	} else if ($('#M_vote_fixed_body_input').val() == ""){
+		snackbar("내용을 입력해주세요.");
+		$('#M_user_post_modal_container_fixed').animate({scrollTop : 200}, 400);
+		$('#M_vote_fixed_body_input').focus();
+		return;
+	} else if ($('#M_vote_fixed_body_input').val().length >= 50000){
+		snackbar("작성 범위를 초과하였습니다.");
+		$('#M_user_post_modal_container_fixed').animate({scrollTop : 200}, 400);
+		$('#M_vote_fixed_body_input').focus();
+		return;
+	} else if ($('#M_vote_end_date_slider').text() == ""){
+		snackbar("마감 날짜를 선택해주세요.");
+		return;
 	}
 	let token = localStorage.getItem('modakbul_token');
-	let is_anony = 0;
-	let content = $('#M_vote_fixed_body_input').html();
+	let vote = {};
 	let send_data = new FormData();
+	let que_list = [];
 	var M_files = document.getElementById('files_upload').files;
-	var M_list = [];
-	if (is_post_modify == 0) {
-		for (var i = 0; i < M_files.length; i++){
-			M_list.push(M_files[i]);
+	var M_file = M_files[0];
+
+	vote["title"] = $('#M_post_fixed_title_input').val();
+	vote["content"] = $('#M_vote_fixed_body_input').val();
+	vote["end_date"] = $('#M_vote_end_date_slider').text().slice(0, 10);
+
+	let question_containers = $('#M_vote_question_cotainer_target').find('div.M_vote_question_container');
+	for (let i = 0; i < question_containers.length; i++){
+		let que_list_element = {};
+		let question_container_type = question_containers[i].attr('box_type');
+		let question_container_inputs = question_containers[i].find('input');
+		let question_container_input_title = question_container_inputs[0].val();
+		if (question_container_input_title == ""){
+			snackbar("질문을 모두 입력해주세요.");
+			$('#M_user_post_modal_container_fixed').animate({scrollTop : 500}, 400);
+			question_container_inputs[0].focus();
+			return;
+		} else {
+			que_list_element['que'] = question_container_input_title;
 		}
-		if ($('input:checkbox[id="M_post_user_post_anony"]').is(":checked") == true){
-			is_anony = 1;
+		
+		if (question_container_type == "checkbox"){
+			que_list_element['que_type'] = 0;
+		} else if (question_container_type == "radio"){
+			que_list_element['que_type'] = 1;
+		} else if (question_container_type == "answer"){
+			que_list_element['que_type'] = 2;
+		} else {
+			snackbar("잘못된 질문형태 입니다.");
+			return;
 		}
-		send_data.append("title", $('#M_post_fixed_title_input').val());
-		send_data.append("content", content);
-		if (content.length >= 50000){
-			snackbar("작성 범위를 초과하였습니다.")
+
+		let que_container_select = [];
+		for (let j = 1; j < question_container_inputs.length; j++){
+			let number = question_container_inputs[j].prev().text()*1;
+			let question_container_input_select = question_container_inputs[j].val();
+			if (question_container_input_select == ""){
+				snackbar("선택지를 모두 입력해주세요.");
+				$('#M_user_post_modal_container_fixed').animate({scrollTop : 500}, 400);
+				question_container_inputs[j]focus();
+				return;
+			} else {
+				que_container_select.push(question_container_input_select);
+			}
 		}
-		send_data.append("anony", is_anony);
-		send_data.append("tags", "설문조사");
-		for (var i = 0; i< M_files.length; i++){
-			send_data.append('files', M_list[i]);
-		}
-		let a_jax = A_JAX(TEST_IP+"post_upload", "POST", token, send_data);
-		$.when(a_jax).done(function(){
-			let json = a_jax.responseJSON;
-			if (json['result'] == "success"){
-				snackbar("설문조사를 성공적으로 업로드하였습니다.");
-				post_write_cancel();
-				location.reload();
-    	  	}
-    	  	else if (json['result'] == 'bad request'){
-    	  	 	snackbar("설문조사 업로드를 실패하였습니다.");
-    	  	}
-    	  	else if (json['result'] == 'fail_save_file'){
-    	  		snackbar("설문조사 업로드를 실패하였습니다.");
-    	  	}
-    	  	else if (json['result'] == "wrong_file"){
-    	  		snackbar("잘못된 파일 확장자명입니다.");
-    	  	}
-    	  	else {
-    	  		snackbar("설문조사 업로드를 실패하였습니다.");
-    	  	}
-		});
-	} else {
-		for (var i = 0; i < M_files.length; i++){
-			M_list.push(M_files[i]);
-		}
-		if ($('input:checkbox[id="M_post_user_post_anony"]').is(":checked") == true){
-			is_anony = 1;
-		}
-		send_data.append("post_id", $('#M_user_post_modal_container_fixed').attr('alt').split('_')[1]*1);
-		send_data.append("title", $('#M_post_fixed_title_input').val());
-		send_data.append("content", content);
-		if (content.length >= 50000){
-			snackbar("작성 범위를 초과하였습니다.")
-		}
-		send_data.append("anony", is_anony);
-		for (var i = 0; i< M_files.length; i++){
-			send_data.append('files', M_list[i]);
-		}
-		let a_jax = A_JAX(TEST_IP+"post_update", "POST", token, send_data);
-		$.when(a_jax).done(function(){
-			let json = a_jax.responseJSON;
-			if (json['result'] == "success"){
-				snackbar("게실글을 성공적으로 업로드하였습니다.");
-				post_write_cancel();
-				location.reload();
-    	  	}
-    	  	else if (json['result'] == 'bad request'){
-    	  	 	snackbar("게시글 업로드를 실패하였습니다.");
-    	  	}
-    	  	else if (json['result'] == 'fail_save_file'){
-    	  		snackbar("게시글 업로드를 실패하였습니다.");
-    	  	}
-    	  	else if (json['result'] == "wrong_file"){
-    	  		snackbar("잘못된 파일 확장자명입니다.");
-    	  	}
-    	  	else {
-    	  		snackbar("게시글 업로드를 실패하였습니다.");
-    	  	}
-		});
+		que_list_element['select'] = que_container_select;
+		que_list.push(que_list_element);
 	}
+	vote['que_list'] = que_list;
+
+	send_data.append('vote', vote);
+	send_data.append('file', M_file);
+
+	let a_jax = A_JAX(TEST_IP+"post_upload", "POST", token, send_data);
+	$.when(a_jax).done(function(){
+		let json = a_jax.responseJSON;
+		if (json['result'] == "success"){
+			snackbar("설문조사를 성공적으로 업로드하였습니다.");
+			post_write_cancel();
+			location.reload();
+      	}
+      	else if (json['result'] == 'bad request'){
+      	 	snackbar("설문조사 업로드를 실패하였습니다.");
+      	}
+      	else if (json['result'] == 'fail_save_file'){
+      		snackbar("설문조사 업로드를 실패하였습니다.");
+      	}
+      	else if (json['result'] == "wrong_file"){
+      		snackbar("잘못된 파일 확장자명입니다.");
+      	}
+      	else {
+      		snackbar("설문조사 업로드를 실패하였습니다.");
+      	}
+	});
 }
+
+
+
 
 function post_write_cancel() {
 	is_postmodal_fixed_open = 0;
 	$('#M_post_fixed_title_input').val("");
+	$('#M_vote_fixed_body_input').val("");
+	$('#files_upload').val("");
 	$('#M_file_route').empty();
-	$('.note-editable').empty();
+	$('#M_vote_question_cotainer_target').empty();
+	let output = '<div class="M_vote_question_container" box_type="checkbox">\
+					<input type="text" class="M_vote_write_title" placeholder="질문을 입력해주세요." maxlength="100">\
+					<div class="M_vote_write_trash" onclick="vote_write_question_delete($(this))"><i class="fas fa-trash-alt" style="position: relative; float: right;"></i></div>\
+					<span class="M_vote_write_answer_number">1</span>\
+					<input type="text" class="M_vote_write_answer_input" placeholder="선택지를 입력해주세요." maxlength="100">\
+					<div class="M_vote_write_answer_add_container">\
+						<i class="far fa-check-square M_vote_write_answer_plus"></i>\
+						<div class="M_vote_write_answer_input" onclick="vote_write_question_select_add($(this))" alt="1">선택지를 추가하기</div>\
+					</div>\
+				</div>';
+	$('#M_vote_question_cotainer_target').append(output);
 	history.replaceState(null, null, "#list");
 	$('#M_user_post_modal_background_fixed').addClass('fadeOut');
 	$('#M_user_post_modal_background_fixed').removeClass('fadeIn');
@@ -473,7 +470,7 @@ function post_write_cancel() {
 function vote_send() {
 	let token = localStorage.getItem('modakbul_token');
 	let vote_id = $('#M_user_post_modal_container').attr('alt').split('_')[1]*1;
-	send_data = {};
+	let send_data = {};
 	let question_list = $('#M_vote_que_target').find('section').toArray();
 	let question_len = question_list.length;
 	let ans_list = [];
@@ -621,6 +618,7 @@ $("input[type=file]").change(function () {
     $('#M_file_route').empty();
     $('#M_file_route').append(string);
 });
+
 
 /*
 //디버그 확인용 코드

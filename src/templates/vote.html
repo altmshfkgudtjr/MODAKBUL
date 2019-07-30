@@ -202,16 +202,11 @@
 			<textarea type="textfield" id="M_vote_fixed_body_input" class="M_vote_fixed_body_input" placeholder="내용을 입력해주세요." maxlength="10000"></textarea>
 			<div class="M_filebox">
 				<label for="files_upload" class="M_filebox">업로드</label> 사진파일을 1개만 등록해주세요!
-				<div id="M_post_user_post_anony_container" class="M_post_user_post_anony_container">
-					<input id="M_post_user_post_anony" class="M_post_user_post_anony" type="checkbox">
-					익명
-				</div>
 				<input type="file" id="files_upload" multiple="multiple" class="M_post_fixed_attachment" max-1 maxlength="1" data-maxsize="51200" onchange="javascript:document.getElementById('M_file_route').value=this.value">
 				<div id="M_file_route" class="M_file_route"></div>
 			</div>
 			<div class="M_vote_write_line"></div>
 			<div id="M_vote_question_cotainer_target" class="M_vote_question_cotainer_target">
-				<!--여기부터 폼-->
 				<div class="M_vote_question_container" box_type="checkbox">
 					<input type="text" class="M_vote_write_title" placeholder="질문을 입력해주세요." maxlength="100">
 					<div class="M_vote_write_trash" onclick="vote_write_question_delete($(this))"><i class="fas fa-trash-alt" style="position: relative; float: right;"></i></div>
@@ -222,7 +217,6 @@
 						<div class="M_vote_write_answer_input" onclick="vote_write_question_select_add($(this))" alt="1">선택지를 추가하기</div>
 					</div>
 				</div>
-				<!--여기까지-->
 				<div class="M_vote_container_add">
 					<div class="M_vote_container_add_choice M_vote_container_add_checkbox" title="체크박스" onclick="vote_write_question_add_checkbox($(this))">
 						<i class="far fa-check-square M_vote_container_add_checkbox_icon"></i>
@@ -234,12 +228,11 @@
 						<i class="fas fa-keyboard M_vote_container_add_answer_icon"></i>
 					</div>
 				</div>
-				<div class="range-slider">
-					<div class="range-slider__bar">마감기한</div>
-					<input id="post_admin_modal_date_select" type="range" class="custom-range" orient="vertical"
-						min="0" max="30" value="0" />
-					<div class="range-slider__thumb"></div>
-				</div>
+			</div>
+			<div class="range-slider">
+				<div class="range-slider__bar">마감기한</div>
+				<input id="post_admin_modal_date_select" type="range" class="custom-range" orient="vertical" min="0" max="30" value="0" />
+				<div id="M_vote_end_date_slider" class="range-slider__thumb"></div>
 			</div>
 			<div class="M_user_post_modal_container_fixed_choice_container">
 				<div class="M_user_post_modal_container_fixed_choice" onclick="post_write_accept()" style="border-right: 1px solid #e2e2e2">적용</div>
