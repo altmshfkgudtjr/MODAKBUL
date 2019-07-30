@@ -57,7 +57,7 @@ $(window).ready(function () {
                 }
             }
             else if (board.board_name === '투표/설문조사') {
-                result_html += '<li><a class="M_nav_user_button">' +
+                result_html += '<li><a href="/vote" class="M_nav_user_button">' +
                     '<i class="far fa-check-square" style="padding: 0 22px"></i>' + board.board_name + '</a></li>';
             }
             else if (board.board_name === '통계자료') {
