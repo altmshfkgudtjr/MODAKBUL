@@ -278,6 +278,9 @@ main {
 .info_bio {
 	font-size: 1.9vh;
 }
+.main_intro {
+	line-height: 4vh;
+}
 
 /* Scene */
 .scene {
