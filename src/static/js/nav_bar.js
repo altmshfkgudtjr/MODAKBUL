@@ -1,10 +1,9 @@
 $(window).ready(function () {
 
-    let a_jax = A_JAX(TEST_IP+'get_board', 'GET', null, null);
+    let a_jax = A_JAX(TEST_IP+'get_boards', 'GET', null, null);
     $.when(a_jax).done(function () {
-        let response_data = a_jax.responseJSON.board;
+        let response_data = a_jax.responseJSON.boards;
         let result_html = '<ul id="gn-menu2" class="gn-menu">';
-
         for (let i=0; i<response_data.length; i++) {
             let board = response_data[i];
             if (board.board_name === '공지사항') {
@@ -20,14 +19,14 @@ $(window).ready(function () {
                     '<li><a onclick="M_dropdown_global($(this))" class="M_nav_user_button">' +
                     '<i id="M_studentMoneyButton" class="fas fa-file-invoice-dollar" style="padding: 0 23px"></i>학생회비내역<i id="M_dropdown_icon_money" class="fas fa-sort-down M_dropdown_icon"></i></a></li>'+
                     '<div id="M_studentMoney" class="display_none"><div>'+
-                    '<a href="board?type=장부_소프트웨어융합대학" class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>소프트웨어융합대학</a>'+
-                    '<a href="board?type=장부_컴퓨터공학과" class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>컴퓨터공학과</a>'+
-                    '<a href="board?type=장부_소프트웨어학과" class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>소프트웨어학과</a>'+
-                    '<a href="board?type=장부_정보보호학과" class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>정보보호학과</a>'+
-                    '<a href="board?type=장부_데이터사이언스학과" class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>데이터사이언스학과</a>'+
-                    '<a href="board?type=장부_지능기전공학부" class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>지능기전공학부</a>'+
-                    '<a href="board?type=장부_디자인이노베이션" class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>디자인이노베이션</a>'+
-                    '<a href="board?type=장부_만화애니메이션택" class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>만화애니메이션택</a>'+
+                    '<a href="/board?type=장부_소프트웨어융합대학" class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>소프트웨어융합대학</a>'+
+                    '<a href="/board?type=장부_컴퓨터공학과" class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>컴퓨터공학과</a>'+
+                    '<a href="/board?type=장부_소프트웨어학과" class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>소프트웨어학과</a>'+
+                    '<a href="/board?type=장부_정보보호학과" class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>정보보호학과</a>'+
+                    '<a href="/board?type=장부_데이터사이언스학과" class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>데이터사이언스학과</a>'+
+                    '<a href="/board?type=장부_지능기전공학부" class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>지능기전공학부</a>'+
+                    '<a href="/board?type=장부_디자인이노베이션" class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>디자인이노베이션</a>'+
+                    '<a href="/board?type=장부_만화애니메이션택" class="M_nav_user_button"><i class="fas fa-minus M_dropdown_hypeon"></i>만화애니메이션택</a>'+
                     '</div></div>';
             }
             else if (board.board_name === '민원') {

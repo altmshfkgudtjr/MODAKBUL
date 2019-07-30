@@ -2,7 +2,7 @@ function set_display(type) {
     let intro_main = $('.intro_main');
     let principle_bio = $('.principle_bio');
     let director_bio = $('.director_bio');
-    let contacts = $('.cotacts');
+    let contacts = $('.contacts');
 
     if (type === 0) {
         intro_main.css('display', 'inline-block');
