@@ -29,7 +29,7 @@ function user_login(){
 			// 로그인 성공 token 생성
 			localStorage.setItem('modakbul_token', json['access_token']);
 			snackbar("로그인 성공!");
-			location.href = "/";
+			setTimeout(function() {location.href = "/";}, 300);
 		}
 		else {
 			snackbar("올바르지 않은 회원 정보입니다.");
