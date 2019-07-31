@@ -401,7 +401,9 @@ function draw_like_graph(what) {
                 graph_lable_name.push(posts_like_rank[i]['post_title']);
                 graph_lable_value.push(posts_like_rank[i]['like_cnt']);
             }
-
+            
+            $('#M_statistics_graph_like_js').empty();
+            $('#M_statistics_graph_like_js').append('<canvas id="M_today_post_like" width="auto" height="auto"></canvas>');
             pie(    // HOT 게시글은 TOP 7 만 보여주기
             "M_today_post_like", //해당 캔버스 아이디
             "HOT 게시글", // 없으면 ""
