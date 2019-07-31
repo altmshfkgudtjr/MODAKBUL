@@ -112,10 +112,10 @@ function get_post_info(get_post_id) {
 			$('#M_post_url_copy').attr('alt', get_post_id);
 			$('#M_post_body_icons_data').append(json['vote']['join_cnt']);
 			$('#M_post_body').append(json['vote']['vote_content']);
-			if (json['file'].length == 0){
+			if (json['vote']['vote_file_path'] == null){
 				$('#M_vote_picture_container').addClass('display_none_important');
 			} else {
-				$('#M_vote_picture').attr('src', "../static/files/"+json['file'][0]['vote_file_path']);
+				$('#M_vote_picture').attr('src', "../static/files/"+json['vote']['vote_file_path']);
 			}
 			let que_length = json['vote']['que_list'].length;
 			for (let i = 0; i < que_length; i++){
@@ -426,9 +426,11 @@ function post_write_accept() {
       	}
       	else if (json['result'] == "wrong_file"){
       		snackbar("잘못된 파일 확장자명입니다.");
+      	} else if (json['result'] == "you are not admin"){
+      		snackbar("권한이 없습니다.");
       	}
       	else {
-      		snackbar("설문조사 업로드를 실패하였습니다.");
+      		snackbar("설문조사 업로드를 실패하였습니다!");
       	}
 	});
 }
