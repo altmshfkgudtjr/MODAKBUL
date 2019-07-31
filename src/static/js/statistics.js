@@ -77,6 +77,9 @@ function hist(id_, title_, labels_, data_, bgcolor_, tfsize_, lfsize_, fcolor_) 
 //원형그래프
 function pie(id_, title_, labels_, data_, bgcolor_, tfsize_, lfsize_, fcolor_) {
     var ctx = document.getElementById(id_);
+    function op100(value, index, array) {
+        return value + "FF";
+    }
     var myChart = new Chart(ctx, {
         type: 'pie',
         data: {
@@ -200,7 +203,7 @@ function calculate_date_list(what) {
 
 //AJAX 데이터 요청 밎 송신 (what == 'visitor' or 'post' or 'both')
 function visitor_post_graph(what, who){
-    let a_jax = A_JAX(TEST_IP+'visitor_analysis/'+31, "GET", null, null);
+    let a_jax = A_JAX(TEST_IP+'today_analysis/'+31, "GET", null, null);
     $.when(a_jax).done(function(){
         let json = a_jax.responseJSON;
         if (json['result'] == 'success'){
@@ -223,12 +226,13 @@ function visitor_post_graph(what, who){
 function draw_visitor_graph(what, json) {
     let user_color = json['user_color'];
     let font_color;
-    var graph_lable_name = calculate_date_list(what);
-    var graph_lable_value = [];    // 연산값
-    let visitor_cnt_list = json['visitor_cnt_list'];
+    let graph_lable_name = calculate_date_list(what);
+    let graph_lable_value = [];    // 연산값
+    let visitor_cnt_list = json['everyday_analysis'];
     let total_visitor = json['total_visitor'];
+    let today_visitor = json['today_visitor'];
     $('#M_statistics_today_data').empty();
-    $('#M_statistics_today_data').append(visitor_cnt_list[visitor_cnt_list.length-1]['visitor_cnt']);  //오늘 방문자수
+    $('#M_statistics_today_data').append(today_visitor);  //오늘 방문자수
     $('#M_statistics_today_all_data').empty();
     $('#M_statistics_today_all_data').append(total_visitor);
     //visitor_cnt_list 가 7개 미만일 경우
@@ -269,7 +273,6 @@ function draw_visitor_graph(what, json) {
                 font_color = '#e2e2e2';
             }
         }
-        $('#M_today_visitors_graph').remove();
         $('#M_statistics_graph_visitor_js').empty();
         $('#M_statistics_graph_visitor_js').append('<canvas id="M_today_visitors_graph" width="auto" height="auto"></canvas>');
         //선형 그래프
@@ -290,15 +293,9 @@ function draw_visitor_graph(what, json) {
 function draw_post_upload_graph(what, json) {
     let user_color = json['user_color'];
     let font_color;
-    var graph_lable_name = calculate_date_list(what);
-    var graph_lable_value = [];    // 연산값
-    let a_jax = A_JAX(TEST_IP+'visitor_analysis/'+31, "GET", null, null);
-    let visitor_cnt_list = json['visitor_cnt_list'];
-    let total_visitor = json['total_visitor'];
-    $('#M_statistics_today_data').empty();
-    $('#M_statistics_today_data').append(visitor_cnt_list[visitor_cnt_list.length-1]['visitor_cnt']);  //오늘 방문자수
-    $('#M_statistics_today_all_data').empty();
-    $('#M_statistics_today_all_data').append(total_visitor);
+    let graph_lable_name = calculate_date_list(what);
+    let graph_lable_value = [];    // 연산값
+    let visitor_cnt_list = json['everyday_analysis'];
     //visitor_cnt_list 가 7개 미만일 경우
     if (visitor_cnt_list.length < 7){
         graph_lable_name = [];
@@ -309,14 +306,14 @@ function draw_post_upload_graph(what, json) {
     }
     if (what == 'week'){
         for (let i = visitor_cnt_list.length - 7; i< visitor_cnt_list.length; i++){
-            graph_lable_value.push(visitor_cnt_list[i]['visitor_cnt']*1);
+            graph_lable_value.push(visitor_cnt_list[i]['posts_cnt']*1);
         }
     } else if (what == 'month'){
         let j = 6;
         for (let i = visitor_cnt_list.length - 1; i >= 0; i--){
             let time = new Date(Date.parse(visitor_cnt_list[i]['v_date']));
             if (time.getDate()*1 == graph_lable_name[j]){
-                graph_lable_value.unshift(visitor_cnt_list[i]['visitor_cnt']);
+                graph_lable_value.unshift(visitor_cnt_list[i]['posts_cnt']);
                 j -= 1;
             }
         }
@@ -338,12 +335,11 @@ function draw_post_upload_graph(what, json) {
                 font_color = '#e2e2e2';
             }
         }
-        $('#M_today_post_upload_graph').remove();
         $('#M_statistics_graph_post_upload_js').empty();
         $('#M_statistics_graph_post_upload_js').append('<canvas id="M_today_post_upload_graph" width="auto" height="auto"></canvas>');
         //선형 그래프
         line(
-            "M_today_visitors_graph",   // target ID
+            "M_today_post_upload_graph", // target ID
             "방문자 수",                 // graph title
             graph_lable_name,           // lable_name_list
             graph_lable_value,          // lable_value_list
@@ -355,11 +351,54 @@ function draw_post_upload_graph(what, json) {
     }
 }
 
+//좋아요 그래프 그리는 함수 
+function draw_like_graph() {
+    let font_color;
+    let graph_lable_name = [];
+    let graph_lable_value = [];    // 연산값
+    a_jax = A_JAX(TEST_IP+'like_analysis/'+30, "GET", null, null);
+    $.when(a_jax).done(function(){
+        let json = a_jax.responseJSON;
+        if (json['result'] == 'success'){
+            if (localStorage.getItem('modakbul_theme') != null){
+                if (localStorage.getItem('modakbul_theme') == 'white'){
+                    font_color = '#5f6f81';
+                } else {
+                    font_color = '#e2e2e2';
+                }
+            }
+
+
+            /*나머지 기능 채워넣기*/
+
+            pie(    // HOT 게시글은 TOP 7 만 보여주기
+            "M_today_post_like", //해당 캔버스 아이디
+            "HOT 게시글", // 없으면 ""
+            ['25' ,'26', '27', '28', '29', '30', '31'], //레이블
+            [12, 19, 20, 54, 42, 31, 17],               // 각 레이블의 값
+            ['#FF6384',        // 각 막대의 색깔(모든 리스트의 길이는 같게)
+            '#36A2EB',
+            '#FFCE56',
+            '#4BC0C0',
+            '#9966FF',
+            '#FF9F40',
+            '#2EFE2E'],
+            20,  // 제목폰트
+            20,  // 라벨 폰트
+            font_color // 모든 글씨 색깔
+            );
+        } else {
+            snackbar("일시적인 오류로 정보를 가져오지 못하였습니다.");
+            return;
+        }
+    });
+}
+
+
 //document load시 실행되는함수
 function statistics(){
     $('html').animate({scrollTop : 0}, 400);
     printClock();   // 현재시간 JS
-    visitor_post_graph('both');
+    visitor_post_graph('week' ,'both');
+    //draw_like_graph();
 }
-
-

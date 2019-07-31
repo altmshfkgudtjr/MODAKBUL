@@ -143,8 +143,8 @@
 		</div>
 		<!--change button form two-->
 		<div class="M_statistics_button_container">
-			<button class="M_statistics_button_two" style="border-right: 1.5px solid #e2e2e2" onclick="draw_visitor_graph('week')">일주일</button>
-			<button class="M_statistics_button_two" onclick="draw_visitor_graph('month')">한달</button>
+			<button class="M_statistics_button_two" style="border-right: 1.5px solid #e2e2e2" onclick="visitor_post_graph('week', 'visitor')">일주일</button>
+			<button class="M_statistics_button_two" onclick="visitor_post_graph('month', 'visitor')">한달</button>
 		</div>
 		<!--Today post upload graph-->
 		<div id="M_statistics_graph_post_upload_js" class="chart-container M_statistics_graph_all_css">
@@ -152,8 +152,12 @@
 		</div>
 		<!--change button form two-->
 		<div class="M_statistics_button_container">
-			<button class="M_statistics_button_two" style="border-right: 1.5px solid #e2e2e2" onclick="draw_post_upload_graph('week')">일주일</button>
-			<button class="M_statistics_button_two" onclick="draw_post_upload_graph('month')">한달</button>
+			<button class="M_statistics_button_two" style="border-right: 1.5px solid #e2e2e2" onclick="visitor_post_graph('week', 'post')">일주일</button>
+			<button class="M_statistics_button_two" onclick="visitor_post_graph('month', 'post')">한달</button>
+		</div>
+		<!--like post graph-->
+		<div id="M_statistics_graph_like_js" class="chart-container M_statistics_graph_all_css">
+			<canvas id="M_today_post_like"width="auto" height="auto"></canvas>
 		</div>
 		<!--change button form three-->
 		<div class="M_statistics_button_container">
