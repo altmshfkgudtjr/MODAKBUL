@@ -1,3 +1,10 @@
+//미디어쿼리 폰트 크기
+let label_font_size_media = 20;
+if (window.innerWidth < 450){
+    label_font_size_media = 10;
+}
+
+
 //시간 보여주는 함수
 function printClock() {   
     var clock = document.getElementById("M_statistics_time_js");            // 출력할 장소 선택
@@ -47,8 +54,8 @@ function hist(id_, title_, labels_, data_, bgcolor_, tfsize_, lfsize_, fcolor_) 
         },
         options:{
              tooltips: {
-                titleFontSize: lfsize_,
-                bodyFontSize: lfsize_,
+                titleFontSize: tfsize_,
+                bodyFontSize: tfsize_,
                 //titleFontFamily: ,
                 //bodyFontFamily: ,
             },
@@ -66,9 +73,17 @@ function hist(id_, title_, labels_, data_, bgcolor_, tfsize_, lfsize_, fcolor_) 
             scales: {
                 yAxes: [{
                     display: false,
+                    ticks: {
+                    fontSize : lfsize_,
+                    fontColor: fcolor_,
+                }
                 }],
                 xAxes: [{
                     display: false,
+                    ticks: {
+                    fontSize : lfsize_,
+                    fontColor: fcolor_,
+                }
                 }]
             }
         }
@@ -108,13 +123,12 @@ function pie(id_, title_, labels_, data_, bgcolor_, tfsize_, lfsize_, fcolor_) {
                 fontColor: fcolor_,
                 //fontFamily: ,
             },
-             tooltips: {
-                titleFontSize: lfsize_,
-                bodyFontSize: lfsize_,
+            tooltips: {
+                titleFontSize: tfsize_,
+                bodyFontSize: tfsize_,
                 //titleFontFamily: ,
                 //bodyFontFamily: ,
             }
-           
         }
     });
 }
@@ -148,8 +162,8 @@ function line(id_, title_, labels_, data_, bgcolor_, tfsize_, lfsize_, fcolor_) 
                 //fontFamily: ,
             },
              tooltips: {
-                titleFontSize: lfsize_,
-                bodyFontSize: lfsize_,
+                titleFontSize: tfsize_,
+                bodyFontSize: tfsize_,
                 displayColors: true,
                 //titleFontFamily: ,
                 //bodyFontFamily: ,
@@ -158,14 +172,14 @@ function line(id_, title_, labels_, data_, bgcolor_, tfsize_, lfsize_, fcolor_) 
                 yAxes: [{
                     display: true,
                     ticks: {
-                    fontSize : tfsize_,
+                    fontSize : lfsize_,
                     fontColor: fcolor_,
                 }
                 }],
                 xAxes: [{
                     display: true,
                     ticks: {
-                    fontSize : tfsize_,
+                    fontSize : lfsize_,
                     fontColor: fcolor_,
                 }
                 }]
@@ -283,7 +297,7 @@ function draw_visitor_graph(what, json) {
             graph_lable_value,          // lable_value_list
             user_color,                // line_color
             20,                         // title_font_size
-            20,                         // label_font-size
+            label_font_size_media,      // label_font-size
             font_color                  // font_color
             );
     }
@@ -345,18 +359,26 @@ function draw_post_upload_graph(what, json) {
             graph_lable_value,          // lable_value_list
             user_color,                // line_color
             20,                         // title_font_size
-            20,                         // label_font-size
+            label_font_size_media,      // label_font-size
             font_color                  // font_color
             );
     }
 }
 
 //좋아요 그래프 그리는 함수 
-function draw_like_graph() {
+function draw_like_graph(what) {
+    let what_num = 7;
+    if (what == 'today'){
+        what_num = 1;
+    } else if (what == 'week'){
+        what_num == 7;
+    } else if (what == 'month'){
+        what_num == 30;
+    }
     let font_color;
     let graph_lable_name = [];
     let graph_lable_value = [];    // 연산값
-    a_jax = A_JAX(TEST_IP+'like_analysis/'+30, "GET", null, null);
+    a_jax = A_JAX(TEST_IP+'posts_like_rank/'+what_num, "GET", null, null);
     $.when(a_jax).done(function(){
         let json = a_jax.responseJSON;
         if (json['result'] == 'success'){
@@ -367,15 +389,24 @@ function draw_like_graph() {
                     font_color = '#e2e2e2';
                 }
             }
-
-
-            /*나머지 기능 채워넣기*/
+            let posts_like_rank = json['posts_like_rank'];
+            let posts_like_rank_len = posts_like_rank.length;
+            if (posts_like_rank_len > 7){
+                posts_like_rank_len = 7;
+            }
+            for (let i = 0; i < posts_like_rank_len; i++){
+                if (posts_like_rank[i]['post_title'].length > 15){
+                    posts_like_rank[i]['post_title'] = posts_like_rank[i]['post_title'].slice(0,15) + "..";
+                }
+                graph_lable_name.push(posts_like_rank[i]['post_title']);
+                graph_lable_value.push(posts_like_rank[i]['like_cnt']);
+            }
 
             pie(    // HOT 게시글은 TOP 7 만 보여주기
             "M_today_post_like", //해당 캔버스 아이디
             "HOT 게시글", // 없으면 ""
-            ['25' ,'26', '27', '28', '29', '30', '31'], //레이블
-            [12, 19, 20, 54, 42, 31, 17],               // 각 레이블의 값
+            graph_lable_name, //레이블
+            graph_lable_value,               // 각 레이블의 값
             ['#FF6384',        // 각 막대의 색깔(모든 리스트의 길이는 같게)
             '#36A2EB',
             '#FFCE56',
@@ -384,7 +415,7 @@ function draw_like_graph() {
             '#FF9F40',
             '#2EFE2E'],
             20,  // 제목폰트
-            20,  // 라벨 폰트
+            label_font_size_media,  // 라벨 폰트
             font_color // 모든 글씨 색깔
             );
         } else {
@@ -400,5 +431,5 @@ function statistics(){
     $('html').animate({scrollTop : 0}, 400);
     printClock();   // 현재시간 JS
     visitor_post_graph('week' ,'both');
-    //draw_like_graph();
+    draw_like_graph('week');
 }
