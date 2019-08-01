@@ -1,3 +1,5 @@
+let vote_list_for_search;
+//modal 관련 변수
 var is_votemodal_open = 0;
 var is_votemodal_fixed_open = 0;
 var now_postmodal_top = 0;
@@ -522,8 +524,19 @@ function draw_view_graph(what) {
 }
 
 //설문조사 검색 함수
-function search_vote_analysistics() {
-    console.log("hello");
+function search_vote_analysistics(tag) {
+    let target = $('#M_statistics_vote_list_target');
+    let value = tag.val();
+    for (let i = 0; i < vote_list_for_search.length; i++){
+        let num = vote_list_for_search[i]['vote_id'];
+        $('div[alt=vote_'+num+']').css('display', 'block');
+    }
+    for(let i = 0; i < vote_list_for_search.length; i++){
+        if (vote_list_for_search[i]['vote_title'].indexOf(value) == -1){
+            let num = vote_list_for_search[i]['vote_id'];
+            $('div[alt=vote_'+num+']').css('display', 'none');
+        }
+    }
 }
 //설문조사 리스트 반환 함수
 function search_vote_analysistics_list() {
@@ -547,7 +560,7 @@ function search_vote_analysistics_list() {
                     let undone_div_class = ' M_statistics_undone_vote ' + div_class;
                     $("#M_statistics_vote_list_target")
                         .append(
-                            '<div class="' + undone_div_class + '" onclick="votemodal_open('+ vote_id +')">' +
+                            '<div class="' + undone_div_class + '" onclick="votemodal_open('+ vote_id +')"  alt="vote_'+ vote_id +'">' +
                             '<div class="M_vote_date_title">기간 : </div>' +
                             '<div class="M_time_info">'+ start_time + ' ~ </div>' +
                             '<div class="M_time_info">'+ end_time + '</div>' +
@@ -567,7 +580,7 @@ function search_vote_analysistics_list() {
                     let done_div_class = ' M_statistics_done_vote ' + div_class;
                     $("#M_statistics_vote_list_target")
                         .append(
-                            '<div class="' + done_div_class + ' M_statistics_done_vote" onclick="votemodal_open('+ vote_id +')">' +
+                            '<div class="' + done_div_class + ' M_statistics_done_vote" onclick="votemodal_open('+ vote_id +')" alt="vote_'+ vote_id +'">' +
                             '<div class="M_vote_date_title">기간 : </div>' +
                             '<div class="M_time_info">'+ start_time + ' ~ </div>' +
                             '<div class="M_time_info">'+ end_time + '</div>' +
@@ -576,6 +589,8 @@ function search_vote_analysistics_list() {
                             '<div class="M_board_content_title">'+ title +'</div>' +
                             '</div>');
                 }
+                //모든 vote 리스트
+                vote_list_for_search = undone_list.concat(done_list);
         } else {
             snackbar("일시적인 오류로 정보를 가져오지 못하였습니다.");
         }
@@ -685,7 +700,6 @@ function get_vote_info(get_vote_id) {
             }
             let que_list = json['vote']['que_list'];
             let que_len = que_list.length;
-            console.log(que_list);
             $('#M_vote_que_target').empty();    // Graph 들어갈 target 비워주기
             for (let i = 0; i < que_len; i++){
                 //그래프 요소
@@ -717,7 +731,7 @@ function get_vote_info(get_vote_id) {
                         graph_lable_value.push(select_list[j]['select_cnt']);
                         graph_lable_color.push(all_graph_lable_color[i]);
                     }
-                    $('#M_vote_que_target').append('<div class="chart-container M_statistics_body_check_type" style="cursor: pointer; height: '+graph_height+'px" onclick="statistics_admin_check_user('+que_id+')">\
+                    $('#M_vote_que_target').append('<div class="chart-container M_statistics_body_check_type animated" style="cursor: pointer; height: '+graph_height+'px" onclick="statistics_admin_check_user($(this),'+que_id+')" data-wow-duration = "0.6s" alt="que_'+que_id+'">\
                                                         <canvas id="hist'+que_id+'"" width="auto" height="auto"></canvas>\
                                                     </div>');
                     hist(
@@ -735,7 +749,7 @@ function get_vote_info(get_vote_id) {
                     graph_lable_name.push("참여 인원 수");
                     graph_lable_value.push(json['vote']['join_cnt']);
                     graph_lable_color.push(all_graph_lable_color[i]);
-                    $('#M_vote_que_target').append('<div class="chart-container M_statistics_body_check_type" style="cursor: pointer" onclick="statistics_admin_check_user('+que_id+')">\
+                    $('#M_vote_que_target').append('<div class="chart-container M_statistics_body_answer_type animated" style="cursor: pointer" onclick="statistics_admin_check_user($(this),'+que_id+')" data-wow-duration = "0.6s" alt="que_'+que_id+'">\
                                                         <canvas id="hist'+que_id+'"" width="auto" height="auto"></canvas>\
                                                     </div>');
                      hist(
@@ -772,13 +786,77 @@ function empty_vote_info(){
 }
 
 //어드민일시, 투표 유저 확인 함수
-function statistics_admin_check_user(que_id) {
-    console.log(que_id);
+function statistics_admin_check_user(tag, que_id) {
+    let token = localStorage.getItem('modakbul_token');
+    if (token != null){
+        if (tag.hasClass('M_statistics_body_answer_type')){
+            let a_jax = A_JAX(TEST_IP+"get_vote_select_status_user/"+que_id, "GET", token, null);
+            $.when(a_jax).done(function(){
+                let json = a_jax.responseJSON;
+                if (json['result'] == 'success'){
+                    let div_height = tag.height() + 50; //px
+                    tag.addClass('flipOutX');       //변환 before
+                    let div_create = document.createElement('div');
+                    div_create.classList.add("M_statistics_body_answer_type_user");
+                    div_create.classList.add("display_none_important");
+                    div_create.classList.add("animated");
+                    div_create.setAttribute('onclick', 'return_user_to_graph($(this), '+que_id+')');
+                    div_create.setAttribute('data_wow-duration','0.6s');
+                    let select_user_list = json['select_user_list'];
+                    for (let i = 0; i< select_user_list.length; i++){
+                        let p_create = document.createElement('p');
+                        p_create.classList.add("M_statistics_body_answer_type_user_info");
+                        p_create.append(select_user_list[i]['answer']);
+                        div_create.append(p_create);
+                    }
+                    tag.before($(div_create));
+                    setTimeout(function() {
+                        tag.toggleClass('display_none_important');
+                        div_create.classList.remove("display_none_important");
+                        div_create.classList.add('flipInX');
+                        tag.removeClass('flipOutX');
+                    }, 600);
+                } else if (json['result'] == 'bad request'){
+                    snackbar("잘못된 접근입니다.");
+                } else if (json['result'] == 'you are not admin'){
+                    return;
+                } else {
+                    snackbar("일시적인 오류로 정보를 가져오지 못하였습니다.");
+                }
+            });
+        } else {
+            tag.addClass('rubberBand');
+            setTimeout(function() {
+                tag.removeClass('rubberBand');
+            }, 600);
+        }
+    } else {
+        tag.addClass('rubberBand');
+        setTimeout(function() {
+            tag.removeClass('rubberBand');
+        }, 600);
+    }
+}
+
+//다시 그래프로 되돌리기 함수
+function return_user_to_graph(tag, que_id) {
+    let graph = $('div[alt=que_'+que_id+']');
+    tag.removeClass('flipInX');
+    tag.addClass('flipOutX');
+    setTimeout(function() {
+        tag.remove();
+        graph.removeClass('display_none_important');
+        graph.addClass('flipInX');
+        setTimeout(function() {
+            graph.removeClass('flipInX');
+        }, 600);
+    }, 600);
 }
 
 
 //document load시 실행되는함수
 function statistics(){
+    $('#M_statistics_vote_list_target').empty();
     $('html').animate({scrollTop : 0}, 400);
     printClock();   // 현재시간 JS
     visitor_post_graph('week' ,'both');

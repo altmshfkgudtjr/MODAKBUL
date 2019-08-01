@@ -186,10 +186,10 @@
 		<div class="M_statistics_vote_list_container">
 			<div class=" M_statistics_vote_list_search">
 				<i class="fas fa-search M_statistics_vote_list_search_icon"></i>
-				<input type="text" class="M_statistics_vote_list_serach_input" autocomplete="off" placeholder="설문조사 명을 입력해주세요!" onkeyup="search_vote_analysistics()">
+				<input type="text" class="M_statistics_vote_list_serach_input" autocomplete="off" placeholder="설문조사 명을 입력해주세요!" onkeyup="search_vote_analysistics($(this))">
 			</div>
 			<div id="M_statistics_vote_list_target" class="M_statistics_vote_list_target">
-				
+
 			</div>
 		</div>
 	</div>
@@ -215,7 +215,7 @@
 			<div id="M_vote_que_target" class="M_vote_que_target">
 				<!--question target point-->
 			</div>
-			<div class="M_post_body_line" style="margin-bottom: 10px"></div>
+			<div class="M_post_body_line" style="margin: 10px 0"></div>
 			<div class="M_vote_body_icon_container">
 				<i class="fas fa-male M_vote_content_icon_footer"></i>
 				<span id="M_vote_body_icons_data" class="M_vote_body_icon_data"></span>
@@ -305,6 +305,6 @@
 <script src="../static/js/board.js"></script>
 <script src="../static/js/nav_bar.js"></script>
 <script src="../static/js/postmodal.js"></script>
-<script src="../static/js/historyback.js"></script>
+<script src="../static/js/historyback_statistics.js"></script>
 <script src="../static/js/statistics.js"></script>
 </html>

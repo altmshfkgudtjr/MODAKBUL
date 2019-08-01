@@ -165,6 +165,9 @@ function comment_enter() {
 					}
 				});
 			}
+			else if (json['result'] == "unavailable word"){
+    	  		snackbar("내용에 욕설이 들어가있습니다.");
+    	  	}
 			else if (json['result'] == "bad request"){
 				snackbar("다시 로그인해주세요.");
 			}
@@ -684,6 +687,9 @@ function post_write_accept() {
     	  	else if (json['result'] == "wrong_file"){
     	  		snackbar("잘못된 파일 확장자명입니다.");
     	  	}
+    	  	else if (json['result'] == "unavailable word"){
+    	  		snackbar("내용에 욕설이 들어가있습니다.");
+    	  	}
     	  	else {
     	  		snackbar("게시글 업로드를 실패하였습니다.");
     	  	}
@@ -722,6 +728,9 @@ function post_write_accept() {
     	  	}
     	  	else if (json['result'] == "wrong_file"){
     	  		snackbar("잘못된 파일 확장자명입니다.");
+    	  	}
+    	  	else if (json['result'] == "unavailable word"){
+    	  		snackbar("내용에 욕설이 들어가있습니다.");
     	  	}
     	  	else {
     	  		snackbar("게시글 업로드를 실패하였습니다.");
