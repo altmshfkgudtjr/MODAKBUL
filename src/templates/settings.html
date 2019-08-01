@@ -30,6 +30,8 @@
     <!--custom css-->
     <link rel="stylesheet" type="text/css" href="../static/css/main.css">
     <link rel="stylesheet" type="text/css" href="../static/css/settings.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 </head>
 
 
@@ -328,12 +330,47 @@
             # 메뉴 관리
         </div>
         <div class="M_nav_list">
-            <ul id="sortable">
-                <li class="M_board_list_item"><i class="fas fa-bullhorn" style="margin-right: 5%;"></i> 공지사항2 </li>
-                <li class="M_board_list_item"><i class="fas fa-bullhorn" style="margin-right: 5%;"></i> 공지사항3 </li>
-                <li class="M_board_list_item"><i class="fas fa-bullhorn" style="margin-right: 5%;"></i> 공지사항4 </li>
-                <li class="M_board_list_item"><i class="fas fa-bullhorn" style="margin-right: 5%;"></i> 공지사항5 </li>
-            </ul>
+            <!--
+            <div id="M_sortable_list">
+                <div class="M_sortable M_sortable_menu">공지사항</div>
+                <div class="M_sortable M_sortable_menu">학생회 소개</div>
+                <div id="M_sortable_menu_accounts_list" class="M_sortable M_sortable_menu">학생회비 내역
+                    <div class="M_sortable M_sortable_menu_accounts">
+                        소프트웨어융합대학
+                    </div>
+                    <div class="M_sortable M_sortable_menu_accounts">
+                        컴퓨터공학과
+                    </div>
+                    <div class="M_sortable M_sortable_menu_accounts">
+                        소프트웨어학과
+                    </div>
+                    <div class="M_sortable M_sortable_menu_accounts">
+                        정보보호학과
+                    </div>
+                    <div class="M_sortable M_sortable_menu_accounts">
+                        데이터사이언스학과
+                    </div>
+                    <div class="M_sortable M_sortable_menu_accounts">
+                        지능기전공학부
+                    </div>
+                </div>
+                <div class="M_sortable M_sortable_menu">민원</div>
+                <div class="M_sortable M_sortable_menu">갤러리</div>
+                <div id="M_sortable_menu_activities_list" class="M_sortable M_sortable_menu">
+                    대외활동
+                    <div class="M_sortable M_sortable_menu_activities">
+                        공모전
+                    </div>
+                    <div class="M_sortable M_sortable_menu_activities">
+                        취업
+                    </div>
+                </div>
+                <div class="M_sortable M_sortable_menu">통계자료</div>
+            </div>
+            -->
+            <div id="M_sortable_list">
+
+            </div>
         </div>
     </div>
 </div>
@@ -375,9 +412,7 @@
 <script src="../static/js/test_url.js"></script>
 <script src="../static/js/login.js"></script>
 <script src="../static/js/themeChange.js"></script>
-<script src="../static/js/board.js"></script>
 <script src="../static/js/nav_bar.js"></script>
-<script src="../static/js/postmodal.js"></script>
-<script src="../static/js/historyback.js"></script>
 <script src="../static/js/setting.js"></script>
+<script src="../static/js/drag_drop.js"></script>
 </html>

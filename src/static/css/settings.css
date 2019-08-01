@@ -116,3 +116,22 @@ input {
 .M_board_list_item:hover {
     background-color: gray;
 }
+
+.M_sortable  {
+    position: relative;
+    display: block;
+    padding: .75rem 1.25rem;
+    margin-bottom: -1px;
+    margin-top: 10px;
+    background-color: rgba(20,30,50,0.3);
+    border: 1px solid rgba(0,0,0,.125);
+}
+.M_nav_list {
+    width: 60%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.M_nav_list::-webkit-scrollbar {
+    display: none;
+}

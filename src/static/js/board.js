@@ -21,7 +21,8 @@ $(window).ready(function() {
            }
            $('.M_board_tag_container').append(tags);
 
-           console.log()
+           console.log(ajax_board.responseJSON.board.board_access)
+           /*
            if (ajax_board.responseJSON.board.board_access == 0)
            {
                $('#ss_menu').addClass("display_none_important");
@@ -30,7 +31,7 @@ $(window).ready(function() {
                {
                $('#ss_menu').removeClass("display_none_important");
            }
-
+*/
        }
     });
 

@@ -16,11 +16,8 @@ function A_JAX(url, type, token, data){
         beforeSend: function (xhr)
         {
             let token = localStorage.getItem('modakbul_token');
-            console.log(token);
-            console.log(url);
             if (token)
             {
-                console.log('hi')
                 xhr.setRequestHeader("Authorization", "Bearer "+token);
             }
         }
