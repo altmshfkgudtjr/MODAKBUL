@@ -1,12 +1,3 @@
-function format_time(raw_data) {
-    raw_data = raw_data.split(' ');
-    let date = raw_data[1];
-    let month = raw_data[2];
-    let year = raw_data[3];
-    let time = raw_data[4];
-
-    return year+'년 '+month+'월 '+date+'일 '+time;
-}
 let flag = true;
 
 let searchParams = new URLSearchParams(window.location.search);
@@ -18,17 +9,28 @@ $(window).ready(function() {
     $.when(ajax_board).done(function () {
        if (ajax_board.responseJSON['result'] == 'success') {
            let tags = '';
-           /*
-           for (let i=0; i<ajax_board.responseJSON.board.length; i++){
-               tags += '<h5 class="M_board_tag_title"> # ' + ajax_board.responseJSON.board.board_name + '</h5>';
-           }*/
-           tags = '<h5 class="M_board_tag_title"> # ' + ajax_board.responseJSON.board.board_name + '</h5>';
-
+           if (ajax_board.responseJSON.board.board_url.split('_')[1] === undefined)
+           {
+               tags = '<h5 class="M_board_tag_title"> # ' + ajax_board.responseJSON.board.board_name + '</h5>';
+           }
+           else
+           {
+               let tag1 = ajax_board.responseJSON.board.board_url.split('_')[0];
+               let tag2 = ajax_board.responseJSON.board.board_name;
+               tags = '<h5 class="M_board_tag_title"> # ' + tag1 + ' # ' + tag2 + '</h5>';
+           }
            $('.M_board_tag_container').append(tags);
-           /*
-           if (ajax_board.board.board_access === 1) {
 
-           }*/
+           console.log()
+           if (ajax_board.responseJSON.board.board_access == 0)
+           {
+               $('#ss_menu').addClass("display_none_important");
+           }
+           else
+               {
+               $('#ss_menu').removeClass("display_none_important");
+           }
+
        }
     });
 

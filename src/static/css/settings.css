@@ -1,0 +1,118 @@
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+input {
+
+    background: inherit;
+    border: 2px solid gray;
+    width: 70%;
+    padding: 1%;
+}
+
+.M_settings_nav {
+    text-align: center;
+    width: 20%;
+    display: inline-block;
+    border-right: 2px solid grey;
+    margin-top: 12%;
+    margin-bottom: 12%;
+}
+.M_settings_nav_title {
+    font-size: 2.5vh;
+    margin-bottom: 20%;
+    margin-top: 10%;
+}
+.M_settings_nav_content {
+    height: 50px;
+    line-height: 50px;
+    font-size: 2.2vh;
+    cursor: pointer;
+}
+.M_settings_nav_content:hover {
+    background-color: rgb(74, 78, 82);
+}
+.M_settings_nav_content:first-child {
+    margin-top: 30%;
+}
+.M_settings_nav_content:last-child {
+    margin-bottom: 30%;
+}
+.M_setting {
+    display: inline-block;
+    width: 80%;
+    float: right;
+    height: 90%;
+    padding: 5%;
+    position: absolute;
+}
+.M_settings_title {
+    font-size: 2.5vh;
+    margin-bottom: 7%;
+}
+.M_logo_wrapper {
+    display: inline-block;
+    width: 35%;
+    height: 80%;
+}
+.M_union_info_wrapper {
+    display: inline-block;
+    width: 65%;
+    float: right;
+    height: 80%;
+}
+.M_settings_subtitle_wrapper {
+    height: 25px;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 2vh;
+}
+.M_setting_tag {
+    width: 11px;
+    height: 100%;
+    background: #fff;
+    float: left;
+    border-radius: 3px;
+    margin-right: 1vw;
+}
+.M_setting_subtitle {
+    height: 25px;
+    line-height: 25px;
+    display: inline-block;
+}
+.M_image_warning {
+    font-size: 0.56vw;
+    margin-top: 2%;
+}
+.M_union_info_input {
+    background: inherit;
+    border: 2px solid gray;
+    width: 70%;
+    padding: 1%;
+    margin-bottom: 3vh;
+}
+.M_bio_input {
+    margin-bottom: 3%;
+    background: inherit;
+    border: 2px solid gray;
+    width: 70%;
+    padding: 1%;
+}
+.M_user_search_wrapper {
+    margin-bottom: 2vh;
+    width: 30vw;
+}
+
+#sortable {
+    list-style-type: none;
+}
+.M_board_list_item {
+    width: 30%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+.M_board_list_item:hover {
+    background-color: gray;
+}
