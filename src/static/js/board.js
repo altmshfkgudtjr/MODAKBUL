@@ -1,12 +1,3 @@
-function format_time(raw_data) {
-    raw_data = raw_data.split(' ');
-    let date = raw_data[1];
-    let month = raw_data[2];
-    let year = raw_data[3];
-    let time = raw_data[4];
-
-    return year+'년 '+month+'월 '+date+'일 '+time;
-}
 let flag = true;
 
 let searchParams = new URLSearchParams(window.location.search);

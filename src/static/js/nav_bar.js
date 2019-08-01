@@ -1,5 +1,4 @@
 $(window).ready(function () {
-
     let a_jax = A_JAX(TEST_IP+'get_boards', 'GET', null, null);
     $.when(a_jax).done(function () {
         let response_data = a_jax.responseJSON.boards;
@@ -91,7 +90,6 @@ $(window).ready(function () {
 
             }
         }
-
         result_html += '</ul>';
         $('#gn-scroller').append(result_html);
         setTheme();

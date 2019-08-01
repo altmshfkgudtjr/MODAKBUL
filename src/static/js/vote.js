@@ -426,9 +426,13 @@ function post_write_accept() {
       	}
       	else if (json['result'] == "wrong_file"){
       		snackbar("잘못된 파일 확장자명입니다.");
-      	} else if (json['result'] == "you are not admin"){
+      	} 
+      	else if (json['result'] == "you are not admin"){
       		snackbar("권한이 없습니다.");
       	}
+      	else if (json['result'] == "unavailable word"){
+    	  		snackbar("내용에 욕설이 들어가있습니다.");
+    	  	}
       	else {
       		snackbar("설문조사 업로드를 실패하였습니다!");
       	}
@@ -537,7 +541,9 @@ function vote_send() {
 			snackbar("이미 투표한 설문조사입니다.");
 		} else if (json['result'] == "admin can not vote"){
 			snackbar("관리자는 투표에 참여할 수 없습니다.");
-		} else {
+		} else if (json['result'] == "unavailable word"){
+    		snackbar("내용에 욕설이 들어가있습니다.");
+    	} else {
 		 	snackbar("일시적인 오류로 정보를 보내지 못하였습니다.");
 		 }
 	});

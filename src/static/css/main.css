@@ -1687,11 +1687,11 @@ a:focus {
 }
 @media screen and (max-width: 500px){
   .M_post_user_comment_input {
-    width: 80%;
+    width: 77%;
     padding: 10px;
   }
   .M_post_user_comment_anony_container {
-    width: 19%;
+    width: 23%;
   }
 }
 .M_post_comment_line {
@@ -1749,8 +1749,8 @@ a:focus {
 @media screen and (max-width: 850px){
   .M_post_user_comment_container_fixed {
     width: 99%;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 }
 /*post modal fixed ========================================================================*/
@@ -1882,6 +1882,16 @@ a:focus {
   margin-top: 10px;
   padding: 5px;
   padding-left: 10px;
+}
+.M_post_checkbox_container {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 100%;
+  height: 45px;
+  padding: 10px 10px;
+  font-size: 18px;
+  line-height: 22px;
 }
 .M_user_post_modal_container_fixed_choice_container{
   position: relative;
@@ -2644,4 +2654,125 @@ button:focus {
 }
 .M_statistics_body_answer_type_user_info:nth-child(odd){
   background-color: rgba(0,0,0,0.05);
+}
+
+/*checkbox CSS =======================================*/
+.CB_switch {
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 25px;
+}
+
+.CB_switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.CB_slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.CB_slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 2.8px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .CB_slider {
+  background-color: #01DF01;
+}
+
+input:focus + .CB_slider {
+  box-shadow: 0 0 1px #01DF01;
+}
+
+input:checked + .CB_slider:before {
+  -webkit-transform: translateX(19px);
+  -ms-transform: translateX(19px);
+  transform: translateX(19px);
+}
+
+/* Rounded sliders */
+.CB_slider.CB_round {
+  border-radius: 34px;
+}
+
+.CB_slider.CB_round:before {
+  border-radius: 50%;
+}
+/*checkbox comment ==========================================================*/
+.CB_switch_comment {
+  position: relative;
+  display: inline-block;
+  width: 35px;
+  height: 20px;
+}
+
+.CB_switch_comment input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.CB_slider_comment {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.CB_slider_comment:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .CB_slider_comment {
+  background-color: #01DF01;
+}
+
+input:focus + .CB_slider_comment {
+  box-shadow: 0 0 1px #01DF01;
+}
+
+input:checked + .CB_slider_comment:before {
+  -webkit-transform: translateX(15px);
+  -ms-transform: translateX(15px);
+  transform: translateX(15px);
+}
+
+/* Rounded sliders */
+.CB_slider_comment.CB_round_comment {
+  border-radius: 34px;
+}
+
+.CB_slider_comment.CB_round_comment:before {
+  border-radius: 50%;
 }

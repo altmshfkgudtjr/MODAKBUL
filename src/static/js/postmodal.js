@@ -646,6 +646,7 @@ function post_write_accept() {
 	}
 	let token = localStorage.getItem('modakbul_token');
 	let is_anony = 0;
+	let is_secret = 0;
 	let content = $('.note-editable').html();
 	let send_data = new FormData();
 	var M_files = document.getElementById('files_upload').files;
@@ -657,6 +658,9 @@ function post_write_accept() {
 		if ($('input:checkbox[id="M_post_user_post_anony"]').is(":checked") == true){
 			is_anony = 1;
 		}
+		if ($('input:checkbox[id="M_post_user_post_secret"]').is(":checked") == true){
+			is_secret = 1;
+		}
 		send_data.append("title", $('#M_post_fixed_title_input').val());
 		send_data.append("content", content);
 		if (content.length >= 50000){
@@ -665,6 +669,10 @@ function post_write_accept() {
 		}
 		let searchParams = new URLSearchParams(window.location.search);
 		let request_board = searchParams.get('type');
+		if (is_secret ==1) {
+			request_board += "_비밀글";
+		}
+		console.log(request_board);
 		send_data.append("anony", is_anony);
 		send_data.append("tags", request_board);
 		for (var i = 0; i< M_files.length; i++){
@@ -674,7 +682,7 @@ function post_write_accept() {
 		$.when(a_jax).done(function(){
 			let json = a_jax.responseJSON;
 			if (json['result'] == "success"){
-				snackbar("게실글을 성공적으로 업로드하였습니다.");
+				snackbar("게시글을 성공적으로 업로드하였습니다.");
 				post_write_cancel();
 				location.reload();
     	  	}
