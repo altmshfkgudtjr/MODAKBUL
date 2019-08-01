@@ -5,6 +5,7 @@ var now_postmodal_top = 0;
 var is_image_modal_open = 0;
 var img_set = ['png', 'jpg', 'jpeg', 'gif', 'bmp'];
 var file_path = "../static/files/";
+
 function postmodal_open(get_post_id){
 	let token = localStorage.getItem('modakbul_token');
 	if (token == null){
@@ -95,7 +96,6 @@ $(document).keydown(function(event){
 		}
 	}
 });
-
 //포스트 정보 가져오는 함수
 function get_post_info(get_post_id) {
 	let token = localStorage.getItem('modakbul_token');
@@ -574,7 +574,7 @@ function vote_write_question_add_checkbox(tag) {
 						<div class="M_vote_write_answer_input" onclick="vote_write_question_select_add($(this))" alt="1">선택지를 추가하기</div>\
 					</div>\
 				</div>';
-	tag.parent('div').before(output);
+	tag.parent('div').prev().append(output);
 }
 
 function vote_write_question_add_radio(tag) {
@@ -588,7 +588,7 @@ function vote_write_question_add_radio(tag) {
 						<div class="M_vote_write_answer_input" onclick="vote_write_question_select_add($(this))" alt="1">선택지를 추가하기</div>\
 					</div>\
 				</div>';
-	tag.parent('div').before(output);
+	tag.parent('div').prev().append(output);
 }
 
 function vote_write_question_add_answer(tag) {
@@ -597,7 +597,7 @@ function vote_write_question_add_answer(tag) {
 					<div class="M_vote_write_trash" onclick="vote_write_question_delete($(this))"><i class="fas fa-trash-alt" style="position: relative; float: right;"></i></div>\
 					<input type="text" class="M_vote_write_answer_input_answer" value="단답형 양식입니다." maxlength="100" readonly>\
 				</div>';
-	tag.parent('div').before(output);
+	tag.parent('div').prev().append(output);
 }
 
 /*업로드 파일 관리*/
