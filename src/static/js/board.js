@@ -56,7 +56,7 @@ $(window).ready(function() {
                     let user_color = data.author_color;
                     let is_image_icon = data.img_cnt;
                     let is_attachment_icon = data.file_cnt;
-                    let is_lock_icon = data.private;
+                    let is_lock_icon = data.post_secret;
                     let user_name = data.author_name;
                     if (user_name == null){
                         user_name = "익명";
@@ -126,7 +126,7 @@ $(window).scroll(function() {
                             let user_color = data.author_color;
                             let is_image_icon = data.img_cnt;
                             let is_attachment_icon = data.file_cnt;
-                            let is_lock_icon = data.private;
+                            let is_lock_icon = data.post_secret;
                             let user_name = data.author_name;
                             if (user_name == null){
                                 user_name = "익명";

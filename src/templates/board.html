@@ -167,8 +167,11 @@
 		</div>
 		<div id="M_post_user_comment_container" class="M_post_user_comment_container_fixed">
 			<div id="M_post_user_comment_anony_container" class="M_post_user_comment_anony_container">
-				<input id="M_post_user_comment_anony" class="M_post_user_comment_anony" class="M_post_user_comment_anony" type="checkbox">
-				익명
+				<span>익명</span>
+				<label class="CB_switch_comment">
+					<input id="M_post_user_comment_anony" type="checkbox">
+					<span class="CB_slider_comment CB_round_comment"></span>
+				</label>
 			</div>
 			<input type="text" id="M_post_user_comment_input" class="M_post_user_comment_input" placeholder="댓글을 입력해주세요." onkeyup="comment_enter()" autocomplete="off">
 		</div>
@@ -206,17 +209,26 @@
 			<div id="summernote"></div>
 			<div class="M_filebox">
 				<label for="files_upload" class="M_filebox">업로드</label> 10개까지 등록할 수 있습니다.
-				<div id="M_post_user_post_anony_container" class="M_post_user_post_anony_container">
-					<input id="M_post_user_post_anony" class="M_post_user_post_anony" type="checkbox">
-					익명
-				</div>
 				<input type="file" id="files_upload" multiple="multiple" class="M_post_fixed_attachment" max-10 maxlength="10" data-maxsize="51200" onchange="javascript:document.getElementById('M_file_route').value=this.value">
 				<div id="M_file_route" class="M_file_route">
+				</div>
 			</div>
-		</div>
-		<div class="M_user_post_modal_container_fixed_choice_container">
-			<div class="M_user_post_modal_container_fixed_choice" onclick="post_write_accept()" style="border-right: 1px solid #e2e2e2">적용</div>
-			<div class="M_user_post_modal_container_fixed_choice" onclick="post_write_cancel()">취소</div>
+			<div class="M_post_checkbox_container">
+				<span>비밀글</span>
+				<label class="CB_switch" style="margin-right: 20px">
+					<input id="M_post_user_post_secret" type="checkbox">
+					<span class="CB_slider CB_round"></span>
+				</label>
+				<span>익명글</span>
+				<label class="CB_switch">
+					<input id="M_post_user_post_anony" type="checkbox">
+					<span class="CB_slider CB_round"></span>
+				</label>
+			</div>
+			<div class="M_user_post_modal_container_fixed_choice_container">
+				<div class="M_user_post_modal_container_fixed_choice" onclick="post_write_accept()" style="border-right: 1px solid #e2e2e2">적용</div>
+				<div class="M_user_post_modal_container_fixed_choice" onclick="post_write_cancel()">취소</div>
+			</div>
 		</div>
 	</div>
 </body>

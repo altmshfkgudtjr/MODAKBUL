@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
 	<title>세종대학교 소프트웨어융합대학</title>
 	<meta name="keywords" content="세종대학교,소프트웨어융합대학,소융대">
 	<meta name="author" content="Team IML">
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1 user-scalable=no">
 	<!-- 모바일 브라우저 상태바 컬러 -->
 	<meta name="theme-color" content="white">
 	<!-- 모닥불 shortcut 아이콘 -->
@@ -13,7 +13,6 @@
 	<link rel="apple-touch-icon-precomposed" type="image/png" href="../static/image/ModakbulLOGO.png">
 	<!-- 아이콘 -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-
 	<link rel="stylesheet" type="text/css" href="../static/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 	<!--CSS-->
 	<link href="../static/css/style.min.css" rel="stylesheet">
@@ -24,25 +23,22 @@
 	<link rel="stylesheet" type="text/css" href="../static/css/fire.css">
 	<!--animation css-->
 	<link rel="stylesheet" type="text/css" href="../static/css/animation/animate.css">
-	<!--color css-->
+	<!--color-->
 	<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-	<!--gallery css-->
-	<link rel="stylesheet" type="text/css" href="../static/vendor/IsometricGrids/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" href="../static/vendor/IsometricGrids/css/demo.css" />
-	<link rel="stylesheet" type="text/css" href="../static/vendor/IsometricGrids/css/component.css" />
-	<!--post_menu_button-->
-	<link rel="stylesheet" type="text/css" href="../static/css/post_menu_button.css">
-	<!--textarea editor-->
-	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">
-	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css">
+	<!--google analytics JS-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js" integrity="sha256-qSIshlknROr4J8GMHRlW3fGKrPki733tLq+qeMCR05Q=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js" integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css" integrity="sha256-IvM9nJf/b5l2RoebiFno92E5ONttVyaEEsdemDC6iQA=" crossorigin="anonymous" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js" integrity="sha256-arMsf+3JJK2LoTGqxfnuJPFTU4hAK57MtIPdFpiHXOU=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+	<script src="../static/js/graph_.js" type="text/javascript"></script>
 	<!--custom css-->
 	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
 </head>
 
-
-<body class="demo-1 M_white_theme" onload="setTheme(); get_user_info(); image_init()">
+<!--body-->
+<body class="M_white_theme" onload="setTheme(); get_user_info(); statistics();">
 	<!--Side Menu : necessary-->
 	<div id="M_nav_container" class="container M_sidemenu">
 		<ul id="gn-menu" class="gn-menu-main M_boxshadow">
@@ -98,13 +94,13 @@
 					<div class="M_nav_border"></div>
 					<a class="M_nav_user_button" onclick="user_logout()">로그아웃</a>
 					<div class="M_nav_border"></div>
-					<a class="M_nav_user_button" onclick="changeTheme()"><i id="M_theme" class="M_theme fas fa-moon"></i></a>
+					<a class="M_nav_user_button" onclick="changeTheme(); statistics();"><i id="M_theme" class="M_theme fas fa-moon"></i></a>
 				</div>
 				<!--비로그인시-->
 				<div id="M_nav_user_nologin" class="M_nav_user M_boxshadow_user M_nav_user_nologin display_none">
 					<a class="M_nav_user_button" href="/sign-in">로그인</a>
 					<div class="M_nav_border"></div>
-					<a class="M_nav_user_button" onclick="changeTheme()"><i id="M_theme" class="M_theme fas fa-moon"></i></a>
+					<a class="M_nav_user_button" onclick="changeTheme(); statistics();"><i id="M_theme" class="M_theme fas fa-moon"></i></a>
 				</div>
 			</li>
 		</ul>
@@ -122,7 +118,6 @@
 				<div class="user_color_selector_info_content">
 					<div class="user_color_selector_info_content_label user_color_selected_change"></div>
 					<div id="user_color_selector_info_content_name" class="user_color_selector_info_content_name"></div>
-
 				</div>
 			</div>
 		</div>
@@ -131,16 +126,101 @@
 			<div class="M_user_color_select_choice" onclick="user_color_select_cancel()">취소</div>
 		</div>
 	</div>
-	<!--Body-->
-	<div class="M_image_content_title">#갤러리</div>
-	<div class="M_body">
-		<div class="M_image_contents_container">
-			<main>
-				<div class="isolayer isolayer--scroll1 isolayer--shadow abcdefg">
-					<ul id="M_image_container" class="grid grid--effect-flip">
-					</ul>
+	<!--Real body-->
+	<div class="M_body" style="display: inline-block;">
+		<div class="M_statistics_time_container">
+			<div id="M_statistics_time_js" class="M_statistics_time"></div>
+		</div>
+		<div class="M_statistics_today_container">
+			<div class="M_statistics_today_title">오늘 방문자 수</div>
+			<p id="M_statistics_today_data" class="M_statistics_today_info">-</p>
+			<div class="M_statistics_today_title">전체 방문자 수</div>
+			<p id="M_statistics_today_all_data" class="M_statistics_today_info">-</p>
+		</div>
+		<div class="M_graph_box_container">
+			<!--Today vistior graph-->
+			<div id="M_statistics_graph_visitor_js" class="chart-container M_statistics_graph_all_css">
+				<canvas id="M_today_visitors_graph" width="auto" height="auto"></canvas>
+			</div>
+			<!--change button form two-->
+			<div class="M_statistics_button_container">
+				<button class="M_statistics_button_two" style="border-right: 1.5px solid #e2e2e2" onclick="visitor_post_graph('week', 'visitor')">일주일</button>
+				<button class="M_statistics_button_two" onclick="visitor_post_graph('month', 'visitor')">한달</button>
+			</div>
+		</div>
+		<div class="M_graph_box_container">
+			<!--Today post upload graph-->
+			<div id="M_statistics_graph_post_upload_js" class="chart-container M_statistics_graph_all_css">
+				<canvas id="M_today_post_upload_graph" width="auto" height="auto"></canvas>
+			</div>
+			<!--change button form two-->
+			<div class="M_statistics_button_container">
+				<button class="M_statistics_button_two" style="border-right: 1.5px solid #e2e2e2" onclick="visitor_post_graph('week', 'post')">일주일</button>
+				<button class="M_statistics_button_two" onclick="visitor_post_graph('month', 'post')">한달</button>
+			</div>
+		</div>
+		<div class="M_graph_box_container">
+			<!--like post graph-->
+			<div id="M_statistics_graph_like_js" class="chart-container M_statistics_graph_all_css">
+				<canvas id="M_today_post_like"width="auto" height="auto"></canvas>
+			</div>
+			<!--change button form three-->
+			<div class="M_statistics_button_container">
+				<button class="M_statistics_button" style="border-right: 1.5px solid #e2e2e2" onclick="draw_like_graph('today')">하루</button>
+				<button class="M_statistics_button" style="border-right: 1.5px solid #e2e2e2" onclick="draw_like_graph('week')">일주일</button>
+				<button class="M_statistics_button" onclick="draw_like_graph('month')">한달</button>
+			</div>
+		</div>
+		<div class="M_graph_box_container">
+			<!--view post graph-->
+			<div id="M_statistics_graph_view_js" class="chart-container M_statistics_graph_all_css">
+				<canvas id="M_today_post_view"width="auto" height="auto"></canvas>
+			</div>
+			<!--change button form three-->
+			<div class="M_statistics_button_container">
+				<button class="M_statistics_button" style="border-right: 1.5px solid #e2e2e2" onclick="draw_view_graph('today')">하루</button>
+				<button class="M_statistics_button" style="border-right: 1.5px solid #e2e2e2" onclick="draw_view_graph('week')">일주일</button>
+				<button class="M_statistics_button" onclick="draw_view_graph('month')">한달</button>
+			</div>
+		</div>
+		<div class="M_statistics_vote_list_container">
+			<div class=" M_statistics_vote_list_search">
+				<i class="fas fa-search M_statistics_vote_list_search_icon"></i>
+				<input type="text" class="M_statistics_vote_list_serach_input" autocomplete="off" placeholder="설문조사 명을 입력해주세요!" onkeyup="search_vote_analysistics($(this))">
+			</div>
+			<div id="M_statistics_vote_list_target" class="M_statistics_vote_list_target">
+
+			</div>
+		</div>
+	</div>
+	<!--vote modal-->
+	<div id="M_user_vote_modal_background" class="M_user_post_modal_background animated wow display_none" data-wow-duration = "0.4s">
+		<div id="M_user_vote_modal_container" class="M_info_div M_user_post_modal_container animated wow M_boxshadow display_none" data-wow-duration = "0.4s">
+			<div class="M_vote_top_container">
+				<div id="M_vote_profile_color" class="M_post_profile_color"></div>
+				<div id="M_vote_author" class="M_post_author"></div>
+				<div class="M_vote_date_container">
+					<div class="M_vote_date_title">기간 : </div>
+					<div id="M_vote_start_date" class="M_vote_time" style="margin-left: 5px"></div>
+					<span class="M_post_time"> ~ </span>
+					<div id="M_vote_end_date" class="M_vote_time"></div>
 				</div>
-			</main>
+			</div>
+			<div id="M_vote_top_title" class="M_vote_top_title" style="margin-top: 20px"></div>
+			<div id="M_vote_picture_container" class="M_vote_picture_container">
+				<img src="#" id="M_vote_picture" class="M_vote_picture" onclick="image_modal_open(this)">
+			</div>
+			<div id="M_vote_body" class="M_vote_body"></div>
+			<div class="M_post_body_line"></div>
+			<div id="M_vote_que_target" class="M_vote_que_target">
+				<!--question target point-->
+			</div>
+			<div class="M_post_body_line" style="margin: 10px 0"></div>
+			<div class="M_vote_body_icon_container">
+				<i class="fas fa-male M_vote_content_icon_footer"></i>
+				<span id="M_vote_body_icons_data" class="M_vote_body_icon_data"></span>
+			</div>
+			<div class="M_vote_empty_box"></div>
 		</div>
 	</div>
 	<!--Post modal-->
@@ -177,27 +257,10 @@
 		</div>
 		<div id="M_post_user_comment_container" class="M_post_user_comment_container_fixed">
 			<div id="M_post_user_comment_anony_container" class="M_post_user_comment_anony_container">
-				<span>익명</span>
-				<label class="CB_switch_comment">
-					<input id="M_post_user_comment_anony" type="checkbox">
-					<span class="CB_slider_comment CB_round_comment"></span>
-				</label>
+				<input id="M_post_user_comment_anony" class="M_post_user_comment_anony" class="M_post_user_comment_anony" type="checkbox">
+				익명
 			</div>
 			<input type="text" id="M_post_user_comment_input" class="M_post_user_comment_input" placeholder="댓글을 입력해주세요." onkeyup="comment_enter()" autocomplete="off">
-		</div>
-	</div>
-	<!--menu control button-->
-	<div id="M_menu_button_container">
-		<div id='ss_menu'>
-		  <div id="M_menu_button_write" onclick="post_write()"> <i class="fas fa-plus"></i> </div>
-		  <div id="M_menu_button_trash" class="display_none_important" onclick="post_delete()"> <i class="fas fa-trash-alt"></i> </div>
-		  <div id="M_menu_button_modify" class="display_none_important" onclick="post_modify()"> <i class="fas fa-pen-nib"></i> </div>
-		  <div></div>
-		  <div class='menu'>
-		    <div class='share' id='ss_toggle' data-rot='180'>
-		      <div class='circle'></div>
-		    </div>
-		  </div>
 		</div>
 	</div>
 	<!--imagemodal-->
@@ -205,41 +268,9 @@
 		<img id="M_image_modal_container" src="../static/image/foot.png" class="M_image_modal_container" onclick="image_modal_close()">
 	</div>
 	<!--Page footer-->
-	<div class="M_footer">
+	<div class="M_footer M_static_footer">
 		<img src="../static/image/foot.png" class="M_footer_img">
 		<p class="M_footer_p">010-7393-3434 | sejong1sc@gmail.com | 학생회관 409호<br>COPYRIGHT ⓒ 2019 Team IML</p>
-	</div>
-	<!--post control modal-->
-	<div id="M_user_post_modal_background_fixed" class="M_user_post_modal_background_fixed display_none wow animated" data-wow-duration = "0.4s"></div>
-		<div id="M_user_post_modal_container_fixed" class="M_info_div M_boxshadow M_user_post_modal_container_fixed animated display_none wow" data-wow-duration = "0.4s">
-			<h1 class="M_post_fixed_info">포스트 작성</h1>
-			<h4 class="M_post_fixed_title">제목</h4>
-			<input type="text" id="M_post_fixed_title_input" class="M_post_fixed_title_input" placeholder="제목을 입력해주세요." autocomplete="off" maxlength="100" required="">
-			<h4 class="M_post_fixed_title">내용</h4>
-			<div id="summernote"></div>
-			<div class="M_filebox">
-				<label for="files_upload" class="M_filebox">업로드</label> 10개까지 등록할 수 있습니다.
-				<input type="file" id="files_upload" multiple="multiple" class="M_post_fixed_attachment" max-10 maxlength="10" data-maxsize="51200" onchange="javascript:document.getElementById('M_file_route').value=this.value">
-				<div id="M_file_route" class="M_file_route">
-				</div>
-			</div>
-			<div class="M_post_checkbox_container">
-				<span>비밀글</span>
-				<label class="CB_switch" style="margin-right: 20px">
-					<input id="M_post_user_post_secret" type="checkbox">
-					<span class="CB_slider CB_round"></span>
-				</label>
-				<span>익명글</span>
-				<label class="CB_switch">
-					<input id="M_post_user_post_anony" type="checkbox">
-					<span class="CB_slider CB_round"></span>
-				</label>
-			</div>
-			<div class="M_user_post_modal_container_fixed_choice_container">
-				<div class="M_user_post_modal_container_fixed_choice" onclick="post_write_accept()" style="border-right: 1px solid #e2e2e2">적용</div>
-				<div class="M_user_post_modal_container_fixed_choice" onclick="post_write_cancel()">취소</div>
-			</div>
-		</div>
 	</div>
 </body>
 
@@ -256,9 +287,7 @@
 <script src="../static/js/sidemenu/classie.js"></script>
 <script src="../static/js/sidemenu/gnmenu.js"></script>
 <script src="../static/js/sidemenu/dropdown.js"></script>
-<script>
-	new gnMenu( document.getElementById( 'gn-menu' ) );
-</script>
+<script>new gnMenu( document.getElementById( 'gn-menu' ) );</script>
 <!--animation-->
 <script src="../static/js/scroll/wow.min.js"></script>
 <script>new WOW().init();</script>
@@ -269,21 +298,6 @@
 <script src="../static/js/color/usercolor.js"></script>
 <!--post_menu_button JS-->
 <script src="../static/js/post_menu_button.js"></script>
-<!--post editor JS-->
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js"></script>
-<!--gallery JS-->
-<script src="../static/vendor/IsometricGrids/js/modernizr.custom.js"></script>
-<script src="../static/vendor/IsometricGrids/js/modernizrNext.js"></script>
-<script src="../static/vendor/IsometricGrids/js/imagesloaded.pkgd.min.js"></script>
-<script src="../static/vendor/IsometricGrids/js/masonry.pkgd.min.js"></script>
-<script src="../static/vendor/IsometricGrids/js/dynamics.min.js"></script>
-<script src="../static/vendor/IsometricGrids/js/animOnScroll.js"></script>
-<script src="../static/vendor/IsometricGrids/js/main.js"></script>
-<script src="../static/js/image.js"></script>
 <!--custom JS-->
 <script src="../static/js/test_url.js"></script>
 <script src="../static/js/login.js"></script>
@@ -291,43 +305,6 @@
 <script src="../static/js/board.js"></script>
 <script src="../static/js/nav_bar.js"></script>
 <script src="../static/js/postmodal.js"></script>
-<script src="../static/js/historyback.js"></script>
-<script>
-	M_summernote_change();
-	$(document).ready(function() {
-	  $('#summernote').summernote({
-	  	fontNames: ['NanumGothic', 'sans-serif', 'serif'],
-        placeholder: '내용을 입력해주세요.',
-        tabsize: 2,
-        minHeight: 450,
-        maxHeight: 450,
-        height: 450,
-        toolbar: [
-  		// [groupName, [list of button]]
-  		['style', ['bold', 'italic', 'underline', 'clear']],
-  		['fontsize', ['fontsize']],
-  		['color', ['color']],
-  		['undo', ['undo']]
-  		],
-  		callbacks: {
-  			onInit: function() {
-  				M_summernote_init();
-  			}
-  		}
-      });
-      $("input[type=file]").change(function () {
-            let fileInput = document.getElementById("files_upload");
-            let files = fileInput.files;
-            let file;
-            let string = "";
-            for (let i = 0; i < files.length; i++) {
-                file = files[i];
-                string += file.name;
-                string += " / ";
-            }
-            $('#M_file_route').empty();
-            $('#M_file_route').append(string);
-        });
-	});
-</script>
+<script src="../static/js/historyback_statistics.js"></script>
+<script src="../static/js/statistics.js"></script>
 </html>

@@ -165,6 +165,9 @@ function comment_enter() {
 					}
 				});
 			}
+			else if (json['result'] == "unavailable word"){
+    	  		snackbar("내용에 욕설이 들어가있습니다.");
+    	  	}
 			else if (json['result'] == "bad request"){
 				snackbar("다시 로그인해주세요.");
 			}
@@ -213,6 +216,7 @@ function get_post_info(get_post_id) {
 	}
 	$.when(a_jax).done(function(){
 		var json = a_jax.responseJSON;
+		console.log(json);
 		if (json['result'] == "success"){
 			is_post_property = json['property']*1;
 			$('#M_user_post_modal_container').attr('alt', "post_"+json['post']['post_id']);
@@ -293,7 +297,13 @@ function get_post_info(get_post_id) {
 				let comment_double_icon = document.createElement('i');
 				comment_double_icon.classList.add("fas", "fa-comment", 'M_comment_double');
 				comment_double_icon.setAttribute('onclick', "double_comment_button_check("+json['comment'][i]['comment_id']+")");
-				if (user_comments_id.includes(json['comment'][i]['comment_id'])){
+				if (json['admin'] == 1){
+					let comment_trash_icon = document.createElement('i');
+					comment_trash_icon.classList.add("fas", "fa-trash-alt", 'M_comment_double');
+					comment_trash_icon.setAttribute('onclick', "comment_trash_button("+json['comment'][i]['comment_id']+")");
+					top_container.append(comment_trash_icon);
+				}
+				else if (user_comments_id.includes(json['comment'][i]['comment_id'])){
 					let comment_trash_icon = document.createElement('i');
 					comment_trash_icon.classList.add("fas", "fa-trash-alt", 'M_comment_double');
 					comment_trash_icon.setAttribute('onclick', "comment_trash_button("+json['comment'][i]['comment_id']+")");
@@ -323,7 +333,13 @@ function get_post_info(get_post_id) {
 					let d_comment_time = document.createElement('div');
 					d_comment_time.classList.add('M_comment_time');
 					d_comment_time.append("| "+json['comment'][i]['double_comment'][j]['comment_date']);
-					if (user_comments_id.includes(json['comment'][i]['double_comment'][j]['comment_id'])){
+					if (json['admin'] == 1){
+						let d_comment_trash_icon = document.createElement('i');
+						d_comment_trash_icon.classList.add("fas", "fa-trash-alt", 'M_comment_double');
+						d_comment_trash_icon.setAttribute('onclick', "comment_trash_button("+json['comment'][i]['double_comment'][j]['comment_id']+")");
+						d_top_container.append(d_comment_trash_icon);
+					}
+					else if (user_comments_id.includes(json['comment'][i]['double_comment'][j]['comment_id'])){
 						let d_comment_trash_icon = document.createElement('i');
 						d_comment_trash_icon.classList.add("fas", "fa-trash-alt", 'M_comment_double');
 						d_comment_trash_icon.setAttribute('onclick', "comment_trash_button("+json['comment'][i]['double_comment'][j]['comment_id']+")");
@@ -488,11 +504,11 @@ function image_modal_open(tag){
 }
 
 function image_modal_close(){
-	is_image_modal_open = 0;
 	$('#M_image_modal_background').addClass('fadeOut');
 	$('#M_image_modal_background').removeClass('fadeIn');
 	setTimeout(function(){
   		$('#M_image_modal_background').addClass('display_none');
+  		is_image_modal_open = 0;
   	}, 400);
 	$('html').scrollTop(now_postmodal_top);
 }
@@ -643,6 +659,7 @@ function post_write_accept() {
 	}
 	let token = localStorage.getItem('modakbul_token');
 	let is_anony = 0;
+	let is_secret = 0;
 	let content = $('.note-editable').html();
 	let send_data = new FormData();
 	var M_files = document.getElementById('files_upload').files;
@@ -654,6 +671,9 @@ function post_write_accept() {
 		if ($('input:checkbox[id="M_post_user_post_anony"]').is(":checked") == true){
 			is_anony = 1;
 		}
+		if ($('input:checkbox[id="M_post_user_post_secret"]').is(":checked") == true){
+			is_secret = 1;
+		}
 		send_data.append("title", $('#M_post_fixed_title_input').val());
 		send_data.append("content", content);
 		if (content.length >= 50000){
@@ -662,8 +682,8 @@ function post_write_accept() {
 		}
 		let searchParams = new URLSearchParams(window.location.search);
 		let request_board = searchParams.get('type');
+		send_data.append("secret", is_secret);
 		send_data.append("anony", is_anony);
-		console.log(request_board);
 		send_data.append("tags", request_board);
 		for (var i = 0; i< M_files.length; i++){
 			send_data.append('files', M_list[i]);
@@ -672,7 +692,7 @@ function post_write_accept() {
 		$.when(a_jax).done(function(){
 			let json = a_jax.responseJSON;
 			if (json['result'] == "success"){
-				snackbar("게실글을 성공적으로 업로드하였습니다.");
+				snackbar("게시글을 성공적으로 업로드하였습니다.");
 				post_write_cancel();
 				location.reload();
     	  	}
@@ -684,6 +704,12 @@ function post_write_accept() {
     	  	}
     	  	else if (json['result'] == "wrong_file"){
     	  		snackbar("잘못된 파일 확장자명입니다.");
+    	  	}
+    	  	else if (json['result'] == "unavailable word"){
+    	  		snackbar("내용에 욕설이 들어가있습니다.");
+    	  	}
+    	  	else if (json['result'] == "do not access"){
+    	  		snackbar("권한이 없습니다.");
     	  	}
     	  	else {
     	  		snackbar("게시글 업로드를 실패하였습니다.");
@@ -696,6 +722,9 @@ function post_write_accept() {
 		if ($('input:checkbox[id="M_post_user_post_anony"]').is(":checked") == true){
 			is_anony = 1;
 		}
+		if ($('input:checkbox[id="M_post_user_post_secret"]').is(":checked") == true){
+			is_secret = 1;
+		}
 		send_data.append("post_id", $('#M_user_post_modal_container_fixed').attr('alt').split('_')[1]*1);
 		send_data.append("title", $('#M_post_fixed_title_input').val());
 		send_data.append("content", content);
@@ -704,10 +733,11 @@ function post_write_accept() {
 			return;
 		}
 		send_data.append("anony", is_anony);
+		send_data.append("secret", is_secret);
 		for (var i = 0; i< M_files.length; i++){
 			send_data.append('files', M_list[i]);
 		}
-		let a_jax = A_JAX(TEST_IP+"post_update", "POST", token, send_data);
+		let a_jax = A_JAX_FILE(TEST_IP+"post_update", "POST", token, send_data);
 		$.when(a_jax).done(function(){
 			let json = a_jax.responseJSON;
 			if (json['result'] == "success"){
@@ -723,6 +753,9 @@ function post_write_accept() {
     	  	}
     	  	else if (json['result'] == "wrong_file"){
     	  		snackbar("잘못된 파일 확장자명입니다.");
+    	  	}
+    	  	else if (json['result'] == "unavailable word"){
+    	  		snackbar("내용에 욕설이 들어가있습니다.");
     	  	}
     	  	else {
     	  		snackbar("게시글 업로드를 실패하였습니다.");
