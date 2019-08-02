@@ -297,7 +297,7 @@ function get_post_info(get_post_id) {
 				let comment_double_icon = document.createElement('i');
 				comment_double_icon.classList.add("fas", "fa-comment", 'M_comment_double');
 				comment_double_icon.setAttribute('onclick', "double_comment_button_check("+json['comment'][i]['comment_id']+")");
-				if (json['admin'] == 1){
+				if (json.hasOwnProperty('admin')){
 					let comment_trash_icon = document.createElement('i');
 					comment_trash_icon.classList.add("fas", "fa-trash-alt", 'M_comment_double');
 					comment_trash_icon.setAttribute('onclick', "comment_trash_button("+json['comment'][i]['comment_id']+")");
@@ -333,7 +333,7 @@ function get_post_info(get_post_id) {
 					let d_comment_time = document.createElement('div');
 					d_comment_time.classList.add('M_comment_time');
 					d_comment_time.append("| "+json['comment'][i]['double_comment'][j]['comment_date']);
-					if (json['admin'] == 1){
+					if (json.hasOwnProperty('admin')){
 						let d_comment_trash_icon = document.createElement('i');
 						d_comment_trash_icon.classList.add("fas", "fa-trash-alt", 'M_comment_double');
 						d_comment_trash_icon.setAttribute('onclick', "comment_trash_button("+json['comment'][i]['double_comment'][j]['comment_id']+")");
