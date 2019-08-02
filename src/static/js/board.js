@@ -9,17 +9,29 @@ $(window).ready(function() {
     $.when(ajax_board).done(function () {
        if (ajax_board.responseJSON['result'] == 'success') {
            let tags = '';
-           /*
-           for (let i=0; i<ajax_board.responseJSON.board.length; i++){
-               tags += '<h5 class="M_board_tag_title"> # ' + ajax_board.responseJSON.board.board_name + '</h5>';
-           }*/
-           tags = '<h5 class="M_board_tag_title"> # ' + ajax_board.responseJSON.board.board_name + '</h5>';
-
+           if (ajax_board.responseJSON.board.board_url.split('_')[1] === undefined)
+           {
+               tags = '<h5 class="M_board_tag_title"> # ' + ajax_board.responseJSON.board.board_name + '</h5>';
+           }
+           else
+           {
+               let tag1 = ajax_board.responseJSON.board.board_url.split('_')[0];
+               let tag2 = ajax_board.responseJSON.board.board_name;
+               tags = '<h5 class="M_board_tag_title"> # ' + tag1 + ' # ' + tag2 + '</h5>';
+           }
            $('.M_board_tag_container').append(tags);
-           /*
-           if (ajax_board.board.board_access === 1) {
 
-           }*/
+           console.log(ajax_board.responseJSON.board.board_access)
+           /*
+           if (ajax_board.responseJSON.board.board_access == 0)
+           {
+               $('#ss_menu').addClass("display_none_important");
+           }
+           else
+               {
+               $('#ss_menu').removeClass("display_none_important");
+           }
+*/
        }
     });
 
