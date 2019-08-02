@@ -8,7 +8,14 @@ var img_set = ['png', 'jpg', 'jpeg', 'gif', 'bmp'];
 var file_path = "../static/files/";
 var is_post_modify = 0;
 var is_post_property = 0;
+function postpage_open(get_post_href, get_post_id){
+	let a_jax = A_JAX(TEST_IP+"view_up/"+get_post_id, "GET", null, null);
+	window.open(get_post_href, '_blank');
+}
+
 function postmodal_open(get_post_id){
+	let searchParams = new URLSearchParams(window.location.search);
+	let request_board = searchParams.get('type');
 	is_post_like = 0;
 	get_post_info(get_post_id);
 	$('#M_menu_button_modify').removeClass('display_none_important');
@@ -216,7 +223,6 @@ function get_post_info(get_post_id) {
 	}
 	$.when(a_jax).done(function(){
 		var json = a_jax.responseJSON;
-		console.log(json);
 		if (json['result'] == "success"){
 			is_post_property = json['property']*1;
 			$('#M_user_post_modal_container').attr('alt', "post_"+json['post']['post_id']);
@@ -472,7 +478,7 @@ function comment_trash_button(comment_id) {
 		snackbar('잘못된 접근입니다.');
 		return;
 	} else {
-		if (user_comments_id.includes(comment_id)){
+		if ($('#M_user_content_number').text() == 'admin'){
 			let token = localStorage.getItem('modakbul_token');
 			a_jax = A_JAX(TEST_IP+"comment_delete/"+comment_id, "GET", token, null);
 			$.when(a_jax).done(function(){
@@ -482,6 +488,27 @@ function comment_trash_button(comment_id) {
 					empty_post_info();
 					let get_post_id =$('#M_user_post_modal_container').attr('alt').split('_')[1]*1;
 					get_post_info(get_post_id);
+				} else if (json['result'] == 'bad request'){
+					snackbar("권한이 없습니다.");
+				} else {
+					snackbar("잘못된 접근입니다.");
+				}
+			});
+		}
+		else if (user_comments_id.includes(comment_id)){
+			let token = localStorage.getItem('modakbul_token');
+			a_jax = A_JAX(TEST_IP+"comment_delete/"+comment_id, "GET", token, null);
+			$.when(a_jax).done(function(){
+				json = a_jax.responseJSON;
+				if (json['result'] == 'success'){
+					snackbar("댓글을 삭제하였습니다.");
+					empty_post_info();
+					let get_post_id =$('#M_user_post_modal_container').attr('alt').split('_')[1]*1;
+					get_post_info(get_post_id);
+				} else if (json['result'] == 'bad request'){
+					snackbar("권한이 없습니다.");
+				} else {
+					snackbar("잘못된 접근입니다.");
 				}
 			});
 		} else {

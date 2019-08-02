@@ -56,10 +56,10 @@ $(document).mouseup(function (e) {
 function search_enter(){
 	search_bar_value = 0;
     if (window.event.keyCode == 13) {
-    	var search_bar = $("#M_search_bar");
-    	search_bar.removeClass("fadeInDown");
-		search_bar.addClass("fadeOutUp");
-		setTimeout(function(){search_bar.addClass("display_none")}, 400);
-		$("#M_search_input").val("")
+    	let search_user_value = $("#M_search_input").val();
+    	$("#M_search_input").val("");
+    	search_user_value = search_user_value.replace(/ /gi, "&");
+    	location.href = "/board?type=검색&search="+search_user_value;
+
     }
 }
