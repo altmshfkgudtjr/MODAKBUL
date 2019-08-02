@@ -819,6 +819,10 @@ function statistics_admin_check_user(tag, que_id) {
                 } else if (json['result'] == 'bad request'){
                     snackbar("잘못된 접근입니다.");
                 } else if (json['result'] == 'you are not admin'){
+                    tag.addClass('rubberBand');
+                    setTimeout(function() {
+                        tag.removeClass('rubberBand');
+                    }, 600);
                     return;
                 } else {
                     snackbar("일시적인 오류로 정보를 가져오지 못하였습니다.");
