@@ -6,8 +6,8 @@ function M_dropdown_user() {
 	}
 }
 function M_dropdown_global(tag){
-	tag.children('i.M_dropdown_icon').toggleClass("fa-sort-down");
-	tag.children('i.M_dropdown_icon').toggleClass("fa-sort-up M_dropdwon_trf");
+	tag.toggleClass("fa-sort-down");
+	tag.toggleClass("fa-sort-up M_dropdwon_trf");
 	tag.parent().next().animate({height: 'toggle'});
 }
 

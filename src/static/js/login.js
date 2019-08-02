@@ -90,6 +90,22 @@ function get_user_info() {
 			for (let i = 0; i< json['user_comments'].length; i++){
 				user_comments_id.push(json['user_comments'][i]);
 			}
+			//control button 유무 체크
+			let searchParams = new URLSearchParams(window.location.search);
+			let request_board = searchParams.get('type');
+			let control_button_ajax = A_JAX(TEST_IP+"get_board/"+request_board, "GET", null, null);
+			$.when(control_button_ajax).done(function(){
+				let control_button_json = control_button_ajax.responseJSON;
+				if (control_button_json['result'] == 'success'){
+					if (control_button_json['board']['board_access'] == 1){
+						$('#M_menu_button_container').removeClass('display_none_important');
+					} else if (control_button_json['board']['board_access'] == 0){
+						if (json['user_id'] == 'admin'){
+							$('#M_menu_button_container').removeClass('display_none_important');
+						}
+					}	
+				}
+			});
 		}
 		else if (json['result'] == 'blacklist'){
 			snackbar("블랙리스트 입니다.");
