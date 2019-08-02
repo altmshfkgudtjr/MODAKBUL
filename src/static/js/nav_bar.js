@@ -95,3 +95,29 @@ $(window).ready(function () {
         setTheme();
     });
 });
+
+var check_logo_cnt = 0;
+function EE_change_logo_to_fire(tag) {
+    check_logo_cnt = 1;
+    setTimeout(function() {
+        if (check_logo_cnt != 0){
+            localStorage.setItem('modakbul_logo', 'fire');
+            tag.addClass('display_none_important');
+            $('#logo_change_target_fire').removeClass('display_none_important');
+            snackbar("모닥불 프로젝트");
+        }
+    }, 5000);            
+}
+function EE_chage_logo_to_logo(tag) {
+    check_logo_cnt = 1;
+    setTimeout(function() {
+        if (check_logo_cnt != 0){
+            localStorage.removeItem('modakbul_logo');
+            tag.addClass('display_none_important');
+            $('#logo_change_target_logo').removeClass('display_none_important');
+        }   
+    }, 5000);
+}
+function EE_return_logo() {
+    check_logo_cnt = 0;
+}
