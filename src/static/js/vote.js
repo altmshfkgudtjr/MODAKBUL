@@ -264,11 +264,11 @@ function image_modal_open(tag){
 }
 
 function image_modal_close(){
-	is_image_modal_open = 0;
 	$('#M_image_modal_background').addClass('fadeOut');
 	$('#M_image_modal_background').removeClass('fadeIn');
 	setTimeout(function(){
   		$('#M_image_modal_background').addClass('display_none');
+  		is_image_modal_open = 0;
   	}, 400);
 	$('html').scrollTop(now_postmodal_top);
 }

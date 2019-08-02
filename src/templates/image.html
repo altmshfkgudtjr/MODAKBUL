@@ -221,6 +221,7 @@
 				<label for="files_upload" class="M_filebox">업로드</label> 10개까지 등록할 수 있습니다.
 				<input type="file" id="files_upload" multiple="multiple" class="M_post_fixed_attachment" max-10 maxlength="10" data-maxsize="51200" onchange="javascript:document.getElementById('M_file_route').value=this.value">
 				<div id="M_file_route" class="M_file_route">
+				</div>
 			</div>
 			<div class="M_post_checkbox_container">
 				<span>비밀글</span>
@@ -234,11 +235,10 @@
 					<span class="CB_slider CB_round"></span>
 				</label>
 			</div>
+			<div class="M_user_post_modal_container_fixed_choice_container">
+				<div class="M_user_post_modal_container_fixed_choice" onclick="post_write_accept()" style="border-right: 1px solid #e2e2e2">적용</div>
+				<div class="M_user_post_modal_container_fixed_choice" onclick="post_write_cancel()">취소</div>
 			</div>
-		</div>
-		<div class="M_user_post_modal_container_fixed_choice_container">
-			<div class="M_user_post_modal_container_fixed_choice" onclick="post_write_accept()" style="border-right: 1px solid #e2e2e2">적용</div>
-			<div class="M_user_post_modal_container_fixed_choice" onclick="post_write_cancel()">취소</div>
 		</div>
 	</div>
 </body>

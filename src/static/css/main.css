@@ -1805,6 +1805,7 @@ a:focus {
   text-align: center;
   margin-top: 40px;
   margin-bottom: 40px;
+  cursor: default;
 }
 @media screen and (max-width: 450px){
   .M_post_fixed_info {
@@ -1814,6 +1815,7 @@ a:focus {
 .M_post_fixed_title {
   text-align: left;
   margin-left: 10px;
+  cursor: default;
 }
 @media screen and (max-width: 450px){
   .M_post_fixed_title {
@@ -1988,7 +1990,8 @@ a:focus {
 }
 .M_vote_picture_container {
   width: 100%;
-  height: 300px;
+  height: auto;
+  max-height: 300px;
   position: relative;
   display: inline-block;
   float: left;
@@ -2003,7 +2006,7 @@ a:focus {
     max-height: 300px;
   }
 }
-.M_vote_pciture {
+.M_vote_picture {
   position: relative;
   margin: auto;
   width: auto;
@@ -2320,6 +2323,7 @@ a:focus {
   font-size: 24px;
   line-height: 24px;
   text-align: center;
+  cursor: default;
 }
 .range-slider__thumb {
   position: relative;
@@ -2332,6 +2336,11 @@ a:focus {
   font-size: 20px;
   line-height: 20px;
   text-align: center;
+  cursor: default;
+  transition: 0.4s;
+}
+.range-slider__thumb:hover {
+  box-shadow: 0px 2px 20px -10px #111111;
 }
 /* 통계 CSS =====================================================*/
 .M_statistics_body {
@@ -2775,4 +2784,21 @@ input:checked + .CB_slider_comment:before {
 
 .CB_slider_comment.CB_round_comment:before {
   border-radius: 50%;
+}
+/*===================================================*/
+.M_user_vote_modal_warning_info {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 100%;
+  height: 35px;
+  padding: 10px;
+  font-size: 15px;
+  line-height: 15px;
+  text-align: center;
+  transition: 0.4s;
+  cursor: default;
+}
+.M_user_vote_modal_warning_info:hover {
+  box-shadow: 0px 2px 20px -10px #111111;
 }

@@ -662,7 +662,7 @@ $(document).keydown(function(event){
             image_modal_close();
         }
         else {
-            if (is_postmodal_open == 1){
+            if (is_votemodal_open == 1){
                 votemodal_close();
             }
             if (search_bar_value == 1){
@@ -853,14 +853,38 @@ function return_user_to_graph(tag, que_id) {
     }, 600);
 }
 
+//이미지 모달 열기
+function image_modal_open(tag){
+    is_image_modal_open = 1;
+    let now_src = tag.getAttribute('src');
+    $('#M_image_modal_container').attr('src', now_src);
+    $('#M_image_modal_background').css('position', "fixed");
+    $('#M_image_modal_background').removeClass('display_none');
+    $('#M_image_modal_background').removeClass('fadeOut');
+    $('#M_image_modal_background').addClass('fadeIn');
+    $('html, body').css({'overflow': 'hidden'});
+    $('html, body').addClass('M_modal_open_fixed');
+}
+
+//이미지 모달 닫기
+function image_modal_close(){
+    $('#M_image_modal_background').addClass('fadeOut');
+    $('#M_image_modal_background').removeClass('fadeIn');
+    setTimeout(function(){
+        $('#M_image_modal_background').addClass('display_none');
+        is_image_modal_open = 0;
+    }, 400);
+    $('html').scrollTop(now_postmodal_top);
+}
+
 
 //document load시 실행되는함수
 function statistics(){
-    $('#M_statistics_vote_list_target').empty();
-    $('html').animate({scrollTop : 0}, 400);
+    $('#M_statistics_vote_list_target').empty();    //설문조사 target 비우기
+    $('html').animate({scrollTop : 0}, 400);    //제일 위로 스크롤 애니메이션
     printClock();   // 현재시간 JS
-    visitor_post_graph('week' ,'both');
-    draw_like_graph('week');
-    draw_view_graph('week');
-    search_vote_analysistics_list();
+    visitor_post_graph('week' ,'both'); //방문자수, 포스트업로드수
+    draw_like_graph('week');    //좋아요 그래프
+    draw_view_graph('week');    //조회수 그래프
+    search_vote_analysistics_list();    //설문조사 통계
 }
