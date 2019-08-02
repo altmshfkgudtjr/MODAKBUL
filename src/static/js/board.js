@@ -1,31 +1,39 @@
 let flag = true;
 let searchParams = new URLSearchParams(window.location.search);
 let request_board = searchParams.get('type');
+let search = searchParams.get('search');
 
 $(window).ready(function() {
-    let ajax_board = A_JAX(TEST_IP+'get_board/'+request_board, 'GET', null, null);
-
-    $.when(ajax_board).done(function () {
-       if (ajax_board.responseJSON['result'] == 'success') {
-           let tags = '';
-           if (ajax_board.responseJSON.board.board_url.split('_')[1] === undefined)
-           {
-               tags = '<h5 class="M_board_tag_title"> # ' + ajax_board.responseJSON.board.board_name + '</h5>';
+    if (search == null) {
+        var ajax_board = A_JAX(TEST_IP+'get_board/'+request_board, 'GET', null, null);
+        $.when(ajax_board).done(function () {
+           if (ajax_board.responseJSON['result'] == 'success') {
+                let tags = '';
+                if (ajax_board.responseJSON.board.board_url.split('_')[1] === undefined)
+                {
+                    tags = '<h5 class="M_board_tag_title"> # ' + ajax_board.responseJSON.board.board_name + '</h5>';
+                }
+                else
+                {
+                    let tag1 = ajax_board.responseJSON.board.board_url.split('_')[0];
+                    let tag2 = ajax_board.responseJSON.board.board_name;
+                    tags = '<h5 class="M_board_tag_title"> # ' + tag1 + ' # ' + tag2 + '</h5>';
+                }
+                $('.M_board_tag_container').append(tags);
            }
-           else
-           {
-               let tag1 = ajax_board.responseJSON.board.board_url.split('_')[0];
-               let tag2 = ajax_board.responseJSON.board.board_name;
-               tags = '<h5 class="M_board_tag_title"> # ' + tag1 + ' # ' + tag2 + '</h5>';
-           }
-           $('.M_board_tag_container').append(tags);
-       }
-    });
+        });
+    }
 
-
-    let a_jax = A_JAX(TEST_IP+'get_posts/' + request_board + '/1', 'GET', null, null);
+    if (search != null) {
+        var a_jax = A_JAX(TEST_IP+'search/' + search, 'GET', null, null);
+    } else {
+        var a_jax = A_JAX(TEST_IP+'get_posts/' + request_board + '/1', 'GET', null, null);
+    }
         $.when(a_jax).done(function () {
             if (a_jax.responseJSON['result'] == 'success') {
+                if (search != null){
+                    snackbar(a_jax.responseJSON['posts'].length + ' 개의 포스트가 검색되었습니다.');
+                }
                 flag = false;
                 let div_class = 'M_info_div M_board_content M_boxshadow wow flipInX';
                 if (localStorage.getItem('modakbul_theme') === 'dark') {
