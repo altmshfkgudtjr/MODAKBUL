@@ -136,3 +136,14 @@ input {
 .M_nav_list::-webkit-scrollbar {
     display: none;
 }
+.M_nav_add_wrapper {
+    display: inline-block;
+    width: 40%;
+    height: 50vh;
+    padding: 2.3vh;
+}
+.M_nav_add {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+}
