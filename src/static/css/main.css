@@ -1314,7 +1314,7 @@ a:focus {
 .M_post_top_container{
   display: inline-block;
   float: left;
-  height: 60px;
+  height: 70px;
   width: 80%;
   padding-top: 10px;
 }
@@ -1344,6 +1344,7 @@ a:focus {
   font-size: 16px;
   line-height: 30px;
   margin-left: 10px;
+  margin-top: 3px;
   opacity: 0.6;
 }
 @media screen and (max-width: 450px){
@@ -1686,11 +1687,11 @@ a:focus {
 }
 @media screen and (max-width: 500px){
   .M_post_user_comment_input {
-    width: 80%;
+    width: 77%;
     padding: 10px;
   }
   .M_post_user_comment_anony_container {
-    width: 19%;
+    width: 23%;
   }
 }
 .M_post_comment_line {
@@ -1748,8 +1749,8 @@ a:focus {
 @media screen and (max-width: 850px){
   .M_post_user_comment_container_fixed {
     width: 99%;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 }
 /*post modal fixed ========================================================================*/
@@ -1804,6 +1805,7 @@ a:focus {
   text-align: center;
   margin-top: 40px;
   margin-bottom: 40px;
+  cursor: default;
 }
 @media screen and (max-width: 450px){
   .M_post_fixed_info {
@@ -1813,6 +1815,7 @@ a:focus {
 .M_post_fixed_title {
   text-align: left;
   margin-left: 10px;
+  cursor: default;
 }
 @media screen and (max-width: 450px){
   .M_post_fixed_title {
@@ -1881,6 +1884,16 @@ a:focus {
   margin-top: 10px;
   padding: 5px;
   padding-left: 10px;
+}
+.M_post_checkbox_container {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 100%;
+  height: 45px;
+  padding: 10px 10px;
+  font-size: 18px;
+  line-height: 22px;
 }
 .M_user_post_modal_container_fixed_choice_container{
   position: relative;
@@ -1977,7 +1990,8 @@ a:focus {
 }
 .M_vote_picture_container {
   width: 100%;
-  height: 300px;
+  height: auto;
+  max-height: 300px;
   position: relative;
   display: inline-block;
   float: left;
@@ -1992,7 +2006,7 @@ a:focus {
     max-height: 300px;
   }
 }
-.M_vote_pciture {
+.M_vote_picture {
   position: relative;
   margin: auto;
   width: auto;
@@ -2309,6 +2323,7 @@ a:focus {
   font-size: 24px;
   line-height: 24px;
   text-align: center;
+  cursor: default;
 }
 .range-slider__thumb {
   position: relative;
@@ -2321,4 +2336,469 @@ a:focus {
   font-size: 20px;
   line-height: 20px;
   text-align: center;
+  cursor: default;
+  transition: 0.4s;
+}
+.range-slider__thumb:hover {
+  box-shadow: 0px 2px 20px -10px #111111;
+}
+/* 통계 CSS =====================================================*/
+.M_statistics_body {
+  position: relative;
+  width: 700px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+@media screen and (max-width: 450px){
+  .M_statistics_body {
+    width: 320px;
+  }
+}
+.M_statistics_button_container {
+  position: relative;
+  display: inline-block;
+  width: 700px;
+  height: 50px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  margin-top: 35px;
+  margin-bottom: 80px;
+}
+button {
+  color: inherit;
+}
+button:focus {
+  outline: none;
+}
+.M_statistics_button {
+  position: relative;
+  display: inline-block;
+  float: left;
+  font-family: 'NanumBarunGothic', 'sans-serif';
+  width: 33.333%;
+  height: 50px;
+  padding: 10px;
+  text-align: center;
+  font-size: 20px;
+  line-height: 30px;
+  background-color: rgba(0,0,0,0);
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  transition: 0.3s;
+}
+.M_statistics_button:hover {
+  background-color: rgba(170,170,170,.1)
+}
+.M_statistics_button:active {
+  background-color: rgba(0,0,0,.2);
+}
+.M_statistics_button_two {
+  position: relative;
+  display: inline-block;
+  float: left;
+  font-family: 'NanumBarunGothic', 'sans-serif';
+  width: 50%;
+  height: 50px;
+  padding: 10px;
+  text-align: center;
+  font-size: 20px;
+  line-height: 30px;
+  background-color: rgba(0,0,0,0);
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  transition: 0.3s;
+}
+.M_statistics_button_two:hover {
+  background-color: rgba(170,170,170,.1)
+}
+.M_statistics_button_two:active {
+  background-color: rgba(0,0,0,.2);
+}
+@media screen and (max-width: 450px){
+  .M_statistics_button_container {
+    width: 350px;
+  }
+  .M_statistics_button {
+    font-size: 16px;
+  }
+  .M_statistics_button_two {
+    font-size: 16px;
+  }
+}
+.M_statistics_time_container {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 60%;
+  height: 240px;
+  padding: 10px;
+  padding-bottom: 70px;
+  cursor: default;
+}
+@media screen and (max-width: 1000px){
+  .M_statistics_time_container {
+    width: 65%;
+  }
+}
+@media screen and (max-width: 450px){
+  .M_statistics_time_container {
+    display: none !important;
+  }
+}
+.M_statistics_today_container {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 40%;
+  height: 240px;
+  padding: 10px;
+  padding-top: 40px;
+  padding-left: 0px;
+  padding-bottom: 70px;
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: bold;
+  text-align: center;
+  cursor: default;
+}
+@media screen and (max-width: 1000px){
+  .M_statistics_today_container {
+    width: 35%;
+  }
+}
+@media screen and (max-width: 450px){
+  .M_statistics_today_container {
+    width: 100%;
+    padding-left: 10px;
+    padding-top: 20px;
+  }
+}
+
+.M_statistics_today_title {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 100%;
+  height: 30px;
+  margin: auto;
+  padding-bottom: 10px;
+}
+.M_statistics_today_info {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 100%;
+  height: 40px;
+  margin: auto;
+  font-weight: normal;
+  transition: 0.3s;
+}
+.M_statistics_today_info:hover {
+  transform: scale(1.3, 1.3);
+}
+.M_statistics_time {
+  width:100%;
+  height:180px;
+  line-height:160px;
+  font-size:70px;
+  text-align: center;
+}
+.M_statistics_graph_all_css {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 800px;
+  height: 400px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+@media screen and (max-width: 800px){
+  .M_statistics_graph_all_css {
+    width: 99%;
+    height: 50%;
+  }
+}
+.M_graph_box_container {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 100%;
+  height: 475px;
+  margin-bottom: 40px;
+}
+@media screen and (max-width: 450px){
+  .M_graph_box_container {
+    height: 445px;
+    margin-bottom: 0px;
+  }
+}
+.M_statistics_vote_list_container {
+  position: relative;
+  display: inline-block;
+  float: left;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 80%;
+  max-width: 800px;
+}
+@media screen and (max-width: 800px){
+  .M_statistics_vote_list_container {
+    width: 100%;
+  }
+}
+.M_statistics_vote_list_search {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 100%;
+  height: 60px;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+.M_statistics_vote_list_search_icon {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 10%;
+  height: 40px;
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 30px;
+  line-height: 30px;
+  cursor: default;
+}
+.M_statistics_vote_list_serach_input {
+  position: relative;
+  display: inline-block;
+  float: left;
+  background-color: rgba(0,0,0,0);
+  width: 90%;
+  height: 40px;
+  padding: 10px;
+  font-size: 20px;
+  line-height: 30px;
+  border-bottom: 1.5px solid #e2e2e2;
+  color: inherit;
+}
+.M_statistics_vote_list_target {
+  position: relative;
+  display: inline-block;
+  float: left;
+  background-color: rgba(0,0,0,0);
+  width: 100%;
+  height: auto;
+  min-height: 100px;
+}
+.M_statistics_done_vote {
+  border-left: 3px solid #DF0101 !important;
+}
+.M_statistics_undone_vote {
+  border-left: 3px solid #01DF01 !important;
+}
+.M_vote_body_icon_data {
+  float: left;
+  line-height: 30px;
+  font-size: 25px;
+  margin-left: 10px;
+}
+.M_statistics_body_check_type {
+  position: relative;
+  width: 700px;
+  margin: auto;
+  padding-bottom: 50px;
+  border-bottom: 1.5px solid #e2e2e2;
+}
+@media screen and (max-width: 450px){
+  .M_statistics_body_check_type {
+    width: 100%;
+  }
+}
+
+.M_statistics_body_answer_type {
+  position: relative;
+  width: 700px;
+  margin: auto;
+  padding-bottom: 50px;
+  border-bottom: 1.5px solid #e2e2e2;
+}
+@media screen and (max-width: 450px){
+  .M_statistics_body_answer_type {
+    width: 100%;
+  }
+}
+
+.M_statistics_body_answer_type_user {
+  position: relative;
+  width: 700px;
+  margin: auto;
+  border-bottom: 1.5px solid #e2e2e2;
+  overflow-y: auto;
+  cursor: pointer;
+}
+@media screen and (max-width: 450px){
+  .M_statistics_body_answer_type_user {
+    width: 100%;
+  }
+}
+.M_statistics_body_answer_type_user_info {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 100%;
+  height: 35px;
+  padding: 10px 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 15px;
+  line-height: 15px;
+  text-align: center;
+  margin-bottom: 0;
+}
+.M_statistics_body_answer_type_user_info:nth-child(even){
+  background-color: rgba(0,0,0,0.1);
+}
+.M_statistics_body_answer_type_user_info:nth-child(odd){
+  background-color: rgba(0,0,0,0.05);
+}
+
+/*checkbox CSS =======================================*/
+.CB_switch {
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 25px;
+}
+
+.CB_switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.CB_slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.CB_slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 2.8px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .CB_slider {
+  background-color: #01DF01;
+}
+
+input:focus + .CB_slider {
+  box-shadow: 0 0 1px #01DF01;
+}
+
+input:checked + .CB_slider:before {
+  -webkit-transform: translateX(19px);
+  -ms-transform: translateX(19px);
+  transform: translateX(19px);
+}
+
+/* Rounded sliders */
+.CB_slider.CB_round {
+  border-radius: 34px;
+}
+
+.CB_slider.CB_round:before {
+  border-radius: 50%;
+}
+/*checkbox comment ==========================================================*/
+.CB_switch_comment {
+  position: relative;
+  display: inline-block;
+  width: 35px;
+  height: 20px;
+}
+
+.CB_switch_comment input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.CB_slider_comment {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.CB_slider_comment:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .CB_slider_comment {
+  background-color: #01DF01;
+}
+
+input:focus + .CB_slider_comment {
+  box-shadow: 0 0 1px #01DF01;
+}
+
+input:checked + .CB_slider_comment:before {
+  -webkit-transform: translateX(15px);
+  -ms-transform: translateX(15px);
+  transform: translateX(15px);
+}
+
+/* Rounded sliders */
+.CB_slider_comment.CB_round_comment {
+  border-radius: 34px;
+}
+
+.CB_slider_comment.CB_round_comment:before {
+  border-radius: 50%;
+}
+/*===================================================*/
+.M_user_vote_modal_warning_info {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 100%;
+  height: 35px;
+  padding: 10px;
+  font-size: 15px;
+  line-height: 15px;
+  text-align: center;
+  transition: 0.4s;
+  cursor: default;
+}
+.M_user_vote_modal_warning_info:hover {
+  box-shadow: 0px 2px 20px -10px #111111;
 }

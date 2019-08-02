@@ -5,6 +5,7 @@ var now_postmodal_top = 0;
 var is_image_modal_open = 0;
 var img_set = ['png', 'jpg', 'jpeg', 'gif', 'bmp'];
 var file_path = "../static/files/";
+
 function postmodal_open(get_post_id){
 	let token = localStorage.getItem('modakbul_token');
 	if (token == null){
@@ -95,7 +96,6 @@ $(document).keydown(function(event){
 		}
 	}
 });
-
 //포스트 정보 가져오는 함수
 function get_post_info(get_post_id) {
 	let token = localStorage.getItem('modakbul_token');
@@ -112,10 +112,10 @@ function get_post_info(get_post_id) {
 			$('#M_post_url_copy').attr('alt', get_post_id);
 			$('#M_post_body_icons_data').append(json['vote']['join_cnt']);
 			$('#M_post_body').append(json['vote']['vote_content']);
-			if (json['file'].length == 0){
+			if (json['vote']['vote_file_path'] == null){
 				$('#M_vote_picture_container').addClass('display_none_important');
 			} else {
-				$('#M_vote_picture').attr('src', "../static/files/"+json['file'][0]['vote_file_path']);
+				$('#M_vote_picture').attr('src', "../static/files/"+json['vote']['vote_file_path']);
 			}
 			let que_length = json['vote']['que_list'].length;
 			for (let i = 0; i < que_length; i++){
@@ -264,11 +264,11 @@ function image_modal_open(tag){
 }
 
 function image_modal_close(){
-	is_image_modal_open = 0;
 	$('#M_image_modal_background').addClass('fadeOut');
 	$('#M_image_modal_background').removeClass('fadeIn');
 	setTimeout(function(){
   		$('#M_image_modal_background').addClass('display_none');
+  		is_image_modal_open = 0;
   	}, 400);
 	$('html').scrollTop(now_postmodal_top);
 }
@@ -426,9 +426,15 @@ function post_write_accept() {
       	}
       	else if (json['result'] == "wrong_file"){
       		snackbar("잘못된 파일 확장자명입니다.");
+      	} 
+      	else if (json['result'] == "you are not admin"){
+      		snackbar("권한이 없습니다.");
       	}
+      	else if (json['result'] == "unavailable word"){
+    	  		snackbar("내용에 욕설이 들어가있습니다.");
+    	  	}
       	else {
-      		snackbar("설문조사 업로드를 실패하였습니다.");
+      		snackbar("설문조사 업로드를 실패하였습니다!");
       	}
 	});
 }
@@ -535,7 +541,9 @@ function vote_send() {
 			snackbar("이미 투표한 설문조사입니다.");
 		} else if (json['result'] == "admin can not vote"){
 			snackbar("관리자는 투표에 참여할 수 없습니다.");
-		} else {
+		} else if (json['result'] == "unavailable word"){
+    		snackbar("내용에 욕설이 들어가있습니다.");
+    	} else {
 		 	snackbar("일시적인 오류로 정보를 보내지 못하였습니다.");
 		 }
 	});
@@ -572,7 +580,7 @@ function vote_write_question_add_checkbox(tag) {
 						<div class="M_vote_write_answer_input" onclick="vote_write_question_select_add($(this))" alt="1">선택지를 추가하기</div>\
 					</div>\
 				</div>';
-	tag.parent('div').before(output);
+	tag.parent('div').prev().append(output);
 }
 
 function vote_write_question_add_radio(tag) {
@@ -586,7 +594,7 @@ function vote_write_question_add_radio(tag) {
 						<div class="M_vote_write_answer_input" onclick="vote_write_question_select_add($(this))" alt="1">선택지를 추가하기</div>\
 					</div>\
 				</div>';
-	tag.parent('div').before(output);
+	tag.parent('div').prev().append(output);
 }
 
 function vote_write_question_add_answer(tag) {
@@ -595,7 +603,7 @@ function vote_write_question_add_answer(tag) {
 					<div class="M_vote_write_trash" onclick="vote_write_question_delete($(this))"><i class="fas fa-trash-alt" style="position: relative; float: right;"></i></div>\
 					<input type="text" class="M_vote_write_answer_input_answer" value="단답형 양식입니다." maxlength="100" readonly>\
 				</div>';
-	tag.parent('div').before(output);
+	tag.parent('div').prev().append(output);
 }
 
 /*업로드 파일 관리*/

@@ -1,5 +1,4 @@
 $(window).ready(function () {
-
     let a_jax = A_JAX(TEST_IP+'get_boards', 'GET', null, null);
     $.when(a_jax).done(function () {
         let response_data = a_jax.responseJSON.boards;
@@ -61,7 +60,7 @@ $(window).ready(function () {
                     '<i class="far fa-check-square" style="padding: 0 22px"></i>' + board.board_name + '</a></li>';
             }
             else if (board.board_name === '통계자료') {
-                result_html += '<li><a class="M_nav_user_button">' +
+                result_html += '<li><a href="/statistics" class="M_nav_user_button">' +
                     '<i class="far fa-chart-bar" style="padding: 0 22px"></i>' + board.board_name + '</a></li>';
             }
             else {
@@ -91,7 +90,6 @@ $(window).ready(function () {
 
             }
         }
-
         result_html += '</ul>';
         $('#gn-scroller').append(result_html);
         setTheme();

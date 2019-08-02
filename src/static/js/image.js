@@ -38,8 +38,8 @@ function image_get_posts(json) {
 	var target = document.getElementById("M_image_container");
 	for (var i =0; i < json['posts'].length; i++){
 		var item = document.createElement('li');
-		item.setAttribute('title', json['posts'][i]['post_id']);
-		item.classList.add('grid__item', 'shown');
+		item.setAttribute('onclick', "postmodal_open("+json['posts'][i]['post_id']+")");
+		item.classList.add('grid__item', 'shown', "M_image_content");
 		var item_a = document.createElement('a');
 		item_a.classList.add('grid__link');
 		var item_img_first = document.createElement('img');

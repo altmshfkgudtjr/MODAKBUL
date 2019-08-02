@@ -1,12 +1,3 @@
-function format_time(raw_data) {
-    raw_data = raw_data.split(' ');
-    let date = raw_data[1];
-    let month = raw_data[2];
-    let year = raw_data[3];
-    let time = raw_data[4];
-
-    return year+'년 '+month+'월 '+date+'일 '+time;
-}
 let flag = true;
 
 let searchParams = new URLSearchParams(window.location.search);
@@ -53,7 +44,7 @@ $(window).ready(function() {
                     let user_color = data.author_color;
                     let is_image_icon = data.img_cnt;
                     let is_attachment_icon = data.file_cnt;
-                    let is_lock_icon = data.private;
+                    let is_lock_icon = data.post_secret;
                     let user_name = data.author_name;
                     if (user_name == null){
                         user_name = "익명";
@@ -123,7 +114,7 @@ $(window).scroll(function() {
                             let user_color = data.author_color;
                             let is_image_icon = data.img_cnt;
                             let is_attachment_icon = data.file_cnt;
-                            let is_lock_icon = data.private;
+                            let is_lock_icon = data.post_secret;
                             let user_name = data.author_name;
                             if (user_name == null){
                                 user_name = "익명";
