@@ -885,6 +885,7 @@ function image_modal_close(){
 //document load시 실행되는함수
 function statistics(){
     $('#M_statistics_vote_list_target').empty();    //설문조사 target 비우기
+    $('.M_statistics_vote_list_serach_input').val("");
     $('html').animate({scrollTop : 0}, 400);    //제일 위로 스크롤 애니메이션
     printClock();   // 현재시간 JS
     visitor_post_graph('week' ,'both'); //방문자수, 포스트업로드수
