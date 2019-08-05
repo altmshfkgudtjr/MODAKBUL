@@ -126,3 +126,24 @@ if (localStorage.getItem('modakbul_logo') == 'fire'){
 	$('#logo_change_target_logo').removeClass('display_none_important');
 	localStorage.removeItem('modakbul_logo');
 }
+
+function change_setting_theme() {
+	let now_theme = localStorage.getItem('modakbul_theme');
+	if (now_theme == 'white'){
+		whiteSetTheme_setting();
+	}
+	else {
+		darkSetTheme_setting();
+	}
+}
+
+function whiteSetTheme_setting() {
+	$('.M_setting_line').css('background-color', "#5f6f81");
+	$('.M_setting_tag').css('background-color', '#5f6f81');
+	$('#M_image_preview').css('border', '2px solid #5f6f81');
+}
+function darkSetTheme_setting() {
+	$('.M_setting_line').css('background-color', 'white');
+	$('.M_setting_tag').css('background-color', 'white');
+	$('#M_image_preview').css('border', '2px solid #fff');
+}
