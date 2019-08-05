@@ -16,6 +16,15 @@ $(document).ready(()=>{
        $('#M_union_subtitle').attr('placeholder', subtitle[0].value);
        $('#M_image_preview').attr('src', '../static/image/'+image[0].value);
    });
+   let filter = "win16|win32|win64|mac|macintel";
+    if ( navigator.platform ) { //mobile
+        if ( filter.indexOf( navigator.platform.toLowerCase() ) < 0 ) {
+            $('body').css('overflow-y', 'auto');
+        } else {
+            $('.M_info').css('overflow-y', 'auto');
+            $('.M_setting').css('height', '90%');
+        }
+    }
 
    black_list();
 });
@@ -133,7 +142,10 @@ $('#M_union_subtitle').change(()=>{
 })
 
 function submit_bio() {
-
+    let introduce_textarea_value; // 학생회 소개 textarea
+    introduce_textarea_value =  $('#M_union_info_wrapper_introduce_textarea').val();
+    introduce_textarea_value = introduce_textarea_value.replace(/\n/g, "<br />");
+    console.log(introduce_textarea_value);
     console.log(image_updated, name_updated, subtitle_updated);
     if (image_updated === true)
     {
