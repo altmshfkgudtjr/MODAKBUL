@@ -1,11 +1,7 @@
 $(window).ready(function () {
     let a_jax = A_JAX(TEST_IP+'get_boards', 'GET', null, null);
     $.when(a_jax).done(function () {
-        let response_data = a_jax.responseJSON.boards;
         let result_html = '<ul id="gn-menu2" class="gn-menu">';
-
-
-
         let data = a_jax.responseJSON.boards;
         let result_list = [];
         let nested_list = [];
@@ -46,10 +42,14 @@ $(window).ready(function () {
                     subboard += '<a href="/board?type=' + result_list[i][j].board_url + '">' +
                     '<i class="fas fa-minus M_dropdown_hypeon"></i>' + result_list[i][j].board_name + '</a>';
                 }
+                let icon = '';
+                if (result_list[i][0].board_name === '학생회비내역') icon = 'fas fa-file-invoice-dollar';
+                else if (result_list[i][0].board_name === '대외활동')icon ='fas fa-cubes';
+                else icon = 'fas fa-sticky-note';
                 result_html +=
                     '<li class="M_dropdown_list">' +
                     '<div onclick="location.href='+"'/board?type="+result_list[i][0].board_url+"'"+'" class="M_dropdown_real_body">' +
-                    '<i id="M_studentMoneyButton" class="fas fa-file-invoice-dollar" style="padding: 0 23px"></i>' + result_list[i][0].board_name +
+                    '<i id="M_studentMoneyButton" class="' + icon + '" style="padding: 0 23px"></i>' + result_list[i][0].board_name +
                     '</div>' +
                     '<i id="M_dropdown_icon_money" class="fas fa-sort-down M_dropdown_icon" onclick="M_dropdown_global($(this))"></i>' +
                     '</li>' +
