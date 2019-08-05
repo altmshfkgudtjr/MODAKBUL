@@ -78,6 +78,7 @@ function toggle(flag) {
     let user = $('.M_user');
     let menu = $('.M_menu');
     let tag = $('.M_tag');
+    let password = $('.M_password');
 
     if (flag === 0){
         info.css('display', 'inline-block');
@@ -86,6 +87,7 @@ function toggle(flag) {
         user.css('display', 'none');
         menu.css('display', 'none');
         tag.css('display', 'none');
+        password.css('display', 'none');
     }
     else if (flag === 1){
         info.css('display', 'none');
@@ -94,6 +96,7 @@ function toggle(flag) {
         user.css('display', 'none');
         menu.css('display', 'none');
         tag.css('display', 'none');
+        password.css('display', 'none');
     }
     else if (flag === 2){
         info.css('display', 'none');
@@ -102,6 +105,7 @@ function toggle(flag) {
         user.css('display', 'none');
         menu.css('display', 'none');
         tag.css('display', 'none');
+        password.css('display', 'none');
     }
     else if (flag === 3){
         info.css('display', 'none');
@@ -110,6 +114,7 @@ function toggle(flag) {
         user.css('display', 'inline-block');
         menu.css('display', 'none');
         tag.css('display', 'none');
+        password.css('display', 'none');
     }
     else if (flag === 4){
         info.css('display', 'none');
@@ -118,6 +123,7 @@ function toggle(flag) {
         user.css('display', 'none');
         menu.css('display', 'inline-block');
         tag.css('display', 'none');
+        password.css('display', 'none');
     }
     else if (flag === 5){
         info.css('display', 'none');
@@ -126,6 +132,16 @@ function toggle(flag) {
         user.css('display', 'none');
         menu.css('display', 'none');
         tag.css('display', 'inline-block');
+        password.css('display', 'none');
+    }
+    else if (flag === 6){
+        info.css('display', 'none');
+        principle_bio.css('display', 'none');
+        bio.css('display', 'none');
+        user.css('display', 'none');
+        menu.css('display', 'none');
+        tag.css('display', 'none');
+        password.css('display', 'inline-block');
     }
 }
 
@@ -319,4 +335,36 @@ function white_user(div) {
         $('.M_setting_blacklist').empty();
         black_list();
     })
+}
+
+function change_password() {
+    let prev_pw = $('#prev_pw').val();
+    let new_pw = $('#new_pw').val();
+    let new_pw_confirm = $('#new_pw_confirm').val();
+
+    if (prev_pw === '') {
+        alert('이전 비밀번호를 입력해주세요.');
+        return;
+    }
+    else if (new_pw === '') {
+        alert('새 비밀번호를 입력해주세요.');
+        return;
+    }
+    else if (new_pw_confirm === '') {
+        alert('새 비밀번호를 확인해주세요.');
+        return;
+    }
+
+    let data = {'old_pw': prev_pw, 'new_pw_1': new_pw, 'new_pw_2': new_pw_confirm};
+
+    let ajax = A_JAX(TEST_IP+"change_pw", "POST", null, data);
+    $.when(ajax).done(()=>{
+        if (ajax.responseJSON.result === 'not same pw') {
+            snackbar('새 비밀번호가 일치하지 않습니다.')
+        }
+        else if (ajax.responseJSON.result === 'wrong old pw') {
+            snackbar('이전 비밀번호가 일치하지 않습니다.')
+        }
+    })
+
 }

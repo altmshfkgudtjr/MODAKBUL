@@ -524,7 +524,7 @@
     <div style="display: none;" class="M_setting M_tag">
         <div class="M_setting_submit">
                 <i class="far fa-check-circle"></i>
-            </div>
+        </div>
         <div class="M_settings_title">
             # 태그 관리
         </div>
@@ -543,6 +543,41 @@
                 <i style="display: none;" class="fas fa-check M_tag_icon_delete"></i>
             </div>
 
+        </div>
+    </div>
+
+    <div style="display: none" class="M_setting M_password">
+        <div onclick="change_password()" class="M_setting_submit">
+            <i class="far fa-check-circle"></i>
+        </div>
+        <div class="M_settings_title">
+            # 비밀번호 변경
+        </div>
+        <div class="M_settings_subtitle_wrapper">
+            <div class="M_setting_tag">
+            </div>
+            <div class="M_setting_subtitle">
+                비밀번호변경
+            </div>
+        </div>
+        <div class="M_setting_line"></div>
+        <div class="M_password_wrapper">
+            <div class="M_password_info">
+                이전 비밀번호
+            </div>
+            <input id="prev_pw" class="M_password_input" type="password">
+        </div>
+        <div class="M_password_wrapper">
+            <div class="M_password_info">
+                새 비밀번호
+            </div>
+            <input id="new_pw" class="M_password_input" type="password">
+        </div>
+        <div class="M_password_wrapper">
+            <div class="M_password_info">
+                새 비밀번호 확인
+            </div>
+            <input id="new_pw_confirm" class="M_password_input"  type="password">
         </div>
     </div>
 </div>
