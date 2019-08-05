@@ -65,3 +65,7 @@ function image_preview(input) {
 $('#M_logo_upload').change(function () {
    image_preview(this);
 });
+
+function submit_bio() {
+
+}

@@ -146,7 +146,7 @@
         </div>
     </div>
     <div class="M_setting M_info">
-            <div class="M_setting_submit">적용</div>
+            <div onclick="submit_bio()"class="M_setting_submit">적용</div>
         <div class="M_settings_title">
             # 학생회 정보
         </div>
@@ -159,7 +159,7 @@
                 </div>
             </div>
             <div class="M_setting_line" style="width: 70%;"></div>
-            <img id="M_image_preview" onclick="upload_logo()" src="http://placehold.it/160x160" style="border: 2px solid #fff;width: 50%;cursor: pointer;">
+            <img id="M_image_preview" onclick="upload_logo()" src="http://placehold.it/160x160" style="border: 2px solid #fff;width: 50%; height: 50%;cursor: pointer;">
             <input type="file" id="M_logo_upload" style="display: none;">
             <div class="M_image_warning">
                 로고는 160x160 사이즈로 업로드해주시기 바랍니다.
@@ -418,9 +418,9 @@
             <div class="M_nav_add">
             </div>
             <div style="float:left; width: 69%">
-                <input type="text" style="width:100%" placeholder="게시판 이름을 입력하세요.">
+                <input id="M_new_board_name" type="text" style="width:100%" placeholder="게시판 이름을 입력하세요.">
             </div>
-            <div class="M_nav_submit">
+            <div onclick="create_board()" class="M_nav_submit">
                 생성
             </div>
         </div>
