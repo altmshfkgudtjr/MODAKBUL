@@ -93,10 +93,14 @@ $(window).ready(function () {
 
     let user_ajax = A_JAX(TEST_IP+'get_userinfo', 'GET', null, null);
     $.when(user_ajax).done(()=>{
-        if (user_ajax.responseJSON.user_tags.indexOf('ADMIN') !== -1) {
-            $('#gn-menu2').append('<li><a href="/settings" class="M_nav_user_button">' +
-                '<i class="fas fa-cog" style="padding: 0 22px"></i>설정</a></li>');
-            setTheme();
+        if (user_ajax.responseJSON['result'] == 'success'){
+            if (user_ajax.responseJSON.user_tags.indexOf('ADMIN') !== -1) {
+                $('#gn-menu2').append('<li><a href="/settings" class="M_nav_user_button">' +
+                    '<i class="fas fa-cog" style="padding: 0 22px"></i>설정</a></li>');
+                setTheme();
+            }
+        } else {
+            snackbar("일시적인 오류로 정보를 불러오지 못하였습니다.");
         }
     });
 });

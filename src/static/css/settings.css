@@ -37,6 +37,10 @@ input {
        -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; 
+    overflow-x: hidden;
+}
+.M_settings_nav::-webkit-scrollbar {
+    display: none;
 }
 .M_settings_nav_title {
     font-size: 2.5vh;
@@ -105,15 +109,15 @@ input {
     height: 40px;
 }
 .M_setting_submit:hover {
-    color: #01DF01;
+    color: #58D878;
 }
 .M_left_settings{
     float: left;
-    width: 40%;
+    width: 42%;
 }
 .M_right_settings{
     float: right;
-    width: 40%;
+    width: 42%;
     margin-right: 13%;
 }
 
@@ -156,6 +160,7 @@ input {
 
 .M_setting_black_button{
     display: inline-block;
+    float: right;
     width: 40px;
     padding: 3px;
     margin: 0px 5px;
@@ -171,9 +176,9 @@ input {
 }
 .M_setting_unblack_button{
     display: inline-block;
+    float: right;
     width: 40px;
     padding: 3px;
-    margin: 0px 5px;
     background-color: grey;
     border-radius: 3px;
     color: white;
@@ -182,7 +187,7 @@ input {
     transition: 0.4s;
 }
 .M_setting_unblack_button:hover {
-    background-color: #01DF01;
+    background-color: #58D878;
 }
 .M_setting_black_user{
     width: 100%;
@@ -355,6 +360,7 @@ input {
     width: 40%;
     height: 50vh;
     padding: 2.3vh;
+    padding-right: 0;
 }
 .M_nav_add {
     display: inline-block;
@@ -397,7 +403,7 @@ input {
     transition: 0.4s;
 }
 .M_tag_icon_fixed:hover {
-    color: #01DF01;
+    color: #58D878;
 }
 .M_tag_icon_delete {
     margin-left: 1%;
@@ -467,6 +473,7 @@ input {
       top: 0;
       margin-top: 0;
       margin-bottom: 0;
+      padding-bottom: 0px;
       border-right: none !important;
       width: 100%;
       height: auto;
@@ -749,7 +756,7 @@ input:checked + .CB_slider:before {
 .M_union_info_wrapper_introduce_textarea:focus {
     border: 1.5px solid #c30e2e;
 }
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 800px) {
     .M_union_info_wrapper_introduce_textarea {
         width: 100%;
     }
@@ -770,11 +777,49 @@ input:checked + .CB_slider:before {
 .M_union_info_wrapper_phonenumber_textarea:focus {
     border: 1.5px solid #c30e2e;
 }
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 800px) {
     .M_union_info_wrapper_phonenumber_textarea {
         width: 100%;
     }
 }
 .M_info::-webkit-scrollbar {
     display: none;
+}
+.M_setting_subtitle_name {
+    height: 28px;
+    font-size: 16px;
+    line-height: 18px;
+    padding: 5px 0;
+    display: inline-block;
+    font-family: 'NanumGothic', 'sans-serif';
+}
+@media screen and (max-width: 1180px){
+    .M_setting_subtitle_name {
+        height: 28px;
+        font-size: 14px;
+        line-height: 18px;
+        padding: 5px 0;
+        display: inline-block;
+        font-family: 'NanumGothic', 'sans-serif';
+    }
+}
+@media screen and (max-width: 1130px){
+    .M_setting_subtitle_name {
+        height: 28px;
+        font-size: 12px;
+        line-height: 18px;
+        padding: 5px 0;
+        display: inline-block;
+        font-family: 'NanumGothic', 'sans-serif';
+    }
+}
+@media screen and (max-width: 910px){
+    .M_setting_subtitle_name {
+        height: 28px;
+        font-size: 10px;
+        line-height: 18px;
+        padding: 5px 0;
+        display: inline-block;
+        font-family: 'NanumGothic', 'sans-serif';
+    }
 }
