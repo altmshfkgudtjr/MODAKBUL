@@ -40,7 +40,7 @@ $(window).ready(function () {
                 let subboard = '';
                 for (let j=1; j<result_list[i].length; j++) {
                     subboard += '<a href="/board?type=' + result_list[i][j].board_url + '">' +
-                    '<i class="fas fa-minus M_dropdown_hypeon"></i>' + result_list[i][j].board_name + '</a>';
+                        '<i class="fas fa-minus M_dropdown_hypeon"></i>' + result_list[i][j].board_name + '</a>';
                 }
                 let icon = '';
                 if (result_list[i][0].board_name === '학생회비내역') icon = 'fas fa-file-invoice-dollar';
@@ -82,13 +82,22 @@ $(window).ready(function () {
                 }
                 else {
                     result_html += '<li><a href="/board?type='+ result_list[i].board_url+'" class="M_nav_user_button">' +
-                    '<i class="far fa-sticky-note" style="padding: 0 22px"></i>' + result_list[i].board_name + '</a></li>';
+                        '<i class="far fa-sticky-note" style="padding: 0 22px"></i>' + result_list[i].board_name + '</a></li>';
                 }
             }
         }
         result_html += '</ul>';
         $('#gn-scroller').append(result_html);
         setTheme();
+    });
+
+    let user_ajax = A_JAX(TEST_IP+'get_userinfo', 'GET', null, null);
+    $.when(user_ajax).done(()=>{
+        if (user_ajax.responseJSON.user_tags.indexOf('ADMIN') !== -1) {
+            $('#gn-menu2').append('<li><a href="/settings" class="M_nav_user_button">' +
+                '<i class="fas fa-cog" style="padding: 0 22px"></i>설정</a></li>');
+            setTheme();
+        }
     });
 });
 
