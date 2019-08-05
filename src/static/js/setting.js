@@ -26,15 +26,15 @@ $(document).ready(()=>{
         }
     }
 
-    let tag_ajax = A_JAX(TEST_IP+'get_tags', 'GET', null, null);
+    let tag_ajax = A_JAX(TEST_IP+'get_access_tags', 'GET', null, null);
     $.when(tag_ajax).done(function() {
         for (let i=0; i<tag_ajax.responseJSON.tags.length; i++)
         {
             $('.M_tag_list').append(
                 '<div class="M_tag_list_item">'+
                 '<div class="M_tag_name" style="display:inline;"> # ' + tag_ajax.responseJSON.tags[i] + ' </div>'+
-                '<i onclick="modify_tag($(this).prev(), $(this))" class="fas fa-pencil-alt M_tag_icon_fixed"></i>'+
                 '<i class="fas fa-trash-alt M_tag_icon_delete"></i>'+
+                '<i onclick="modify_tag($(this).prev(), $(this))" class="fas fa-pencil-alt M_tag_icon_fixed"></i>'+
                 '<i style="display: none;" class="fas fa-check M_tag_icon_delete"></i>'+
                 '</div>'
             )
