@@ -30,6 +30,11 @@ def statistics():
 @app.route('/credit')
 def credt():
 	return render_template('credit.html')
+@app.route('/v')
+def postpage():
+	return render_template('postpage.html')
+
+
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', port=80, debug = True)
