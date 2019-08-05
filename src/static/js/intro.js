@@ -1,3 +1,10 @@
+$(document).ready(()=>{
+    let ajax = A_JAX(TEST_IP+'get_value/총인사말', 'GET', null, null);
+    $.when(ajax).done(()=>{
+        $('.main_intro').append(ajax.responseJSON.value);
+    });
+});
+
 function set_display(type) {
     let intro_main = $('.intro_main');
     let principle_bio = $('.principle_bio');
