@@ -1123,7 +1123,7 @@ a:focus {
   width: 1%;
   height: 28%;
   background-color: #d8d8d8;
-  border-radius: 20%;
+  border-radius: 10px;
   margin-left: 2%;
   margin-top: 1%;
   float: left;

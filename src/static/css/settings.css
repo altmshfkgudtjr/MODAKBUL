@@ -3,12 +3,17 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-input {
+.M_setting_blacklist::-webkit-scrollbar {
+    display: none;
+}
 
+input {
+    color: white;
     background: inherit;
     border: 2px solid gray;
     width: 70%;
     padding: 1%;
+    height: 28px;
 }
 
 .M_settings_nav {
@@ -46,6 +51,7 @@ input {
     height: 90%;
     padding: 5%;
     position: absolute;
+    max-width: 1500px;
 }
 .M_settings_title {
     font-size: 2.5vh;
@@ -54,14 +60,72 @@ input {
 .M_logo_wrapper {
     display: inline-block;
     width: 35%;
-    height: 80%;
+    height: 60%;
 }
 .M_union_info_wrapper {
     display: inline-block;
     width: 65%;
     float: right;
-    height: 80%;
+    height: 60%;
 }
+.M_setting_submit{
+    display:inline-block;
+    cursor: pointer;
+    border: 1px solid white;
+    padding: 3px 5px;
+    width: auto;
+    float: right;
+    margin-right: 13%; 
+}
+.M_left_settings{
+    float: left;
+    width: 35%;
+}
+.M_right_settings{
+    float: right;
+    width: 35%;
+    margin-right: 5%;
+}
+
+.M_setting_blacklist{
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.M_setting_line{
+    width: 90%;
+    height: 2px;
+    background-color: white;
+    margin-bottom: 10px;
+}
+
+.M_user_info{
+    height: 25px;
+    display: inline-block;
+    margin: 5px 0px;
+    width: 100%;
+}
+.M_black_user_info{
+    height: 25px;
+    display: inline-block;
+    margin: 5px 0px;
+    width: 100%;
+}
+
+.M_setting_black_button{
+    display: inline-block;
+    padding: 3px;
+    margin: 0px 5px;
+    background-color: grey;
+    border-radius: 3px;
+    color: white;
+    text-align: center;
+}
+
+.M_setting_black_user{
+    width: 100%;
+}
+
 .M_settings_subtitle_wrapper {
     height: 25px;
     display: inline-block;
@@ -76,9 +140,22 @@ input {
     border-radius: 3px;
     margin-right: 1vw;
 }
+.M_setting_user_tag{
+    width: 4px;
+    height: 100%;
+    background: #D8D8D8;
+    float: left;
+    border-radius: 3px;
+    margin-right: 1vw;
+}
+.admin_access_checkbox{
+    width: auto
+}
 .M_setting_subtitle {
     height: 25px;
-    line-height: 25px;
+    line-height: 15px;
+    margin-right: 15px;
+    padding: 5px;
     display: inline-block;
 }
 .M_image_warning {
@@ -88,7 +165,7 @@ input {
 .M_union_info_input {
     background: inherit;
     border: 2px solid gray;
-    width: 70%;
+    width: 80%;
     padding: 1%;
     margin-bottom: 3vh;
 }
@@ -100,8 +177,12 @@ input {
     padding: 1%;
 }
 .M_user_search_wrapper {
-    margin-bottom: 2vh;
+    margin-top: 20px;
+    margin-bottom: 30px;
     width: 30vw;
+}
+.M_user_search{
+    color: white;
 }
 
 #sortable {
@@ -145,5 +226,127 @@ input {
 .M_nav_add {
     display: inline-block;
     width: 100%;
-    height: auto;
+    height: 60%;
+    border: 2px solid gray;
+    padding: 5%;
+    overflow-y: scroll;
+    text-align: center;
 }
+.M_nav_add::-webkit-scrollbar {
+    display: none;
+}
+
+.M_nav_tag {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    cursor: pointer;
+}
+
+.M_nav_tag:hover {
+    background: rgb(74, 78, 82);
+}
+.M_nav_submit {
+    width: 30%;
+    float: right;
+    border: 2px solid gray;
+    height: 28px;
+    line-height: 24px;
+    text-align: center;
+    cursor: pointer;
+}
+.M_nav_submit:hover {
+    background: rgb(74, 78, 82);
+}
+.M_tag_icon {
+    margin-left: 1%;
+    cursor: pointer;
+}
+.M_tag_list{
+    height: 50%;
+    overflow-y: scroll;
+}
+.M_tag_list::-webkit-scrollbar {
+    display: none;
+}
+
+.M_tag_list_item {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+.M_tag_nav {
+    background: rgb(74, 78, 82);
+}
+
+@media screen and (max-width: 55em){
+    .M_setting{
+        position: relative;
+        float: none;
+        width: 100%;
+        margin-top: 30px;
+        margin-bottom: 80px;
+        height: 100%;
+        display: inline-block;
+    }
+    .M_settings_nav{
+        position: absolute;
+        top: 0;
+        margin-top: 0px;
+        width: 100%;
+        display: inline-block;
+        overflow-x: scroll;
+    }
+    .M_settings_nav_content{
+        display: inline;
+        margin: 0px 3px;
+        background-color: grey;
+        border-radius: 5px;
+        font-size: 12px;
+        padding: 5px;
+        text-align: center;
+    }
+
+    .M_logo_wrapper{
+        display: block;
+        width:100%;
+        border-bottom: 3px, white; 
+        margin-bottom: 20px;
+    }
+    .M_union_info_wrapper{
+        display: block;
+        width:100%;
+    }
+
+    .M_left_settings{
+        float: none;
+        width: 100%;
+    }
+    .M_user_search_wrapper{
+        width: 100%;
+    }
+    .M_setting_line{
+        display: none;
+    }
+    .M_right_settings{
+        float: none;
+        width: 100%;
+        margin-top: 40px;
+        margin-right: 0px;
+    }
+    .M_nav_list{
+        float: none;
+        width: 100%;
+    }
+    .M_nav_add_wrapper{
+        margin-top: 30px;
+        width: 100%;
+    }
+    .M_union_info_input{
+        width:100%;
+    }
+    .M_bio_input{
+        width:100%;
+    }
+    .M_setting_submit{
+        margin-right: 0px;
+    }
+  }
