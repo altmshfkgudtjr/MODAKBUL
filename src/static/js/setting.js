@@ -41,7 +41,54 @@ $(document).ready(()=>{
         }
     });
 
-   black_list();
+    black_list();
+
+    let intro_ajax = A_JAX(TEST_IP+'get_department/0', 'GET', null, null);
+    let result_html = '';
+    $.when(intro_ajax).done(()=>{
+
+        for (let i=0; i<intro_ajax.responseJSON.department.length; i++)
+        {
+            result_html +=
+                '            <div class="M_bio_wrapper" style="overflow-y: scroll;height: 85%;">\n' +
+                '                <div class="M_setting_subtitle_wrapper3">\n' +
+                '                    <div class="M_settings_subtitle_wrapper">\n' +
+                '                        <div class="M_setting_tag"></div>\n' +
+                '                        <div class="M_setting_subtitle">사진</div>\n' +
+                '                    </div>\n' +
+                '                    <img onclick="profile_pic_upload()" src=../static/images/" ' + intro_ajax.responseJSON.department[i].dm_img + ' " class="M_setting_introduce_image">\n' +
+                '                    <input id="" type="file" style="display: none;">\n' +
+                '                    <div class="M_image_warning_introduce">\n' +
+                '                    대표 사진을 업로드해주세요!\n' +
+                '                    </div>\n' +
+                '                </div>\n' +
+                '                <div class="M_setting_subtitle_wrapper4">\n' +
+                '                    <div class="M_settings_subtitle_wrapper">\n' +
+                '                        <div class="M_setting_tag"></div>\n' +
+                '                        <div class="M_setting_subtitle">직책</div>\n' +
+                '                    </div>\n' +
+                '                    <div class="M_position">\n' +
+                '                        <input class="M_bio_input" disabled type="text" value="' + intro_ajax.responseJSON.department[i].dm_name + '">'+
+                '                    </div>\n' +
+                '                    <div class="M_settings_subtitle_wrapper">\n' +
+                '                        <div class="M_setting_tag"></div>\n' +
+                '                        <div class="M_setting_subtitle">정보</div>\n' +
+                '                    </div>\n' +
+                '                    <div class="M_manager">\n' +
+                '                        <input class="M_bio_input" type="text" value=" ' + intro_ajax.responseJSON.department[i].dm_chairman +' ">\n' +
+                '                    </div>\n' +
+                '                    <div class="M_settings_subtitle_wrapper">\n' +
+                '                        <div class="M_setting_tag"></div>\n' +
+                '                        <div class="M_setting_subtitle">소개</div>\n' +
+                '                    </div>\n' +
+                '                    <div class="M_manager_bio">\n' +
+                '                        <textarea class="M_bio_input" style="height: 100px; margin-bottom: 0;" type="text" value="'+ intro_ajax.responseJSON.department[i].dm_intro +'"></textarea>\n' +
+                '                    </div>\n' +
+                '              </div>\n' +
+                '            </div>';
+        }
+        $('#M_student_introduce_target').append(result_html);
+    });
 });
 
 function black_list() {
