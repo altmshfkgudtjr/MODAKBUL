@@ -5,7 +5,7 @@ body{
 }
 .fir_all_contain {
   position: absolute;
-  left: 42%;
+  left: 45%;
   transform: translate(-50%, 0);
   cursor: pointer;
 }

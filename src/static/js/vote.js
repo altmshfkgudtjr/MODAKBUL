@@ -631,6 +631,20 @@ $("input[type=file]").change(function () {
     $('#M_file_route').append(string);
 });
 
+//관리자일 경우 control button 보여주기
+$(window).ready(function () {
+	let a_jax = A_JAX(TEST_IP+"get_userinfo", "GET",  null, null);
+	$.when(a_jax).done(function(){
+		var json = a_jax.responseJSON;
+		if (json['result'] == "success"){
+			if (json['user_id'] == 'admin'){
+				$('#M_menu_button_container').removeClass('display_none_important');
+			}
+		}
+	});
+});
+
+
 
 /*
 //디버그 확인용 코드
