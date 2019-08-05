@@ -297,9 +297,6 @@
     </div>
 
     <div style="display: none;" class="M_setting M_user">
-            <div class="M_setting_submit">
-                <i class="far fa-check-circle"></i>
-            </div>
         <div class="M_settings_title">
             # 사용자 관리
         </div>
@@ -313,7 +310,7 @@
             </div>
             <div class="M_user_search_wrapper">
                 <input class="M_user_search" type="text" placeholder="홍길동" autocomplete="off">
-                <div class="M_user_search_button">
+                <div onclick="search_user()" class="M_user_search_button">
                     <i style="margin-left: 3%;" class="fas fa-search"></i>
                 </div>
                 <div>* 학번 혹은 이름으로 검색해주세요.</div>
@@ -326,15 +323,7 @@
                 </div>
             </div>
             <div class="M_setting_line"></div>
-            <div class="M_user_info">
-                <div class="M_setting_user_tag">
-                </div>
-                <div class="M_setting_subtitle">
-                    서정민 16011092 컴퓨터공학과
-                </div>
-                <div class = "M_setting_black_button">
-                    블랙
-                </div>
+            <div id="M_user_info">
             </div>
         </div>
 
@@ -348,40 +337,7 @@
             </div>
                 <div class="M_setting_line"></div>
 
-                <div class = "M_setting_blacklist">
-
-                    <div class="M_black_user_info">
-                        <div class="M_setting_user_tag">
-                        </div>
-                        <div class="M_setting_subtitle">
-                        16011089 신희재 컴퓨터공학과
-                        </div>
-                        <div class = "M_setting_unblack_button">
-                            취소
-                        </div>
-                    </div>
-
-                    <div class="M_black_user_info">
-                        <div class="M_setting_user_tag">
-                        </div>
-                        <div class="M_setting_subtitle">
-                        16011075 김형석 컴퓨터공학과
-                        </div>
-                        <div class = "M_setting_unblack_button">
-                            취소
-                        </div>
-                    </div>
-
-                    <div class="M_black_user_info">
-                        <div class="M_setting_user_tag">
-                        </div>
-                        <div class="M_setting_subtitle">
-                        17011584 정재경 컴퓨터공학과
-                        </div>
-                        <div class = "M_setting_unblack_button">
-                            취소
-                        </div>
-                    </div>
+                <div class="M_setting_blacklist">
                 </div>
 
         </div>
