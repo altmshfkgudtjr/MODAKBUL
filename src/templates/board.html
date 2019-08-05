@@ -43,27 +43,26 @@
 	<div id="M_nav_container" class="container M_sidemenu">
 		<ul id="gn-menu" class="gn-menu-main M_boxshadow">
 			<!--nav bar 메인 로고-->
-			<div class="" onclick="location.href='/'">
-
+			<div id="logo_change_target_logo" class="M_nav_bar_logo_container display_none_important" onclick="location.href='/'" onmouseenter="EE_change_logo_to_fire($(this))" onmouseleave="EE_return_logo()">
+				<div class="M_nav_bar_logo_image">
+					<img id="M_nav_bar_logo_image_img" src="../static/image/ModakbulLOGO.png" class="M_nav_bar_logo_image_img">
+				</div>
 			</div>
-			<a class="fir_all_contain" href="/">
-				<div class = "fire_container">
-					<div class = "fire_flame" id = "flame-2"></div>
-					<div class = "fire_flame" id = "flame-1"></div>
-					<div class = "fire_flame" id = "flame-3"></div>
-					<div class = "fire_small-element"></div>
-					<div class = "fire_small-element"></div>
-					<div class = "fire_fire-bottom">
-						<div class = "fire_main-fire"></div>
-					</div>
-					<div class = "fire_wood" id = "wood-1"></div>
-					<div class = "fire_wood" id = "wood-2"></div>
-				</div>
-				<div class="fire_container display_none">
-					<img src="../static/image/ModakbulLOGO.png" style="height: 40px; width: auto; transform: translate(0, -8px); border-radius: 50%;">
-				</div>
-				<div id="M_fire_logo" class="fire_logo">Burn Young</div>
-			</a>
+        	<a id="logo_change_target_fire" class="fir_all_contain display_none_important" href="/" onmouseenter="EE_chage_logo_to_logo($(this))"  onmouseleave="EE_return_logo()">
+        	    <div class = "fire_container">
+        	        <div class = "fire_flame" id = "flame-2"></div>
+        	        <div class = "fire_flame" id = "flame-1"></div>
+        	        <div class = "fire_flame" id = "flame-3"></div>
+        	        <div class = "fire_small-element"></div>
+        	        <div class = "fire_small-element"></div>
+        	        <div class = "fire_fire-bottom">
+        	            <div class = "fire_main-fire"></div>
+        	        </div>
+        	        <div class = "fire_wood" id = "wood-1"></div>
+        	        <div class = "fire_wood" id = "wood-2"></div>
+        	    </div>
+        	    <div id="M_fire_logo" class="fire_logo">MODAKBUL</div>
+        	</a>
 			<!--사이드 메뉴-->
 			<li class="gn-trigger">
 				<a id="M_gn-icon" class="gn-icon gn-icon-menu" style="padding-left : 20px"><span>Menu</span></a>
@@ -180,8 +179,8 @@
 		</div>
 	</div>
 	<!--menu control button-->
-	<div id="M_menu_button_container">
-		<div id='ss_menu' class="">
+	<div id="M_menu_button_container" class="display_none_important">
+		<div id='ss_menu'>
 		  <div id="M_menu_button_write" onclick="post_write()"> <i class="fas fa-plus"></i> </div>
 		  <div id="M_menu_button_trash" class="display_none_important" onclick="post_delete()"> <i class="fas fa-trash-alt"></i> </div>
 		  <div id="M_menu_button_modify" class="display_none_important" onclick="post_modify()"> <i class="fas fa-pen-nib"></i> </div>
@@ -278,7 +277,6 @@
 <script src="../static/js/nav_bar.js"></script>
 <script src="../static/js/postmodal.js"></script>
 <script src="../static/js/historyback.js"></script>
-<script src="../static/js/search.js"></script>
 <script>
 	M_summernote_change();
 	$(document).ready(function() {

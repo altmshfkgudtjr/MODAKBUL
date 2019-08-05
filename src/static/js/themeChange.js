@@ -119,3 +119,10 @@ function M_summernote_change() {
 		$('.M_filebox').css('color', "#5f6f81");
 	}
 }
+
+if (localStorage.getItem('modakbul_logo') == 'fire'){
+	$('#logo_change_target_fire').removeClass('display_none_important');
+} else {
+	$('#logo_change_target_logo').removeClass('display_none_important');
+	localStorage.removeItem('modakbul_logo');
+}

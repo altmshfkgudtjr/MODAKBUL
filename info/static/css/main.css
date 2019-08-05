@@ -195,7 +195,7 @@ input:-ms-input-placeholder { color: #adadad;}
 .display_none {display: none}
 .display_block {display: block}
 
-.M_dropdwon_trf {transform: translate(0, 5px)}
+.M_dropdwon_trf {line-height: 50px !important; padding-top: 10px !important;}
 .M_dropdown_hypeon {padding: 0 22px 0 30px}
 
 .M_boxshadow {box-shadow: 0px 4px 30px -4px}
@@ -205,35 +205,46 @@ input:-ms-input-placeholder { color: #adadad;}
   .M_boxshadow_sidemenu {box-shadow: 0px 0px 0px 0px}
 }
 
+.M_dropdown_list {
+  height: 60px;
+}
 .M_dropdown_icon {
-  position: absolute; right: 10px; margin-right: 30px; line-height: 60px;
+  position: relative;
+  display: inline-block;
+  float: right;
+  width: 15%;
+  padding: 0 4%;
+  line-height: 60px;
+  cursor: pointer;
+  text-align: center;
+}
+.M_dropdown_icon:hover {
+  background-color: #c30e2e;
+  color: white;
 }
 @media screen and (max-width: 760px) {
   .M_dropdown_icon {
-    position: absolute; left: 320px !important; line-height: 60px;
+    padding: 0;
+    padding-right: 7%;
+    width: 20%;
   }
 }
-@media screen and (max-width: 420px) {
-  .M_dropdown_icon {
-    position: absolute; left: 380px !important; line-height: 60px;
+.M_dropdown_real_body {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 85%;
+}
+.M_dropdown_real_body:hover {
+  background-color: #c30e2e;
+  color: white;
+  cursor: pointer;
+}
+@media screen and (max-width: 760px){
+  .M_dropdown_real_body{
+    width: 80%;
   }
 }
-@media screen and (max-width: 400px) {
-  .M_dropdown_icon {
-    position: absolute; left: 350px !important; line-height: 60px;
-  }
-}
-@media screen and (max-width: 360px) {
-  .M_dropdown_icon {
-    position: absolute; left: 330px !important; line-height: 60px;
-  }
-}
-@media screen and (max-width: 320px) {
-  .M_dropdown_icon {
-    position: absolute; left: 300px !important; line-height: 60px;
-  }
-}
-
 .M_nav_user {
   position: absolute;
   top: 65px;

@@ -679,6 +679,7 @@ $(function(){
 	});
 });
 */
+
 function post_write_accept() {
 	if ($('#M_post_fixed_title_input').val() == ""){
 		snackbar("제목을 입력해주세요.");
@@ -799,7 +800,6 @@ function post_write_cancel() {
 	history.replaceState(null, null, "#list");
 	$('#M_user_post_modal_background_fixed').addClass('fadeOut');
 	$('#M_user_post_modal_background_fixed').removeClass('fadeIn');
-	$('#M_user_post_modal_container_fixed').addClass("fadeOutDown");
 	$('#M_user_post_modal_container_fixed').removeClass('fadeInUp');
 	setTimeout(function(){
   		$('#M_user_post_modal_container_fixed').addClass("display_none");
