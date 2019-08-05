@@ -30,13 +30,12 @@
     <!--custom css-->
     <link rel="stylesheet" type="text/css" href="../static/css/main.css">
     <link rel="stylesheet" type="text/css" href="../static/css/settings.css">
-
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 </head>
 
 
 
-<body class="M_white_theme" onload="setTheme(); get_user_info();">
+<body class="M_white_theme" onload="setTheme(); settingsPage_check_admin(); get_user_info();">
 <!--Side Menu : necessary-->
 <div id="M_nav_container" class="container M_sidemenu">
     <ul id="gn-menu" class="gn-menu-main M_boxshadow">
@@ -146,7 +145,9 @@
         </div>
     </div>
     <div class="M_setting M_info">
-            <div onclick="submit_bio()"class="M_setting_submit">적용</div>
+            <div onclick="submit_bio()" class="M_setting_submit">
+                <i class="far fa-check-circle"></i>
+            </div>
         <div class="M_settings_title">
             # 학생회 정보
         </div>
@@ -158,8 +159,7 @@
                     로고 변경
                 </div>
             </div>
-            <div class="M_setting_line" style="width: 70%;"></div>
-            <img id="M_image_preview" onclick="upload_logo()" src="#" style="border: 2px solid #fff;width: 50%; height: 50%;cursor: pointer;">
+            <img id="M_image_preview" onclick="upload_logo()" src="#" class="M_setting_logo_image">
             <input type="file" id="M_logo_upload" style="display: none;">
             <div class="M_image_warning">
                 로고는 160x160 사이즈로 업로드해주시기 바랍니다.
@@ -189,7 +189,9 @@
         </div>
     </div>
     <div style="display: none;" class="M_setting M_bio">
-            <div class="M_setting_submit">적용</div>
+            <div class="M_setting_submit">
+                <i class="far fa-check-circle"></i>
+            </div>
         <div class="M_settings_title">
             # 학생회 소개
         </div>
@@ -295,7 +297,9 @@
     </div>
 
     <div style="display: none;" class="M_setting M_user">
-            <div class="M_setting_submit">적용</div>
+            <div class="M_setting_submit">
+                <i class="far fa-check-circle"></i>
+            </div>
         <div class="M_settings_title">
             # 사용자 관리
         </div>
@@ -307,10 +311,11 @@
                     사용자 검색
                 </div>
             </div>
-            <div class="M_setting_line"></div>
             <div class="M_user_search_wrapper">
-                <input class="M_user_search" type="text">
-                <i style="margin-left: 3%;" class="fas fa-search"></i>
+                <input class="M_user_search" type="text" placeholder="홍길동" autocomplete="off">
+                <div class="M_user_search_button">
+                    <i style="margin-left: 3%;" class="fas fa-search"></i>
+                </div>
                 <div>* 학번 혹은 이름으로 검색해주세요.</div>
             </div>
             <div class="M_settings_subtitle_wrapper">
@@ -329,9 +334,6 @@
                 </div>
                 <div class = "M_setting_black_button">
                     블랙
-                </div>
-                <div class = "M_setting_unblack_button">
-                    
                 </div>
             </div>
         </div>
@@ -354,6 +356,9 @@
                         <div class="M_setting_subtitle">
                         16011089 신희재 컴퓨터공학과
                         </div>
+                        <div class = "M_setting_unblack_button">
+                            취소
+                        </div>
                     </div>
 
                     <div class="M_black_user_info">
@@ -361,6 +366,9 @@
                         </div>
                         <div class="M_setting_subtitle">
                         16011075 김형석 컴퓨터공학과
+                        </div>
+                        <div class = "M_setting_unblack_button">
+                            취소
                         </div>
                     </div>
 
@@ -370,6 +378,9 @@
                         <div class="M_setting_subtitle">
                         17011584 정재경 컴퓨터공학과
                         </div>
+                        <div class = "M_setting_unblack_button">
+                            취소
+                        </div>
                     </div>
                 </div>
 
@@ -377,7 +388,9 @@
     </div>
 
     <div style="display: none;" class="M_setting M_menu">
-        <div onclick="nav_submit()" class="M_setting_submit">적용</div>
+        <div onclick="nav_submit()" class="M_setting_submit">
+                <i class="far fa-check-circle"></i>
+            </div>
         <div class="M_settings_title">
             # 메뉴 관리
         </div>
@@ -394,21 +407,27 @@
                     메뉴 추가
                 </div>
             </div>
-            <div class="M_setting_line" style="margin-bottom:2vh"></div>
+            <div class="M_setting_line" style="margin-bottom:5px"></div>
+            <div class="M_settings_subtitle_wrapper2">
+                <span class="CB_title_for_writing">글쓰기 권한</span>
+                <span style="float: left; margin-right: 5px;">전체</span>
+                <label class="CB_switch" style="margin-bottom: 0; top: 3px;">
+                    <input id="admin_access_checkbox" type="checkbox">
+                    <span class="CB_slider CB_round"></span>
+                </label>
+                <span style="float: right;">관리자</span>
+            </div>
             <div class="M_settings_subtitle_wrapper">
                 <div class="M_setting_tag">
                 </div>
                 <div class="M_setting_subtitle">
                     태그 선택
                 </div>
-                <input id = "admin_access_checkbox"type="checkbox" class="admin_access_checkbox">
-                    <label for="admin_access_checkbox">어드민 접근</label>
-                
             </div>
             <div class="M_nav_add">
             </div>
-            <div style="float:left; width: 69%">
-                <input id="M_new_board_name" type="text" style="width:100%" placeholder="게시판 이름을 입력하세요.">
+            <div>
+                <input id="M_new_board_name" class="M_new_board_name" type="text" placeholder="게시판 이름을 입력하세요.">
             </div>
             <div onclick="create_board()" class="M_nav_submit">
                 생성
@@ -417,7 +436,9 @@
     </div>
 
     <div style="display: none;" class="M_setting M_tag">
-        <div class="M_setting_submit">적용</div>
+        <div class="M_setting_submit">
+                <i class="far fa-check-circle"></i>
+            </div>
         <div class="M_settings_title">
             # 태그 관리
         </div>
@@ -431,9 +452,9 @@
         <div class="M_tag_list">
             <div class="M_tag_list_item">
                 <div class="M_tag_name" style="display:inline;"> # 소융대 </div>
-                <i onclick="modify_tag($(this).prev(), $(this))" class="fas fa-pencil-alt M_tag_icon"></i>
-                <i class="fas fa-trash-alt M_tag_icon"></i>
-                <i style="display: none;" class="fas fa-check M_tag_icon"></i>
+                <i onclick="modify_tag($(this).prev(), $(this))" class="fas fa-pencil-alt M_tag_icon_fixed"></i>
+                <i class="fas fa-trash-alt M_tag_icon_delete"></i>
+                <i style="display: none;" class="fas fa-check M_tag_icon_delete"></i>
             </div>
         </div>
     </div>

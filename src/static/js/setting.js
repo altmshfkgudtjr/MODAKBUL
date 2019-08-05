@@ -141,3 +141,19 @@ function submit_bio() {
         snackbar('적용되었습니다.');
     }
 }
+function settingsPage_check_admin() {
+    let a_jax = A_JAX(TEST_IP+"get_userinfo", "GET", null, null);
+    $.when(a_jax).done(function(){
+        let json = a_jax.responseJSON;
+        if (json['result'] == "success"){
+            //You are admin!
+        } else {
+            alert("접근 권한이 없습니다.");
+            location.href = "/";
+        }
+    });
+    $.when(a_jax).fail(function(){
+        alert("접근 권한이 없습니다.");
+        location.href = "/";
+    });
+}
