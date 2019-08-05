@@ -193,6 +193,7 @@ input {
     height: 25px;
     display: inline-block;
     width: 100%;
+    height: auto;
     margin-top: 10px;
     margin-bottom: 10px;
     cursor: default;
@@ -208,7 +209,7 @@ input {
 }
 .M_setting_tag {
     width: 11px;
-    height: 100%;
+    height: 26px;
     background: #fff;
     float: left;
     border-radius: 3px;
@@ -226,11 +227,13 @@ input {
     width: auto
 }
 .M_setting_subtitle {
-    height: 25px;
-    line-height: 15px;
+    height: 28px;
+    font-size: 18px;
+    line-height: 18px;
     margin-right: 10px;
     padding: 5px 0;
     display: inline-block;
+    font-family: 'NanumBarunGothic', 'sans-serif';
 }
 .M_image_warning {
     position: relative;
@@ -748,6 +751,27 @@ input:checked + .CB_slider:before {
 }
 @media screen and (max-width: 450px) {
     .M_union_info_wrapper_introduce_textarea {
+        width: 100%;
+    }
+}
+.M_union_info_wrapper_phonenumber_textarea {
+    position: relative;
+    width: 87%;
+    height: 150px;
+    font-size: 18px;
+    color: inherit;
+    text-align: center;
+    resize: none;
+    border: 1.5px solid #e2e2e2;
+    background-color: rgba(0,0,0,0);
+    transition: 0.4s;
+    padding: 10px;
+}
+.M_union_info_wrapper_phonenumber_textarea:focus {
+    border: 1.5px solid #c30e2e;
+}
+@media screen and (max-width: 450px) {
+    .M_union_info_wrapper_phonenumber_textarea {
         width: 100%;
     }
 }
