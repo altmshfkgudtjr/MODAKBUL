@@ -105,7 +105,7 @@ function get_post_info(get_post_id) {
 		if (json['result'] == "success"){
 			$('#M_user_post_modal_container').attr('alt', "vote_"+get_post_id);
 			$('#M_post_profile_color').css("background-color", "#d8d8d8");
-			$('#M_post_author').append(json['vote']['vote_author']);
+			$('#M_post_author').append('관리자');
 			$('#M_post_start_date').append(json['vote']['start_date']);
 			$('#M_post_end_date').append(json['vote']['end_date']);
 			$('#M_post_top_title').append(json['vote']['vote_title']);
