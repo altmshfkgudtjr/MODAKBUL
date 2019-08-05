@@ -60,7 +60,7 @@ function black_list() {
 
             result_html += '<div class="M_black_user_info">' +
                 '<div style="background-color: ' +  black_ajax.responseJSON.blacklist[i].user_color + '" class="M_setting_user_tag"></div>'+
-                '<div class="M_setting_subtitle">'+
+                '<div class="M_setting_subtitle_name">'+
                 black_ajax.responseJSON.blacklist[i].user_name + ' ' +
                 black_ajax.responseJSON.blacklist[i].user_id + ' ' +
                 major +
@@ -278,7 +278,7 @@ function search_user() {
 
             result_html +=
                 '<div style="background-color: ' +  ajax.responseJSON.user.user_color + '" class="M_setting_user_tag"></div>'+
-                '<div class="M_setting_subtitle">'+
+                '<div class="M_setting_subtitle_name">'+
                 ' ' + ajax.responseJSON.user.user_name + ' ' + ajax.responseJSON.user.user_id + ' '+ major +
                 '</div>'+
                 '<div onclick="black_user($(this).parent())" class = "M_setting_black_button"> 블랙</div>';
