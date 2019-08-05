@@ -131,7 +131,7 @@
     <div class="M_settings_nav">
         <div class="M_settings_nav_content" onclick="toggle(0)">
             학생회 정보
-       </div>
+        </div>
         <div class="M_settings_nav_content" onclick="toggle(1)">
             학생회 소개
         </div>
@@ -141,8 +141,12 @@
         <div class="M_settings_nav_content" onclick="toggle(3)">
             메뉴 관리
         </div>
+        <div class="M_settings_nav_content" onclick="toggle(4)">
+            태그 관리
+        </div>
     </div>
     <div class="M_setting M_info">
+            <div class="M_setting_submit">적용</div>
         <div class="M_settings_title">
             # 학생회 정보
         </div>
@@ -154,7 +158,9 @@
                     로고 변경
                 </div>
             </div>
-            <img src="http://placehold.it/160x160" style="border: 2px solid #fff;width: 50%;">
+            <div class="M_setting_line" style="width: 70%;"></div>
+            <img id="M_image_preview" onclick="upload_logo()" src="http://placehold.it/160x160" style="border: 2px solid #fff;width: 50%;cursor: pointer;">
+            <input type="file" id="M_logo_upload" style="display: none;">
             <div class="M_image_warning">
                 로고는 160x160 사이즈로 업로드해주시기 바랍니다.
             </div>
@@ -193,6 +199,7 @@
         </div>
     </div>
     <div style="display: none;" class="M_setting M_bio">
+            <div class="M_setting_submit">적용</div>
         <div class="M_settings_title">
             # 학생회 소개
         </div>
@@ -296,86 +303,148 @@
             </div>
         </div>
     </div>
+
     <div style="display: none;" class="M_setting M_user">
+            <div class="M_setting_submit">적용</div>
         <div class="M_settings_title">
             # 사용자 관리
         </div>
-        <div class="M_settings_subtitle_wrapper">
-            <div class="M_setting_tag">
+        <div class = M_left_settings>
+            <div class="M_settings_subtitle_wrapper">
+                <div class="M_setting_tag">
+                </div>
+                <div class="M_setting_subtitle">
+                    사용자 검색
+                </div>
             </div>
-            <div class="M_setting_subtitle">
-                사용자 검색
+            <div class="M_setting_line"></div>
+            <div class="M_user_search_wrapper">
+                <input class="M_user_search" type="text">
+                <i style="margin-left: 3%;" class="fas fa-search"></i>
+                <div>* 학번 혹은 이름으로 검색해주세요.</div>
+            </div>
+            <div class="M_settings_subtitle_wrapper">
+                <div class="M_setting_tag">
+                </div>
+                <div class="M_setting_subtitle">
+                    사용자 정보
+                </div>
+            </div>
+            <div class="M_setting_line"></div>
+            <div class="M_user_info">
+                <div class="M_setting_user_tag">
+                </div>
+                <div class="M_setting_subtitle">
+                    서정민 16011092 컴퓨터공학과
+                </div>
+                <div class = "M_setting_black_button">
+                    블랙
+                </div>
+                <div class = "M_setting_unblack_button">
+                    
+                </div>
             </div>
         </div>
 
-        <div class="M_user_search_wrapper">
-            <input class="M_user_search" type="text">
-            <i style="margin-left: 3%;" class="fas fa-search"></i>
-        </div>
-        <div class="M_settings_subtitle_wrapper">
-            <div class="M_setting_tag">
+        <div class = "M_right_settings">
+            <div class="M_settings_subtitle_wrapper">
+                <div class="M_setting_tag">
+                </div>
+                <div class="M_setting_subtitle">
+                    블랙리스트 목록
+                </div>
             </div>
-            <div class="M_setting_subtitle">
-                사용자 정보
-            </div>
-        </div>
-        <div class="M_user_info">
-            <div class="M_setting_tag">
-            </div>
-            <div class="">
-                정재경
-            </div>
+                <div class="M_setting_line"></div>
+
+                <div class = "M_setting_blacklist">
+
+                    <div class="M_black_user_info">
+                        <div class="M_setting_user_tag">
+                        </div>
+                        <div class="M_setting_subtitle">
+                        16011089 신희재 컴퓨터공학과
+                        </div>
+                    </div>
+
+                    <div class="M_black_user_info">
+                        <div class="M_setting_user_tag">
+                        </div>
+                        <div class="M_setting_subtitle">
+                        16011075 김형석 컴퓨터공학과
+                        </div>
+                    </div>
+
+                    <div class="M_black_user_info">
+                        <div class="M_setting_user_tag">
+                        </div>
+                        <div class="M_setting_subtitle">
+                        17011584 정재경 컴퓨터공학과
+                        </div>
+                    </div>
+                </div>
+
         </div>
     </div>
+
     <div style="display: none;" class="M_setting M_menu">
+        <div onclick="nav_submit()" class="M_setting_submit">적용</div>
         <div class="M_settings_title">
             # 메뉴 관리
         </div>
         <div class="M_nav_list">
-            <!--
             <div id="M_sortable_list">
-                <div class="M_sortable M_sortable_menu">공지사항</div>
-                <div class="M_sortable M_sortable_menu">학생회 소개</div>
-                <div id="M_sortable_menu_accounts_list" class="M_sortable M_sortable_menu">학생회비 내역
-                    <div class="M_sortable M_sortable_menu_accounts">
-                        소프트웨어융합대학
-                    </div>
-                    <div class="M_sortable M_sortable_menu_accounts">
-                        컴퓨터공학과
-                    </div>
-                    <div class="M_sortable M_sortable_menu_accounts">
-                        소프트웨어학과
-                    </div>
-                    <div class="M_sortable M_sortable_menu_accounts">
-                        정보보호학과
-                    </div>
-                    <div class="M_sortable M_sortable_menu_accounts">
-                        데이터사이언스학과
-                    </div>
-                    <div class="M_sortable M_sortable_menu_accounts">
-                        지능기전공학부
-                    </div>
-                </div>
-                <div class="M_sortable M_sortable_menu">민원</div>
-                <div class="M_sortable M_sortable_menu">갤러리</div>
-                <div id="M_sortable_menu_activities_list" class="M_sortable M_sortable_menu">
-                    대외활동
-                    <div class="M_sortable M_sortable_menu_activities">
-                        공모전
-                    </div>
-                    <div class="M_sortable M_sortable_menu_activities">
-                        취업
-                    </div>
-                </div>
-                <div class="M_sortable M_sortable_menu">통계자료</div>
-            </div>
-            -->
-            <div id="M_sortable_list">
-
             </div>
         </div>
+         
         <div class="M_nav_add_wrapper">
+            <div class="M_settings_subtitle_wrapper">
+                <div class="M_setting_tag">
+                </div>
+                <div class="M_setting_subtitle">
+                    메뉴 추가
+                </div>
+            </div>
+            <div class="M_setting_line" style="margin-bottom:2vh"></div>
+            <div class="M_settings_subtitle_wrapper">
+                <div class="M_setting_tag">
+                </div>
+                <div class="M_setting_subtitle">
+                    태그 선택
+                </div>
+                <input id = "admin_access_checkbox"type="checkbox" class="admin_access_checkbox">
+                    <label for="admin_access_checkbox">어드민 접근</label>
+                
+            </div>
+            <div class="M_nav_add">
+            </div>
+            <div style="float:left; width: 69%">
+                <input type="text" style="width:100%" placeholder="게시판 이름을 입력하세요.">
+            </div>
+            <div class="M_nav_submit">
+                생성
+            </div>
+        </div>
+    </div>
 
+    <div style="display: none;" class="M_setting M_tag">
+        <div class="M_setting_submit">적용</div>
+        <div class="M_settings_title">
+            # 태그 관리
+        </div>
+        <div class="M_settings_subtitle_wrapper">
+            <div class="M_setting_tag">
+            </div>
+            <div class="M_setting_subtitle">
+                태그 관리
+            </div>
+        </div>
+        <div class="M_tag_list">
+            <div class="M_tag_list_item">
+                <div class="M_tag_name" style="display:inline;"> # 소융대 </div>
+                <i onclick="modify_tag($(this).prev(), $(this))" class="fas fa-pencil-alt M_tag_icon"></i>
+                <i class="fas fa-trash-alt M_tag_icon"></i>
+                <i style="display: none;" class="fas fa-check M_tag_icon"></i>
+            </div>
         </div>
     </div>
 </div>

@@ -12,7 +12,7 @@ $(window).ready(function () {
 
         for (let i=0; i<data.length; i++) {
             if (data[i].board_url.split('_')[1] === undefined) result_list.push(data[i]);
-            else nested_list.push(data[i]);      
+            else nested_list.push(data[i]);
         }
 
         for (let i=0; i<nested_list.length; i++) {
@@ -82,8 +82,8 @@ $(window).ready(function () {
                 }
                 else {
                     result_html += '<li><a href="/board?type='+ result_list[i].board_url+'" class="M_nav_user_button">' +
-                    '<i class="far fa-sticky-note" style="padding: 0 22px"></i>' + result_list[i].board_name + '</a></li>';    
-                }                
+                    '<i class="far fa-sticky-note" style="padding: 0 22px"></i>' + result_list[i].board_name + '</a></li>';
+                }
             }
         }
         result_html += '</ul>';
@@ -102,7 +102,7 @@ function EE_change_logo_to_fire(tag) {
             $('#logo_change_target_fire').removeClass('display_none_important');
             snackbar("모닥불 프로젝트");
         }
-    }, 5000);            
+    }, 5000);
 }
 function EE_chage_logo_to_logo(tag) {
     check_logo_cnt = 1;
@@ -111,7 +111,7 @@ function EE_chage_logo_to_logo(tag) {
             localStorage.removeItem('modakbul_logo');
             tag.addClass('display_none_important');
             $('#logo_change_target_logo').removeClass('display_none_important');
-        }   
+        }
     }, 5000);
 }
 function EE_return_logo() {
