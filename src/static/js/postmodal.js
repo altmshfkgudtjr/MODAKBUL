@@ -558,7 +558,7 @@ function clipboardCopy(tag) {
 	let post_id = tag.getAttribute('alt');
 	var clipboard_textarea = document.createElement('textarea');
 	clipboard_textarea.setAttribute('id', 'clipboard_copy');
-	clipboard_textarea.value = TEST_IP+"v/"+post_id;
+	clipboard_textarea.value = TEST_IP+"v#"+post_id;
 	clipboard_textarea.style.zIndex = "-3000";
 	document.body.appendChild(clipboard_textarea);
 	clipboard_textarea.select();
