@@ -23,7 +23,6 @@ ACCESS_DENIED_BOARD = ['공지', '갤러리', '학생회소개', '통계', '대�
 $(document).ready(function(){
     let tag_ajax = A_JAX(TEST_IP+'get_tags', 'GET', null, null);
     $.when(tag_ajax).done(function() {
-
         for (let i=0; i<tag_ajax.responseJSON.tags.length; i++)
         {
             $('.M_nav_add').append('<div onclick="select_tag($(this))" class="M_nav_tag"># ' + tag_ajax.responseJSON.tags[i] + '</div>')
@@ -108,7 +107,6 @@ $(document).ready(function(){
     let board_ajax = A_JAX(TEST_IP+'get_boards_origin', 'GET', null, null);
 
     $.when(board_ajax).done(function () {
-        console.log(final_result.length);
         for (let i=0; i<final_result.length; i++) {
 
             for (let j=0; j<final_result[i].length; j++) {
@@ -160,13 +158,11 @@ function nav_submit(new_board, delete_board){
         if (delete_board) {
             send_data.splice(send_data.indexOf(delete_board))
         }
-        console.log(send_data);
 
         output.append('boards', JSON.stringify(send_data));
 
         let send_ajax = A_JAX_FILE(TEST_IP+'board_upload', 'POST', null, output);
         $.when(send_ajax).done(function() {
-            console.log(send_ajax.responseJSON);
             location.reload();
         })
     });
@@ -186,7 +182,6 @@ function select_tag(target) {
         target.addClass('M_tag_nav');
         selected_tags.push(target[0].innerText);
     }
-    console.log(selected_tags)
 }
 
 function create_board() {
@@ -206,18 +201,13 @@ function create_board() {
     }
     new_board.board_url = tags.join('_');
 
-
-    console.log(new_board);
-
     nav_submit(new_board);
 }
 
 function delete_board(target) {
-    console.log(target[0].parentNode.innerText);
     let board = send_data.filter(data => {
         return data.board_name === target[0].parentNode.innerText;
     });
-    console.log(board);
 
     nav_submit(null, board[0])
 }
