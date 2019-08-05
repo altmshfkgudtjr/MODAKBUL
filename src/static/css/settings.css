@@ -276,6 +276,13 @@ input {
 .M_tag_nav {
     background: rgb(74, 78, 82);
 }
+.M_board_delete_icon {
+    float: right;
+    cursor: pointer;
+}
+.M_board_delete_icon:hover {
+    color: darkred;
+}
 
 @media screen and (max-width: 55em){
     .M_setting{
