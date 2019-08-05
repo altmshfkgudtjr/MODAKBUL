@@ -42,7 +42,7 @@
        <!--nav bar 메인 로고-->
             <div id="logo_change_target_logo" class="M_nav_bar_logo_container display_none_important" onclick="location.href='/'" onmouseenter="EE_change_logo_to_fire($(this))" onmouseleave="EE_return_logo()">
                 <div class="M_nav_bar_logo_image">
-                    <img id="M_nav_bar_logo_image_img" src="../static/image/ModakbulLOGO.png" class="M_nav_bar_logo_image_img">
+                    <img id="M_nav_bar_logo_image_img" src="#" class="M_nav_bar_logo_image_img">
                 </div>
             </div>
             <a id="logo_change_target_fire" class="fir_all_contain display_none_important" href="/" onmouseenter="EE_chage_logo_to_logo($(this))"  onmouseleave="EE_return_logo()">
@@ -159,7 +159,7 @@
                     로고 변경
                 </div>
             </div>
-            <img id="M_image_preview" onclick="upload_logo()" src="http://placehold.it/160x160" class="M_setting_logo_image">
+            <img id="M_image_preview" onclick="upload_logo()" src="#" class="M_setting_logo_image">
             <input type="file" id="M_logo_upload" style="display: none;">
             <div class="M_image_warning">
                 로고는 160x160 사이즈로 업로드해주시기 바랍니다.
@@ -170,31 +170,21 @@
                 <div class="M_setting_tag">
                 </div>
                 <div class="M_setting_subtitle">
-                    학생회 이름(Korean)
+                    학생회 이름
                 </div>
             </div>
             <div>
-                <input class="M_union_info_input" type="text" placeholder="모닥불" autocomplete="off">
+                <input id="M_union_name"class="M_union_info_input" type="text">
             </div>
             <div class="M_settings_subtitle_wrapper">
                 <div class="M_setting_tag">
                 </div>
                 <div class="M_setting_subtitle">
-                    학생회 이름(English)
+                    메인페이지 학생회 부제
                 </div>
             </div>
             <div>
-                <input class="M_union_info_input" type="text" placeholder="Modakbul" autocomplete="off">
-            </div>
-            <div class="M_settings_subtitle_wrapper">
-                <div class="M_setting_tag">
-                </div>
-                <div class="M_setting_subtitle">
-                    메인페이지 학생회 소개
-                </div>
-            </div>
-            <div>
-                <input class="M_union_info_input" type="text" placeholder="Software Convergence College" autocomplete="off">
+                <input id="M_union_subtitle" class="M_union_info_input" type="text">
             </div>
         </div>
     </div>
@@ -436,7 +426,7 @@
             </div>
             <div class="M_nav_add">
             </div>
-            <div style="">
+            <div>
                 <input id="M_new_board_name" class="M_new_board_name" type="text" placeholder="게시판 이름을 입력하세요.">
             </div>
             <div onclick="create_board()" class="M_nav_submit">
@@ -466,7 +456,6 @@
                 <i class="fas fa-trash-alt M_tag_icon_delete"></i>
                 <i style="display: none;" class="fas fa-check M_tag_icon_delete"></i>
             </div>
-
         </div>
     </div>
 </div>
@@ -508,7 +497,8 @@
 <script src="../static/js/test_url.js"></script>
 <script src="../static/js/login.js"></script>
 <script src="../static/js/themeChange.js"></script>
-<script src="../static/js/nav_bar.js"></script>
+<script src="../static/js/sidebar.js"></script>
 <script src="../static/js/setting.js"></script>
 <script src="../static/js/drag_drop.js"></script>
+<script src="../static/js/navigation.js"></script>
 </html>
