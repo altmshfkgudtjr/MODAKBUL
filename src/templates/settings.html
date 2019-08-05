@@ -35,7 +35,7 @@
 
 
 
-<body class="M_white_theme" onload="setTheme(); settingsPage_check_admin(); get_user_info();">
+<body class="M_white_theme" onload="setTheme(); settingsPage_check_admin(); get_user_info(); change_setting_theme();">
 <!--Side Menu : necessary-->
 <div id="M_nav_container" class="container M_sidemenu">
     <ul id="gn-menu" class="gn-menu-main M_boxshadow">
@@ -187,6 +187,15 @@
                 <input id="M_union_subtitle" class="M_union_info_input" type="text">
             </div>
         </div>
+        <div class="M_settings_subtitle_wrapper">
+            <div class="M_setting_tag"></div>
+            <div class="M_setting_subtitle">
+                총 인사말
+            </div>
+            <div class="M_union_info_wrapper_introduce">
+               <textarea id="M_union_info_wrapper_introduce_textarea" class="M_union_info_wrapper_introduce_textarea"></textarea>
+            </div>
+        </div>
     </div>
     <div style="display: none;" class="M_setting M_bio">
             <div class="M_setting_submit">
@@ -297,9 +306,9 @@
     </div>
 
     <div style="display: none;" class="M_setting M_user">
-            <div class="M_setting_submit">
-                <i class="far fa-check-circle"></i>
-            </div>
+        <div class="M_setting_submit">
+            <i class="far fa-check-circle"></i>
+        </div>
         <div class="M_settings_title">
             # 사용자 관리
         </div>
@@ -383,7 +392,6 @@
                         </div>
                     </div>
                 </div>
-
         </div>
     </div>
 
@@ -454,6 +462,7 @@
                 <i class="fas fa-trash-alt M_tag_icon_delete"></i>
                 <i style="display: none;" class="fas fa-check M_tag_icon_delete"></i>
             </div>
+            
         </div>
     </div>
 </div>

@@ -138,12 +138,18 @@ function change_setting_theme() {
 }
 
 function whiteSetTheme_setting() {
-	$('.M_setting_line').css('background-color', "#5f6f81");
-	$('.M_setting_tag').css('background-color', '#5f6f81');
-	$('#M_image_preview').css('border', '2px solid #5f6f81');
+	$('.M_setting_line').css('background-color', "#c30e2e");
+	$('.M_setting_tag').css('background-color', '#c30e2e');
+	$('#M_image_preview').css('border', '2px solid #c30e2e');
+	$('.M_settings_nav').css('border-right', '2px solid #c30e2e');
+	$('.M_nav_add').css('border', '1.5px solid #c30e2e');
+	$('.M_nav_submit').css('border', '1.5px solid #5f6f81');
 }
 function darkSetTheme_setting() {
 	$('.M_setting_line').css('background-color', 'white');
 	$('.M_setting_tag').css('background-color', 'white');
-	$('#M_image_preview').css('border', '2px solid #fff');
+	$('#M_image_preview').css('border', '2px solid white');
+	$('.M_settings_nav').css('border-right', '2px solid white');
+	$('.M_nav_add').css('border', '1.5px solid white');
+	$('.M_nav_submit').css('border', '1.5px solid white');
 }
