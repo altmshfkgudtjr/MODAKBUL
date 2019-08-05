@@ -93,13 +93,13 @@
                 <div class="M_nav_border"></div>
                 <a class="M_nav_user_button" onclick="user_logout()">로그아웃</a>
                 <div class="M_nav_border"></div>
-                <a class="M_nav_user_button" onclick="changeTheme()"><i id="M_theme" class="M_theme fas fa-moon"></i></a>
+                <a class="M_nav_user_button" onclick="changeTheme(); change_setting_theme();"><i id="M_theme" class="M_theme fas fa-moon"></i></a>
             </div>
             <!--비로그인시-->
             <div id="M_nav_user_nologin" class="M_nav_user M_boxshadow_user M_nav_user_nologin display_none">
                 <a class="M_nav_user_button" href="/sign-in">로그인</a>
                 <div class="M_nav_border"></div>
-                <a class="M_nav_user_button" onclick="changeTheme()"><i id="M_theme" class="M_theme fas fa-moon"></i></a>
+                <a class="M_nav_user_button" onclick="changeTheme(); change_setting_theme();"><i id="M_theme" class="M_theme fas fa-moon"></i></a>
             </div>
         </li>
     </ul>
@@ -409,13 +409,11 @@
             </div>
             <div class="M_setting_line" style="margin-bottom:5px"></div>
             <div class="M_settings_subtitle_wrapper2">
-                <span class="CB_title_for_writing">글쓰기 권한</span>
-                <span style="float: left; margin-right: 5px;">전체</span>
-                <label class="CB_switch" style="margin-bottom: 0; top: 3px;">
+                <span class="CB_title_for_writing">글쓰기 권한(관리자만)</span>
+                <label class="CB_switch">
                     <input id="admin_access_checkbox" type="checkbox">
                     <span class="CB_slider CB_round"></span>
                 </label>
-                <span style="float: right;">관리자</span>
             </div>
             <div class="M_settings_subtitle_wrapper">
                 <div class="M_setting_tag">
@@ -458,11 +456,6 @@
             </div>
         </div>
     </div>
-</div>
-<!--Page footer-->
-<div class="M_footer" style="position:absolute; margin: 0 auto; bottom: 1%">
-    <img src="../static/image/foot.png" class="M_footer_img">
-    <p class="M_footer_p">010-7393-3434 | sejong1sc@gmail.com | 학생회관 409호<br>COPYRIGHT ⓒ 2019 Team IML</p>
 </div>
 </body>
 
