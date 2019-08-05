@@ -26,13 +26,28 @@ $(document).ready(()=>{
         }
     }
 
+    let tag_ajax = A_JAX(TEST_IP+'get_tags', 'GET', null, null);
+    $.when(tag_ajax).done(function() {
+        for (let i=0; i<tag_ajax.responseJSON.tags.length; i++)
+        {
+            $('.M_tag_list').append(
+                '<div class="M_tag_list_item">'+
+                '<div class="M_tag_name" style="display:inline;"> # ' + tag_ajax.responseJSON.tags[i] + ' </div>'+
+                '<i onclick="modify_tag($(this).prev(), $(this))" class="fas fa-pencil-alt M_tag_icon_fixed"></i>'+
+                '<i class="fas fa-trash-alt M_tag_icon_delete"></i>'+
+                '<i style="display: none;" class="fas fa-check M_tag_icon_delete"></i>'+
+                '</div>'
+            )
+        }
+    });
+
    black_list();
 });
 
 function black_list() {
     let black_ajax = A_JAX(TEST_IP+'get_blacklist', 'GET', null, null);
     $.when(black_ajax).done(()=>{
-        result_html = ''
+        result_html = '';
         for (let i=0; i<black_ajax.responseJSON.blacklist.length; i++) {
             let major = '';
             for (let j=0; j<DEPARTMENTS.length; j++)
@@ -44,7 +59,7 @@ function black_list() {
 
 
             result_html += '<div class="M_black_user_info">' +
-                '<div class="M_setting_user_tag"></div>'+
+                '<div style="background-color: ' +  black_ajax.responseJSON.blacklist[i].user_color + '" class="M_setting_user_tag"></div>'+
                 '<div class="M_setting_subtitle">'+
                 black_ajax.responseJSON.blacklist[i].user_name + ' ' +
                 black_ajax.responseJSON.blacklist[i].user_id + ' ' +
@@ -58,6 +73,7 @@ function black_list() {
 
 function toggle(flag) {
     let info = $('.M_info');
+    let principle_bio = $('.M_principle_bio');
     let bio = $('.M_bio');
     let user = $('.M_user');
     let menu = $('.M_menu');
@@ -65,6 +81,7 @@ function toggle(flag) {
 
     if (flag === 0){
         info.css('display', 'inline-block');
+        principle_bio.css('display', 'none');
         bio.css('display', 'none');
         user.css('display', 'none');
         menu.css('display', 'none');
@@ -72,27 +89,39 @@ function toggle(flag) {
     }
     else if (flag === 1){
         info.css('display', 'none');
-        bio.css('display', 'inline-block');
+        principle_bio.css('display', 'inline-block');
+        bio.css('display', 'none');
         user.css('display', 'none');
         menu.css('display', 'none');
         tag.css('display', 'none');
     }
     else if (flag === 2){
         info.css('display', 'none');
-        bio.css('display', 'none');
-        user.css('display', 'inline-block');
+        principle_bio.css('display', 'none');
+        bio.css('display', 'inline-block');
+        user.css('display', 'none');
         menu.css('display', 'none');
         tag.css('display', 'none');
     }
     else if (flag === 3){
         info.css('display', 'none');
+        principle_bio.css('display', 'none');
+        bio.css('display', 'none');
+        user.css('display', 'inline-block');
+        menu.css('display', 'none');
+        tag.css('display', 'none');
+    }
+    else if (flag === 4){
+        info.css('display', 'none');
+        principle_bio.css('display', 'none');
         bio.css('display', 'none');
         user.css('display', 'none');
         menu.css('display', 'inline-block');
         tag.css('display', 'none');
     }
-    else if (flag === 4){
+    else if (flag === 5){
         info.css('display', 'none');
+        principle_bio.css('display', 'none');
         bio.css('display', 'none');
         user.css('display', 'none');
         menu.css('display', 'none');
@@ -110,12 +139,10 @@ function upload_logo() {
 
 let image;
 function image_preview(input) {
-    console.log(input);
     if (input.files && input.files[0]) {
         let reader = new FileReader();
 
         reader.onload = function(e) {
-            console.log(e);
             $('#M_image_preview').attr('src', e.target.result);
         };
         reader.readAsDataURL(input.files[0]);
@@ -127,6 +154,8 @@ function image_preview(input) {
 let image_updated = false;
 let name_updated = false;
 let subtitle_updated = false;
+let main_bio_updated = false;
+let contacts_updated = false;
 
 $('#M_logo_upload').change(function () {
    image_preview(this);
@@ -139,14 +168,17 @@ $('#M_union_name').change(()=>{
 
 $('#M_union_subtitle').change(()=>{
     subtitle_updated = true;
-})
+});
+
+$('#M_union_info_wrapper_introduce_textarea').change(()=>{
+    main_bio_updated = true;
+});
+
+$('#M_union_info_wrapper_phonenumber_textarea').change(()=>{
+    contacts_updated = true;
+});
 
 function submit_bio() {
-    let introduce_textarea_value; // 학생회 소개 textarea
-    introduce_textarea_value =  $('#M_union_info_wrapper_introduce_textarea').val();
-    introduce_textarea_value = introduce_textarea_value.replace(/\n/g, "<br />");
-    console.log(introduce_textarea_value);
-    console.log(image_updated, name_updated, subtitle_updated);
     if (image_updated === true)
     {
         let img_data = new FormData();
@@ -177,6 +209,36 @@ function submit_bio() {
         $.when(subtitle_ajax).done(()=>{
             div.val('');
             div.attr('placeholder', new_subtitle);
+        });
+        snackbar('적용되었습니다.');
+    }
+    if (main_bio_updated === true)
+    {
+        let introduce_textarea_value; // 학생회 소개 textarea
+        let tmp;
+        tmp =  $('#M_union_info_wrapper_introduce_textarea').val();
+        introduce_textarea_value = tmp.replace(/\n/g, "<br />");
+
+        let main_bio_data = {'key': '총인사말', 'value': introduce_textarea_value};
+        let main_bio_ajax = A_JAX(TEST_IP+'variable_update', 'POST', null, main_bio_data);
+        $.when(main_bio_ajax).done(()=>{
+            $('#M_union_info_wrapper_introduce_textarea').val('');
+            $('#M_union_info_wrapper_introduce_textarea').attr('placeholder', tmp);
+        });
+        snackbar('적용되었습니다.');
+    }
+    if (contacts_updated === true)
+    {
+        let contacts_textarea_value; // 학생회 소개 textarea
+        let tmp;
+        tmp =  $('#M_union_info_wrapper_phonenumber_textarea').val();
+        contacts_textarea_value = tmp.replace(/\n/g, "<br />");
+
+        let contacts_data = {'key': '연락처', 'value': contacts_textarea_value};
+        let contacts_ajax = A_JAX(TEST_IP+'variable_update', 'POST', null, contacts_data);
+        $.when(contacts_ajax).done(()=> {
+            $('#M_union_info_wrapper_phonenumber_textarea').val('');
+            $('#M_union_info_wrapper_phonenumber_textarea').attr('placeholder', tmp);
         });
         snackbar('적용되었습니다.');
     }
@@ -215,7 +277,7 @@ function search_user() {
             }
 
             result_html +=
-                '<div class="M_setting_user_tag"></div>'+
+                '<div style="background-color: ' +  ajax.responseJSON.user.user_color + '" class="M_setting_user_tag"></div>'+
                 '<div class="M_setting_subtitle">'+
                 ' ' + ajax.responseJSON.user.user_name + ' ' + ajax.responseJSON.user.user_id + ' '+ major +
                 '</div>'+

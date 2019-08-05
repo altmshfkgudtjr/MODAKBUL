@@ -92,7 +92,7 @@ $(window).ready(function () {
     });
 
     let user_ajax = A_JAX(TEST_IP+'get_userinfo', 'GET', null, null);
-    $.when(user_ajax).done(()=>{
+    $.when(user_ajax).done(function (){
         if (user_ajax.responseJSON.user_tags.indexOf('ADMIN') !== -1) {
             $('#gn-menu2').append('<li><a href="/settings" class="M_nav_user_button">' +
                 '<i class="fas fa-cog" style="padding: 0 22px"></i>설정</a></li>');
