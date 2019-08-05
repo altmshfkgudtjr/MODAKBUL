@@ -3011,7 +3011,7 @@ input:checked + .CB_slider_comment:before {
   border: 3px solid #494E52;
   transform: rotate(55deg);
   margin-left: 140%;
-  animation: square_spin1 60s infinite linear;
+  animation: square_spin1 80s infinite linear;
 }
 .M_credit_background_square1:before {
   content: "";
@@ -3022,7 +3022,7 @@ input:checked + .CB_slider_comment:before {
   width: 50%;
   border: 3px solid #494E52;
   transform: rotate(35deg);
-  animation: square_spin2 60s infinite linear;
+  animation: square_spin2 100s infinite linear;
 }
 .M_credit_background_square2:before {
   content: "";
