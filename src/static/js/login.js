@@ -93,6 +93,7 @@ function get_user_info() {
 			//control button 유무 체크
 			let searchParams = new URLSearchParams(window.location.search);
 			let request_board = searchParams.get('type');
+			/*
 			let control_button_ajax = A_JAX(TEST_IP+"get_board/"+request_board, "GET", null, null);
 			$.when(control_button_ajax).done(function(){
 				let control_button_json = control_button_ajax.responseJSON;
@@ -106,6 +107,7 @@ function get_user_info() {
 					}	
 				}
 			});
+			*/
 		}
 		else if (json['result'] == 'blacklist'){
 			snackbar("블랙리스트 입니다.");
