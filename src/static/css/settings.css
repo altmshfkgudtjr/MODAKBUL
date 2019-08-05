@@ -138,6 +138,19 @@ input {
     background-color: white;
     margin-bottom: 10px;
 }
+.M_password_line{
+    width: 87%;
+    margin-right: 13%;
+    height: 2px;
+    background-color: white;
+    margin-bottom: 10px;
+}
+@media screen and (max-width: 800px){
+    .M_password_line {
+        width: 100%;
+        margin-right: 0;
+    }
+}
 
 .M_user_info{
     height: 25px;
@@ -224,22 +237,11 @@ input {
     float: left
     height: auto;
     display: inline-block;
-    width: 57%;
-    margin-right: 13%;
-}
-@media screen and (max-width: 800px){
-    .M_setting_subtitle_wrapper4 {
-        width: 70%;
-        margin-right: 0;
-    }
+    width: 70%;
 }
 @media screen and (max-width: 700px){
     .M_setting_subtitle_wrapper3 {
         width: 100%;
-    }
-    .M_setting_subtitle_wrapper4 {
-        width: 100%;
-        margin-right: 0;
     }
 }
 .M_setting_introduce_image {
@@ -314,8 +316,11 @@ input {
     float: right;
     margin-left: 3%;
     width: 60%;
+    transition: 0.4s;
 }
-
+.M_password_input:focus {
+    border: 1.5px solid #c30e2e;
+}
 @media screen and (max-width: 1000px){
     .M_password_wrapper {
         width: 70%;
@@ -339,8 +344,7 @@ input {
     float: left;
     display: inline-block;
     height: 60px;
-    width: 87%;
-    margin-right: 13%;
+    width: 100%;
     padding: 10px;
     text-align: center;
     border-radius: 4px;
@@ -358,12 +362,6 @@ input {
 .M_setting_introduce_delete_button:hover {
     border: 1.5px solid #c30e2e;
     color: #c30e2e;
-}
-@media screen and (max-width: 800px){
-    .M_setting_introduce_delete_button {
-        margin-right: 0;
-        width: 100%;
-    }
 }
 .M_setting_introduce_plus_button_container {
     position: relative;
@@ -408,6 +406,19 @@ input {
 }
 .M_union_info_input:focus {
     border: 1.5px solid #c30e2e;
+}
+.M_bio_wrapper {
+    padding-bottom: 40px;
+    margin-bottom: 30px;
+    border-bottom: 1.5px solid #c30e2e;
+    margin-right: 13%;
+    width: 87%;
+}
+@media screen and (max-width: 800px) {
+    .M_bio_wrapper {
+        width: 100%;
+        margin-right: 0;
+    }
 }
 .M_bio_wrapper::-webkit-scrollbar { 
   display: none; 
@@ -544,20 +555,36 @@ input {
     cursor: pointer;
 }
 .M_tag_icon_fixed {
-    margin-left: 1%;
+    float: right;
     cursor: pointer;
     transition: 0.4s;
+    padding: 0 5px;
+    line-height: 30px;
 }
 .M_tag_icon_fixed:hover {
     color: #58D878;
 }
 .M_tag_icon_delete {
+    float: right;
     margin-left: 1%;
     cursor: pointer;
     transition: 0.4s;
+    padding-right: 5px;
+    line-height: 30px;
 }
 .M_tag_icon_delete:hover {
     color: red;
+}
+.M_tag_icon_check {
+    float: right;
+    margin-left: 1%;
+    cursor: pointer;
+    transition: 0.4s;
+    padding-right: 5px;
+    line-height: 30px;
+}
+.M_tag_icon_check:hover {
+    color: #58D878;
 }
 .M_tag_list{
     height: 70%;
@@ -565,7 +592,7 @@ input {
     margin-right: 13%;
     overflow-y: scroll;
 }
-@media screen and (max-width: 450px){
+@media screen and (max-width: 800px){
     .M_tag_list {
         width: 100%;
     }
@@ -578,17 +605,14 @@ input {
     position: relative;
     display: inline-block;
     float: left;
-    width: 50%;
-    height: 30px;
-    font-size: 20px;
-    line-height: 30px;
+    width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
-}
-@media screen and (max-width: 450px){
-    .M_tag_list_item {
-        width: 100%;
-    }
+    height: auto;
+    font-size: 20px;
+    line-height: 30px;
+    padding: 10px;
+    border-bottom: 1.5px solid #e2e2e2;
 }
 .M_tag_nav {
     color: #01DF01;
@@ -759,12 +783,12 @@ input {
       position: relative;
       display: inline-block;
       float: left;
-      width: 19%;
-      max-width: 90px;
+      width: 33.333%;
+      max-width: 125px;
       min-width: 60px;
       height: 30px;
       margin: 0px 1% 10px 0;
-      font-size: 10px;
+      font-size: 14px;
       line-height: 30px;
       padding: 5px;
       text-align: center;
@@ -780,17 +804,74 @@ input {
         transform: translate(-50%, 0);
     }
 }
+@media screen and (max-width: 410px){
+    .M_settings_nav_content{
+      position: relative;
+      display: inline-block;
+      float: left;
+      width: 33.3333%;
+      max-width: 115px;
+      min-width: 50px;
+      height: 40px;
+      margin: 0px 1% 10px 0;
+      font-size: 12px;
+      line-height: 30px;
+      padding: 5px;
+      text-align: center;
+      background-color: rgba(0,0,0,0);
+      border-radius: 0;
+      border-bottom: 1.5px solid grey;
+    }
+}
+@media screen and (max-width: 380px){
+    .M_settings_nav_content{
+      position: relative;
+      display: inline-block;
+      float: left;
+      width: 33.3333%;
+      max-width: 110px;
+      min-width: 50px;
+      height: 40px;
+      margin: 0px 1% 10px 0;
+      font-size: 12px;
+      line-height: 30px;
+      padding: 5px;
+      text-align: center;
+      background-color: rgba(0,0,0,0);
+      border-radius: 0;
+      border-bottom: 1.5px solid grey;
+    }
+}
+@media screen and (max-width: 360px){
+    .M_settings_nav_content{
+      position: relative;
+      display: inline-block;
+      float: left;
+      width: 33.3333%;
+      max-width: 102px;
+      min-width: 50px;
+      height: 40px;
+      margin: 0px 1% 10px 0;
+      font-size: 12px;
+      line-height: 30px;
+      padding: 5px;
+      text-align: center;
+      background-color: rgba(0,0,0,0);
+      border-radius: 0;
+      border-bottom: 1.5px solid grey;
+    }
+}
 @media screen and (max-width: 340px){
     .M_settings_nav_content{
       position: relative;
       display: inline-block;
       float: left;
-      width: 19%;
-      max-width: 70px;
+      width: 33.3333%;
+      max-width: 90px;
       min-width: 50px;
       height: 40px;
       margin: 0px 1% 10px 0;
-      font-size: 8px;
+      font-size: 12px;
       line-height: 30px;
       padding: 5px;
       text-align: center;
