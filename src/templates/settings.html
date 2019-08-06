@@ -393,9 +393,6 @@
     </div>
 
     <div style="display: none;" class="M_setting M_tag">
-        <div class="M_setting_submit">
-                <i class="far fa-check-circle"></i>
-        </div>
         <div class="M_settings_title">
             # 태그 관리
         </div>
@@ -407,13 +404,12 @@
             </div>
         </div>
         <div class="M_tag_list">
-            <div class="M_tag_list_item">
-                <div class="M_tag_name" style="display:inline;"> # 소융대 </div>
-                <i class="fas fa-trash-alt M_tag_icon_delete"></i>
-                <i onclick="modify_tag($(this).prev(), $(this))" class="fas fa-pencil-alt M_tag_icon_fixed"></i>
-                <i style="display: none;" class="fas fa-check M_tag_icon_delete"></i>
+            <!--Tag list input target-->
+        </div>
+        <div class="M_setting_introduce_plus_button_container">
+            <div onclick="plus_tag_button()" class="M_setting_introduce_plus_button">
+                <i class="fas fa-plus-circle"></i>
             </div>
-
         </div>
     </div>
 

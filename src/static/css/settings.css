@@ -15,8 +15,6 @@ body::-webkit-scrollbar {
 }
 
 input {
-    color: inherit;
-    background: inherit;
     border: 1.5px solid gray;
     width: 70%;
     padding: 1%;
@@ -317,6 +315,8 @@ input {
     margin-left: 3%;
     width: 60%;
     transition: 0.4s;
+    color: inherit;
+    background-color: rgba(0,0,0,0);
 }
 .M_password_input:focus {
     border: 1.5px solid #c30e2e;
@@ -403,6 +403,7 @@ input {
     padding: 10px;
     margin-bottom: 3vh;
     transition: 0.4s;
+    color: inherit;
 }
 .M_union_info_input:focus {
     border: 1.5px solid #c30e2e;
@@ -432,6 +433,7 @@ input {
     margin-bottom: 3vh;
     transition: 0.4s;
     resize: none;
+    color: inherit;
 }
 .M_bio_input:focus {
     border: 1.5px solid #c30e2e;
@@ -452,6 +454,7 @@ input {
     margin-bottom: 10px;
     transition: 0.4s;
     resize: none;
+    color: inherit;
 }
 .M_user_search:focus {
     border: 1.5px solid #c30e2e;
@@ -470,7 +473,7 @@ input {
     font-size: 20px;
 }
 .M_user_search_button:hover {
-    color: #01DF01;
+    color: #58d878;
 }
 #sortable {
     list-style-type: none;
@@ -490,8 +493,9 @@ input {
     padding: 10px 0 10px 10px;
     margin-bottom: -1px;
     margin-top: 10px;
-    background-color: rgba(20,30,50,0.3);
+    background-color: rgba(140,20,20,0.2);
     border: 1px solid rgba(0,0,0,.125);
+    border-radius: 4px;
     width: 95%;
     cursor: pointer;
 }
@@ -575,6 +579,17 @@ input {
 .M_tag_icon_delete:hover {
     color: red;
 }
+.M_tag_icon_cancel {
+    float: right;
+    margin-left: 1%;
+    cursor: pointer;
+    transition: 0.4s;
+    padding-right: 5px;
+    line-height: 30px;
+}
+.M_tag_icon_cancel:hover {
+    color: red;
+}
 .M_tag_icon_check {
     float: right;
     margin-left: 1%;
@@ -613,9 +628,10 @@ input {
     line-height: 30px;
     padding: 10px;
     border-bottom: 1.5px solid #e2e2e2;
+    transition: 0.4s;
 }
 .M_tag_nav {
-    color: #01DF01;
+    color: #58d878;
 }
 .M_board_delete_icon {
     float: right;
@@ -625,7 +641,7 @@ input {
     text-align: center;
 }
 .M_board_delete_icon:hover {
-    color: red;
+    color: #c30e2e;
 }
 
 @media screen and (max-width: 800px){
@@ -708,7 +724,9 @@ input {
   .M_nav_add_wrapper{
       margin-top: 30px;
       margin-right: 0;
+      margin-left: 0;
       width: 100%;
+      padding-left: 0;
   }
   .M_union_info_input{
       width:100%;
@@ -922,11 +940,11 @@ input {
 }
 
 input:checked + .CB_slider {
-  background-color: #01DF01;
+  background-color: #58d878;
 }
 
 input:focus + .CB_slider {
-  box-shadow: 0 0 1px #01DF01;
+  box-shadow: 0 0 1px #58d878;
 }
 
 input:checked + .CB_slider:before {
@@ -950,6 +968,8 @@ input:checked + .CB_slider:before {
     font-family: 'NanumBarunGothic', 'sans-serif';
 }
 .M_new_board_name {
+    color: inherit;
+    background-color: rgba(0,0,0,0);
     position: relative;
     float:left;
     width: 69%;
@@ -1049,4 +1069,30 @@ input:checked + .CB_slider:before {
         display: inline-block;
         font-family: 'NanumGothic', 'sans-serif';
     }
+}
+.M_setting_tag_change_input {
+    position: relative;
+    width: 80%;
+    height: auto;
+    font-size: 20px;
+    font-family: 'NanumGothic', 'sans-serif';
+    background-color: rgba(0,0,0,0);
+    border: none;
+    padding: 0;
+    color: inherit;
+}
+.M_setting_tag_change_input:focus .M_tag_list_item {
+    border-bottom: 1.5px solid #c30e2e;
+}
+.M_setting_tag_change_input2 {
+    position: relative;
+    width: 80%;
+    height: auto;
+    font-size: 20px;
+    font-family: 'NanumGothic', 'sans-serif';
+    background-color: rgba(0,0,0,0);
+    border: none;
+    padding: 0;
+    color: inherit;
+    padding-left: 8px;
 }

@@ -32,10 +32,11 @@ $(document).ready(()=>{
         {
             $('.M_tag_list').append(
                 '<div class="M_tag_list_item">'+
-                '<div class="M_tag_name" style="display:inline;"> # ' + tag_ajax.responseJSON.tags[i] + ' </div>'+
-                '<i class="fas fa-trash-alt M_tag_icon_delete"></i>'+
-                '<i onclick="modify_tag($(this).prev(), $(this))" class="fas fa-pencil-alt M_tag_icon_fixed"></i>'+
-                '<i style="display: none;" class="fas fa-check M_tag_icon_delete"></i>'+
+                '# <div class="M_tag_name" style="display:inline;">' + tag_ajax.responseJSON.tags[i] + ' </div>'+
+                '<i onclick="delete_modify_tag($(this))" class="fas fa-trash-alt M_tag_icon_delete"></i>'+
+                '<i onclick="modify_tag($(this))" class="fas fa-pencil-alt M_tag_icon_fixed"></i>'+
+                '<i onclick="cancel_modify_tag($(this))" style="display: none;" class="far fa-times-circle M_tag_icon_cancel"></i>'+
+                '<i onclick="accept_modify_tag($(this))" style="display: none;" class="fas fa-check M_tag_icon_check"></i>'+
                 '</div>'
             )
         }
@@ -192,8 +193,154 @@ function toggle(flag) {
     }
 }
 
+function accept_modify_tag(tag) {
+    let old_value = tag.prev().prev().prev().prev().attr('placeholder');
+    let new_value = tag.prev().prev().prev().prev().val();
+    let send_data = new FormData();
+    send_data.append('new_tag', new_value);
+    send_data.append('old_tag', old_value);
+    let a_jax = A_JAX_FILE(TEST_IP+'update_tag', 'POST', null, send_data);
+    $.when(a_jax).done(function(){
+        let json = a_jax.responseJSON;
+        if (json['result'] == 'success'){
+            snackbar("태그를 수정하였습니다.");
+            $('.M_tag_list').empty();
+            let tag_ajax = A_JAX(TEST_IP+'get_access_tags', 'GET', null, null);
+            $.when(tag_ajax).done(function() {
+                for (let i=0; i<tag_ajax.responseJSON.tags.length; i++)
+                {
+                    $('.M_tag_list').append(
+                        '<div class="M_tag_list_item">'+
+                        '# <div class="M_tag_name" style="display:inline;">' + tag_ajax.responseJSON.tags[i] + ' </div>'+
+                        '<i onclick="delete_modify_tag($(this))" class="fas fa-trash-alt M_tag_icon_delete"></i>'+
+                        '<i onclick="modify_tag($(this))" class="fas fa-pencil-alt M_tag_icon_fixed"></i>'+
+                        '<i onclick="cancel_modify_tag($(this))" style="display: none;" class="far fa-times-circle M_tag_icon_cancel"></i>'+
+                        '<i onclick="accept_modify_tag($(this))" style="display: none;" class="fas fa-check M_tag_icon_check"></i>'+
+                        '</div>'
+                    )
+                }
+            });
+        } else if (json['result'] == 'do not use special characters'){
+            snackbar("특수기호는 사용할 수 없습니다.");
+        }
+        else {
+            snackbar("태그 수정에 실패하였습니다.");
+        }
+    });
+}
+
+function delete_modify_tag(tag) {
+    let value;
+    if (tag.prev('input').attr('placeholder') != undefined){
+        value = tag.prev('input').attr('placeholder');
+    } else if (tag.prev('div').text() != "") {
+        value = tag.prev('div').text();
+    }
+    let send_data = new FormData();
+    send_data.append('tag', value);
+    let a_jax = A_JAX_FILE(TEST_IP+"delete_tag", "POST", null, send_data);
+    $.when(a_jax).done(function(){
+        let json = a_jax.responseJSON;
+        if (json['result'] == 'success'){
+            snackbar("태그를 삭제하였습니다.");
+            $('.M_tag_list').empty();
+            let tag_ajax = A_JAX(TEST_IP+'get_access_tags', 'GET', null, null);
+            $.when(tag_ajax).done(function() {
+                for (let i=0; i<tag_ajax.responseJSON.tags.length; i++)
+                {
+                    $('.M_tag_list').append(
+                        '<div class="M_tag_list_item">'+
+                        '# <div class="M_tag_name" style="display:inline;">' + tag_ajax.responseJSON.tags[i] + ' </div>'+
+                        '<i onclick="delete_modify_tag($(this))" class="fas fa-trash-alt M_tag_icon_delete"></i>'+
+                        '<i onclick="modify_tag($(this))" class="fas fa-pencil-alt M_tag_icon_fixed"></i>'+
+                        '<i onclick="cancel_modify_tag($(this))" style="display: none;" class="far fa-times-circle M_tag_icon_cancel"></i>'+
+                        '<i onclick="accept_modify_tag($(this))" style="display: none;" class="fas fa-check M_tag_icon_check"></i>'+
+                        '</div>'
+                    )
+                }
+            });
+        } else {
+            snackbar("태그 삭제에 실패하였습니다.");
+        }
+    });
+}
+
 function modify_tag(tag) {
-    tag.replaceWith('<input type="text" style="width:30%"></input>');
+    let prev_value = tag.prev().prev().text();
+    let input_tag =  document.createElement('input');
+    input_tag.setAttribute('type', 'text');
+    input_tag.classList.add('M_setting_tag_change_input');
+    input_tag.setAttribute('placeholder', prev_value);
+    tag.prev().prev().replaceWith($(input_tag));
+    $(input_tag).focus();
+    tag.parent().css('border-bottom', '1.5px solid #c30e2e');
+    tag.next('i').css('display', 'inline-block');
+    tag.next('i').next('i').css('display', 'inline-block');
+    tag.css('display', 'none');
+}
+
+function cancel_modify_tag(tag) {
+    let tag_name_value = tag.prev().prev().prev().attr('placeholder');
+    let tag_name = document.createElement('div');
+    tag_name.classList.add('M_tag_name');
+    tag_name.style.display = 'inline';
+    tag_name.append(tag_name_value);
+    tag.prev().prev().prev().replaceWith($(tag_name));
+    tag.next('i').css('display', 'none');
+    tag.prev('i').css('display', 'inline-block');
+    tag.css('display', 'none');
+    tag.parent().css('border-bottom', '1.5px solid #e2e2e2');
+}
+
+function plus_tag_button(tag) {
+    let reader = '<div class="M_tag_list_item" style="border-bottom: 1.5px solid rgb(195, 14, 46);">#'+
+                '<input type="text" class="M_setting_tag_change_input2" placeholder="태그명을 입력해주세요.">'+
+                '<i onclick="plus_tag_delete($(this))" class="far fa-times-circle M_tag_icon_cancel"></i>'+
+                '<i onclick="plus_tag_append($(this))" class="fas fa-check M_tag_icon_check"></i>'+
+                '</div>';
+    $('.M_tag_list').append(reader);
+    $('.M_tag_list').children().last().children('input').focus();
+}
+
+function plus_tag_append(tag) {
+    let value = tag. prev().prev().val();
+    if (value == ""){
+        snackbar("태그명을 입력해주세요.");
+        tag.focus();
+    } else {
+        let send_data = new FormData();
+        send_data.append('tag', value);
+        let a_jax = A_JAX_FILE(TEST_IP+'input_tag', "POST", null, send_data);
+        $.when(a_jax).done(function(){
+            let json = a_jax.responseJSON;
+            console.log(json);
+            if (json['result'] == 'success'){
+                snackbar("태그가 추가되었습니다.");
+                $('.M_tag_list').empty();
+                let tag_ajax = A_JAX(TEST_IP+'get_access_tags', 'GET', null, null);
+                $.when(tag_ajax).done(function() {
+                    for (let i=0; i<tag_ajax.responseJSON.tags.length; i++)
+                    {
+                        $('.M_tag_list').append(
+                            '<div class="M_tag_list_item">'+
+                            '#<div class="M_tag_name" style="display:inline;">' + tag_ajax.responseJSON.tags[i] + ' </div>'+
+                            '<i onclick="delete_modify_tag($(this))" class="fas fa-trash-alt M_tag_icon_delete"></i>'+
+                            '<i onclick="modify_tag($(this))" class="fas fa-pencil-alt M_tag_icon_fixed"></i>'+
+                            '<i onclick="cancel_modify_tag($(this))" style="display: none;" class="far fa-times-circle M_tag_icon_cancel"></i>'+
+                            '<i onclick="accept_modify_tag($(this))" style="display: none;" class="fas fa-check M_tag_icon_check"></i>'+
+                            '</div>'
+                        )
+                    }
+                });
+            } else {
+                snackbar("태그 추가에 실패하였습니다.");
+            }
+        }); 
+    }
+}
+
+function plus_tag_delete(tag) {
+    tag.parent().remove();
 }
 
 function upload_logo() {
