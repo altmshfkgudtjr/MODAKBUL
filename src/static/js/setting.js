@@ -490,24 +490,26 @@ function search_user() {
     let ajax = A_JAX(TEST_IP+"get_user_search", "POST", null, {'search': search});
     let result_html = '';
     $.when(ajax).done(()=>{
+        console.log(ajax.responseJSON);
         if (ajax.responseJSON.result === 'user is not defined') {
             snackbar('사용자가 없습니다.')
         }
         else {
-            let major = '';
-            for (let j=0; j<DEPARTMENTS.length; j++)
-            {
-                if (ajax.responseJSON.user_tags.indexOf(DEPARTMENTS[j]) !== -1) {
-                    major = DEPARTMENTS[j];
+            for (let i = 0; i < ajax.responseJSON.user.length; i++){
+                let major = '';
+                for (let j=0; j<DEPARTMENTS.length; j++){
+                    if (ajax.responseJSON.user[i].tags.indexOf(DEPARTMENTS[j]) !== -1) {
+                        major = DEPARTMENTS[j];
+                        break;
+                    }
                 }
+                result_html +=
+                    '<div style="background-color: ' +  ajax.responseJSON.user[i].user_color + '" class="M_setting_user_tag"></div>'+
+                    '<div class="M_setting_subtitle_name">'+
+                    ' ' + ajax.responseJSON.user[i].user_name + ' ' + ajax.responseJSON.user[i].user_id + ' '+ major +
+                    '</div>'+
+                    '<div onclick="black_user($(this).parent())" class = "M_setting_black_button"> 블랙</div>';
             }
-
-            result_html +=
-                '<div style="background-color: ' +  ajax.responseJSON.user.user_color + '" class="M_setting_user_tag"></div>'+
-                '<div class="M_setting_subtitle_name">'+
-                ' ' + ajax.responseJSON.user.user_name + ' ' + ajax.responseJSON.user.user_id + ' '+ major +
-                '</div>'+
-                '<div onclick="black_user($(this).parent())" class = "M_setting_black_button"> 블랙</div>';
             $('#M_user_info').empty();
             $('#M_user_info').append(result_html);
         }

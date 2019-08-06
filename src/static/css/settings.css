@@ -183,7 +183,7 @@ input {
     transition: 0.4s;
 }
 .M_setting_black_button:hover {
-    background-color: red;
+    background-color: #c30e2e;
 }
 .M_setting_unblack_button{
     display: inline-block;
@@ -1096,4 +1096,14 @@ input:checked + .CB_slider:before {
     padding: 0;
     color: inherit;
     padding-left: 8px;
+}
+.M_setting_tag_change_bottom_empty {
+    position: relative;
+    widows: 100%;
+    height: 10px;
+}
+@media screen and (max-width: 800px) {
+    .M_setting_tag_change_bottom_empty {
+        height: 200px;
+    }
 }
