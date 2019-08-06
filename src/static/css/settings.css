@@ -443,6 +443,9 @@ input {
     margin-bottom: 30px;
     width: 100%;
 }
+.M_bio {
+    overflow-y: scroll;
+}
 .M_user_search{
     position: relative;
     display: inline-block;
