@@ -214,7 +214,7 @@
     </div>
 
     <div style="display: none;" class="M_setting M_principle_bio">
-        <div class="M_setting_submit">
+        <div onclick="update_principle_bio()" class="M_setting_submit">
             <i class="far fa-check-circle"></i>
         </div>
         <div class="M_settings_title">
@@ -229,13 +229,6 @@
 
 
         </div>
-        <!--
-        <div class="M_setting_introduce_plus_button_container">
-            <div class="M_setting_introduce_plus_button">
-                <i class="fas fa-plus-circle"></i>
-            </div>
-        </div>
-        -->
     </div>
 
     <div style="display: none;" class="M_setting M_bio">
@@ -246,7 +239,7 @@
             # 국장 소개
         </div>
         <!--여기 target 에 append 시키면됨-->
-        <div id="M_student_introduce_target">
+        <div id="M_student_introduce_target_2">
 
 
             <!--여기서부터-->
@@ -294,7 +287,7 @@
 
         </div>
         <div class="M_setting_introduce_plus_button_container">
-            <div class="M_setting_introduce_plus_button">
+            <div onclick="add_intro()" class="M_setting_introduce_plus_button">
                 <i class="fas fa-plus-circle"></i>
             </div>
         </div>
