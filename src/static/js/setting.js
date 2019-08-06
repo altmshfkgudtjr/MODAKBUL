@@ -1,4 +1,5 @@
 const DEPARTMENTS = ['데이터사이언스학과', '디자인이노베이션', '디지털콘텐츠학과', '만화애니메이션텍', '소프트웨어학과', '정보보호학과', '지능기전공학부', '창의소프트학부', '컴퓨터공학과'];
+let bio_cnt = 0;
 $(document).ready(()=>{
    let ajax = A_JAX(TEST_IP+'get_variables', "GET", null, null);
    $.when(ajax).done(()=>{
@@ -83,13 +84,66 @@ $(document).ready(()=>{
                 '                        <div class="M_setting_subtitle">소개</div>\n' +
                 '                    </div>\n' +
                 '                    <div class="M_manager_bio">\n' +
-                '                        <textarea class="M_bio_input" style="height: 100px; margin-bottom: 0;" type="text" value="'+ intro_ajax.responseJSON.department[i].dm_intro +'"></textarea>\n' +
-                '                    </div>\n' +
-                '              </div>\n' +
+                '                        <textarea class="M_bio_input" style="height: 100px; margin-bottom: 0;" type="text"></textarea>' +
+                '                    </div>'+
+                '              </div>'+
                 '            </div>';
         }
         $('#M_student_introduce_target').append(result_html);
+        change_setting_theme();
     });
+
+    let intro_ajax2 = A_JAX(TEST_IP+'get_department/1', 'GET', null, null);
+    let result_html2 = '';
+    $.when(intro_ajax2).done(()=>{
+        for (let i=0; i<intro_ajax2.responseJSON.department.length; i++)
+        {
+            result_html2 +=
+                '            <div class="M_bio_wrapper" style="overflow-y: scroll;height: 85%;">\n' +
+                '                <div class="M_setting_subtitle_wrapper3">\n' +
+                '                    <div class="M_settings_subtitle_wrapper">\n' +
+                '                        <div class="M_setting_tag"></div>\n' +
+                '                        <div class="M_setting_subtitle">사진</div>\n' +
+                '                    </div>\n' +
+                '                    <img id="M_principle_profile_pic-'+ intro_ajax2.responseJSON.department[i].dm_id +'" onclick="profile_pic_upload(\'' + intro_ajax2.responseJSON.department[i].dm_id + '\')\" src="../static/images/' + intro_ajax2.responseJSON.department[i].dm_img + '" class="M_setting_introduce_image">\n' +
+                '                    <input onchange="profile_change($(this), '+ intro_ajax2.responseJSON.department[i].dm_id +')" id="M_principle_profile_upload-'+ intro_ajax2.responseJSON.department[i].dm_id +'" type="file" style="display: none;">\n' +
+                '                    <div class="M_image_warning_introduce">\n' +
+                '                    대표 사진을 업로드해주세요!\n' +
+                '                    </div>\n' +
+                '                </div>\n' +
+                '                <div class="M_setting_subtitle_wrapper4">\n' +
+                '                    <div class="M_settings_subtitle_wrapper">\n' +
+                '                        <div class="M_setting_tag"></div>\n' +
+                '                        <div class="M_setting_subtitle">직책</div>\n' +
+                '                    </div>\n' +
+                '                    <div class="M_position">\n' +
+                '                        <input class="M_bio_input" type="text" value="' + intro_ajax2.responseJSON.department[i].dm_name + '">'+
+                '                    </div>\n' +
+                '                    <div class="M_settings_subtitle_wrapper">\n' +
+                '                        <div class="M_setting_tag"></div>\n' +
+                '                        <div class="M_setting_subtitle">정보</div>\n' +
+                '                    </div>\n' +
+                '                    <div class="M_manager">\n' +
+                '                        <input class="M_bio_input" type="text" value="' + intro_ajax2.responseJSON.department[i].dm_chairman +'">\n' +
+                '                    </div>\n' +
+                '                    <div class="M_settings_subtitle_wrapper">\n' +
+                '                        <div class="M_setting_tag"></div>\n' +
+                '                        <div class="M_setting_subtitle">소개</div>\n' +
+                '                    </div>\n' +
+                '                    <div class="M_manager_bio">\n' +
+                '                        <textarea class="M_bio_input" style="height: 100px; margin-bottom: 0;" type="text"></textarea>' +
+                '                    </div>'+
+                '              </div>'+
+                '<div onclick="delete_intro($(this), ' + intro_ajax2.responseJSON.department[i].dm_id + ')" class="M_setting_introduce_delete_button">'+
+                '<i class="fas fa-trash-alt"></i>'+
+                '</div>'+
+                '</div>';
+        }
+        $('#M_student_introduce_target_2').append(result_html2);
+        bio_cnt = intro_ajax2.responseJSON.department[intro_ajax2.responseJSON.department.length - 1].dm_id + 1;
+        change_setting_theme();
+    });
+
 });
 
 function black_list() {
@@ -599,13 +653,19 @@ function change_password() {
 
 }
 
-
-function update_principle_bio() {
+function update_bio(type) {
     let list = [];
-    for (let i=0; i< $('#M_student_introduce_target')[0].childNodes.length; i++){
-        if ($('#M_student_introduce_target')[0].childNodes[i].className === 'M_bio_wrapper') list.push($('#M_student_introduce_target')[0].childNodes[i]);
+
+    if (type === 0) {
+        for (let i=0; i< $('#M_student_introduce_target')[0].childNodes.length; i++){
+            if ($('#M_student_introduce_target')[0].childNodes[i].className === 'M_bio_wrapper') list.push($('#M_student_introduce_target')[0].childNodes[i]);
+        }
     }
-    let send_data = [];
+    else {
+        for (let i=0; i< $('#M_student_introduce_target_2')[0].childNodes.length; i++){
+            if ($('#M_student_introduce_target_2')[0].childNodes[i].className === 'M_bio_wrapper') list.push($('#M_student_introduce_target_2')[0].childNodes[i]);
+        }
+    }
 
     for (let i=0; i<list.length; i++) {
         let image = $(list[i].children[0].children[2])[0].files[0];
@@ -618,38 +678,95 @@ function update_principle_bio() {
         console.log(info);
         console.log(bio);
         console.log(id);
+        console.log(image);
 
         let data = new FormData();
-        /*
-        data['dm_id'] = id;
-        data['dm_name'] = info;
-        data['dm_chairman'] = name;
-        data['dm_intro'] = bio;
-        data['dm_type'] = 0;
-        */
 
         data.append('dm_id', id);
         data.append('dm_name', name);
         data.append('dm_chairman', info);
         data.append('dm_intro', bio);
-        data.append('dm_type', 0);
+        data.append('dm_type', type);
         data.append('dm_img', image);
-
-        console.log(image);
-
 
         let ajax = A_JAX_FILE(TEST_IP+"department_update", "POST", null, data);
         $.when(ajax).done(()=>{
-            console.log(ajax.responseJSON);
+            if (ajax.responseJSON.result === 'img is not defined') {
+                snackbar('새로운 국장 소개를 추가할 때는 사진을 필수로 업로드해야합니다.')
+            }
+            else if (ajax.responseJSON.result === 'wrong extension') {
+                snackbar('이미지 확장자가 옳바르지 않습니다.')
+            }
+            else if (ajax.responseJSON.result === 'file save fail') {
+                alert('일시적인 오류입니다. 다시시도해주세요.');
+                location.reload();
+            }
         });
     }
-
+    snackbar('적용되었습니다.');
 }
 
 function add_intro() {
-
+    console.log(bio_cnt);
+    $('#M_student_introduce_target_2').append(
+        '            <div class="M_bio_wrapper" style="overflow-y: scroll;height: 85%;">\n' +
+        '                <div class="M_setting_subtitle_wrapper3">\n' +
+        '                    <div class="M_settings_subtitle_wrapper">\n' +
+        '                        <div class="M_setting_tag"></div>\n' +
+        '                        <div class="M_setting_subtitle">사진</div>\n' +
+        '                    </div>\n' +
+        '                    <img id="M_principle_profile_pic-'+ bio_cnt +'" onclick="profile_pic_upload(\'' + bio_cnt + '\')\" src="../static/images/' + '#'+ '" class="M_setting_introduce_image">\n' +
+        '                    <input onchange="profile_change($(this), '+ bio_cnt +')" id="M_principle_profile_upload-'+ bio_cnt +'" type="file" style="display: none;">\n' +
+        '                    <div class="M_image_warning_introduce">\n' +
+        '                    대표 사진을 업로드해주세요!\n' +
+        '                    </div>\n' +
+        '                </div>\n' +
+        '                <div class="M_setting_subtitle_wrapper4">\n' +
+        '                    <div class="M_settings_subtitle_wrapper">\n' +
+        '                        <div class="M_setting_tag"></div>\n' +
+        '                        <div class="M_setting_subtitle">직책</div>\n' +
+        '                    </div>\n' +
+        '                    <div class="M_position">\n' +
+        '                        <input class="M_bio_input" type="text">'+
+        '                    </div>\n' +
+        '                    <div class="M_settings_subtitle_wrapper">\n' +
+        '                        <div class="M_setting_tag"></div>\n' +
+        '                        <div class="M_setting_subtitle">정보</div>\n' +
+        '                    </div>\n' +
+        '                    <div class="M_manager">\n' +
+        '                        <input class="M_bio_input" type="text" value="">\n' +
+        '                    </div>\n' +
+        '                    <div class="M_settings_subtitle_wrapper">\n' +
+        '                        <div class="M_setting_tag"></div>\n' +
+        '                        <div class="M_setting_subtitle">소개</div>\n' +
+        '                    </div>\n' +
+        '                    <div class="M_manager_bio">\n' +
+        '                        <textarea class="M_bio_input" style="height: 100px; margin-bottom: 0;" type="text"></textarea>' +
+        '                    </div>'+
+        '              </div>'+
+        '<div onclick="delete_intro($(this))" class="M_setting_introduce_delete_button">'+
+        '<i class="fas fa-trash-alt"></i>'+
+        '</div>'+
+        '</div>'
+    );
+    bio_cnt++;
+    change_setting_theme();
 }
 
+function delete_intro(target, id) {
+    console.log(target.parent());
+    target.parent().remove();
+
+    if (id === undefined){
+        bio_cnt--;
+        return;
+    }
+
+    let intro_ajax2 = A_JAX(TEST_IP+'department_delete/'+id, 'GET', null, null);
+    $.when(intro_ajax2).done(()=>{
+            update_bio(1);
+    });
+}
 
 
 
