@@ -190,7 +190,7 @@ main {
 }
 
 .content__subtitle  {
-	text-align: left;
+	text-align: center;
 	font-size: 1.25em;
 	font-weight: 400;
 	color: var(--color-subtitle);
