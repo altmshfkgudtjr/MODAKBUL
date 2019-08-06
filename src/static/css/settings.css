@@ -167,8 +167,16 @@ input {
         -ms-user-select: text;
             user-select: text;
 }*/
+.M_user_info_container {
+    height: 25px;
+    display: inline-block;
+    margin: 5px 0px 8px 0;
+    width: 100%;
+}
 .M_user_info {
     height: 240px;
+    widows: 100%;
+    margin: 5px 0;
     overflow-y: auto;
     -webkit-touch-callout: text; /* iOS Safari */
     -webkit-user-select: text; /* Safari */
