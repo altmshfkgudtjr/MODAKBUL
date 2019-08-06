@@ -7,7 +7,6 @@ $(document).ready(()=>{
     let intro_ajax = A_JAX(TEST_IP+'get_department/0', 'GET', null, null);
     $.when(intro_ajax).done(()=>{
         for (let i=0; i<intro_ajax.responseJSON.department.length; i++) {
-            console.log(intro_ajax.responseJSON.department[i].dm_intro.replace(/\<br \/\>/g, "\n"));
             if (intro_ajax.responseJSON.department[i].dm_name.indexOf('소프트웨어융합대학 학생회장') !== -1) {
                 $('#M_principle').text(intro_ajax.responseJSON.department[i].dm_name);
                 $('#M_principle_name').text(intro_ajax.responseJSON.department[i].dm_chairman);
@@ -42,9 +41,15 @@ $(document).ready(()=>{
     });
 
     let contacts_ajax =  A_JAX(TEST_IP+'get_value/연락처', 'GET', null, null);
-    $.when(contacts_ajax).done(()=>{
-        $('#M_contacts').text(contacts_ajax.responseJSON.value);
-    })
+    $.when(contacts_ajax).done(function(){
+        let contacts_json = contacts_ajax.responseJSON;
+        if (contacts_json['result'] == 'success'){
+            console.log(contacts_json);
+            $('#M_contacts').append(contacts_json['value']);    
+        } else {
+            snackbar("일시적인 오류로 정보를 불러오지 못하였습니다.");
+        }
+    });
 });
 
 function set_display(type) {

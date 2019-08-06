@@ -37,7 +37,7 @@
 			<!--nav bar 메인 로고-->
 			<div id="logo_change_target_logo" class="M_nav_bar_logo_container display_none_important" onclick="location.href='/'" onmouseenter="EE_change_logo_to_fire($(this))" onmouseleave="EE_return_logo()">
 				<div class="M_nav_bar_logo_image">
-					<img id="M_nav_bar_logo_image_img" src="#" class="M_nav_bar_logo_image_img">
+					<img onerror="this.src=\'/static/image/baseprofileimg.png\'" id="M_nav_bar_logo_image_img" src="#" class="M_nav_bar_logo_image_img">
 				</div>
 			</div>
         	<a id="logo_change_target_fire" class="fir_all_contain display_none_important" href="/" onmouseenter="EE_chage_logo_to_logo($(this))"  onmouseleave="EE_return_logo()">
@@ -141,7 +141,7 @@
 	<!--Page footer-->
 	<div class="M_footer_up"></div>
 	<div class="M_footer">
-		<img src="../static/image/foot.png" class="M_footer_img">
+		<img onerror="this.src=\'/static/image/baseprofileimg.png\'" src="../static/image/foot.png" class="M_footer_img">
 		<p class="M_footer_p">010-7393-3434 | sejong1sc@gmail.com | 학생회관 409호<br>COPYRIGHT ⓒ 2019 Team IML</p>
 	</div>
 </body>
