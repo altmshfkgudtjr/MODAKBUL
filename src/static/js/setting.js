@@ -57,8 +57,8 @@ $(document).ready(()=>{
                 '                        <div class="M_setting_tag"></div>\n' +
                 '                        <div class="M_setting_subtitle">사진</div>\n' +
                 '                    </div>\n' +
-                '                    <img onclick="profile_pic_upload()" src=../static/images/" ' + intro_ajax.responseJSON.department[i].dm_img + ' " class="M_setting_introduce_image">\n' +
-                '                    <input id="" type="file" style="display: none;">\n' +
+                '                    <img id="M_principle_profile_pic-'+ intro_ajax.responseJSON.department[i].dm_id +'" onclick="profile_pic_upload(\'' + intro_ajax.responseJSON.department[i].dm_id + '\')\" src="../static/images/' + intro_ajax.responseJSON.department[i].dm_img + '" class="M_setting_introduce_image">\n' +
+                '                    <input onchange="profile_change($(this), '+ intro_ajax.responseJSON.department[i].dm_id +')" id="M_principle_profile_upload-'+ intro_ajax.responseJSON.department[i].dm_id +'" type="file" style="display: none;">\n' +
                 '                    <div class="M_image_warning_introduce">\n' +
                 '                    대표 사진을 업로드해주세요!\n' +
                 '                    </div>\n' +
@@ -76,7 +76,7 @@ $(document).ready(()=>{
                 '                        <div class="M_setting_subtitle">정보</div>\n' +
                 '                    </div>\n' +
                 '                    <div class="M_manager">\n' +
-                '                        <input class="M_bio_input" type="text" value=" ' + intro_ajax.responseJSON.department[i].dm_chairman +' ">\n' +
+                '                        <input class="M_bio_input" type="text" value="' + intro_ajax.responseJSON.department[i].dm_chairman +'">\n' +
                 '                    </div>\n' +
                 '                    <div class="M_settings_subtitle_wrapper">\n' +
                 '                        <div class="M_setting_tag"></div>\n' +
@@ -360,6 +360,22 @@ function image_preview(input) {
     }
 }
 
+function profile_pic_upload(id) {
+    let target = $('#M_principle_profile_upload-'+id);
+    target.trigger('click');
+}
+
+function profile_change(target, id) {
+    let image = $('#M_principle_profile_pic-'+id);
+    target = target[0];
+    if (target.files && target.files[0]) {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            image.attr('src', e.target.result);
+        };
+        reader.readAsDataURL(target.files[0]);
+    }
+}
 
 let image_updated = false;
 let name_updated = false;
@@ -530,7 +546,6 @@ function white_user(div) {
         black_list();
     })
 }
-
 function change_password() {
     let prev_pw = $('#prev_pw').val();
     let new_pw = $('#new_pw').val();
@@ -562,3 +577,65 @@ function change_password() {
     })
 
 }
+
+
+function update_principle_bio() {
+    let list = [];
+    for (let i=0; i< $('#M_student_introduce_target')[0].childNodes.length; i++){
+        if ($('#M_student_introduce_target')[0].childNodes[i].className === 'M_bio_wrapper') list.push($('#M_student_introduce_target')[0].childNodes[i]);
+    }
+    let send_data = [];
+
+    for (let i=0; i<list.length; i++) {
+        let image = $(list[i].children[0].children[2])[0].files[0];
+        let name = $(list[i].children[1].children[1].children[0]).val();
+        let info =$(list[i].children[1].children[3].children[0]).val();
+        let bio = $(list[i].children[1].children[5].children[0]).val();
+        let id = $(list[i].children[0].children[2])[0].id.split('-')[1];
+        bio = bio.replace(/\n/g, "<br />");
+        console.log(name);
+        console.log(info);
+        console.log(bio);
+        console.log(id);
+
+        let data = new FormData();
+        /*
+        data['dm_id'] = id;
+        data['dm_name'] = info;
+        data['dm_chairman'] = name;
+        data['dm_intro'] = bio;
+        data['dm_type'] = 0;
+        */
+
+        data.append('dm_id', id);
+        data.append('dm_name', name);
+        data.append('dm_chairman', info);
+        data.append('dm_intro', bio);
+        data.append('dm_type', 0);
+        data.append('dm_img', image);
+
+        console.log(image);
+
+
+        let ajax = A_JAX_FILE(TEST_IP+"department_update", "POST", null, data);
+        $.when(ajax).done(()=>{
+            console.log(ajax.responseJSON);
+        });
+    }
+
+}
+
+function add_intro() {
+
+}
+
+
+
+
+
+
+
+
+
+
+

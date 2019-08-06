@@ -7,16 +7,17 @@ $(document).ready(()=>{
     let intro_ajax = A_JAX(TEST_IP+'get_department/0', 'GET', null, null);
     $.when(intro_ajax).done(()=>{
         for (let i=0; i<intro_ajax.responseJSON.department.length; i++) {
-            if (intro_ajax.responseJSON.department[i].dm_name == '소프트웨어융합대학 학생회장') {
+            console.log(intro_ajax.responseJSON.department[i].dm_intro.replace(/\<br \/\>/g, "\n"));
+            if (intro_ajax.responseJSON.department[i].dm_name.indexOf('소프트웨어융합대학 학생회장') !== -1) {
                 $('#M_principle').text(intro_ajax.responseJSON.department[i].dm_name);
                 $('#M_principle_name').text(intro_ajax.responseJSON.department[i].dm_chairman);
-                $('#M_principle_bio').text(intro_ajax.responseJSON.department[i].dm_intro);
+                $('#M_principle_bio').append(intro_ajax.responseJSON.department[i].dm_intro);
                 $('#M_principle_image').attr('src', intro_ajax.responseJSON.department[i].dm_img);
             }
             else {
                 $('#M_vice_principle').text(intro_ajax.responseJSON.department[i].dm_name);
                 $('#M_vice_principle_name').text(intro_ajax.responseJSON.department[i].dm_chairman);
-                $('#M_vice_principle_bio').text(intro_ajax.responseJSON.department[i].dm_intro);
+                $('#M_vice_principle_bio').append(intro_ajax.responseJSON.department[i].dm_intro);
                 $('#M_vice_principle_image').attr('src', intro_ajax.responseJSON.department[i].dm_img);
             }
         }

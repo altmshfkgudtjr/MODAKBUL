@@ -427,6 +427,7 @@ input {
 .M_bio_input {
     background: rgba(0,0,0,0);
     border: 1.5px solid #e2e2e2;
+    color: inherit;
     width: 100%;
     height: 40px;
     padding: 10px;
