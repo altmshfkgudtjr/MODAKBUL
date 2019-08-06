@@ -541,6 +541,10 @@ function settingsPage_check_admin() {
 }
 function search_user() {
     let search = $('.M_user_search').val();
+    if (search == ""){
+        $('#M_user_info').empty();
+        return;
+    }
     let ajax = A_JAX(TEST_IP+"get_user_search", "POST", null, {'search': search});
     let result_html = '';
     $.when(ajax).done(()=>{
@@ -548,20 +552,23 @@ function search_user() {
             snackbar('사용자가 없습니다.')
         }
         else {
-            let major = '';
-            for (let j=0; j<DEPARTMENTS.length; j++)
-            {
-                if (ajax.responseJSON.user_tags.indexOf(DEPARTMENTS[j]) !== -1) {
-                    major = DEPARTMENTS[j];
+            snackbar(ajax.responseJSON.user.length+" 명이 검색되었습니다.");
+            for (let i = 0; i < ajax.responseJSON.user.length; i++){
+                let major = '';
+                for (let j=0; j<DEPARTMENTS.length; j++){
+                    if (ajax.responseJSON.user[i].tags.indexOf(DEPARTMENTS[j]) !== -1) {
+                        major = DEPARTMENTS[j];
+                        break;
+                    }
                 }
+                result_html +=
+                    '<div class="M_user_info_container">'+
+                    '<div style="background-color: ' +  ajax.responseJSON.user[i].user_color + '" class="M_setting_user_tag"></div>'+
+                    '<div class="M_setting_subtitle_name">'+
+                    ' ' + ajax.responseJSON.user[i].user_name + ' ' + ajax.responseJSON.user[i].user_id + ' '+ major +
+                    '</div>'+
+                    '<div onclick="black_user($(this).parent())" class = "M_setting_black_button"> 블랙</div></div><br>';
             }
-
-            result_html +=
-                '<div style="background-color: ' +  ajax.responseJSON.user.user_color + '" class="M_setting_user_tag"></div>'+
-                '<div class="M_setting_subtitle_name">'+
-                ' ' + ajax.responseJSON.user.user_name + ' ' + ajax.responseJSON.user.user_id + ' '+ major +
-                '</div>'+
-                '<div onclick="black_user($(this).parent())" class = "M_setting_black_button"> 블랙</div>';
             $('#M_user_info').empty();
             $('#M_user_info').append(result_html);
         }
@@ -579,14 +586,17 @@ $('.M_user_search').keypress(function (e) {
 function black_user(div) {
     let ajax = A_JAX(TEST_IP+"user_black_apply", "POST", null, {'target_id': div[0].childNodes[1].innerText.split(' ')[1]});
     $.when(ajax).done(()=>{
-        if (ajax.responseJSON.result === 'already blacklist') {
-            snackbar('이미 블랙리스트에 추가된 사용자 입니다.');
-            $('#M_user_info').empty();
-        }
-        else {
-            $('#M_user_info').empty();
+        if (ajax.responseJSON.result === 'success'){
+            snackbar("블랙리스트에 추가하였습니다.");
             $('.M_setting_blacklist').empty();
             black_list();
+        }
+        else if (ajax.responseJSON.result === 'already blacklist') {
+            snackbar('이미 블랙리스트에 추가된 사용자 입니다.');
+        }
+        else {
+            snackbar("블랙리스트 추가에 실패하였습니다.");
+            $('#M_user_info').empty();
         }
     })
 }
@@ -606,15 +616,18 @@ function change_password() {
     let new_pw_confirm = $('#new_pw_confirm').val();
 
     if (prev_pw === '') {
-        alert('이전 비밀번호를 입력해주세요.');
+        snackbar('이전 비밀번호를 입력해주세요.');
+        $('#prev_pw').focus();
         return;
     }
     else if (new_pw === '') {
-        alert('새 비밀번호를 입력해주세요.');
+        snackbar('새 비밀번호를 입력해주세요.');
+        $('#new_pw').focus();
         return;
     }
     else if (new_pw_confirm === '') {
-        alert('새 비밀번호를 확인해주세요.');
+        snackbar('비밀번호 재확인을 입력해주세요.');
+        $('#new_pw_confirm').focus();
         return;
     }
 
@@ -622,11 +635,19 @@ function change_password() {
 
     let ajax = A_JAX(TEST_IP+"change_pw", "POST", null, data);
     $.when(ajax).done(()=>{
-        if (ajax.responseJSON.result === 'not same pw') {
-            snackbar('새 비밀번호가 일치하지 않습니다.')
+        if (ajax.responseJSON.result === 'success'){
+            snackbar("비밀번호 변경에 성공하였습니다.");
+            setTimeout(function() {
+                location.reload();
+            }, 400);
+        }
+        else if (ajax.responseJSON.result === 'not same pw') {
+            snackbar('새 비밀번호가 일치하지 않습니다.');
+             $('#new_pw').focus();
         }
         else if (ajax.responseJSON.result === 'wrong old pw') {
-            snackbar('이전 비밀번호가 일치하지 않습니다.')
+            snackbar('이전 비밀번호가 일치하지 않습니다.');
+            $('#prev_pw').focus();
         }
     })
 

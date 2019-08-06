@@ -1,3 +1,7 @@
+*::-webkit-scrollbar {
+    display: none;
+}
+
 body {
     overflow-y: hidden;
 }
@@ -10,9 +14,7 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-.M_setting_blacklist::-webkit-scrollbar {
-    display: none;
-}
+
 
 input {
     border: 1.5px solid gray;
@@ -120,7 +122,7 @@ input {
 }
 
 .M_setting_blacklist{
-    max-height: 200px;
+    max-height: 400px;
     overflow-y: auto;
     -webkit-touch-callout: text; /* iOS Safari */
     -webkit-user-select: text; /* Safari */
@@ -128,6 +130,9 @@ input {
        -moz-user-select: text; /* Firefox */
         -ms-user-select: text; /* Internet Explorer/Edge */
             user-select: text;
+}
+.M_setting_blacklist::-webkit-scrollbar {
+    display: none;
 }
 
 .M_setting_line{
@@ -149,18 +154,39 @@ input {
         margin-right: 0;
     }
 }
-
+/*
 .M_user_info{
     height: 25px;
     display: inline-block;
     margin: 5px 0px;
     width: 100%;
+    -webkit-touch-callout: text; 
+    -webkit-user-select: text;
+     -khtml-user-select: text;
+       -moz-user-select: text;
+        -ms-user-select: text;
+            user-select: text;
+}*/
+.M_user_info_container {
+    height: 25px;
+    display: inline-block;
+    margin: 5px 0px 8px 0;
+    width: 100%;
+}
+.M_user_info {
+    height: 240px;
+    widows: 100%;
+    margin: 5px 0;
+    overflow-y: auto;
     -webkit-touch-callout: text; /* iOS Safari */
     -webkit-user-select: text; /* Safari */
      -khtml-user-select: text; /* Konqueror HTML */
        -moz-user-select: text; /* Firefox */
         -ms-user-select: text; /* Internet Explorer/Edge */
             user-select: text;
+}
+.M_user_info::-webkit-scrollbar {
+    display: none;
 }
 .M_black_user_info{
     height: 25px;
@@ -183,7 +209,7 @@ input {
     transition: 0.4s;
 }
 .M_setting_black_button:hover {
-    background-color: red;
+    background-color: #c30e2e;
 }
 .M_setting_unblack_button{
     display: inline-block;
@@ -359,6 +385,9 @@ input {
 .M_principle_bio {
     overflow-y: auto;
 }
+.M_principle_bio::-webkit-scrollbar { 
+    display: none; 
+}
 .M_setting_introduce_delete_button:hover {
     border: 1.5px solid #c30e2e;
     color: #c30e2e;
@@ -422,6 +451,9 @@ input {
     }
 }
 .M_bio_wrapper::-webkit-scrollbar { 
+  display: none; 
+}
+.M_bio::-webkit-scrollbar { 
   display: none; 
 }
 .M_bio_input {
@@ -1099,4 +1131,14 @@ input:checked + .CB_slider:before {
     padding: 0;
     color: inherit;
     padding-left: 8px;
+}
+.M_setting_tag_change_bottom_empty {
+    position: relative;
+    widows: 100%;
+    height: 10px;
+}
+@media screen and (max-width: 800px) {
+    .M_setting_tag_change_bottom_empty {
+        height: 200px;
+    }
 }
