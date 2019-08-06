@@ -508,7 +508,7 @@ function search_user() {
                     '<div class="M_setting_subtitle_name">'+
                     ' ' + ajax.responseJSON.user[i].user_name + ' ' + ajax.responseJSON.user[i].user_id + ' '+ major +
                     '</div>'+
-                    '<div onclick="black_user($(this).parent())" class = "M_setting_black_button"> 블랙</div>';
+                    '<div onclick="black_user($(this).parent())" class = "M_setting_black_button"> 블랙</div><br>';
             }
             $('#M_user_info').empty();
             $('#M_user_info').append(result_html);
