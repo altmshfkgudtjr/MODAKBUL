@@ -554,15 +554,18 @@ function change_password() {
     let new_pw_confirm = $('#new_pw_confirm').val();
 
     if (prev_pw === '') {
-        alert('이전 비밀번호를 입력해주세요.');
+        snackbar('이전 비밀번호를 입력해주세요.');
+        $('#prev_pw').focus();
         return;
     }
     else if (new_pw === '') {
-        alert('새 비밀번호를 입력해주세요.');
+        snackbar('새 비밀번호를 입력해주세요.');
+        $('#new_pw').focus();
         return;
     }
     else if (new_pw_confirm === '') {
-        alert('새 비밀번호를 확인해주세요.');
+        snackbar('비밀번호 재확인을 입력해주세요.');
+        $('#new_pw_confirm').focus();
         return;
     }
 
@@ -570,11 +573,19 @@ function change_password() {
 
     let ajax = A_JAX(TEST_IP+"change_pw", "POST", null, data);
     $.when(ajax).done(()=>{
-        if (ajax.responseJSON.result === 'not same pw') {
-            snackbar('새 비밀번호가 일치하지 않습니다.')
+        if (ajax.responseJSON.result === 'success'){
+            snackbar("비밀번호 변경에 성공하였습니다.");
+            setTimeout(function() {
+                location.reload();
+            }, 400);
+        }
+        else if (ajax.responseJSON.result === 'not same pw') {
+            snackbar('새 비밀번호가 일치하지 않습니다.');
+             $('#new_pw').focus();
         }
         else if (ajax.responseJSON.result === 'wrong old pw') {
-            snackbar('이전 비밀번호가 일치하지 않습니다.')
+            snackbar('이전 비밀번호가 일치하지 않습니다.');
+            $('#prev_pw').focus();
         }
     })
 
