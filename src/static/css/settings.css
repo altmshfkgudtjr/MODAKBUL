@@ -1,3 +1,7 @@
+*::-webkit-scrollbar {
+    display: none;
+}
+
 body {
     overflow-y: hidden;
 }
@@ -359,6 +363,9 @@ input {
 .M_principle_bio {
     overflow-y: auto;
 }
+.M_principle_bio::-webkit-scrollbar { 
+    display: none; 
+}
 .M_setting_introduce_delete_button:hover {
     border: 1.5px solid #c30e2e;
     color: #c30e2e;
@@ -422,6 +429,9 @@ input {
     }
 }
 .M_bio_wrapper::-webkit-scrollbar { 
+  display: none; 
+}
+.M_bio::-webkit-scrollbar { 
   display: none; 
 }
 .M_bio_input {
